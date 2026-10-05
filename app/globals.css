@@ -1,26 +1,371 @@
 @import "tailwindcss";
 
+/* ── Forge world tokens ───────────────────────────────────────────── */
+@theme {
+  --color-forge: #0b0b0d; /* forge black, the floor */
+  --color-forge-2: #131316; /* raised steel plate */
+  --color-forge-3: #1b1c20;
+  --color-anvil: #2a2d31; /* rules and panel edges */
+  --color-steel: #9a9ea5; /* secondary text, cold metal */
+  --color-iron: #ece6da; /* primary text, iron white */
+  --color-cherry: #c21e0e;
+  --color-ember: #ff5a11; /* bright orange, the working heat */
+  --color-glow: #ffa62b;
+  --color-white-heat: #fff3c4;
+  --color-scale: #070707;
+
+  --font-stencil: var(--font-saira-stencil), "Arial Narrow", sans-serif;
+  --font-mono: var(--font-martian-mono), ui-monospace, monospace;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+
+  --ease-hammer: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-drop: cubic-bezier(0.55, 0, 1, 0.45);
+}
+
+@property --heat {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.4 -0.35'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --scale-flecks: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -40 9.4'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>");
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-forge);
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  scrollbar-color: var(--color-anvil) var(--color-forge);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  background: var(--color-forge);
+  color: var(--color-iron);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+  caret-color: var(--color-ember);
+  overflow-x: clip;
+}
+
+/* the whole floor carries a faint layer of soot */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+}
+
+::selection {
+  background: var(--color-ember);
+  color: var(--color-scale);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-forge);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-anvil);
+  border: 3px solid var(--color-forge);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-cherry);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-white-heat);
+  outline-offset: 3px;
+}
+
+a {
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+@layer components {
+/* ── Type ─────────────────────────────────────────────────────────── */
+.stencil {
+  font-family: var(--font-stencil);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  font-variation-settings: "wdth" var(--wdth, 78);
+}
+
+.readout {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+  font-variation-settings: "wdth" 87.5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* labels stamped on panels, never above headings */
+.stamp {
+  font-family: var(--font-mono);
+  font-variation-settings: "wdth" 87.5;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-steel);
+}
+
+/* ── Materials ────────────────────────────────────────────────────── */
+.plate {
+  background-color: var(--color-forge-2);
+  background-image:
+    var(--grain),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.012) 0 1px, transparent 1px 3px);
+  background-blend-mode: soft-light, normal;
+}
+
+/* chalk-ruled measurement scale */
+.ruler {
+  --tick: rgb(236 230 218 / 0.38);
+  background-image:
+    linear-gradient(90deg, var(--tick) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tick) 1px, transparent 1px);
+  background-size:
+    calc(100% / 10) 100%,
+    calc(100% / 50) 40%;
+  background-repeat: repeat-x;
+  background-position:
+    0 0,
+    0 0;
+}
+
+/* ── Buttons: hot plate and cold steel ───────────────────────────── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  font-family: var(--font-stencil);
+  font-weight: 800;
+  font-size: 1.125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variation-settings: "wdth" 88;
+  border-radius: 3px;
+  transition:
+    background-color 0.25s var(--ease-hammer),
+    color 0.25s var(--ease-hammer),
+    border-color 0.25s var(--ease-hammer),
+    box-shadow 0.35s var(--ease-hammer),
+    transform 0.12s var(--ease-hammer);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.btn:active {
+  transform: translateY(1px) scale(0.985);
+}
+.btn-hot {
+  color: var(--color-scale);
+  background-color: var(--color-ember);
+  background-image: var(--scale-flecks), linear-gradient(100deg, var(--color-cherry) 0%, var(--color-ember) 38%, var(--color-ember) 70%, var(--color-glow) 100%);
+  background-size: 180px 180px, 100% 100%;
+  box-shadow:
+    0 1px 0 rgb(255 243 196 / 0.35) inset,
+    0 10px 30px -12px rgb(255 90 17 / 0.7);
+}
+.btn-hot:hover {
+  background-image: var(--scale-flecks), linear-gradient(100deg, var(--color-ember) 0%, var(--color-glow) 55%, var(--color-white-heat) 100%);
+  box-shadow:
+    0 1px 0 rgb(255 243 196 / 0.6) inset,
+    0 14px 40px -10px rgb(255 166 43 / 0.75);
+}
+.btn-steel {
+  color: var(--color-iron);
+  border: 1px solid rgb(236 230 218 / 0.28);
+  background: rgb(19 19 22 / 0.6);
+}
+.btn-steel:hover {
+  border-color: var(--color-ember);
+  background: var(--color-forge-3);
+  color: var(--color-white-heat);
+}
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ── Heat ramp as state ───────────────────────────────────────────── */
+[data-heat="live"] {
+  --h: var(--color-white-heat);
+  --h2: var(--color-glow);
+}
+[data-heat="white"] {
+  --h: var(--color-glow);
+  --h2: var(--color-ember);
+}
+[data-heat="hot"] {
+  --h: var(--color-ember);
+  --h2: var(--color-cherry);
+}
+[data-heat="warm"] {
+  --h: #e04a16;
+  --h2: #6a1709;
+}
+[data-heat="embers"] {
+  --h: #9c2410;
+  --h2: #3a0f08;
+}
+[data-heat="cold"] {
+  --h: #5b5f66;
+  --h2: #2a2d31;
+}
+
+.heat-bar {
+  background: linear-gradient(90deg, #111 0%, var(--h2) 45%, var(--h) 100%);
+  box-shadow: 0 3px 10px -3px color-mix(in oklab, var(--h) 70%, transparent);
+}
+[data-heat="cold"] .heat-bar,
+.heat-bar[data-heat="cold"] {
+  box-shadow: none;
+}
+[data-heat="live"] .heat-bar {
+  animation: flicker 1.6s steps(6) infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  40% {
+    filter: brightness(1.25);
+  }
+  60% {
+    filter: brightness(0.92);
+  }
+}
+
+/* hero type cools from white heat down to iron */
+.hot-type {
+  color: color-mix(in oklab, var(--color-white-heat) calc(var(--heat) * 100%), var(--color-iron));
+  text-shadow:
+    0 0 calc(var(--heat) * 28px) rgb(255 120 30 / calc(var(--heat) * 0.85)),
+    0 0 calc(var(--heat) * 4px) rgb(255 220 150 / calc(var(--heat) * 0.6));
+}
+
+}
+
+/* artist photos graded into the forge: cold iron with a heat-ramp duotone */
+.iron-photo img {
+  filter: grayscale(1) contrast(1.12) brightness(var(--lift, 0.9));
+  transition: filter 0.7s var(--ease-hammer), transform 0.7s var(--ease-hammer);
+}
+.iron-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--color-glow) 0%, var(--color-ember) 22%, var(--color-cherry) 48%, #2a0b06 80%, #0b0b0d 100%);
+  mix-blend-mode: color;
+  opacity: 0.9;
+  transition: opacity 0.7s var(--ease-hammer);
+}
+.iron-photo:hover img,
+.iron-photo:focus-within img {
+  filter: none;
+  transform: scale(1.03);
+}
+.iron-photo:hover::after,
+.iron-photo:focus-within::after {
+  opacity: 0;
+}
+
+.hero-gutter {
+  --g: 1rem;
+}
+@media (min-width: 640px) {
+  .hero-gutter {
+    --g: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-gutter {
+    --g: max(2.5rem, calc((100vw - 1440px) / 2 + 2.5rem));
+  }
+}
+
+/* ── Motion: a hammer drop, not a float ───────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .drop {
+      animation: drop linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+    .iron-photo::after {
+      animation: heat-photo linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+    }
+  }
+}
+
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heat-photo {
+  from {
+    background-size: 100% 260%;
+    background-position: 0 0;
+  }
+  to {
+    background-size: 100% 100%;
+    background-position: 0 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@utility spin-slow {
+  animation: spin 1.8s linear infinite; /* 33⅓ rpm */
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

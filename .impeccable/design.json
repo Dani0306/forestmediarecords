@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-05T11:57:46.557568+00:00",
+  "title": "Design System: Forest Media Récords",
+  "extensions": {
+    "colorMeta": {
+      "forge": {
+        "role": "neutral",
+        "displayName": "Forge Black",
+        "canonical": "#0b0b0d",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 285.9)",
+          "oklch(26.4% 0.004 285.9)",
+          "oklch(37.9% 0.004 285.9)",
+          "oklch(49.3% 0.004 285.9)",
+          "oklch(60.7% 0.004 285.9)",
+          "oklch(72.1% 0.004 285.9)",
+          "oklch(83.6% 0.004 285.9)",
+          "oklch(95.0% 0.004 285.9)"
+        ]
+      },
+      "forge-2": {
+        "role": "neutral",
+        "displayName": "Raised Plate",
+        "canonical": "#131316",
+        "tonalRamp": [
+          "oklch(15.0% 0.006 285.8)",
+          "oklch(26.4% 0.006 285.8)",
+          "oklch(37.9% 0.006 285.8)",
+          "oklch(49.3% 0.006 285.8)",
+          "oklch(60.7% 0.006 285.8)",
+          "oklch(72.1% 0.006 285.8)",
+          "oklch(83.6% 0.006 285.8)",
+          "oklch(95.0% 0.006 285.8)"
+        ]
+      },
+      "forge-3": {
+        "role": "neutral",
+        "displayName": "Deep Plate",
+        "canonical": "#1b1c20",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 274.6)",
+          "oklch(26.4% 0.008 274.6)",
+          "oklch(37.9% 0.008 274.6)",
+          "oklch(49.3% 0.008 274.6)",
+          "oklch(60.7% 0.008 274.6)",
+          "oklch(72.1% 0.008 274.6)",
+          "oklch(83.6% 0.008 274.6)",
+          "oklch(95.0% 0.008 274.6)"
+        ]
+      },
+      "anvil": {
+        "role": "neutral",
+        "displayName": "Anvil Gray",
+        "canonical": "#2a2d31",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 255.6)",
+          "oklch(26.4% 0.008 255.6)",
+          "oklch(37.9% 0.008 255.6)",
+          "oklch(49.3% 0.008 255.6)",
+          "oklch(60.7% 0.008 255.6)",
+          "oklch(72.1% 0.008 255.6)",
+          "oklch(83.6% 0.008 255.6)",
+          "oklch(95.0% 0.008 255.6)"
+        ]
+      },
+      "steel": {
+        "role": "neutral",
+        "displayName": "Cold Steel",
+        "canonical": "#9a9ea5",
+        "tonalRamp": [
+          "oklch(15.0% 0.011 261.8)",
+          "oklch(26.4% 0.011 261.8)",
+          "oklch(37.9% 0.011 261.8)",
+          "oklch(49.3% 0.011 261.8)",
+          "oklch(60.7% 0.011 261.8)",
+          "oklch(72.1% 0.011 261.8)",
+          "oklch(83.6% 0.011 261.8)",
+          "oklch(95.0% 0.011 261.8)"
+        ]
+      },
+      "iron": {
+        "role": "neutral",
+        "displayName": "Iron White",
+        "canonical": "#ece6da",
+        "tonalRamp": [
+          "oklch(15.0% 0.017 84.6)",
+          "oklch(26.4% 0.017 84.6)",
+          "oklch(37.9% 0.017 84.6)",
+          "oklch(49.3% 0.017 84.6)",
+          "oklch(60.7% 0.017 84.6)",
+          "oklch(72.1% 0.017 84.6)",
+          "oklch(83.6% 0.017 84.6)",
+          "oklch(95.0% 0.017 84.6)"
+        ]
+      },
+      "cherry": {
+        "role": "secondary",
+        "displayName": "Cherry Red",
+        "canonical": "#c21e0e",
+        "tonalRamp": [
+          "oklch(15.0% 0.199 30.2)",
+          "oklch(26.4% 0.199 30.2)",
+          "oklch(37.9% 0.199 30.2)",
+          "oklch(49.3% 0.199 30.2)",
+          "oklch(60.7% 0.199 30.2)",
+          "oklch(72.1% 0.199 30.2)",
+          "oklch(83.6% 0.199 30.2)",
+          "oklch(95.0% 0.199 30.2)"
+        ]
+      },
+      "ember": {
+        "role": "primary",
+        "displayName": "Working Ember",
+        "canonical": "#ff5a11",
+        "tonalRamp": [
+          "oklch(15.0% 0.2 39.1)",
+          "oklch(26.4% 0.2 39.1)",
+          "oklch(37.9% 0.2 39.1)",
+          "oklch(49.3% 0.2 39.1)",
+          "oklch(60.7% 0.2 39.1)",
+          "oklch(72.1% 0.2 39.1)",
+          "oklch(83.6% 0.2 39.1)",
+          "oklch(95.0% 0.2 39.1)"
+        ],
+        "heatState": "hot (hot stop)"
+      },
+      "glow": {
+        "role": "secondary",
+        "displayName": "Forge Glow",
+        "canonical": "#ffa62b",
+        "tonalRamp": [
+          "oklch(15.0% 0.162 68.5)",
+          "oklch(26.4% 0.162 68.5)",
+          "oklch(37.9% 0.162 68.5)",
+          "oklch(49.3% 0.162 68.5)",
+          "oklch(60.7% 0.162 68.5)",
+          "oklch(72.1% 0.162 68.5)",
+          "oklch(83.6% 0.162 68.5)",
+          "oklch(95.0% 0.162 68.5)"
+        ]
+      },
+      "white-heat": {
+        "role": "tertiary",
+        "displayName": "White Heat",
+        "canonical": "#fff3c4",
+        "tonalRamp": [
+          "oklch(15.0% 0.062 95.4)",
+          "oklch(26.4% 0.062 95.4)",
+          "oklch(37.9% 0.062 95.4)",
+          "oklch(49.3% 0.062 95.4)",
+          "oklch(60.7% 0.062 95.4)",
+          "oklch(72.1% 0.062 95.4)",
+          "oklch(83.6% 0.062 95.4)",
+          "oklch(95.0% 0.062 95.4)"
+        ]
+      },
+      "scale": {
+        "role": "neutral",
+        "displayName": "Mill Scale",
+        "canonical": "#070707",
+        "tonalRamp": [
+          "oklch(15.0% 0.0 89.9)",
+          "oklch(26.4% 0.0 89.9)",
+          "oklch(37.9% 0.0 89.9)",
+          "oklch(49.3% 0.0 89.9)",
+          "oklch(60.7% 0.0 89.9)",
+          "oklch(72.1% 0.0 89.9)",
+          "oklch(83.6% 0.0 89.9)",
+          "oklch(95.0% 0.0 89.9)"
+        ]
+      }
+    },
+    "heatRamp": [
+      {
+        "state": "live",
+        "hot": "#fff3c4",
+        "cool": "#ffa62b"
+      },
+      {
+        "state": "white",
+        "hot": "#ffa62b",
+        "cool": "#ff5a11"
+      },
+      {
+        "state": "hot",
+        "hot": "#ff5a11",
+        "cool": "#c21e0e"
+      },
+      {
+        "state": "warm",
+        "hot": "#e04a16",
+        "cool": "#6a1709"
+      },
+      {
+        "state": "embers",
+        "hot": "#9c2410",
+        "cool": "#3a0f08"
+      },
+      {
+        "state": "cold",
+        "hot": "#5b5f66",
+        "cool": "#2a2d31"
+      }
+    ],
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline only; width flexes with blows, color cools with --heat."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, width 66-74."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Event and card titles, width 80 (84 for subheads and nav)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text in Archivo."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Section intros, 30-36rem measure."
+      },
+      "readout": {
+        "displayName": "Readout",
+        "purpose": "Every number, date, unit and metadata line."
+      },
+      "label": {
+        "displayName": "Stamp",
+        "purpose": "Labels on panels and fields; never above section headings."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Stencil caps on hot and steel buttons."
+      }
+    },
+    "shadows": [
+      {
+        "name": "hot-plate",
+        "value": "0 1px 0 rgb(255 243 196 / 0.35) inset, 0 10px 30px -12px rgb(255 90 17 / 0.7)",
+        "purpose": "Hot button at rest."
+      },
+      {
+        "name": "hot-plate-hover",
+        "value": "0 1px 0 rgb(255 243 196 / 0.6) inset, 0 14px 40px -10px rgb(255 166 43 / 0.75)",
+        "purpose": "Hot button hover."
+      },
+      {
+        "name": "heat-bar",
+        "value": "0 3px 10px -3px color-mix(in oklab, var(--h) 70%, transparent)",
+        "purpose": "Heat gauge glow; none when cold."
+      },
+      {
+        "name": "panel-lift",
+        "value": "0 24px 60px -30px rgb(0 0 0 / 0.9)",
+        "purpose": "Hero live heat panel only."
+      },
+      {
+        "name": "focus",
+        "value": "outline: 2px solid #fff3c4; outline-offset: 3px",
+        "purpose": "Global focus-visible ring."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-hammer",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Default easing for every state transition."
+      },
+      {
+        "name": "ease-drop",
+        "value": "cubic-bezier(0.55, 0, 1, 0.45)",
+        "purpose": "Accelerating fall."
+      },
+      {
+        "name": "drop",
+        "value": "scroll-driven view() timeline, entry 0%-55%: translateY(-28px) opacity 0 -> translateY(2px) at 70% -> 0",
+        "purpose": "Section heading reveal, a hammer drop with small overshoot."
+      },
+      {
+        "name": "heat-photo",
+        "value": "scroll-driven view(), entry 0% - cover 50%: duotone background-size 100% 260% -> 100%",
+        "purpose": "Heat ramp sweeps up artist photos on entry."
+      },
+      {
+        "name": "flicker",
+        "value": "1.6s steps(6) infinite brightness 1 / 1.25 / 0.92",
+        "purpose": "Live heat gauges only."
+      },
+      {
+        "name": "press",
+        "value": "translateY(1px) scale(0.985), 0.12s",
+        "purpose": "Button active state."
+      },
+      {
+        "name": "spin-slow",
+        "value": "rotate 360deg, 1.8s linear infinite",
+        "purpose": "Vinyl logo on hover (33 1/3 rpm)."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animations and transitions collapse to 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ],
+    "textures": [
+      {
+        "name": "grain",
+        "purpose": "Soot fractal noise; page overlay at 7% overlay blend, and plate texture."
+      },
+      {
+        "name": "scale-flecks",
+        "purpose": "Mill-scale speckle on the hot button."
+      },
+      {
+        "name": "ruler",
+        "purpose": "Chalk ruler: 10 major and 50 minor ticks in iron at 38%."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Hot Plate Button",
+      "kind": "button",
+      "refersTo": "button-hot",
+      "description": "Primary action: one per decision point; ember plate with heat gradient and glow.",
+      "html": "<button class=\"ds-btn ds-btn-hot\">VER AGENDA <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><path d=\"M12 4v15M6 13l6 6 6-6\"/></svg></button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;min-height:3.25rem;padding:0 1.5rem;font-family:var(--font-stencil,'Saira Stencil','Arial Narrow',sans-serif);font-weight:800;font-size:1.125rem;letter-spacing:0.08em;text-transform:uppercase;font-variation-settings:'wdth' 88;border-radius:3px;border:0;cursor:pointer;transition:background-color .25s cubic-bezier(0.16,1,0.3,1),color .25s cubic-bezier(0.16,1,0.3,1),border-color .25s cubic-bezier(0.16,1,0.3,1),box-shadow .35s cubic-bezier(0.16,1,0.3,1),transform .12s cubic-bezier(0.16,1,0.3,1);}.ds-btn:active{transform:translateY(1px) scale(0.985);}.ds-btn:focus-visible{outline:2px solid #fff3c4;outline-offset:3px;}.ds-btn-hot{color:#070707;background-color:#ff5a11;background-image:linear-gradient(100deg,#c21e0e 0%,#ff5a11 38%,#ff5a11 70%,#ffa62b 100%);box-shadow:0 1px 0 rgb(255 243 196 / 0.35) inset,0 10px 30px -12px rgb(255 90 17 / 0.7);}.ds-btn-hot:hover{background-image:linear-gradient(100deg,#ff5a11 0%,#ffa62b 55%,#fff3c4 100%);box-shadow:0 1px 0 rgb(255 243 196 / 0.6) inset,0 14px 40px -10px rgb(255 166 43 / 0.75);}"
+    },
+    {
+      "name": "Cold Steel Button",
+      "kind": "button",
+      "refersTo": "button-steel",
+      "description": "Secondary action: outlined cold steel, ember edge on hover.",
+      "html": "<button class=\"ds-btn ds-btn-steel\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff5a11\" stroke-width=\"1.75\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\"/></svg>VER EN KICK</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;min-height:3.25rem;padding:0 1.5rem;font-family:var(--font-stencil,'Saira Stencil','Arial Narrow',sans-serif);font-weight:800;font-size:1.125rem;letter-spacing:0.08em;text-transform:uppercase;font-variation-settings:'wdth' 88;border-radius:3px;border:0;cursor:pointer;transition:background-color .25s cubic-bezier(0.16,1,0.3,1),color .25s cubic-bezier(0.16,1,0.3,1),border-color .25s cubic-bezier(0.16,1,0.3,1),box-shadow .35s cubic-bezier(0.16,1,0.3,1),transform .12s cubic-bezier(0.16,1,0.3,1);}.ds-btn:active{transform:translateY(1px) scale(0.985);}.ds-btn:focus-visible{outline:2px solid #fff3c4;outline-offset:3px;}.ds-btn-steel{color:#ece6da;border:1px solid rgb(236 230 218 / 0.28);background:rgb(19 19 22 / 0.6);}.ds-btn-steel:hover{border-color:#ff5a11;background:#1b1c20;color:#fff3c4;}"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form field with stamp label; ember border on focus, cherry on error.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-stamp\">NOMBRE ARTÍSTICO</span><input class=\"ds-input\" placeholder=\"Tu nombre\"/></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:0.5rem;}.ds-stamp{font-family:'Martian Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:rgb(236 230 218 / 0.9);}.ds-input{min-height:3rem;padding:0 1rem;border-radius:3px;border:1px solid #2a2d31;background:#0b0b0d;color:#ece6da;font-family:Archivo,system-ui,sans-serif;font-size:1rem;outline:none;transition:border-color .25s,background-color .25s;}.ds-input::placeholder{color:rgb(154 158 165 / 0.7);}.ds-input:hover{border-color:rgb(154 158 165 / 0.6);}.ds-input:focus{border-color:#ff5a11;background:#131316;}.ds-input:focus-visible{outline:2px solid #fff3c4;outline-offset:3px;}"
+    },
+    {
+      "name": "Stencil Nav",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Fixed forge-black bar; stencil links with an ember hairline wipe.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-wordmark\">FOREST</span><a href=\"#\" class=\"ds-navlink\">AGENDA</a><a href=\"#\" class=\"ds-navlink\">ARTISTAS</a><a href=\"#\" class=\"ds-navlink\">FORJA</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:0.25rem;height:4rem;padding:0 1.5rem;background:#0b0b0d;border-bottom:1px solid #2a2d31;}.ds-wordmark{font-family:'Saira Stencil','Arial Narrow',sans-serif;font-weight:800;font-size:1.6rem;font-variation-settings:'wdth' 72;color:#ece6da;margin-right:auto;}.ds-navlink{position:relative;display:flex;align-items:center;height:2.75rem;padding:0 0.75rem;font-family:'Saira Stencil','Arial Narrow',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:0.06em;font-variation-settings:'wdth' 84;color:rgb(236 230 218 / 0.8);text-decoration:none;transition:color .25s;}.ds-navlink::after{content:'';position:absolute;left:0.75rem;right:0.75rem;bottom:0.5rem;height:1px;background:#ff5a11;transform:scaleX(0);transform-origin:left;transition:transform .3s;}.ds-navlink:hover{color:#fff3c4;}.ds-navlink:hover::after{transform:scaleX(1);}.ds-navlink:focus-visible{outline:2px solid #fff3c4;outline-offset:3px;}"
+    },
+    {
+      "name": "Sample Tag",
+      "kind": "chip",
+      "refersTo": "tag-sample",
+      "description": "Marks placeholder data in a tiny bordered mono box.",
+      "html": "<span class=\"ds-tag\">EJEMPLO</span>",
+      "css": ".ds-tag{display:inline-block;padding:2px 6px;border:1px solid #2a2d31;border-radius:2px;font-family:'Martian Mono',ui-monospace,monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:#9a9ea5;}"
+    },
+    {
+      "name": "Steel Plate",
+      "kind": "card",
+      "refersTo": "plate",
+      "description": "Raised steel panel with grain and brushed striations; anvil-ruled header.",
+      "html": "<div class=\"ds-plate\"><div class=\"ds-plate-head\"><span class=\"ds-plate-stamp\">PRÓXIMA HORNADA</span></div><p class=\"ds-plate-title\">NOCHE DE FORJA</p><p class=\"ds-plate-meta\">CONCIERTO · SÁB 21:00 · MEDELLÍN</p></div>",
+      "css": ".ds-plate{background-color:#131316;background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.4 -0.35'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\"),repeating-linear-gradient(90deg,rgb(255 255 255 / 0.012) 0 1px,transparent 1px 3px);background-blend-mode:soft-light,normal;border:1px solid #2a2d31;border-radius:3px;color:#ece6da;max-width:22rem;}.ds-plate-head{padding:0.75rem 1.25rem;border-bottom:1px solid #2a2d31;}.ds-plate-stamp{font-family:'Martian Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#ece6da;}.ds-plate-title{margin:1.25rem 1.25rem 0;font-family:'Saira Stencil','Arial Narrow',sans-serif;font-weight:800;font-size:1.65rem;line-height:0.95;font-variation-settings:'wdth' 80;}.ds-plate-meta{margin:0.5rem 1.25rem 1.25rem;font-family:'Martian Mono',ui-monospace,monospace;font-size:0.7rem;letter-spacing:0.08em;color:#9a9ea5;}"
+    },
+    {
+      "name": "Heat Gauge",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Signature state indicator: a glowing pill whose colors come from the heat state.",
+      "html": "<div class=\"ds-gauges\"><span class=\"ds-heat-live ds-g\"><i class=\"ds-bar\"></i>EN VIVO</span><span class=\"ds-heat-hot ds-g\"><i class=\"ds-bar\"></i>AL ROJO</span><span class=\"ds-heat-embers ds-g\"><i class=\"ds-bar\"></i>BRASAS</span><span class=\"ds-heat-cold ds-g\"><i class=\"ds-bar ds-cold\"></i>FRÍO</span></div>",
+      "css": ".ds-heat-live{--h:#fff3c4;--h2:#ffa62b}.ds-heat-white{--h:#ffa62b;--h2:#ff5a11}.ds-heat-hot{--h:#ff5a11;--h2:#c21e0e}.ds-heat-warm{--h:#e04a16;--h2:#6a1709}.ds-heat-embers{--h:#9c2410;--h2:#3a0f08}.ds-heat-cold{--h:#5b5f66;--h2:#2a2d31}.ds-gauges{display:flex;flex-wrap:wrap;gap:1.25rem;}.ds-g{display:flex;align-items:center;gap:0.5rem;font-family:'Martian Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.08em;color:#9a9ea5;}.ds-bar{display:block;width:1.5rem;height:0.375rem;border-radius:9999px;background:linear-gradient(90deg,#111 0%,var(--h2) 45%,var(--h) 100%);box-shadow:0 3px 10px -3px color-mix(in oklab,var(--h) 70%,transparent);}.ds-bar.ds-cold{box-shadow:none;}"
+    },
+    {
+      "name": "Event Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Agenda row: heat-colored stamped date, stencil title, mono metadata, rule-separated.",
+      "html": "<div class=\"ds-row ds-heat-hot\"><div><span class=\"ds-day\">21</span><span class=\"ds-mon\">NOV · SÁB</span></div><div><p class=\"ds-rtitle\">NOCHE DE FORJA</p><p class=\"ds-rmeta\">CONCIERTO / 21:00</p></div></div>",
+      "css": ".ds-heat-live{--h:#fff3c4;--h2:#ffa62b}.ds-heat-white{--h:#ffa62b;--h2:#ff5a11}.ds-heat-hot{--h:#ff5a11;--h2:#c21e0e}.ds-heat-warm{--h:#e04a16;--h2:#6a1709}.ds-heat-embers{--h:#9c2410;--h2:#3a0f08}.ds-heat-cold{--h:#5b5f66;--h2:#2a2d31}.ds-row{display:grid;grid-template-columns:7rem 1fr;gap:1rem;padding:1.5rem 1rem;border-top:1px solid #2a2d31;border-bottom:1px solid #2a2d31;transition:background-color .5s;}.ds-row:hover{background:#131316;}.ds-day{display:block;font-family:'Saira Stencil','Arial Narrow',sans-serif;font-weight:800;font-size:4.5rem;line-height:1;font-variation-settings:'wdth' 66;color:var(--h);}.ds-mon,.ds-rmeta{font-family:'Martian Mono',ui-monospace,monospace;font-size:0.7rem;letter-spacing:0.08em;color:#9a9ea5;}.ds-rtitle{margin:0;font-family:'Saira Stencil','Arial Narrow',sans-serif;font-weight:800;font-size:2.35rem;line-height:0.95;font-variation-settings:'wdth' 80;color:#ece6da;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Forge Floor",
+    "overview": "The interface is a blacksmith's floor at night: forge-black ground, anvil-gray steel plates, chalk-ruled measurement scales, and a single heat ramp (black to cherry to orange to white heat) that is never decoration, always state. Anything glowing is either happening now, coming soon, or being worked. Anything cold is finished or past. Artists are workpieces on the floor, events are heats on the schedule, and the visitor reads temperature before reading text.\n\nDensity is workshop-dense rather than editorial-airy: big stenciled headlines stamped onto the floor, tabular mono readouts beside them, hairline anvil rules separating everything. The layout is a 12-column steel bench with generous section height, so each station (agenda, roster, Kick, process, demos) reads as its own heat. Motion is physical: headings drop like a hammer with a small overshoot, hero type cools from white heat to iron, and the signature canvas bar in the hero takes blows.\n\nSurfaces carry texture. A faint soot grain lies over the whole page, steel plates have fine brushed striations, and the hot button is flecked with mill scale. Flat, clean, untextured panels read as foreign to this world.",
+    "keyCharacteristics": [
+      "Dark only (`color-scheme: dark`); forge black is the floor, never a light theme.",
+      "One heat ramp, used as a state scale (live, white, hot, warm, embers, cold).",
+      "Heavy Saira Stencil caps whose width axis flexes; Martian Mono for every number and measurement; Archivo for reading.",
+      "Hairline anvil rules and near-square 3px corners; steel plates with grain.",
+      "Hammer-drop motion with a hard overshoot, never floaty eases."
+    ],
+    "rules": [
+      {
+        "name": "The Heat Is State Rule",
+        "body": "The ramp's colors mean temperature, and temperature means time-to-event or activity. Set them through the heat state (`live`, `white`, `hot`, `warm`, `embers`, `cold`), which exposes a hot stop and a cooler stop to children; never paint a ramp color on something just to make it pop. The intermediate stops (warm #e04a16 / #6a1709, embers #9c2410 / #3a0f08, cold #5b5f66 / anvil) exist only inside that ramp.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Hot Button Rule",
+        "body": "A view carries one hot plate action per decision point; every other action is cold steel. Toggle groups (agenda filters) use hot for the selected option only.",
+        "section": "colors"
+      },
+      {
+        "name": "The Stamp Sits On The Plate Rule",
+        "body": "Stamp labels live inside panels (panel headers, field labels, plate captions). They never sit above a section heading as a kicker or eyebrow.",
+        "section": "typography"
+      },
+      {
+        "name": "The Numbers Are Measured Rule",
+        "body": "Any figure (date, time, countdown, length, temperature, index like 001 or 02 / 05) is set in the mono readout with tabular numerals, never in Archivo.",
+        "section": "typography"
+      },
+      {
+        "name": "The Width Axis Moves Rule",
+        "body": "Stencil width is a live parameter, not a fixed style: it responds to blows in the hero and widens (74 to 92) on the active forge step.",
+        "section": "typography"
+      },
+      {
+        "name": "The Only Glow Is Heat Rule",
+        "body": "A colored shadow appears only on something at heat. Cold elements cast nothing.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** route every ramp color through a heat state so color always means temperature.",
+      "**Do** set every number, date, unit and measurement in the Martian Mono readout with tabular numerals.",
+      "**Do** separate content with 1px anvil rules and rule-separated rows before reaching for cards.",
+      "**Do** keep corners at 3px (2px for tags) and reserve full rounding for heat gauges.",
+      "**Do** use the hammer ease (`cubic-bezier(0.16, 1, 0.3, 1)`) and the drop reveal with its small overshoot; respect reduced motion.",
+      "**Do** grade photography into the forge with the iron duotone, releasing color only on interaction.",
+      "**Do** keep the soot grain and plate texture on surfaces."
+    ],
+    "donts": [
+      "**Don't** put a stamp label, kicker or eyebrow above a section heading.",
+      "**Don't** use more than one hot plate action per decision point.",
+      "**Don't** introduce a light theme or a second accent hue outside the heat ramp.",
+      "**Don't** cast colored glows from cold or inactive elements.",
+      "**Don't** use soft floating eases or fade-up-from-below reveals; things drop like a hammer.",
+      "**Don't** use rounded pill buttons or large radii on plates."
+    ]
+  }
+}
