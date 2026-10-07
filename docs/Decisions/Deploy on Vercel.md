@@ -21,3 +21,6 @@ Buy a custom domain and deploy on **Vercel**.
 
 ## Update (2026-10-06)
 First deploy for the demo: **https://forestmr.vercel.app** (project `dani0306s-projects/forestmr`, production). Deployed from the local folder with `npx vercel@latest --prod --yes`, not from git (nothing is committed yet). The production URL is public. Open Graph images resolve against `VERCEL_PROJECT_PRODUCTION_URL` until a custom domain exists.
+
+## Update (2026-10-07)
+Domain **forestmediarecords.com** bought on Vercel (registrar and DNS on Vercel, renews 2027-10-07) and attached to `forestmr` with `www.forestmediarecords.com`. `metadataBase` now points to it; redeployed. `forestmr.vercel.app` still works.

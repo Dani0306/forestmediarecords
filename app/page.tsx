@@ -1,5 +1,6 @@
 import Agenda from "@/components/Agenda";
 import DemoForm from "@/components/DemoForm";
+import FollowUs from "@/components/FollowUs";
 import ForgeProcess from "@/components/ForgeProcess";
 import Hero from "@/components/Hero";
 import KickSection from "@/components/KickSection";
@@ -24,6 +25,7 @@ export default function Home() {
         <ForgeProcess />
         <Studio />
         <DemoForm />
+        <FollowUs />
       </main>
       <SiteFooter />
     </>

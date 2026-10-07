@@ -305,6 +305,14 @@ const es = {
     contents: "Contenido",
     back: "Volver al inicio",
   },
+  follow: {
+    title: "Síguenos",
+    intro: "Estrenos, detrás de cámaras y lo que viene, primero en nuestras redes.",
+    list: "Redes de Forest Media Récords",
+    follow: "Seguir",
+    soon: "Muy pronto",
+    live: "En vivo en Kick",
+  },
   footer: {
     tag: "Forjado en Medellín, Colombia",
     rights: "Todos los derechos reservados.",
@@ -614,6 +622,14 @@ const en: Dict = {
     draft: "Draft · pending legal review",
     contents: "Contents",
     back: "Back to home",
+  },
+  follow: {
+    title: "Follow us",
+    intro: "Premieres, behind the scenes and what's next, first on our socials.",
+    list: "Forest Media Récords socials",
+    follow: "Follow",
+    soon: "Coming soon",
+    live: "Live on Kick",
   },
   footer: {
     tag: "Forged in Medellín, Colombia",

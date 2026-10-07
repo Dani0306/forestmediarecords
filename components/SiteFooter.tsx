@@ -18,6 +18,7 @@ export default function SiteFooter() {
     { href: "/#estudio", label: t.nav.studio },
     { href: "/#kick", label: t.nav.kick },
     { href: "/#demos", label: t.nav.demos },
+    { href: "/#siguenos", label: t.follow.title },
   ];
   return (
     <footer className="relative overflow-hidden border-t border-anvil bg-scale">
@@ -38,13 +39,15 @@ export default function SiteFooter() {
                 </Link>
               </li>
             ))}
-            {site.socials.map((s) => (
-              <li key={s.url}>
-                <a href={s.url} target="_blank" rel="noreferrer" className="stencil flex min-h-11 items-center gap-1 text-[1.25rem] text-iron/80 [--wdth:84] hover:text-white-heat">
-                  {s.label} <ArrowUpRight className="size-4" />
-                </a>
-              </li>
-            ))}
+            {site.socials
+              .filter((s) => s.url)
+              .map((s) => (
+                <li key={s.id}>
+                  <a href={s.url} target="_blank" rel="noreferrer" className="stencil flex min-h-11 items-center gap-1 text-[1.25rem] text-iron/80 [--wdth:84] hover:text-white-heat">
+                    {s.label} <ArrowUpRight className="size-4 text-ember" />
+                  </a>
+                </li>
+              ))}
           </ul>
         </nav>
       </div>

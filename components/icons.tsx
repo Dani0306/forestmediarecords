@@ -87,3 +87,26 @@ export const Spark = (p: P) => (
     <path d="M12 3v5M12 16v5M3 12h5M16 12h5M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3" />
   </svg>
 );
+
+/* platform marks, drawn on the same 24px grid and 1.75 stroke as the rest */
+export const Instagram = (p: P) => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" />
+  </svg>
+);
+
+export const YouTube = (p: P) => (
+  <svg {...base} strokeLinejoin="round" {...p}>
+    <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+    <path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor" />
+  </svg>
+);
+
+export const SoundCloud = (p: P) => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M10 17.5V8.6a5 5 0 0 1 9.4 2.4 3.3 3.3 0 0 1-.4 6.5H10" />
+    <path d="M7 17.5v-7M4 17.5v-4.5" />
+  </svg>
+);

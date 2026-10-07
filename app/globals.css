@@ -471,6 +471,49 @@ a {
   }
 }
 
+/* Síguenos rows: an ember plate sweeps in from the left on hover / focus (transform
+   only); text turns to mill scale on it. Pending platforms stay cold. */
+.follow-row {
+  isolation: isolate;
+  color: var(--color-iron);
+  transition: color 0.35s var(--ease-hammer);
+}
+.follow-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, var(--color-cherry), var(--color-ember) 45%, var(--color-glow));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-hammer);
+}
+.follow-row .follow-icon,
+.follow-row .follow-cta {
+  color: var(--color-ember);
+  transition: color 0.35s var(--ease-hammer), translate 0.35s var(--ease-hammer);
+}
+.follow-row .follow-handle {
+  color: var(--color-steel);
+  transition: color 0.35s var(--ease-hammer);
+}
+a.follow-row:is(:hover, :focus-visible) {
+  color: var(--color-scale);
+}
+a.follow-row:is(:hover, :focus-visible)::before {
+  transform: scaleX(1);
+}
+a.follow-row:is(:hover, :focus-visible) :is(.follow-icon, .follow-cta, .follow-handle) {
+  color: var(--color-scale);
+}
+a.follow-row:is(:hover, :focus-visible) .follow-cta {
+  translate: 0.25rem -0.25rem;
+}
+.follow-row.is-soon,
+.follow-row.is-soon .follow-icon {
+  color: color-mix(in oklab, var(--color-steel) 40%, var(--color-forge));
+}
+
 /* side glass: black glass over moving video or a photo, feathered at its leading edge
    (top on mobile, left on desktop). Hero main event and artist stage. */
 .glass-side {

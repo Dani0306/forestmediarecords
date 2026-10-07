@@ -20,7 +20,7 @@ tags:
 - [ ] Legal review of [[Legal pages]]; NIT and address
 - [ ] Spotify / YouTube links per artist (`listen` in `data/artists.ts`)
 - [ ] Real **artist profiles and bios**: Lentino done (2026-10-06); RS el Italiano still a mock-up
-- [ ] **Social links** for the label and artists
+- [ ] **Social links**: label Instagram done (2026-10-07); YouTube and SoundCloud URLs pending; artist socials pending ([[Follow us]])
 - [x] Images of the Kick channel that supports the company: Futuras Promesas posters and LeoLugoLive photo (2026-10-06)
 
 ## Fixes and polish
@@ -30,7 +30,9 @@ tags:
 - [ ] Uncomment the **secondary heat strip** in `components/Hero.tsx` once the first real secondary event exists
 - [ ] New RS photos (`RS1–3.avif`) are well lit but still use `lift: 2.1` (sizes fixed 2026-10-06)
 - [x] Demo deploy on Vercel: https://forestmr.vercel.app (2026-10-06)
-- [ ] Buy the domain, point it at the Vercel project and set it as `metadataBase` ([[Deploy on Vercel]])
+- [x] Domain **forestmediarecords.com** bought on Vercel, attached and set as `metadataBase` (2026-10-07, [[Deploy on Vercel]])
+- [ ] Optional: make `www` and `forestmr.vercel.app` redirect to `forestmediarecords.com` (Vercel → Settings → Domains)
+- [ ] Move to Vercel Pro before the public launch (Hobby is non-commercial)
 - [ ] Connect the repo to Vercel (`vercel git connect`) once the work is committed, so pushes deploy automatically
 - [ ] Clean unused assets: `public/lowkey/lowkey1.avif` (original screenshot), `public/videoloop.webm` (5.7 MB original; source of the trending clips), `public/leolugo/leolugo1.avif` (original screenshot of the cropped portrait), `videoloop-poster.webp.json`
 - [ ] Align font sizes with the `DESIGN.md` type ramp (detector flags about 45 sizes)

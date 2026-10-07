@@ -12,7 +12,6 @@ tags:
 Things the code can't answer. Move answers into the relevant note, then tick them off.
 
 ## Open
-- [ ] Which domain will we buy? (needed for `metadataBase` and Open Graph, see [[Deploy on Vercel]])
 - [ ] Kick URLs for Lentino and RS el Italiano, if they get their own
 - [ ] Who is in the hero video and what is the production called? (needed to title the [[Trending]] clips)
 - [ ] Which real projects should appear in [[Trending]], and do they have their own short clips?
@@ -23,6 +22,7 @@ Things the code can't answer. Move answers into the relevant note, then tick the
 - [ ] When does "Sobrio" (Lentino × RS el Italiano) come out? Not dated yet ([[Artists]], [[Agenda]])
 
 ## Answered (2026-10-06)
+- [x] Domain: **forestmediarecords.com** (bought on Vercel 2026-10-07) → [[Deploy on Vercel]]
 - [x] Lentino joined Forest about two months ago (≈ August 2026) → `since: "2026"`
 - [x] No `/scroll-world` film: keep the free CSS scroll animations
 - [x] Studio hours/policies, NIT/address and artist Spotify/YouTube links: still to be defined by the team (kept open above)

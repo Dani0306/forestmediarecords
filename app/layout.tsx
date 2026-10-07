@@ -23,11 +23,8 @@ const sans = Archivo({
   axes: ["wdth"],
 });
 
-// Until the custom domain exists, resolve Open Graph images against the Vercel URL.
-// TODO: set the real domain here once it's bought (see docs/Decisions/Deploy on Vercel).
-const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : "http://localhost:3000";
+// The site's public address: used to resolve Open Graph / link-preview images.
+const siteUrl = "https://forestmediarecords.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

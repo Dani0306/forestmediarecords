@@ -35,6 +35,7 @@ Working vault for the **Forest Media Récords** website: a bilingual (ES/EN) lab
 7. [[La forja]]
 8. [[Studio]]
 9. [[Demo form]]
+10. [[Follow us]]
 
 Around the page: [[Navigation and footer]], [[Legal pages]] (`/privacidad`, `/terminos`, cookie notice), [[Bilingual copy]].
 
