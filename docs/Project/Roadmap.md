@@ -32,7 +32,7 @@ tags:
 - [x] Demo deploy on Vercel: https://forestmr.vercel.app (2026-10-06)
 - [ ] Buy the domain, point it at the Vercel project and set it as `metadataBase` ([[Deploy on Vercel]])
 - [ ] Connect the repo to Vercel (`vercel git connect`) once the work is committed, so pushes deploy automatically
-- [ ] Clean unused assets: `public/videoloop.webm` (5.7 MB original; source of the trending clips), `public/leolugo/leolugo1.avif` (original screenshot of the cropped portrait), `videoloop-poster.webp.json`
+- [ ] Clean unused assets: `public/lowkey/lowkey1.avif` (original screenshot), `public/videoloop.webm` (5.7 MB original; source of the trending clips), `public/leolugo/leolugo1.avif` (original screenshot of the cropped portrait), `videoloop-poster.webp.json`
 - [ ] Align font sizes with the `DESIGN.md` type ramp (detector flags about 45 sizes)
 - [ ] Replace the create-next-app `README.md`
 - [ ] Commit the work since `57d4b6f`

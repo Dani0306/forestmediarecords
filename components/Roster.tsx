@@ -143,7 +143,8 @@ function Stage({ a, index }: { a: Artist; index: number }) {
               alt=""
               fill
               sizes="60vw"
-              className="object-cover object-[50%_22%]"
+              className="object-cover"
+              style={{ objectPosition: a.photos[shown].focus ?? "50% 22%" }}
             />
           </div>
         </div>
@@ -160,7 +161,8 @@ function Stage({ a, index }: { a: Artist; index: number }) {
                 alt={i === shown ? ph.alt[lang] : ""}
                 fill
                 sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover object-[50%_22%]"
+                className="object-cover"
+                style={{ objectPosition: ph.focus ?? "50% 22%" }}
               />
             </div>
           ))}

@@ -42,7 +42,7 @@ Marketing and information site for **Forest Media Récords**, a music production
 ## Brand assets (`public/`)
 
 - `logo.png` (1254×1254, used for Open Graph) and `logo-512.webp` (used in the UI): chrome "FR" monogram with a stag head and roots on a vinyl record. Keep it intact.
-- Artist photos (AVIF) in folders: `public/lentino/lentino1–5.avif`; `public/RS/RS1–3.avif` for RS el Italiano (slug `renzo`). `lift` in `data/artists.ts` brightens dark stage shots. Paths are case-sensitive on Vercel (`/RS/`).
+- Artist photos (AVIF) in folders: `public/lentino/lentino1–5.avif`; `public/RS/RS1–3.avif` for RS el Italiano (slug `renzo`); `public/lowkey/` for Lowkey (`lowkey1-crop.avif` is the crop of the story screenshot `lowkey1.avif`). Each photo can set `focus` (object-position) when the subject sits low or off-centre. `lift` in `data/artists.ts` brightens dark stage shots. Paths are case-sensitive on Vercel (`/RS/`).
 - Kick posters: `public/kick/kick1.avif` (Futuras Promesas #2 winner) and `kick2.avif` (line-up), described in `data/kick.ts`.
 - Streamers (`data/streamers.ts`): LeoLugoLive (Leonardo Lugo, kick.com/leolugolive) in `public/leolugo/` (`leolugo-portrait.avif` is the crop of the screenshot `leolugo1.avif`) and Trianiss (Daniel Triana, kick.com/trianiss) in `public/triana/triana.avif`. Both profiles are real (from the team).
 - Trending clips: `public/trending/clip-01.webm`, `clip-02.webm` (4–5 s cuts of `videoloop.webm`, ~400 KB each) with `.webp` poster frames (sidecar `.webp.json` records the origin), described in `data/trending.ts`.

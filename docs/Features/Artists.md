@@ -21,7 +21,11 @@ Section title "Nuestros Artistas". One artist at a time:
 - **Profile** on `.glass-side`: role and sample tag, name with the Escuchar button, bio intro + "Leer biografía completa", facts grid (genre, city, since, next date in its heat colour, Kick, links), thumbnails.
 - Data: `data/artists.ts` → `profile`. **Lentino** is real (2026-10-06): bio summarised from Daniel's text (born in Sincelejo in 1997, in Medellín since 2022, reguetón · R&B · trap, songs "La Vuelta" and "BM", upcoming "Sobrio" with RS el Italiano). **RS el Italiano** is still a mock-up (`sample: true`).
 
+## Lowkey (2026-10-06)
+- Third artist (added by Daniel): photos in `public/lowkey/`. `lowkey1-crop.avif` is cropped from the story screenshot `lowkey1.avif`. Each photo has its own `focus` so the stage centres on him (studio shots with the subject low in the frame); sizes and alt text were fixed (they had been copied from Lentino).
+
 ## Open issues
+- [ ] Higher-resolution photos of Lowkey (738 px wide; the first is a 445 px tall crop)
 - [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`)
 - [ ] RS el Italiano bio and facts are mock-ups
 - [x] Lentino joined Forest about two months before 2026-10-06: `since: "2026"`

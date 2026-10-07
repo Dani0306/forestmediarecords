@@ -8,6 +8,8 @@ export type Artist = {
     width: number;
     height: number;
     lift?: number;
+    /** CSS object-position for the crop (default "50% 22%"); set it when the subject sits low or off-centre. */
+    focus?: string;
     alt: { es: string; en: string };
   }[];
   kickUrl: string; // TODO: artist Kick channel
@@ -169,31 +171,36 @@ export const artists: Artist[] = [
     name: "Lowkey",
     photos: [
       {
-        src: "/lowkey/lowkey1.avif",
-        width: 1023,
-        height: 1280,
+        // cropped from lowkey1.avif (a phone story screenshot) to the photo itself
+        src: "/lowkey/lowkey3.avif",
+
+        width: 738,
+        height: 445,
+        focus: "40% 45%",
         alt: {
-          es: "Lentino sentado frente a un mural, ajustándose la gorra",
-          en: "Lentino seated in front of a mural, adjusting his cap",
+          es: "Lowkey con audífonos y gorra produciendo en el estudio frente a un portátil",
+          en: "Lowkey in headphones and a cap producing in the studio at a laptop",
         },
       },
       {
         src: "/lowkey/lowkey2.avif",
-        width: 1280,
-        height: 1023,
+        width: 738,
+        height: 899,
+        focus: "50% 78%",
         alt: {
-          es: "Lentino recostado contra una columna verde en la noche",
-          en: "Lentino leaning against a green pillar at night",
+          es: "Lowkey de espaldas trabajando en el estudio bajo luz morada",
+          en: "Lowkey from behind, working in the studio under purple light",
         },
       },
       {
-        src: "/lowkey/lowkey3.avif",
+        src: "/lowkey/lowkey1-crop.avif",
 
-        width: 1023,
-        height: 1280,
+        width: 691,
+        height: 974,
+        focus: "50% 25%",
         alt: {
-          es: "lowkey bajo luz verde azulada, mirando a la cámara",
-          en: "lowkey under teal light, looking down the lens",
+          es: "Sesión de grabación en el estudio: dos artistas con audífonos frente al micrófono",
+          en: "Recording session in the studio: two artists in headphones at the mic",
         },
       },
     ],
