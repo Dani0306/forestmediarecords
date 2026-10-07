@@ -433,6 +433,18 @@ a {
   opacity: 0;
 }
 
+/* hero main event poster: its own aspect, as large as the column allows while
+   the whole panel still fits the viewport height */
+.main-poster {
+  width: min(100%, calc(52svh * var(--ratio)));
+}
+@media (min-width: 1024px) {
+  .main-poster {
+    /* the rest of the panel (label, date and title, countdown, action, padding) takes about 31rem */
+    width: min(100%, calc((100svh - 31rem) * var(--ratio)));
+  }
+}
+
 /* side glass: black glass over moving video or a photo, feathered at its leading edge
    (top on mobile, left on desktop). Hero main event and artist stage. */
 .glass-side {

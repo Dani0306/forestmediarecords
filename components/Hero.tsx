@@ -75,23 +75,45 @@ function MainHeat({ e, now: initial }: { e: ForgeEvent; now: number }) {
         </span>
       </div>
 
-      {photo && (
+      {photo && e.poster ? (
+        /* a poster keeps its own shape and shows whole, untreated; the panel sizes around it */
         <div
-          className="iron-photo relative mt-5 aspect-[16/10] overflow-hidden rounded-[3px] bg-forge-3 lg:aspect-[16/9] lg:max-h-[30vh] lg:w-full"
-          style={{ "--lift": photo.lift ?? 0.9 } as React.CSSProperties}
+          className="main-poster relative mt-5 shrink-0 overflow-hidden rounded-[3px] bg-forge-3 shadow-[0_24px_60px_-30px_rgb(0_0_0/0.9)]"
+          style={
+            {
+              "--ratio": e.poster.width / e.poster.height,
+              aspectRatio: `${e.poster.width} / ${e.poster.height}`,
+            } as React.CSSProperties
+          }
         >
           <Image
             src={photo.src}
             alt={photo.alt[lang]}
             fill
-            sizes="(max-width: 1024px) 100vw, 36vw"
+            sizes="(max-width: 1024px) 100vw, 32rem"
             loading="eager"
-            className="object-cover object-[50%_30%]"
+            className="object-cover"
           />
-          <span className="readout absolute left-3 top-3 z-10 bg-forge/85 px-2 py-1 text-[0.58rem] text-glow">
-            {t.agenda.featured}
-          </span>
         </div>
+      ) : (
+        photo && (
+          <div
+            className="iron-photo relative mt-5 aspect-[16/10] overflow-hidden rounded-[3px] bg-forge-3 lg:aspect-[16/9] lg:max-h-[30vh] lg:w-full"
+            style={{ "--lift": photo.lift ?? 0.9 } as React.CSSProperties}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.alt[lang]}
+              fill
+              sizes="(max-width: 1024px) 100vw, 36vw"
+              loading="eager"
+              className="object-cover object-[50%_30%]"
+            />
+            <span className="readout absolute left-3 top-3 z-10 bg-forge/85 px-2 py-1 text-[0.58rem] text-glow">
+              {t.agenda.featured}
+            </span>
+          </div>
+        )
       )}
 
       <div className="mt-6 flex items-end gap-5">

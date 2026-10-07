@@ -24,6 +24,7 @@ How to replace placeholders with real content. No component changes needed.
   url: "https://…",              // optional: tickets / Kick / release
   featured: true,                // main event → hero panel
   image: "/lentino/lentino1.avif", // optional, else lead artist photo
+  poster: { width: 1254, height: 1254 }, // optional: image is a poster (its pixel size); the hero shows it whole, in colour, in its own shape
   sample: true,                  // REMOVE for real events
 }
 ```

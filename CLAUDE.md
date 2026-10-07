@@ -36,7 +36,7 @@ Marketing and information site for **Forest Media Récords**, a music production
 - React 19, TypeScript, Tailwind CSS v4 (`@import "tailwindcss"` + `@theme` in `app/globals.css`; there is no `tailwind.config`). Custom classes live in `@layer components`.
 - Fonts via `next/font/google`: Saira Stencil, Martian Mono, Archivo.
 - Scripts: `npm run dev`, `npm run build`, `npm run lint`. Judge performance on `npm run build && npm start`, not on `next dev`.
-- Deployment: Vercel on a custom domain (to be bought). Set `metadataBase` in `app/layout.tsx` once the domain exists.
+- Deployment: Vercel project `dani0306s-projects/forestmr`, live at **https://forestmr.vercel.app** (deployed from the local folder with `npx vercel@latest --prod`; the global CLI 41 is too old). `metadataBase` uses `VERCEL_PROJECT_PRODUCTION_URL` until the custom domain is bought. `.vercelignore` keeps `docs/`, `.impeccable/` and unused originals out of the upload.
 - Live links: Kick channel `https://kick.com/leolugolive` and email `forestmediarecords@gmail.com` (both in `data/site.ts`).
 
 ## Brand assets (`public/`)

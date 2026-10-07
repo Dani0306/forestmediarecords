@@ -29,7 +29,9 @@ tags:
 - [x] Hero video stays a loop with no pause button (decided: [[Hero video loop without controls]])
 - [ ] Uncomment the **secondary heat strip** in `components/Hero.tsx` once the first real secondary event exists
 - [ ] New RS photos (`RS1–3.avif`) are well lit but still use `lift: 2.1` (sizes fixed 2026-10-06)
-- [ ] Buy the domain, deploy on Vercel, then set `metadataBase` in `app/layout.tsx` ([[Deploy on Vercel]])
+- [x] Demo deploy on Vercel: https://forestmr.vercel.app (2026-10-06)
+- [ ] Buy the domain, point it at the Vercel project and set it as `metadataBase` ([[Deploy on Vercel]])
+- [ ] Connect the repo to Vercel (`vercel git connect`) once the work is committed, so pushes deploy automatically
 - [ ] Clean unused assets: `public/videoloop.webm` (5.7 MB original; source of the trending clips), `public/leolugo/leolugo1.avif` (original screenshot of the cropped portrait), `videoloop-poster.webp.json`
 - [ ] Align font sizes with the `DESIGN.md` type ramp (detector flags about 45 sizes)
 - [ ] Replace the create-next-app `README.md`

@@ -23,7 +23,14 @@ const sans = Archivo({
   axes: ["wdth"],
 });
 
+// Until the custom domain exists, resolve Open Graph images against the Vercel URL.
+// TODO: set the real domain here once it's bought (see docs/Decisions/Deploy on Vercel).
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Forest Media Récords — Forjamos artistas emergentes en Medellín",
   description:
     "Forest Media Récords es una compañía musical de Medellín dedicada a desarrollar artistas emergentes. Agenda de conciertos, streams en Kick, showcases y lanzamientos.",

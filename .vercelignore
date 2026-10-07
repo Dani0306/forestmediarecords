@@ -1,0 +1,5 @@
+# not needed to build or serve the site
+docs/
+.impeccable/
+public/videoloop.webm
+public/leolugo/leolugo1.avif

@@ -26,6 +26,11 @@ export type ForgeEvent = {
   featured?: boolean;
   /** Event picture (agenda card and hero); defaults to the lead artist's photo. */
   image?: string;
+  /**
+   * The image is a poster (artwork with text): give its pixel size and the hero
+   * shows it whole, in full colour, in its own shape (the panel sizes around it).
+   */
+  poster?: { width: number; height: number };
   sample?: boolean;
 };
 
@@ -41,7 +46,7 @@ export const events: ForgeEvent[] = [
     start: "2026-10-09T20:00:00-05:00",
     place: { es: "Kick", en: "Kick" },
     image: "/lentino/lentino2.avif",
-    sample: true,
+    sample: false,
   },
   {
     id: "renzo-stream",
@@ -57,16 +62,20 @@ export const events: ForgeEvent[] = [
     sample: true,
   },
   {
-    id: "lentino-live",
-    type: "concert",
-    title: { es: "Lentino en concierto", en: "Lentino live in concert" },
-    artists: ["lentino"],
-    start: "2026-10-24T21:00:00-05:00",
-    end: "2026-10-25T00:00:00-05:00",
-    place: { es: "Lugar por confirmar · Medellín", en: "Venue TBA · Medellín" },
+    id: "futuras-promesas-3",
+    type: "stream",
+    title: { es: "Futuras promesas #3", en: "Futuras promesas #3" },
+    artists: [""],
+    start: "2026-10-07T21:00:00-05:00",
+    end: "2026-10-08T00:00:00-05:00",
+    place: {
+      es: "Estudio Forest Media · Sabaneta",
+      en: "Forest Media headquarters · Medellín",
+    },
     featured: true,
-    image: "/lentino/lentino1.avif",
-    sample: true,
+    image: "/events/futuraspromesas3.avif",
+    poster: { width: 1254, height: 1254 },
+    sample: false,
   },
   {
     id: "forest-showcase",
