@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# obsidian: personal state (shared settings in docs/.obsidian/ stay committed)
+docs/.obsidian/workspace*.json
+docs/.obsidian/cache
+docs/.trash/

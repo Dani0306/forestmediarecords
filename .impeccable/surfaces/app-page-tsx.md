@@ -10,7 +10,7 @@ related_targets: []
 Mode: Persuade. Audience: fans, emerging artists, partners (label hub). Bilingual ES (default) / EN.
 Job: understand Forest in one line, see the next heat (event/stream), then watch on Kick, attend, follow, or submit a demo.
 Proof on hand: logo, Lentino + Renzo photos. Events, Kick URLs and contact details are marked placeholders until provided.
-Memorable moment: striking the white-hot bar in the hero (scale shower, the stencil type stretches under the blow).
+Memorable moment: the artist video behind white-hot stencil type that cools to iron, closed by the heat line glowing toward the next event.
 
 ## Direction contract
 
@@ -20,7 +20,7 @@ OWN-WORLD: forge black ground, anvil-gray steel panels, one heat ramp (black →
 
 STORY: The visitor learns that Forest develops emerging artists in Medellín with Kick. They see the next event glowing, scan the agenda by temperature, meet the artists as workpieces, then watch on Kick or bring their own metal (a demo).
 
-FIRST VIEWPORT: nav bar (vinyl logo, stencil links, ES/EN, Kick status). On the left, a giant stencil headline "FORJAMOS ARTISTAS EMERGENTES" with a Medellín chalk ruler and the primary hot button "VER AGENDA" plus secondary "VER EN KICK". On the right, a LIVE HEAT panel: the next event drawn as a canvas white-hot bar with a scale shower, countdown, type, venue, and blow/length readouts. Signature interaction: striking the bar fires a blow (particles, length increase, counter). Motion grammar: hammer-drop reveals and type that cools from white heat.
+FIRST VIEWPORT: nav bar (vinyl logo, stencil links, ES/EN, Kick). Full-bleed artist video loop (public/videoloop.webm, muted, looping, poster, pause control, held on poster under reduced motion) under forge-black scrims. Bottom-left: giant stencil headline "FORJAMOS ARTISTAS EMERGENTES" that cools from white heat on load, lede, primary hot button "VER AGENDA" plus secondary "VER EN KICK". Bottom-right: the next main event (featured) as a plate with its graded picture, stencil date and big countdown. Closing the viewport: a full-width heat line (cold steel to the event's heat) carrying the next secondary event with live countdown. The canvas forge bar was removed at the user's request (2026-10-05) as too exaggerated. Motion grammar: hammer-drop reveals and type that cools from white heat.
 
 FORM: Forge scale shower (catalog metal-forging-patina-blacksmith-scale-shower), adopted by the user from the declined row of the hand; seed key d28d4ec1.
 

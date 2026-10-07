@@ -50,18 +50,23 @@ export const Anvil = (p: P) => (
   </svg>
 );
 
-export const Hammer = (p: P) => (
-  <svg {...base} {...p}>
-    <path d="M13 4h6v5h-6zM13 6.5H9.5L8 5" />
-    <path d="M15 9 6 20l-2-2 9-9" />
-  </svg>
-);
-
 /** Play mark used for Kick links (not the Kick logo). */
 export const Broadcast = (p: P) => (
   <svg {...base} {...p}>
     <path d="M4 5h16v11H4zM9 20h6" />
     <path d="M10.5 8.5v4l3.5-2z" fill="currentColor" />
+  </svg>
+);
+
+export const Play = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M7 5v14l11-7z" fill="currentColor" />
+  </svg>
+);
+
+export const Pause = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M8 5v14M16 5v14" strokeWidth={3} />
   </svg>
 );
 

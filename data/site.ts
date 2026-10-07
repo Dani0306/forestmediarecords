@@ -8,11 +8,11 @@ export const site = {
   city: "Medellín",
   country: "Colombia",
   /** Demo submissions open a pre-filled email to this address. */
-  contactEmail: "", // TODO: the real demo/contact email; the form stays closed until set
+  contactEmail: "forestmediarecords@gmail.com",
   kick: {
-    /** Label channel on Kick, e.g. "https://kick.com/forestmediarecords" */
-    url: "", // TODO
-    handle: "", // TODO, e.g. "forestmediarecords"
+    /** The Kick channel that supports Forest Media Récords; label streams go out here. */
+    url: "https://kick.com/leolugolive",
+    handle: "leolugolive",
   },
   socials: [
     // TODO: add the real profiles, e.g.

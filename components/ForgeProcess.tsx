@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/i18n";
 
-/** Five steps of artist development, each row heats as it reaches the hammer line. */
+/** The steps of a music career, each row heats as it reaches the middle of the screen. */
 export default function ForgeProcess() {
   const { t } = useLang();
   const [active, setActive] = useState(0);
@@ -24,7 +24,7 @@ export default function ForgeProcess() {
 
   return (
     <section id="forja" aria-labelledby="forja-title" className="border-t border-anvil">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-24 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-10 lg:py-36">
+      <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-10 lg:py-28">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <h2 id="forja-title" className="stencil drop text-[clamp(2.75rem,6vw,4.5rem)] [--wdth:74]">
@@ -45,10 +45,10 @@ export default function ForgeProcess() {
                   rows.current[i] = el;
                 }}
                 data-i={i}
-                className="grid grid-cols-[auto_1fr] items-baseline gap-x-5 border-b border-anvil py-8 first:border-t sm:grid-cols-[5.5rem_1fr_auto] sm:gap-x-8 sm:py-10"
+                className="drop grid grid-cols-[auto_1fr] items-baseline gap-x-5 border-b border-anvil py-8 first:border-t sm:grid-cols-[5rem_1fr] sm:gap-x-8 sm:py-8"
               >
                 <span
-                  className="stencil text-[2.75rem] transition-colors duration-700 [--wdth:70] sm:text-[4rem]"
+                  className="stencil text-[2.5rem] transition-colors duration-700 [--wdth:70] sm:text-[3.5rem]"
                   style={{
                     color: hot ? "var(--color-glow)" : done ? "var(--color-cherry)" : "var(--color-anvil)",
                   }}
@@ -58,26 +58,18 @@ export default function ForgeProcess() {
                 </span>
                 <div>
                   <h3
-                    className="stencil text-[clamp(2.4rem,5.4vw,4.25rem)] transition-[color,font-variation-settings] duration-700 ease-[var(--ease-hammer)]"
+                    className="stencil text-[clamp(2.2rem,4.6vw,3.75rem)] transition-[color,font-variation-settings] duration-700 ease-[var(--ease-hammer)]"
                     style={{ color: hot ? "var(--color-white-heat)" : "var(--color-iron)", "--wdth": hot ? 92 : 74 } as React.CSSProperties}
                   >
                     {step.name}
                   </h3>
+                  <p
+                    className="readout mt-2 text-[0.64rem] transition-colors duration-700"
+                    style={{ color: hot ? "var(--color-ember)" : "var(--color-steel)" }}
+                  >
+                    {step.tag}
+                  </p>
                   <p className="mt-3 max-w-[36rem] text-[1.0625rem] leading-relaxed text-iron/75">{step.body}</p>
-                </div>
-                <div className="hidden h-full items-center gap-3 sm:flex" aria-hidden="true">
-                  <span className="relative h-16 w-px bg-anvil">
-                    {[0, 1, 2, 3, 4].map((k) => (
-                      <span key={k} className="absolute left-0 h-px w-2 bg-steel/50" style={{ top: `${k * 25}%` }} />
-                    ))}
-                    <span
-                      className="absolute -left-1 h-0.5 w-3 bg-ember transition-[top,opacity] duration-700"
-                      style={{ top: hot ? "20%" : "100%", opacity: hot || done ? 1 : 0 }}
-                    />
-                  </span>
-                  <span className="readout w-16 text-[0.65rem]" style={{ color: hot ? "var(--color-ember)" : "var(--color-steel)" }}>
-                    +{(i + 1) * 25}MM
-                  </span>
                 </div>
               </li>
             );

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useLang } from "@/lib/i18n";
@@ -9,7 +10,11 @@ import { Broadcast, Close, Menu } from "./icons";
 export function LangSwitch({ className = "" }: { className?: string }) {
   const { lang, setLang, t } = useLang();
   return (
-    <div role="group" aria-label={t.nav.language} className={`readout flex text-[0.75rem] ${className}`}>
+    <div
+      role="group"
+      aria-label={t.nav.language}
+      className={`readout flex text-[0.75rem] ${className}`}
+    >
       {(["es", "en"] as Lang[]).map((l) => (
         <button
           key={l}
@@ -30,11 +35,14 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "#agenda", label: t.nav.agenda },
-    { href: "#artistas", label: t.nav.artists },
-    { href: "#forja", label: t.nav.forge },
-    { href: "#kick", label: t.nav.kick },
-    { href: "#demos", label: t.nav.demos },
+    { href: "/#agenda", label: t.nav.agenda },
+    { href: "/#tendencia", label: t.nav.trending },
+    { href: "/#artistas", label: t.nav.artists },
+    { href: "/#streamers", label: t.nav.streamers },
+    { href: "/#forja", label: t.nav.forge },
+    { href: "/#estudio", label: t.nav.studio },
+    { href: "/#kick", label: t.nav.kick },
+    { href: "/#demos", label: t.nav.demos },
   ];
 
   useEffect(() => {
@@ -57,9 +65,13 @@ export default function SiteNav() {
         {t.skip}
       </a>
       <nav className="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-4 sm:px-6 lg:px-10">
-        <a href="#top" aria-label={t.nav.home} className="group flex shrink-0 items-center gap-3">
+        <Link
+          href="/"
+          aria-label={t.nav.home}
+          className="group flex shrink-0 items-center gap-3"
+        >
           <Image
-            src="/logo.png"
+            src="/logo-512.webp"
             alt=""
             width={40}
             height={40}
@@ -68,29 +80,47 @@ export default function SiteNav() {
           />
           <span className="flex items-baseline gap-2">
             <span className="stencil text-[1.6rem] [--wdth:72]">Forest</span>
-            <span className="readout hidden text-[0.625rem] text-steel sm:inline">Media Récords</span>
+            <span className="readout sm:hidden text-[0.625rem] text-steel inline">
+              MD
+            </span>
+            <span className="readout hidden text-[0.625rem] text-steel sm:inline">
+              Media Récords
+            </span>
           </span>
-        </a>
+        </Link>
 
         <ul className="ml-auto hidden items-center gap-1 lg:flex">
           {links.map((l) => (
-            <li key={l.href}>
-              <a
+            // the bar is full at 1024px: Tendencia and Streamers join it from 1280px (always in the menu)
+            <li
+              key={l.href}
+              className={
+                l.href === "/#estudio"
+                  ? "hidden min-[1440px]:block"
+                  : l.href === "/#tendencia" || l.href === "/#streamers"
+                    ? "hidden xl:block"
+                    : undefined
+              }
+            >
+              <Link
                 href={l.href}
                 className="stencil relative flex h-11 items-center px-3 text-[1.05rem] tracking-[0.06em] text-iron/80 transition-colors [--wdth:84] after:absolute after:inset-x-3 after:bottom-2 after:h-px after:origin-left after:scale-x-0 after:bg-ember after:transition-transform after:duration-300 hover:text-white-heat hover:after:scale-x-100"
               >
                 {l.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         <div className="ml-auto flex items-center gap-3 lg:ml-4">
           <LangSwitch className="hidden sm:flex" />
-          <a href="#kick" className="btn btn-steel hidden min-h-11 px-4 text-[0.95rem] md:inline-flex">
+          <Link
+            href="/#kick"
+            className="btn btn-steel hidden min-h-11 px-4 text-[0.95rem] md:inline-flex"
+          >
             <Broadcast className="size-4 text-ember" />
             Kick
-          </a>
+          </Link>
           <button
             type="button"
             className="btn btn-steel min-h-11 px-3 lg:hidden"
@@ -105,35 +135,44 @@ export default function SiteNav() {
       </nav>
 
       {open && (
-      <div
-        id="mobile-menu"
-        role="dialog"
-        aria-modal="true"
-        aria-label={t.nav.menu}
-        className="fixed inset-0 z-50 flex flex-col bg-forge px-4 pb-8 pt-4 sm:px-6 lg:hidden"
-      >
-        <div className="flex h-12 items-center justify-between">
-          <LangSwitch />
-          <button type="button" className="btn btn-steel min-h-11 px-3" onClick={() => setOpen(false)} autoFocus>
-            <Close />
-            <span className="sr-only">{t.nav.close}</span>
-          </button>
+        <div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t.nav.menu}
+          className="fixed inset-0 z-50 flex flex-col bg-forge px-4 pb-8 pt-4 sm:px-6 lg:hidden"
+        >
+          <div className="flex h-12 items-center justify-between">
+            <LangSwitch />
+            <button
+              type="button"
+              className="btn btn-steel min-h-11 px-3"
+              onClick={() => setOpen(false)}
+              autoFocus
+            >
+              <Close />
+              <span className="sr-only">{t.nav.close}</span>
+            </button>
+          </div>
+          <ul className="mt-10 flex flex-col">
+            {links.map((l) => (
+              <li key={l.href} className="border-b border-anvil">
+                <Link
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-baseline py-4 text-iron hover:text-white-heat"
+                >
+                  <span className="stencil text-[3rem] [--wdth:80]">
+                    {l.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="readout mt-auto text-xs text-steel">
+            Medellín · Colombia
+          </p>
         </div>
-        <ul className="mt-10 flex flex-col">
-          {links.map((l) => (
-            <li key={l.href} className="border-b border-anvil">
-              <a
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="flex items-baseline py-4 text-iron hover:text-white-heat"
-              >
-                <span className="stencil text-[3rem] [--wdth:80]">{l.label}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p className="readout mt-auto text-xs text-steel">Medellín · Colombia</p>
-      </div>
       )}
     </header>
   );

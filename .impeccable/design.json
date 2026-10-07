@@ -206,7 +206,7 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Hero headline only; width flexes with blows, color cools with --heat."
+        "purpose": "Hero headline only; color cools with --heat once on load."
       },
       "headline": {
         "displayName": "Headline",
@@ -332,10 +332,6 @@
       {
         "name": "scale-flecks",
         "purpose": "Mill-scale speckle on the hot button."
-      },
-      {
-        "name": "ruler",
-        "purpose": "Chalk ruler: 10 major and 50 minor ticks in iron at 38%."
       }
     ]
   },
@@ -407,7 +403,7 @@
   ],
   "narrative": {
     "northStar": "The Forge Floor",
-    "overview": "The interface is a blacksmith's floor at night: forge-black ground, anvil-gray steel plates, chalk-ruled measurement scales, and a single heat ramp (black to cherry to orange to white heat) that is never decoration, always state. Anything glowing is either happening now, coming soon, or being worked. Anything cold is finished or past. Artists are workpieces on the floor, events are heats on the schedule, and the visitor reads temperature before reading text.\n\nDensity is workshop-dense rather than editorial-airy: big stenciled headlines stamped onto the floor, tabular mono readouts beside them, hairline anvil rules separating everything. The layout is a 12-column steel bench with generous section height, so each station (agenda, roster, Kick, process, demos) reads as its own heat. Motion is physical: headings drop like a hammer with a small overshoot, hero type cools from white heat to iron, and the signature canvas bar in the hero takes blows.\n\nSurfaces carry texture. A faint soot grain lies over the whole page, steel plates have fine brushed striations, and the hot button is flecked with mill scale. Flat, clean, untextured panels read as foreign to this world.",
+    "overview": "The interface is a blacksmith's floor at night: forge-black ground, anvil-gray steel plates, mm-ruled measurement marks, and a single heat ramp (black to cherry to orange to white heat) that is never decoration, always state. Anything glowing is either happening now, coming soon, or being worked. Anything cold is finished or past. Artists are workpieces on the floor, events are heats on the schedule, and the visitor reads temperature before reading text.\n\nDensity is workshop-dense rather than editorial-airy: big stenciled headlines stamped onto the floor, tabular mono readouts beside them, hairline anvil rules separating everything. The layout is a 12-column steel bench with generous section height, so each station (agenda, roster, Kick, process, demos) reads as its own heat. Motion is physical: headings drop like a hammer with a small overshoot, hero type cools from white heat to iron over the artist video loop.\n\nSurfaces carry texture. A faint soot grain lies over the whole page, steel plates have fine brushed striations, and the hot button is flecked with mill scale. Flat, clean, untextured panels read as foreign to this world.",
     "keyCharacteristics": [
       "Dark only (`color-scheme: dark`); forge black is the floor, never a light theme.",
       "One heat ramp, used as a state scale (live, white, hot, warm, embers, cold).",
@@ -438,7 +434,7 @@
       },
       {
         "name": "The Width Axis Moves Rule",
-        "body": "Stencil width is a live parameter, not a fixed style: it responds to blows in the hero and widens (74 to 92) on the active forge step.",
+        "body": "Stencil width is a live parameter, not a fixed style: it widens (74 to 92) on the active forge step.",
         "section": "typography"
       },
       {

@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { site } from "@/data/site";
+import { sendDemo, type DemoResult } from "@/lib/demo";
 import { useLang } from "@/lib/i18n";
 import { ArrowUpRight } from "./icons";
 
 type Field = "name" | "email" | "city" | "link" | "message";
 type Errors = Partial<Record<"name" | "email" | "link", string>>;
+type Status = "idle" | "sending" | "sent" | "error";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -70,11 +72,15 @@ export default function DemoForm() {
   const { t } = useLang();
   const f = t.demo.fields;
   const [errors, setErrors] = useState<Errors>({});
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [via, setVia] = useState<"mailto" | "api">("api");
+  const [who, setWho] = useState({ name: "", link: "" });
+  const panel = useRef<HTMLDivElement>(null);
   const open = site.contactEmail.length > 0;
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status === "sending") return;
     const data = new FormData(e.currentTarget);
     const v = (k: Field) => String(data.get(k) ?? "").trim();
     const next: Errors = {};
@@ -82,27 +88,28 @@ export default function DemoForm() {
     if (!EMAIL.test(v("email"))) next.email = t.demo.errors.email;
     if (!/^https?:\/\/\S+\.\S+/.test(v("link"))) next.link = t.demo.errors.link;
     setErrors(next);
-    setSent(false);
     if (Object.keys(next).length) {
-      const first = Object.keys(next)[0];
-      document.getElementById(first)?.focus();
+      setStatus("idle");
+      document.getElementById(Object.keys(next)[0])?.focus();
       return;
     }
     if (!open) return;
-    const lines = [`${f.name}: ${v("name")}`, `${f.email}: ${v("email")}`];
-    if (v("city")) lines.push(`${f.city}: ${v("city")}`);
-    lines.push(`${f.link}: ${v("link")}`);
-    if (v("message")) lines.push("", v("message"));
-    const body = lines.join("\n");
-    window.location.href = `mailto:${site.contactEmail}?subject=${encodeURIComponent(
-      `${t.demo.subject} · ${v("name")}`,
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    setStatus("sending");
+    const res: DemoResult = await sendDemo(
+      { name: v("name"), email: v("email"), city: v("city"), link: v("link"), message: v("message") },
+      { subject: t.demo.subject, name: f.name, email: f.email, city: f.city, link: f.link },
+    );
+    if (res.ok) {
+      setVia(res.via);
+      setWho({ name: v("name"), link: v("link") });
+      setStatus("sent");
+    } else setStatus("error");
+    requestAnimationFrame(() => panel.current?.focus());
   };
 
   return (
     <section id="demos" aria-labelledby="demos-title" className="border-t border-anvil">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-24 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-10 lg:py-32">
+      <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-10 lg:py-28">
         <div className="lg:col-span-5">
           <h2 id="demos-title" className="stencil drop text-[clamp(3.5rem,10vw,6rem)] [--wdth:68]">
             {t.demo.title}
@@ -120,22 +127,95 @@ export default function DemoForm() {
           </p>
         </div>
 
-        <form noValidate onSubmit={onSubmit} className="plate grid gap-6 rounded-[3px] border border-anvil p-5 sm:grid-cols-2 sm:p-8 lg:col-span-7">
-          <Input id="name" label={f.name} error={errors.name} autoComplete="nickname" />
-          <Input id="email" label={f.email} type="email" error={errors.email} autoComplete="email" />
-          <Input id="link" label={f.link} hint={f.linkHint} type="url" error={errors.link} autoComplete="url" />
-          <Input id="city" label={f.city} optional={f.optional} autoComplete="address-level2" />
-          <Input id="message" label={f.message} optional={f.optional} multiline />
-          <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-            <p role="status" className={`text-[0.95rem] ${open ? "text-glow" : "text-steel"}`}>
-              {!open ? t.demo.closed : sent ? t.demo.success : ""}
-            </p>
-            <button type="submit" aria-disabled={!open} className="btn btn-hot sm:min-w-[14rem]">
-              {t.demo.submit}
-              <ArrowUpRight className="size-5" />
-            </button>
-          </div>
-        </form>
+        <div className="forge-in lg:col-span-7">
+          {status === "sent" ? (
+            /* thanks: the form is replaced by a hot plate that says what happens next */
+            <div
+              ref={panel}
+              tabIndex={-1}
+              role="status"
+              data-heat="white"
+              className="plate thanks relative overflow-hidden rounded-[3px] border border-anvil p-6 outline-none sm:p-10"
+            >
+              <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-[3px]" />
+              <p className="readout text-[0.65rem] text-glow">{t.demo.sentFrom} {who.name}</p>
+              <h3 className="stencil mt-4 text-[clamp(2.5rem,5vw,4rem)] leading-[0.88] [--wdth:72]">
+                {t.demo.thanksTitle}
+              </h3>
+              <p className="mt-5 max-w-[34rem] text-[1.125rem] leading-relaxed text-iron/90">{t.demo.thanksBody}</p>
+              {via === "mailto" && (
+                <p className="mt-4 max-w-[34rem] text-[0.95rem] text-iron/70">{t.demo.thanksMailto}</p>
+              )}
+              <p className="readout mt-8 truncate border-t border-iron/15 pt-4 text-[0.62rem] text-steel">
+                {f.link}: <span className="text-iron">{who.link}</span>
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setStatus("idle");
+                  requestAnimationFrame(() => document.getElementById("name")?.focus());
+                }}
+                className="btn btn-steel mt-6"
+              >
+                {t.demo.sendAnother}
+              </button>
+            </div>
+          ) : (
+            <form
+              noValidate
+              onSubmit={onSubmit}
+              aria-busy={status === "sending"}
+              className="plate grid gap-6 rounded-[3px] border border-anvil p-5 sm:grid-cols-2 sm:p-8"
+            >
+              {status === "error" && (
+                <div
+                  ref={panel}
+                  tabIndex={-1}
+                  role="alert"
+                  className="rounded-[3px] border border-cherry bg-cherry/10 p-4 outline-none sm:col-span-2 sm:p-5"
+                >
+                  <div>
+                    <p className="stencil text-[1.4rem] leading-none text-[#ff7a52] [--wdth:80]">{t.demo.errorTitle}</p>
+                    <p className="mt-2 text-[0.95rem] leading-relaxed text-iron/85">
+                      {t.demo.errorBody}{" "}
+                      <a href={`mailto:${site.contactEmail}`} className="text-ember underline decoration-ember/40 hover:text-white-heat">
+                        {site.contactEmail}
+                      </a>
+                      .
+                    </p>
+                  </div>
+                </div>
+              )}
+              <Input id="name" label={f.name} error={errors.name} autoComplete="nickname" />
+              <Input id="email" label={f.email} type="email" error={errors.email} autoComplete="email" />
+              <Input id="link" label={f.link} hint={f.linkHint} type="url" error={errors.link} autoComplete="url" />
+              <Input id="city" label={f.city} optional={f.optional} autoComplete="address-level2" />
+              <Input id="message" label={f.message} optional={f.optional} multiline />
+              <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+                <p role="status" className="text-[0.95rem] text-steel">
+                  {!open ? t.demo.closed : ""}
+                </p>
+                <button
+                  type="submit"
+                  aria-disabled={!open || status === "sending"}
+                  className="btn btn-hot sm:min-w-[14rem]"
+                >
+                  {status === "sending" ? (
+                    <>
+                      <span aria-hidden="true" className="sending-dot size-2 rounded-full bg-scale" />
+                      {t.demo.sending}
+                    </>
+                  ) : (
+                    <>
+                      {status === "error" ? t.demo.retry : t.demo.submit}
+                      <ArrowUpRight className="size-5" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </section>
   );

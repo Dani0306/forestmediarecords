@@ -1,0 +1,10 @@
+filters:
+  and:
+    - type == "feature"
+views:
+  - type: table
+    name: Features
+    order:
+      - file.name
+      - status
+      - code

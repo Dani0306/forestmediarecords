@@ -4,6 +4,10 @@
  *
  * Every entry below is a SAMPLE (`sample: true`) shown with a visible
  * "Example" tag. Replace them with real events and drop the flag.
+ *
+ * `featured: true` marks a main event: the hero gives the next one the big
+ * panel with its picture and countdown. Everything else is secondary and runs
+ * along the hero's heat line.
  */
 export type EventType = "concert" | "stream" | "showcase" | "release";
 
@@ -18,6 +22,10 @@ export type ForgeEvent = {
   /** Venue name for live shows; for streams use "Kick". */
   place: { es: string; en: string };
   url?: string; // tickets, Kick channel or release link
+  /** Main event: gets the hero panel. */
+  featured?: boolean;
+  /** Event picture (agenda card and hero); defaults to the lead artist's photo. */
+  image?: string;
   sample?: boolean;
 };
 
@@ -25,19 +33,27 @@ export const events: ForgeEvent[] = [
   {
     id: "studio-session-lentino",
     type: "stream",
-    title: { es: "Sesión en vivo desde el estudio", en: "Live session from the studio" },
+    title: {
+      es: "Sesión en vivo desde el estudio",
+      en: "Live session from the studio",
+    },
     artists: ["lentino"],
     start: "2026-10-09T20:00:00-05:00",
     place: { es: "Kick", en: "Kick" },
+    image: "/lentino/lentino2.avif",
     sample: true,
   },
   {
     id: "renzo-stream",
     type: "stream",
-    title: { es: "Renzo · Directo y freestyle", en: "Renzo · Live & freestyle" },
+    title: {
+      es: "Renzo · Directo y freestyle",
+      en: "Renzo · Live & freestyle",
+    },
     artists: ["renzo"],
     start: "2026-10-16T21:00:00-05:00",
     place: { es: "Kick", en: "Kick" },
+    image: "/RS/RS2.avif",
     sample: true,
   },
   {
@@ -48,16 +64,23 @@ export const events: ForgeEvent[] = [
     start: "2026-10-24T21:00:00-05:00",
     end: "2026-10-25T00:00:00-05:00",
     place: { es: "Lugar por confirmar · Medellín", en: "Venue TBA · Medellín" },
+    featured: true,
+    image: "/lentino/lentino1.avif",
     sample: true,
   },
   {
     id: "forest-showcase",
     type: "showcase",
-    title: { es: "Showcase Forest: artistas emergentes", en: "Forest Showcase: emerging artists" },
+    title: {
+      es: "Showcase Forest: artistas emergentes",
+      en: "Forest Showcase: emerging artists",
+    },
     artists: ["lentino", "renzo"],
     start: "2026-11-14T19:00:00-05:00",
     end: "2026-11-14T23:00:00-05:00",
     place: { es: "Lugar por confirmar · Medellín", en: "Venue TBA · Medellín" },
+    featured: true,
+    image: "/lentino/lentino4.avif",
     sample: true,
   },
   {
@@ -68,6 +91,7 @@ export const events: ForgeEvent[] = [
     start: "2026-11-28T00:00:00-05:00",
     end: "2026-11-28T23:59:00-05:00",
     place: { es: "Todas las plataformas", en: "All platforms" },
+    image: "/RS/RS1.avif",
     sample: true,
   },
   {
@@ -78,12 +102,15 @@ export const events: ForgeEvent[] = [
     start: "2026-09-20T22:00:00-05:00",
     end: "2026-09-21T01:00:00-05:00",
     place: { es: "Medellín", en: "Medellín" },
+    image: "/RS/RS3.avif",
     sample: true,
   },
 ];
 
 export const eventEnd = (e: ForgeEvent) =>
-  e.end ? new Date(e.end).getTime() : new Date(e.start).getTime() + 2 * 3600_000;
+  e.end
+    ? new Date(e.end).getTime()
+    : new Date(e.start).getTime() + 2 * 3600_000;
 
 export type Heat = "live" | "white" | "hot" | "warm" | "embers" | "cold";
 
@@ -124,3 +151,10 @@ export const past = (now: number) =>
   events
     .filter((e) => eventEnd(e) <= now)
     .sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime());
+
+/** The next main event (featured), or undefined. */
+export const nextMain = (now: number) => upcoming(now).find((e) => e.featured);
+
+/** The next secondary event (not featured), or undefined. */
+export const nextSecondary = (now: number) =>
+  upcoming(now).find((e) => !e.featured);

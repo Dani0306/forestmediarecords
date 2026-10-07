@@ -132,21 +132,6 @@ a {
   background-blend-mode: soft-light, normal;
 }
 
-/* chalk-ruled measurement scale */
-.ruler {
-  --tick: rgb(236 230 218 / 0.38);
-  background-image:
-    linear-gradient(90deg, var(--tick) 1px, transparent 1px),
-    linear-gradient(90deg, var(--tick) 1px, transparent 1px);
-  background-size:
-    calc(100% / 10) 100%,
-    calc(100% / 50) 40%;
-  background-repeat: repeat-x;
-  background-position:
-    0 0,
-    0 0;
-}
-
 /* ── Buttons: hot plate and cold steel ───────────────────────────── */
 .btn {
   position: relative;
@@ -258,6 +243,17 @@ a {
 }
 
 /* hero type cools from white heat down to iron */
+.cool-in {
+  animation: cool-in 2.8s var(--ease-hammer) 0.2s both;
+}
+@keyframes cool-in {
+  from {
+    --heat: 1;
+  }
+  to {
+    --heat: 0.12;
+  }
+}
 .hot-type {
   color: color-mix(in oklab, var(--color-white-heat) calc(var(--heat) * 100%), var(--color-iron));
   text-shadow:
@@ -268,22 +264,29 @@ a {
 }
 
 /* artist photos graded into the forge: cold iron with a heat-ramp duotone */
-.iron-photo img {
+.iron-photo :is(img, video) {
   filter: grayscale(1) contrast(1.12) brightness(var(--lift, 0.9));
   transition: filter 0.7s var(--ease-hammer), transform 0.7s var(--ease-hammer);
 }
+.iron-photo {
+  overflow: hidden;
+}
+/* the heat ramp lives in the bottom half of a double-height layer; sliding it
+   up with transform (compositor-only, no repaint) is how the heat "rises" */
 .iron-photo::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 0 0 auto 0;
+  height: 200%;
   pointer-events: none;
-  background: linear-gradient(to top, var(--color-glow) 0%, var(--color-ember) 22%, var(--color-cherry) 48%, #2a0b06 80%, #0b0b0d 100%);
+  background: linear-gradient(to top, var(--color-glow) 0%, var(--color-ember) 11%, var(--color-cherry) 24%, #2a0b06 40%, #0b0b0d 50%, #0b0b0d 100%);
   mix-blend-mode: color;
   opacity: 0.9;
+  transform: translateY(-50%);
   transition: opacity 0.7s var(--ease-hammer);
 }
-.iron-photo:hover img,
-.iron-photo:focus-within img {
+.iron-photo:hover :is(img, video),
+.iron-photo:focus-within :is(img, video) {
   filter: none;
   transform: scale(1.03);
 }
@@ -294,6 +297,157 @@ a {
 
 .hero-gutter {
   --g: 1rem;
+}
+
+/* black glass under a picture: agenda cards, feathered at the top */
+/* no live backdrop-filter: the card renders a pre-blurred copy of its own
+   photo inside this field (.glass-blur), which rasterizes once and scrolls free */
+.glass-field {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3rem);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 3rem);
+}
+.glass-field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgb(11 11 13 / 0.35), rgb(11 11 13 / 0.72) 45%, rgb(11 11 13 / 0.8));
+}
+/* the open streamer channel: its glass also fades out toward the portrait on the right */
+.glass-fade-right {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3rem), linear-gradient(90deg, #000 calc(100% - 5rem), transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 3rem), linear-gradient(90deg, #000 calc(100% - 5rem), transparent);
+  mask-composite: intersect;
+}
+.glass-blur {
+  filter: blur(18px) saturate(0.8);
+}
+
+/* Kick posters: real printed artwork, pinned like prints. Shown untreated
+   (no duotone); hover straightens one and lifts it to the front. */
+.kick-poster {
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow:
+    0 0 0 1px rgb(236 230 218 / 0.08),
+    0 30px 60px -24px rgb(0 0 0 / 0.85);
+  transition:
+    rotate 0.6s var(--ease-hammer),
+    translate 0.6s var(--ease-hammer),
+    box-shadow 0.6s var(--ease-hammer);
+}
+.kick-poster:hover {
+  rotate: 0deg;
+  translate: 0 -6px;
+  z-index: 20;
+  box-shadow:
+    0 0 0 1px rgb(236 230 218 / 0.14),
+    0 40px 80px -24px rgb(0 0 0 / 0.9);
+}
+
+/* hovering anywhere on an event card heats its picture to true colour */
+.event-card:hover .iron-photo img,
+.event-card:focus-within .iron-photo :is(img, video) {
+  filter: none;
+  transform: scale(1.03);
+}
+.event-card:hover .iron-photo::after,
+.event-card:focus-within .iron-photo::after {
+  opacity: 0;
+}
+/* trending cards heat to true colour on hover, focus, or while their clip plays */
+.trend-card:hover .iron-photo :is(img, video),
+.trend-card:focus-within .iron-photo :is(img, video),
+.trend-card[data-playing] .iron-photo :is(img, video) {
+  filter: none;
+  transform: scale(1.03);
+}
+.trend-card:hover .iron-photo::after,
+.trend-card:focus-within .iron-photo::after,
+.trend-card[data-playing] .iron-photo::after {
+  opacity: 0;
+}
+
+/* "Escuchar": the equalizer bars rest low and dance while the button is hot */
+.eq-bar {
+  transform: scaleY(0.35);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .listen:is(:hover, :focus-visible, [aria-expanded="true"]) .eq-bar {
+    animation: eq 0.9s var(--ease-hammer) infinite alternate;
+  }
+}
+@keyframes eq {
+  0% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.55);
+  }
+}
+
+/* cookie notice drops in from below the fold edge, once */
+@media (prefers-reduced-motion: no-preference) {
+  .cookie-in {
+    animation: cookie-in 0.6s var(--ease-hammer) 0.8s both;
+  }
+}
+@keyframes cookie-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+/* form "sending" pulse */
+.sending-dot {
+  animation: sending 0.8s steps(2) infinite;
+}
+@keyframes sending {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* streamer channels: the open one is on air in true colour; a closed one sits in cold iron */
+.stream-photo img {
+  filter: brightness(var(--lift, 1));
+  transition: filter 0.7s var(--ease-hammer), transform 0.9s var(--ease-hammer);
+}
+.stream-panel:not([data-open]) .stream-photo img {
+  filter: grayscale(1) contrast(1.1) brightness(calc(var(--lift, 1) * 0.6));
+}
+.stream-panel:not([data-open]):hover .stream-photo img {
+  filter: grayscale(0.6) brightness(calc(var(--lift, 1) * 0.75));
+}
+.stream-panel[data-open] .stream-photo img {
+  transform: scale(1.02);
+}
+
+/* finished events stay cold: plain grayscale, no heat */
+.event-card[data-heat="cold"] .iron-photo::after {
+  opacity: 0;
+}
+
+/* side glass: black glass over moving video or a photo, feathered at its leading edge
+   (top on mobile, left on desktop). Hero main event and artist stage. */
+.glass-side {
+  background: rgb(11 11 13 / 0.55);
+  -webkit-backdrop-filter: blur(22px) saturate(0.8);
+  backdrop-filter: blur(22px) saturate(0.8);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3.5rem);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 3.5rem);
+}
+@media (min-width: 1024px) {
+  .glass-side {
+    background: linear-gradient(90deg, rgb(11 11 13 / 0.3) 0%, rgb(11 11 13 / 0.6) 35%, rgb(11 11 13 / 0.7) 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 clamp(5rem, 8vw, 8rem));
+    mask-image: linear-gradient(90deg, transparent 0, #000 clamp(5rem, 8vw, 8rem));
+  }
 }
 @media (min-width: 640px) {
   .hero-gutter {
@@ -322,6 +476,113 @@ a {
   }
 }
 
+/* ── Scroll choreography (scroll-driven, compositor-only, off under reduced motion) ──
+   Blocks of media are forged in: a top-down shutter with a small hammer overshoot.
+   Photos inside media drift against the scroll (parallax, `translate` so hover
+   scales still work). The hero sinks away: its video pushes in, the copy lifts off.
+   The Kick posters float at two speeds. Rows keep the hammer `.drop`. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .forge-in {
+      animation: forge-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+    @media (min-width: 1024px) {
+      .trend-in {
+        animation: forge-in linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 30%;
+      }
+    }
+    .parallax {
+      view-timeline-name: --media;
+    }
+    .parallax :is(img, video) {
+      scale: 1.1;
+      animation: parallax linear both;
+      animation-timeline: --media;
+      animation-range: cover 0% cover 100%;
+    }
+    .hero-scope {
+      view-timeline-name: --hero;
+    }
+    .hero-zoom {
+      animation: hero-zoom linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+    .hero-exit {
+      animation: hero-exit linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 75%;
+    }
+    .float-scope {
+      view-timeline-name: --float;
+    }
+    .float-a,
+    .float-b {
+      animation: float-a linear both;
+      animation-timeline: --float;
+      animation-range: cover 0% cover 100%;
+    }
+    .float-b {
+      animation-name: float-b;
+    }
+  }
+}
+@keyframes forge-in {
+  from {
+    clip-path: inset(0 0 35% 0);
+    translate: 0 -2rem;
+    opacity: 0.35;
+  }
+  70% {
+    translate: 0 0.3rem;
+    opacity: 1;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes parallax {
+  from {
+    translate: 0 -4%;
+  }
+  to {
+    translate: 0 4%;
+  }
+}
+@keyframes hero-zoom {
+  to {
+    scale: 1.12;
+  }
+}
+@keyframes hero-exit {
+  to {
+    translate: 0 -10vh;
+    opacity: 0.1;
+  }
+}
+@keyframes float-a {
+  from {
+    transform: translateY(2.5rem);
+  }
+  to {
+    transform: translateY(-2.5rem);
+  }
+}
+@keyframes float-b {
+  from {
+    transform: translateY(-1.5rem);
+  }
+  to {
+    transform: translateY(3.5rem);
+  }
+}
+
 @keyframes drop {
   0% {
     opacity: 0;
@@ -339,12 +600,10 @@ a {
 
 @keyframes heat-photo {
   from {
-    background-size: 100% 260%;
-    background-position: 0 0;
+    transform: translateY(0);
   }
   to {
-    background-size: 100% 100%;
-    background-position: 0 100%;
+    transform: translateY(-50%);
   }
 }
 

@@ -1,228 +1,350 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { artists } from "@/data/artists";
-import { heatOf, upcoming } from "@/data/events";
+import {
+  heatOf,
+  nextMain,
+  nextSecondary,
+  type ForgeEvent,
+  type Heat,
+} from "@/data/events";
 import { hasKick, site } from "@/data/site";
+import { eventPhoto } from "@/lib/eventPhoto";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
-import ForgeBar, { type ForgeBarHandle, type StrikeInfo } from "./ForgeBar";
-import { ArrowDown, ArrowUpRight, Broadcast, Hammer } from "./icons";
+import { ArrowDown, ArrowUpRight, Broadcast } from "./icons";
 
-const BASE_WDTH = 70;
+const artistNames = (e: ForgeEvent) =>
+  e.artists
+    .map((s) => artists.find((a) => a.slug === s)?.name)
+    .filter(Boolean) as string[];
 
-function NextHeat() {
+/** Where an event's action points: Kick for streams (when connected), else the agenda. */
+function EventAction({ e }: { e: ForgeEvent }) {
+  const { t } = useLang();
+  const cls =
+    "readout inline-flex min-h-11 items-center gap-2 text-xs text-ember hover:text-white-heat";
+  const url = e.url || (e.type === "stream" && hasKick ? site.kick.url : "");
+  return url ? (
+    <a href={url} target="_blank" rel="noreferrer" className={cls}>
+      {e.type === "stream" ? t.agenda.watch : "Info"}{" "}
+      <ArrowUpRight className="size-4" />
+    </a>
+  ) : (
+    <a href="#agenda" className={cls}>
+      {t.hero.seeAgenda} <ArrowDown className="size-4" />
+    </a>
+  );
+}
+
+/**
+ * Main event: no card. The event sits straight on a blurred black field on the
+ * right of the hero (a band under the actions on mobile), feathered into the video.
+ */
+function MainHeat({ e, now: initial }: { e: ForgeEvent; now: number }) {
   const { t, lang } = useLang();
-  const now = useNow(1000);
-  const next = now === null ? null : upcoming(now)[0];
-  const heat = next && now !== null ? heatOf(next, now) : "embers";
+  // the countdown ticks here, so only this block re-renders each second
+  const now = useNow(1000) ?? initial;
+  const heat = heatOf(e, now);
   const live = heat === "live";
-  const cd = next && now !== null ? formatCountdown(new Date(next.start).getTime() - now, lang) : null;
-  const date = next ? formatDateParts(next.start, lang) : null;
-  const names = next ? next.artists.map((s) => artists.find((a) => a.slug === s)?.name).filter(Boolean) : [];
-  const lead = next ? artists.find((a) => a.slug === next.artists[0]) : undefined;
-  const photo = lead?.photos[lead.slug === "lentino" ? 1 : 0];
+  const cd = formatCountdown(new Date(e.start).getTime() - now, lang);
+  const date = formatDateParts(e.start, lang);
+  const names = artistNames(e);
+  const photo = eventPhoto(e);
 
   return (
     <section
-      aria-labelledby="next-heat"
+      aria-labelledby="main-heat"
       data-heat={heat}
-      className="plate relative flex h-full flex-col rounded-[3px] border border-anvil shadow-[0_24px_60px_-30px_rgb(0_0_0/0.9)]"
+      className="main-heat relative flex flex-col justify-end px-[var(--g)] pb-12 pt-14 lg:absolute lg:inset-y-0 lg:right-0 lg:z-10 lg:w-[calc(var(--g)+var(--mh-content)+var(--mh-lead))] lg:pb-14 lg:pl-(--mh-lead) lg:pt-24 lg:[--mh-content:clamp(24rem,32vw,32rem)] lg:[--mh-lead:clamp(5rem,7vw,7rem)]"
     >
-      <div className="flex items-center justify-between gap-4 border-b border-anvil px-5 py-3">
-        <h2 id="next-heat" className="stamp text-iron">
+      {/* the field: black, blurred, feathered into the video */}
+      <div aria-hidden="true" className="glass-side absolute inset-0 -z-10" />
+
+      <div className="flex items-center justify-between gap-4">
+        <h2 id="main-heat" className="stamp text-iron">
           {t.hero.next}
         </h2>
-        <span className="stamp flex items-center gap-2" style={{ color: "var(--h)" }}>
+        <span
+          className="stamp flex items-center gap-2"
+          style={{ color: "var(--h)" }}
+        >
           <span className="heat-bar inline-block h-1.5 w-8 rounded-full" />
-          {next ? (live ? t.hero.liveNow : t.heat[heat]) : "—"}
+          {live ? t.hero.liveNow : t.heat[heat]}
         </span>
       </div>
 
-      <div className="iron-photo relative min-h-40 flex-1 overflow-hidden border-b border-anvil bg-forge-3">
-        {photo && (
+      {photo && (
+        <div
+          className="iron-photo relative mt-5 aspect-[16/10] overflow-hidden rounded-[3px] bg-forge-3 lg:aspect-[16/9] lg:max-h-[30vh] lg:w-full"
+          style={{ "--lift": photo.lift ?? 0.9 } as React.CSSProperties}
+        >
           <Image
             src={photo.src}
             alt={photo.alt[lang]}
             fill
-            sizes="(max-width: 1024px) 100vw, 34vw"
+            sizes="(max-width: 1024px) 100vw, 36vw"
             loading="eager"
             className="object-cover object-[50%_30%]"
           />
+          <span className="readout absolute left-3 top-3 z-10 bg-forge/85 px-2 py-1 text-[0.58rem] text-glow">
+            {t.agenda.featured}
+          </span>
+        </div>
+      )}
+
+      <div className="mt-6 flex items-end gap-5">
+        <p className="flex shrink-0 flex-col">
+          <span
+            className="stencil text-[clamp(4rem,7vw,5.5rem)] leading-[0.8] [--wdth:64]"
+            style={{ color: "var(--h)" }}
+          >
+            {date.day}
+          </span>
+          <span className="readout mt-2 text-xs text-iron">
+            {date.month} · {date.weekday}
+          </span>
+        </p>
+        <div className="min-w-0 pb-0.5">
+          <p className="stencil text-[clamp(1.6rem,2.4vw,2.25rem)] leading-[0.92] text-iron [--wdth:78]">
+            {e.title[lang]}
+          </p>
+          <p className="readout mt-2 text-[0.68rem] leading-relaxed text-steel">
+            {t.types[e.type]} · {date.time} · {e.place[lang]}
+            {names.length > 0 && (
+              <span className="text-iron/80"> · {names.join(", ")}</span>
+            )}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-7 border-t border-iron/15 pt-5" aria-live="off">
+        <p className="stamp mb-3">{live ? t.hero.liveNow : t.hero.startsIn}</p>
+        {!live && (
+          <p className="readout flex flex-wrap items-baseline gap-x-1 text-[clamp(2rem,3.2vw,2.75rem)] leading-none tracking-normal text-iron">
+            <span>{cd.d}</span>
+            <span className="mr-3 text-xs text-steel">{cd.units.d}</span>
+            <span>{cd.h}</span>
+            <span className="mr-3 text-xs text-steel">{cd.units.h}</span>
+            <span>{cd.m}</span>
+            <span className="mr-3 text-xs text-steel">{cd.units.m}</span>
+            <span style={{ color: "var(--h)" }}>{cd.s}</span>
+            <span className="text-xs text-steel">{cd.units.s}</span>
+          </p>
         )}
       </div>
 
-      {now === null ? (
-        <div className="h-[15.5rem]" aria-hidden="true" />
-      ) : next && date && cd ? (
-        <div className="flex flex-col gap-5 px-5 pb-5 pt-5">
-          <div className="flex items-start gap-4">
-            <div className="flex flex-col items-center border-r border-anvil pr-4 text-center">
-              <span className="stencil text-[3.25rem] leading-none [--wdth:70]" style={{ color: "var(--h)" }}>
-                {date.day}
-              </span>
-              <span className="readout mt-1 text-xs text-iron">{date.month}</span>
-            </div>
-            <div className="min-w-0">
-              <p className="stencil text-[1.65rem] leading-[0.95] text-iron [--wdth:80]">{next.title[lang]}</p>
-              <p className="readout mt-2 text-[0.7rem] leading-relaxed text-steel">
-                {t.types[next.type]} · {date.weekday} {date.time} · {next.place[lang]}
-              </p>
-              {names.length > 0 && <p className="mt-1 text-sm text-iron/80">{names.join(" · ")}</p>}
-            </div>
-          </div>
+      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <EventAction e={e} />
+        {e.sample && (
+          <span className="readout rounded-[2px] border border-anvil px-1.5 py-0.5 text-[0.6rem] text-steel">
+            {t.agenda.sample}
+          </span>
+        )}
+      </div>
+    </section>
+  );
+}
 
-          <div aria-live="off">
-            <p className="stamp mb-2">{live ? t.hero.liveNow : t.hero.startsIn}</p>
-            {!live && (
-              <p className="readout flex items-baseline gap-1 text-[1.65rem] tracking-normal text-iron">
-                <span>{cd.d}</span>
-                <span className="text-xs text-steel">{cd.units.d}</span>
-                <span className="ml-2">{cd.h}</span>
-                <span className="text-xs text-steel">{cd.units.h}</span>
-                <span className="ml-2">{cd.m}</span>
-                <span className="text-xs text-steel">{cd.units.m}</span>
-                <span className="ml-2 tabular-nums" style={{ color: "var(--h)" }}>
-                  {cd.s}
-                </span>
-                <span className="text-xs text-steel">{cd.units.s}</span>
-              </p>
-            )}
-          </div>
+/** Secondary event, stamped along the hero's heat line.
+ * Kept for when the first real secondary event exists; its render is commented out in Hero. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function SecondaryHeat({ e, now }: { e?: ForgeEvent; now: number | null }) {
+  const heat = e && now !== null ? heatOf(e, now) : "embers";
+  const live = heat === "live";
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            {next.type === "stream" && hasKick ? (
-              <a href={site.kick.url} target="_blank" rel="noreferrer" className="readout inline-flex items-center gap-2 text-xs text-ember hover:text-white-heat">
-                {t.agenda.watch} <ArrowUpRight className="size-4" />
-              </a>
-            ) : (
-              <a href="#agenda" className="readout inline-flex items-center gap-2 text-xs text-ember hover:text-white-heat">
-                {t.hero.ctaAgenda} <ArrowDown className="size-4" />
-              </a>
-            )}
-            {next.sample && (
-              <span className="readout rounded-[2px] border border-anvil px-1.5 py-0.5 text-[0.6rem] text-steel">
-                {t.agenda.sample}
-              </span>
-            )}
-          </div>
-        </div>
-      ) : (
-        <p className="stencil px-5 py-10 text-[1.65rem] text-steel [--wdth:80]">{t.hero.nextNone}</p>
+  return (
+    <section
+      aria-labelledby={e ? "secondary-heat" : undefined}
+      data-heat={heat}
+      className="relative"
+    >
+      {/* the heat line: cold steel on the left, glowing toward the event */}
+      <div
+        aria-hidden="true"
+        className="h-[3px] w-full"
+        style={{
+          background:
+            "linear-gradient(90deg, rgb(42 45 49 / 0.9) 0%, var(--h2) 45%, var(--h) 85%, color-mix(in oklab, var(--h) 50%, var(--color-white-heat)) 100%)",
+          boxShadow:
+            "0 4px 14px -4px color-mix(in oklab, var(--h) 70%, transparent)",
+        }}
+      />
+      {e && now !== null && (
+        <SecondaryRow e={e} now={now} live={live} heat={heat} />
       )}
     </section>
   );
 }
 
+function SecondaryRow({
+  e,
+  now,
+  live,
+  heat,
+}: {
+  e: ForgeEvent;
+  now: number;
+  live: boolean;
+  heat: Heat;
+}) {
+  const { t, lang } = useLang();
+  const cd = formatCountdown(new Date(e.start).getTime() - now, lang);
+  const date = formatDateParts(e.start, lang);
+  const names = artistNames(e);
+
+  return (
+    <div className="bg-forge/90 px-[var(--g)]">
+      <div className="flex min-h-20 flex-wrap items-center gap-x-8 gap-y-3 py-4">
+        <h2
+          id="secondary-heat"
+          className="stamp flex items-center gap-2 text-iron"
+        >
+          {t.hero.alsoNext}
+          <span style={{ color: "var(--h)" }}>
+            · {live ? t.hero.liveNow : t.heat[heat]}
+          </span>
+        </h2>
+
+        <p className="flex min-w-0 items-baseline gap-4">
+          <span
+            className="stencil shrink-0 text-[2.25rem] leading-none [--wdth:68]"
+            style={{ color: "var(--h)" }}
+          >
+            {date.day} <span className="text-[1.25rem]">{date.month}</span>
+          </span>
+          <span className="min-w-0">
+            <span className="stencil block truncate text-[1.35rem] leading-none text-iron [--wdth:80]">
+              {e.title[lang]}
+            </span>
+            <span className="readout mt-1 block truncate text-[0.62rem] text-steel">
+              {t.types[e.type]} · {date.weekday} {date.time} · {e.place[lang]}
+              {names.length > 0 && ` · ${names.join(", ")}`}
+            </span>
+          </span>
+        </p>
+
+        {!live && (
+          <p
+            className="readout flex items-baseline gap-1 text-[1.15rem] tracking-normal text-iron"
+            aria-live="off"
+          >
+            <span className="sr-only">{t.hero.startsIn} </span>
+            {cd.d}
+            <span className="text-[0.6rem] text-steel">{cd.units.d}</span>
+            <span className="ml-1.5">{cd.h}</span>
+            <span className="text-[0.6rem] text-steel">{cd.units.h}</span>
+            <span className="ml-1.5">{cd.m}</span>
+            <span className="text-[0.6rem] text-steel">{cd.units.m}</span>
+            <span className="ml-1.5" style={{ color: "var(--h)" }}>
+              {cd.s}
+            </span>
+            <span className="text-[0.6rem] text-steel">{cd.units.s}</span>
+          </p>
+        )}
+
+        <div className="flex items-center gap-4 lg:ml-auto">
+          {e.sample && (
+            <span className="readout rounded-[2px] border border-anvil px-1.5 py-0.5 text-[0.58rem] text-steel">
+              {t.agenda.sample}
+            </span>
+          )}
+          <EventAction e={e} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Hero() {
   const { t } = useLang();
-  const heroRef = useRef<HTMLElement>(null);
-  const tempRef = useRef<HTMLSpanElement>(null);
-  const bar = useRef<ForgeBarHandle>(null);
-  const [blow, setBlow] = useState<StrikeInfo>({ blows: 0, drawn: 0, reset: false });
+  // which events lead only changes when one starts or ends; a slow clock is enough
+  const now = useNow(30_000);
+  const video = useRef<HTMLVideoElement>(null);
+  const main = now === null ? undefined : nextMain(now);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used by the secondary strip
+  const secondary = now === null ? undefined : nextSecondary(now);
 
-  const onStrike = useCallback((info: StrikeInfo) => setBlow(info), []);
-  const onHeat = useCallback((heat: number, celsius: number) => {
-    heroRef.current?.style.setProperty("--heat", heat.toFixed(3));
-    if (tempRef.current) tempRef.current.textContent = String(celsius);
+  useEffect(() => {
+    const v = video.current;
+    if (!v) return;
+    // reduced motion: the loop has no controls, so it stays on its poster frame
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // only decode (and re-blur under the glass) while the hero is on screen
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) v.play().catch(() => {});
+        else if (!entry.isIntersecting) v.pause();
+      },
+      { threshold: 0.05 },
+    );
+    io.observe(v);
+    return () => io.disconnect();
   }, []);
-  const wdth = BASE_WDTH + Math.min(blow.blows, 9) * 4;
 
   return (
     <section
       id="top"
-      ref={heroRef}
       aria-labelledby="hero-title"
-      className="hero-gutter relative grid min-h-[100svh] grid-cols-1 content-center gap-x-8 overflow-hidden px-[var(--g)] pt-24 [--heat:1] lg:grid-cols-12 lg:pt-28"
+      className="hero-gutter hero-scope relative flex min-h-[100svh] flex-col overflow-hidden"
     >
-      <h1
-        id="hero-title"
-        className="stencil hot-type order-1 text-[clamp(3.25rem,13vw,6rem)] transition-[font-variation-settings] duration-500 ease-[var(--ease-hammer)] lg:col-span-7 lg:row-start-1 lg:text-[6rem]"
-        style={{ "--wdth": wdth } as React.CSSProperties}
-      >
-        {t.hero.lines.map((l) => (
-          <span key={l} className="block">
-            {l}
-          </span>
-        ))}
-      </h1>
+      {/* background: artist loop */}
+      <video
+        ref={video}
+        className="hero-zoom absolute inset-0 size-full object-cover object-[60%_30%] lg:object-[52%_40%]"
+        src="/videoloop-web.webm"
+        poster="/videoloop-poster.webp"
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+      {/* scrims keep the type legible without hiding the artist */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-forge)_0%,rgb(11_11_13/0.78)_30%,rgb(11_11_13/0.38)_52%,rgb(11_11_13/0.08)_74%,rgb(11_11_13/0.5)_100%)] lg:bg-[linear-gradient(90deg,var(--color-forge)_0%,rgb(11_11_13/0.86)_28%,rgb(11_11_13/0.3)_55%,rgb(11_11_13/0.15)_75%,rgb(11_11_13/0.1)_100%),linear-gradient(to_top,var(--color-forge)_0%,transparent_38%)]"
+      />
 
-      <div className="order-3 pb-10 pt-8 lg:col-span-7 lg:row-start-2 lg:pb-0 lg:pt-8">
-        <p className="max-w-[34rem] text-[1.0625rem] leading-relaxed text-iron/85 [font-variation-settings:'wdth'_92]">
-          {t.hero.lede}
-        </p>
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <a href="#agenda" className="btn btn-hot">
-            {t.hero.ctaAgenda}
-            <ArrowDown className="size-5" />
-          </a>
-          <a
-            href={hasKick ? site.kick.url : "#kick"}
-            {...(hasKick ? { target: "_blank", rel: "noreferrer" } : {})}
-            className="btn btn-steel"
+      <div className="relative z-10 grid flex-1 grid-cols-1 content-end gap-10 px-[var(--g)] pb-10 pt-28 lg:grid-cols-12 lg:items-end lg:gap-8 lg:pb-12">
+        <div className="hero-exit lg:col-span-6 xl:col-span-7">
+          <h1
+            id="hero-title"
+            className="stencil hot-type cool-in text-[clamp(3.25rem,13vw,6rem)] [--wdth:70] lg:text-[6rem]"
           >
-            <Broadcast className="size-5 text-ember" />
-            {t.hero.ctaKick}
-          </a>
-          <a
-            href="#demos"
-            className="readout ml-1 inline-flex min-h-11 items-center px-2 text-xs text-steel underline decoration-anvil hover:text-iron hover:decoration-ember"
-          >
-            {t.hero.ctaDemo}
-          </a>
-        </div>
-      </div>
-
-      <div className="order-4 pb-12 lg:order-none lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:pb-0">
-        <NextHeat />
-      </div>
-
-      {/* the bar: the page's one unbroken line */}
-      <div className="order-2 -mx-[var(--g)] mt-4 lg:order-none lg:col-span-12 lg:row-start-3 lg:mt-10">
-        <ForgeBar ref={bar} onHeat={onHeat} onStrike={onStrike} className="h-[clamp(110px,18vh,180px)] w-full" />
-        <div className="px-[var(--g)]">
-          <div className="ruler h-3 w-full opacity-70" aria-hidden="true" />
-          <div className="readout flex justify-between pt-1 text-[0.6rem] text-steel" aria-hidden="true">
-            {["0", "+25", "+50", "+75", "+100", "+125", "+150", "+175", "+200", "+225", "MM"].map((n, i) => (
-              <span key={n} className={i % 2 ? "hidden sm:inline" : ""}>
-                {n}
+            {t.hero.lines.map((l) => (
+              <span key={l} className="block">
+                {l}
               </span>
             ))}
-          </div>
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-b border-anvil py-3 lg:border-b-0">
-            <dl className="readout flex flex-wrap gap-x-6 gap-y-2 text-[0.7rem] sm:gap-x-8">
-              <div className="flex items-baseline gap-2">
-                <dt className="text-steel">{t.hero.blow}</dt>
-                <dd className="text-xl tracking-normal text-iron">{String(blow.blows).padStart(2, "0")}</dd>
-              </div>
-              <div className="flex items-baseline gap-2">
-                <dt className="text-steel">{t.hero.length}</dt>
-                <dd className="text-xl tracking-normal text-ember">
-                  +{blow.drawn}
-                  <span className="ml-1 text-[0.7rem] text-steel">MM</span>
-                </dd>
-              </div>
-              <div className="flex items-baseline gap-2">
-                <dt className="text-steel">{t.hero.temp}</dt>
-                <dd className="text-xl tracking-normal text-iron">
-                  <span ref={tempRef}>1280</span>
-                  <span className="ml-1 text-[0.7rem] text-steel">°C</span>
-                </dd>
-              </div>
-            </dl>
-            <span className="stamp hidden xl:inline">{t.hero.origin} · 6.2442° N 75.5812° W</span>
-            <button
-              type="button"
-              onClick={() => bar.current?.strike()}
-              aria-label={t.hero.strikeLabel}
-              className="btn btn-steel ml-auto min-h-11 px-4 text-[0.95rem]"
+          </h1>
+          <p className="mt-7 max-w-[34rem] text-[1.0625rem] leading-relaxed text-iron/90 [font-variation-settings:'wdth'_92]">
+            {t.hero.lede}
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="#demos"
+              className="btn btn-hot max-w-full whitespace-normal py-3 text-center leading-tight sm:whitespace-nowrap"
             >
-              <Hammer className="size-5 text-ember" />
-              {t.hero.strike}
-            </button>
+              {t.hero.ctaJoin}
+            </a>
+            <a
+              href={hasKick ? site.kick.url : "#kick"}
+              {...(hasKick ? { target: "_blank", rel: "noreferrer" } : {})}
+              className="btn btn-steel"
+            >
+              <Broadcast className="size-5 text-ember" />
+              {t.hero.ctaKick}
+            </a>
           </div>
         </div>
       </div>
+      {main && now !== null && <MainHeat e={main} now={now} />}
+      {/* <div className="relative z-10">
+        <SecondaryHeat e={secondary} now={now} />
+      </div> */}
     </section>
   );
 }
