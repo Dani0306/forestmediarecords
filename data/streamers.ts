@@ -89,7 +89,7 @@ export const streamers: Streamer[] = [
       base: "Medellín",
       bio: {
         es: [
-          "Leonardo Lugo Gómez nació en Villavicencio en 2003 y hace dos años vive en Medellín, desde donde construye su camino en el entretenimiento digital y el streaming. Se destaca por su presencia frente a la cámara y su conexión con la audiencia.",
+          "Leonardo Lugo Gómez nació en Villavicencio en 2004 y hace dos años vive en Medellín, desde donde construye su camino en el entretenimiento digital y el streaming. Se destaca por su presencia frente a la cámara y su conexión con la audiencia.",
           "Hace parte de los proyectos de Forest Media Récords que unen el streaming con la música, abriendo espacio a artistas y creadores emergentes. En su canal salen sesiones como Futuras Promesas.",
           "Su meta es seguir creciendo en la industria digital, fortalecer su comunidad y crear nuevos proyectos que unan streaming, música y entretenimiento.",
         ],
@@ -119,7 +119,12 @@ export const streamers: Streamer[] = [
     profile: {
       role: { es: "Streamer", en: "Streamer" },
       content: {
-        es: ["Streaming", "Entretenimiento", "Colaboraciones", "Cultura digital"],
+        es: [
+          "Streaming",
+          "Entretenimiento",
+          "Colaboraciones",
+          "Cultura digital",
+        ],
         en: ["Streaming", "Entertainment", "Collabs", "Digital culture"],
       },
       schedule: { es: "Por anunciar", en: "To be announced" },
