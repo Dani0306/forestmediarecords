@@ -164,4 +164,64 @@ export const artists: Artist[] = [
       },
     },
   },
+  {
+    slug: "lowkey",
+    name: "Lowkey",
+    photos: [
+      {
+        src: "/lowkey/lowkey1.avif",
+        width: 1023,
+        height: 1280,
+        alt: {
+          es: "Lentino sentado frente a un mural, ajustándose la gorra",
+          en: "Lentino seated in front of a mural, adjusting his cap",
+        },
+      },
+      {
+        src: "/lowkey/lowkey2.avif",
+        width: 1280,
+        height: 1023,
+        alt: {
+          es: "Lentino recostado contra una columna verde en la noche",
+          en: "Lentino leaning against a green pillar at night",
+        },
+      },
+      {
+        src: "/lowkey/lowkey3.avif",
+
+        width: 1023,
+        height: 1280,
+        alt: {
+          es: "lowkey bajo luz verde azulada, mirando a la cámara",
+          en: "lowkey under teal light, looking down the lens",
+        },
+      },
+    ],
+    kickUrl: "",
+    links: [],
+    listen: { spotify: "", youtube: "" },
+    profile: {
+      role: { es: "Compositor de música urbana", en: "Urban music songwriter" },
+      genres: ["Reguetón", "R&B", "Trap"],
+      city: "Medellín",
+      since: "2026", // joined about August 2026 (two months before 2026-10-06)
+      bio: {
+        es: [
+          "Mateo Andrés Valera nació en Cali en 1998 y se radicó en Medellín en 2021, donde comenzó a desarrollar su proyecto musical. Su propuesta combina reguetón, R&B y sonidos urbanos contemporáneos para crear una identidad fresca y versátil.",
+
+          "Entre sus primeros lanzamientos se encuentran «Noche Cero» y «Sin Señal», canciones que reflejan su evolución y su interés por explorar diferentes sonidos dentro de la escena urbana.",
+
+          "Actualmente trabaja en nueva música y prepara «Después de las 12», una colaboración con el artista colombiano Jhay Ríos que representa una nueva etapa en su carrera y en la consolidación de su propuesta artística.",
+        ],
+
+        en: [
+          "Mateo Andrés Valera was born in Cali in 1998 and moved to Medellín in 2021, where he began developing his musical project. His sound blends reggaeton, R&B and contemporary urban influences to create a fresh and versatile identity.",
+
+          "His early releases include “Noche Cero” and “Sin Señal”, songs that reflect his evolution and his interest in exploring different sounds within the urban music scene.",
+
+          "He is currently working on new music and preparing “Después de las 12”, a collaboration with Colombian artist Jhay Ríos that represents a new chapter in his career and the continued development of his artistic identity.",
+        ],
+      },
+    },
+  },
 ];
