@@ -75,7 +75,7 @@ export const events: ForgeEvent[] = [
     featured: true,
     image: "/events/futuraspromesas3.avif",
     poster: { width: 1254, height: 1254 },
-    sample: false,
+    sample: true,
   },
   {
     id: "forest-showcase",
