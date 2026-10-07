@@ -12,8 +12,9 @@ import {
 } from "@/data/events";
 import { hasKick, site } from "@/data/site";
 import { eventPhoto } from "@/lib/eventPhoto";
+import { icsHref } from "@/lib/ics";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
-import { ArrowDown, ArrowUpRight, Broadcast } from "./icons";
+import { ArrowDown, ArrowUpRight, Broadcast, CalendarPlus } from "./icons";
 
 const artistNames = (e: ForgeEvent) =>
   e.artists
@@ -38,132 +39,221 @@ function EventAction({ e }: { e: ForgeEvent }) {
   );
 }
 
-/**
- * Main event: no card. The event sits straight on a blurred black field on the
- * right of the hero (a band under the actions on mobile), feathered into the video.
- */
-function MainHeat({ e, now: initial }: { e: ForgeEvent; now: number }) {
+/** Calendar day in Medellín, for "Hoy" / "Mañana". */
+const dayKey = (ms: number) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "America/Bogota" }).format(ms);
+
+/** The countdown, big: four measured cells; only this block re-renders each second. */
+function BigCountdown({ e }: { e: ForgeEvent }) {
   const { t, lang } = useLang();
-  // the countdown ticks here, so only this block re-renders each second
-  const now = useNow(1000) ?? initial;
-  const heat = heatOf(e, now);
+  const now = useNow(1000);
+  const cd = now === null ? null : formatCountdown(new Date(e.start).getTime() - now, lang);
+  const cells = [
+    { v: cd?.d, label: t.hero.units.d },
+    { v: cd?.h, label: t.hero.units.h },
+    { v: cd?.m, label: t.hero.units.m },
+    { v: cd?.s, label: t.hero.units.s, hot: true },
+  ];
+  return (
+    <div>
+      <p className="stamp mb-3 text-iron/90">{t.hero.startsIn}</p>
+      <div
+        role="timer"
+        aria-live="off"
+        aria-label={cd ? `${t.hero.startsIn} ${cd.d} ${t.hero.units.d}, ${cd.h} ${t.hero.units.h}, ${cd.m} ${t.hero.units.m}` : t.hero.startsIn}
+        className="grid grid-cols-4 border-y border-iron/15"
+      >
+        {cells.map((c, i) => (
+          <div
+            key={c.label}
+            className={`flex flex-col gap-2 py-4 sm:py-5 ${i > 0 ? "border-l border-iron/15 pl-3 sm:pl-5" : ""}`}
+          >
+            <span
+              className="readout overflow-hidden text-[clamp(2.6rem,7.2vw,7rem)] leading-[0.9] tracking-normal"
+              style={{
+                // the heat colour, lifted toward white heat so far-off (dark) states still read
+                color: c.hot
+                  ? "color-mix(in oklab, var(--h) 55%, var(--color-white-heat))"
+                  : "var(--color-iron)",
+              }}
+            >
+              {/* the seconds drop in like a stamp on every tick */}
+              <span key={c.hot ? c.v : undefined} className={`inline-block ${c.hot && c.v ? "tick" : ""}`}>
+                {c.v ?? "--"}
+              </span>
+            </span>
+            <span className="readout text-[0.58rem] text-steel sm:text-[0.68rem]">{c.label}</span>
+          </div>
+        ))}
+      </div>
+      {/* the heat line under the clock: the event's temperature */}
+      <span aria-hidden="true" className="heat-bar mt-[-1px] block h-[3px] w-full rounded-full" />
+    </div>
+  );
+}
+
+/**
+ * Event takeover: when a main event is coming, the whole first screen is the event.
+ * Its poster (or photo) leads, its own picture glows behind everything, the title
+ * is stamped huge and the countdown is the loudest thing on the page.
+ */
+function EventTakeover({ e, now }: { e: ForgeEvent; now: number | null }) {
+  const { t, lang } = useLang();
+  const heat = now === null ? "white" : heatOf(e, now);
   const live = heat === "live";
-  const cd = formatCountdown(new Date(e.start).getTime() - now, lang);
   const date = formatDateParts(e.start, lang);
   const names = artistNames(e);
   const photo = eventPhoto(e);
+  const title = e.title[lang];
+  const split = title.match(/^(.*?)\s*(#\s?\d+)$/);
+  const startMs = new Date(e.start).getTime();
+  const rel =
+    now === null
+      ? null
+      : dayKey(startMs) === dayKey(now)
+        ? t.hero.today
+        : dayKey(startMs) === dayKey(now + 24 * 3600_000)
+          ? t.hero.tomorrow
+          : null;
+  const url = e.url || (e.type === "stream" && hasKick ? site.kick.url : "");
+  const ratio = e.poster ? e.poster.width / e.poster.height : 4 / 5;
 
   return (
     <section
-      aria-labelledby="main-heat"
+      id="top"
+      aria-labelledby="hero-title"
       data-heat={heat}
-      className="main-heat relative flex flex-col justify-end px-[var(--g)] pb-12 pt-14 lg:absolute lg:inset-y-0 lg:right-0 lg:z-10 lg:w-[calc(var(--g)+var(--mh-content)+var(--mh-lead))] lg:pb-14 lg:pl-(--mh-lead) lg:pt-24 lg:[--mh-content:clamp(24rem,32vw,32rem)] lg:[--mh-lead:clamp(5rem,7vw,7rem)]"
+      className="hero-gutter hero-scope relative isolate flex min-h-[100svh] flex-col overflow-hidden"
     >
-      {/* the field: black, blurred, feathered into the video */}
-      <div aria-hidden="true" className="glass-side absolute inset-0 -z-10" />
-
-      <div className="flex items-center justify-between gap-4">
-        <h2 id="main-heat" className="stamp text-iron">
-          {t.hero.next}
-        </h2>
-        <span
-          className="stamp flex items-center gap-2"
-          style={{ color: "var(--h)" }}
-        >
-          <span className="heat-bar inline-block h-1.5 w-8 rounded-full" />
-          {live ? t.hero.liveNow : t.heat[heat]}
-        </span>
-      </div>
-
-      {photo && e.poster ? (
-        /* a poster keeps its own shape and shows whole, untreated; the panel sizes around it */
-        <div
-          className="main-poster relative mt-5 shrink-0 overflow-hidden rounded-[3px] bg-forge-3 shadow-[0_24px_60px_-30px_rgb(0_0_0/0.9)]"
-          style={
-            {
-              "--ratio": e.poster.width / e.poster.height,
-              aspectRatio: `${e.poster.width} / ${e.poster.height}`,
-            } as React.CSSProperties
-          }
-        >
+      {/* the event's own picture, blown up into a dark glow */}
+      {photo && (
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
           <Image
             src={photo.src}
-            alt={photo.alt[lang]}
+            alt=""
             fill
-            sizes="(max-width: 1024px) 100vw, 32rem"
-            loading="eager"
-            className="object-cover"
+            sizes="50vw"
+            preload
+            className="scale-125 object-cover blur-[70px] brightness-[0.42] saturate-[1.1]"
           />
         </div>
-      ) : (
-        photo && (
-          <div
-            className="iron-photo relative mt-5 aspect-[16/10] overflow-hidden rounded-[3px] bg-forge-3 lg:aspect-[16/9] lg:max-h-[30vh] lg:w-full"
-            style={{ "--lift": photo.lift ?? 0.9 } as React.CSSProperties}
-          >
-            <Image
-              src={photo.src}
-              alt={photo.alt[lang]}
-              fill
-              sizes="(max-width: 1024px) 100vw, 36vw"
-              loading="eager"
-              className="object-cover object-[50%_30%]"
-            />
-            <span className="readout absolute left-3 top-3 z-10 bg-forge/85 px-2 py-1 text-[0.58rem] text-glow">
-              {t.agenda.featured}
-            </span>
-          </div>
-        )
       )}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_16%,transparent),transparent_70%),linear-gradient(to_bottom,rgb(11_11_13/0.55),transparent_22%,transparent_70%,var(--color-forge))]"
+      />
 
-      <div className="mt-6 flex items-end gap-5">
-        <p className="flex shrink-0 flex-col">
-          <span
-            className="stencil text-[clamp(4rem,7vw,5.5rem)] leading-[0.8] [--wdth:64]"
-            style={{ color: "var(--h)" }}
-          >
-            {date.day}
-          </span>
-          <span className="readout mt-2 text-xs text-iron">
-            {date.month} · {date.weekday}
-          </span>
-        </p>
-        <div className="min-w-0 pb-0.5">
-          <p className="stencil text-[clamp(1.6rem,2.4vw,2.25rem)] leading-[0.92] text-iron [--wdth:78]">
-            {e.title[lang]}
-          </p>
-          <p className="readout mt-2 text-[0.68rem] leading-relaxed text-steel">
-            {t.types[e.type]} · {date.time} · {e.place[lang]}
-            {names.length > 0 && (
-              <span className="text-iron/80"> · {names.join(", ")}</span>
-            )}
-          </p>
+      <div className="grid flex-1 grid-cols-1 items-center gap-6 px-[var(--g)] pb-8 pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-10 lg:pt-28">
+        {/* the poster, whole, in its own shape */}
+        <div className="flex justify-center lg:col-span-5 lg:justify-start">
+          {photo && (
+            <div
+              className={`takeover-poster relative overflow-hidden rounded-[3px] bg-forge-3 shadow-[0_40px_90px_-30px_rgb(0_0_0/0.95)] ${e.poster ? "" : "iron-photo"}`}
+              style={
+                {
+                  "--ratio": ratio,
+                  "--lift": photo.lift ?? 0.9,
+                  aspectRatio: String(ratio),
+                } as React.CSSProperties
+              }
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt[lang]}
+                fill
+                preload
+                sizes="(max-width: 1024px) 90vw, 40vw"
+                className="object-cover"
+              />
+            </div>
+          )}
         </div>
-      </div>
 
-      <div className="mt-7 border-t border-iron/15 pt-5" aria-live="off">
-        <p className="stamp mb-3">{live ? t.hero.liveNow : t.hero.startsIn}</p>
-        {!live && (
-          <p className="readout flex flex-wrap items-baseline gap-x-1 text-[clamp(2rem,3.2vw,2.75rem)] leading-none tracking-normal text-iron">
-            <span>{cd.d}</span>
-            <span className="mr-3 text-xs text-steel">{cd.units.d}</span>
-            <span>{cd.h}</span>
-            <span className="mr-3 text-xs text-steel">{cd.units.h}</span>
-            <span>{cd.m}</span>
-            <span className="mr-3 text-xs text-steel">{cd.units.m}</span>
-            <span style={{ color: "var(--h)" }}>{cd.s}</span>
-            <span className="text-xs text-steel">{cd.units.s}</span>
+        <div className="hero-exit min-w-0 lg:col-span-7">
+          <h1 id="hero-title" className="readout flex items-center gap-3 text-[0.7rem] text-iron/90">
+            <Image src="/logo-512.webp" alt="" width={28} height={28} className="size-7" />
+            <span>
+              Forest Media Récords <span className="text-steel">{t.hero.presents}</span>
+            </span>
+          </h1>
+
+          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 lg:mt-6">
+            <p className="stamp text-iron">{t.hero.next}</p>
+            <span className="stamp flex items-center gap-2" style={{ color: "var(--h)" }}>
+              <span className={`heat-bar inline-block h-1.5 w-8 rounded-full`} />
+              {live ? t.hero.liveNow : t.heat[heat]}
+            </span>
+            {e.sample && (
+              <span className="readout rounded-[2px] border border-anvil px-1.5 py-0.5 text-[0.58rem] text-steel">
+                {t.agenda.sample}
+              </span>
+            )}
+          </div>
+
+          <h2 className="stencil drop mt-3 text-balance text-[clamp(3rem,6.6vw,7.25rem)] leading-[0.84] text-iron [--wdth:64]">
+            {split ? (
+              <>
+                {split[1]} <span style={{ color: "var(--h)" }}>{split[2]}</span>
+              </>
+            ) : (
+              title
+            )}
+          </h2>
+
+          <p className="readout mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.72rem] leading-relaxed text-iron/90 sm:text-[0.8rem]">
+            {rel && (
+              <span className="rounded-[2px] px-1.5 py-0.5 text-scale" style={{ background: "var(--h)" }}>
+                {rel}
+              </span>
+            )}
+            <span>
+              {date.weekday} {date.day} {date.month} · {date.time}
+            </span>
+            <span className="text-steel">·</span>
+            <span>{e.place[lang]}</span>
+            <span className="text-steel">·</span>
+            <span className="text-steel">{t.types[e.type]}</span>
+            {names.length > 0 && <span className="text-steel">· {names.join(", ")}</span>}
           </p>
-        )}
-      </div>
 
-      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-        <EventAction e={e} />
-        {e.sample && (
-          <span className="readout rounded-[2px] border border-anvil px-1.5 py-0.5 text-[0.6rem] text-steel">
-            {t.agenda.sample}
-          </span>
-        )}
+          <div className="mt-6 lg:mt-10">
+            {live ? (
+              <div className="border-y border-iron/15 py-5">
+                <p className="stencil flex items-center gap-4 text-[clamp(3.5rem,9vw,8rem)] leading-[0.85] [--wdth:66]" style={{ color: "var(--h)" }}>
+                  <span aria-hidden="true" className="live-dot size-[0.28em] rounded-full" style={{ background: "var(--h)" }} />
+                  {t.hero.liveBig}
+                </p>
+              </div>
+            ) : (
+              <BigCountdown e={e} />
+            )}
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            {url ? (
+              <a href={url} target="_blank" rel="noreferrer" className="btn btn-hot">
+                <Broadcast className="size-5" />
+                {live ? t.hero.watchLive : e.type === "stream" ? t.agenda.watch : "Info"}
+              </a>
+            ) : null}
+            {!live && (
+              <a
+                href={icsHref(e, lang)}
+                download={`${e.id}.ics`}
+                className={`btn ${url ? "btn-steel" : "btn-hot"}`}
+              >
+                <CalendarPlus className={`size-5 ${url ? "text-ember" : ""}`} />
+                {t.agenda.addCal}
+              </a>
+            )}
+            <a
+              href="#agenda"
+              className="readout inline-flex min-h-11 items-center gap-2 px-2 text-xs text-iron/80 hover:text-white-heat"
+            >
+              {t.hero.allEvents} <ArrowDown className="size-4 text-ember" />
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -284,7 +374,9 @@ export default function Hero() {
   // which events lead only changes when one starts or ends; a slow clock is enough
   const now = useNow(30_000);
   const video = useRef<HTMLVideoElement>(null);
-  const main = now === null ? undefined : nextMain(now);
+  // before the clock mounts, use the build time so server and client agree
+  const main = nextMain(now ?? Number(process.env.BUILD_TIME));
+  const takeover = Boolean(main);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used by the secondary strip
   const secondary = now === null ? undefined : nextSecondary(now);
 
@@ -303,7 +395,11 @@ export default function Hero() {
     );
     io.observe(v);
     return () => io.disconnect();
-  }, []);
+    // re-run when the takeover hands the hero back to the video
+  }, [takeover]);
+
+  // a main event takes over the whole first screen; otherwise the artist video leads
+  if (main) return <EventTakeover e={main} now={now} />;
 
   return (
     <section
@@ -363,7 +459,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      {main && now !== null && <MainHeat e={main} now={now} />}
       {/* <div className="relative z-10">
         <SecondaryHeat e={secondary} now={now} />
       </div> */}

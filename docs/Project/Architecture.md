@@ -29,7 +29,7 @@ graph TD
 
 ## Key mechanisms
 - **Heat as state**: `heatOf(event, now)` → `live | white | hot | warm | embers | cold` and `heatLevel()` 0–1. Drives colours (`[data-heat]` CSS variables `--h`/`--h2`) across the agenda, hero and artist stage. See [[Design system]].
-- **Main vs secondary events**: `featured: true` events are "main" (hero panel); `nextMain()` / `nextSecondary()` in `data/events.ts`. See [[Main and secondary events]].
+- **Main vs secondary events**: `main: true` events are "main" (hero panel); `nextMain()` / `nextSecondary()` in `data/events.ts`. See [[Main and secondary events]].
 - **Hydration-safe time**: `useNow()` returns `null` until mount so server and client markup match; countdown blocks own their own 1 s tick.
 - **i18n**: client-side; Spanish default, choice stored in `localStorage` (`fmr-lang`), `<html lang>` updated. See [[Bilingual copy]].
 - **Scroll choreography**: CSS scroll-driven animations only (view timelines, compositor properties, off under reduced motion): media blocks are forged in, photos drift, the hero sinks away, Kick posters float. Sections hosting timelines use `overflow: clip`. See `DESIGN.md`.

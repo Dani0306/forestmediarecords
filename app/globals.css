@@ -445,6 +445,32 @@ a {
   }
 }
 
+/* event takeover: the poster as large as the screen allows, in its own shape */
+.takeover-poster {
+  /* phones: small enough that the countdown still lands on the first screen */
+  width: min(100%, calc(34svh * var(--ratio)));
+}
+@media (min-width: 1024px) {
+  .takeover-poster {
+    width: min(100%, calc((100svh - 13rem) * var(--ratio)));
+  }
+}
+/* the seconds land like a stamp on every tick */
+@media (prefers-reduced-motion: no-preference) {
+  .tick {
+    animation: tick 0.45s var(--ease-hammer) both;
+  }
+  .live-dot {
+    animation: flicker 1.6s steps(6) infinite;
+  }
+}
+@keyframes tick {
+  from {
+    opacity: 0.25;
+    transform: translateY(-0.18em);
+  }
+}
+
 /* side glass: black glass over moving video or a photo, feathered at its leading edge
    (top on mobile, left on desktop). Hero main event and artist stage. */
 .glass-side {
@@ -524,10 +550,13 @@ a {
       animation-timeline: --hero;
       animation-range: exit 0% exit 100%;
     }
-    .hero-exit {
-      animation: hero-exit linear both;
-      animation-timeline: --hero;
-      animation-range: exit 0% exit 75%;
+    /* desktop only: on phones the hero copy is what you scroll down to read */
+    @media (min-width: 1024px) {
+      .hero-exit {
+        animation: hero-exit linear both;
+        animation-timeline: --hero;
+        animation-range: exit 0% exit 75%;
+      }
     }
     .float-scope {
       view-timeline-name: --float;

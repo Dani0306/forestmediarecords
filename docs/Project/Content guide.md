@@ -22,7 +22,7 @@ How to replace placeholders with real content. No component changes needed.
   end: "2026-10-25T00:00:00-05:00", // optional, default start + 2h
   place: { es: "…", en: "…" },
   url: "https://…",              // optional: tickets / Kick / release
-  featured: true,                // main event → hero panel
+  main: true,                    // required: true → takes over the hero's first screen
   image: "/lentino/lentino1.avif", // optional, else lead artist photo
   poster: { width: 1254, height: 1254 }, // optional: image is a poster (its pixel size); the hero shows it whole, in colour, in its own shape
   sample: true,                  // REMOVE for real events
@@ -44,7 +44,7 @@ Order is rank: the first item takes the big slot. Fields: `kind` (`video|studio|
 One entry per streamer: `name` (full name, shown in the details), `handle` (Kick nickname, the big name), `url` (Kick channel), `photo` (in a folder per streamer, e.g. `public/triana/`; `focus` sets the crop; `sample: true` only for stand-ins), optional `highlight` (a poster and link for something on their channel), and `profile` (`role`, `content[]`, `schedule`, optional `origin` / `base`, `bio` as paragraphs: the first shows, the rest open with "Leer biografía completa"). The next stream comes from `data/events.ts`: an upcoming `stream` whose `url` is the channel. See [[Streamers]].
 
 ## Studio (`data/studio.ts`)
-`services[]`: `name`, `body`, `price` (COP, a number), `unit` (`piece` per song, `session`, `block` per 4 hours), optional `includes`, `featured`, `blocks` (lets the form pick 4-hour blocks). `slots` are the bookable time slots (samples until the real hours exist; `slotsSample` shows the tag). See [[Studio]].
+`services[]`: `name`, `body`, `price` (COP, a number), `unit` (`piece` per song, `session`, `block` per 4 hours), optional `includes`, `main: true`, `blocks` (lets the form pick 4-hour blocks). `slots` are the bookable time slots (samples until the real hours exist; `slotsSample` shows the tag). See [[Studio]].
 
 ## Legal (`data/legal.ts`)
 `legalMeta` (updated date, `draft`, company name, NIT, address, email) and the `privacy` / `terms` documents in ES and EN as titled sections. Fill the [brackets] and set `draft: false` after legal review. See [[Legal pages]].

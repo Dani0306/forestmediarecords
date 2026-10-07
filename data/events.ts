@@ -5,9 +5,13 @@
  * Every entry below is a SAMPLE (`sample: true`) shown with a visible
  * "Example" tag. Replace them with real events and drop the flag.
  *
- * `featured: true` marks a main event: the hero gives the next one the big
- * panel with its picture and countdown. Everything else is secondary and runs
- * along the hero's heat line.
+ * MAIN EVENTS: every event says `main: true` or `main: false`.
+ *   main: true  → while it is upcoming or live, it takes over the whole first
+ *                 screen of the site (poster, title, big countdown). If several
+ *                 are marked, the soonest one wins; when it ends, the next takes over.
+ *                 With no main event left, the artist video hero comes back.
+ *   main: false → a regular event: it shows in the agenda only.
+ * Keep `main: true` for the one event that matters most.
  */
 export type EventType = "concert" | "stream" | "showcase" | "release";
 
@@ -22,8 +26,8 @@ export type ForgeEvent = {
   /** Venue name for live shows; for streams use "Kick". */
   place: { es: string; en: string };
   url?: string; // tickets, Kick channel or release link
-  /** Main event: gets the hero panel. */
-  featured?: boolean;
+  /** Main event? true → takes over the hero's first screen (see the note above). Required. */
+  main: boolean;
   /** Event picture (agenda card and hero); defaults to the lead artist's photo. */
   image?: string;
   /**
@@ -38,6 +42,7 @@ export const events: ForgeEvent[] = [
   {
     id: "studio-session-lentino",
     type: "stream",
+    main: false,
     title: {
       es: "Sesión en vivo desde el estudio",
       en: "Live session from the studio",
@@ -51,6 +56,7 @@ export const events: ForgeEvent[] = [
   {
     id: "renzo-stream",
     type: "stream",
+    main: false,
     title: {
       es: "Renzo · Directo y freestyle",
       en: "Renzo · Live & freestyle",
@@ -64,6 +70,7 @@ export const events: ForgeEvent[] = [
   {
     id: "futuras-promesas-3",
     type: "stream",
+    main: true,
     title: { es: "Futuras promesas #3", en: "Futuras promesas #3" },
     artists: [""],
     start: "2026-10-07T21:00:00-05:00",
@@ -72,7 +79,6 @@ export const events: ForgeEvent[] = [
       es: "Estudio Forest Media · Sabaneta",
       en: "Forest Media headquarters · Medellín",
     },
-    featured: true,
     image: "/events/futuraspromesas3.avif",
     poster: { width: 1254, height: 1254 },
     sample: false,
@@ -80,6 +86,7 @@ export const events: ForgeEvent[] = [
   {
     id: "forest-showcase",
     type: "showcase",
+    main: true,
     title: {
       es: "Showcase Forest: artistas emergentes",
       en: "Forest Showcase: emerging artists",
@@ -88,13 +95,13 @@ export const events: ForgeEvent[] = [
     start: "2026-11-14T19:00:00-05:00",
     end: "2026-11-14T23:00:00-05:00",
     place: { es: "Lugar por confirmar · Medellín", en: "Venue TBA · Medellín" },
-    featured: true,
     image: "/lentino/lentino4.avif",
     sample: true,
   },
   {
     id: "renzo-single",
     type: "release",
+    main: false,
     title: { es: "Renzo · Nuevo sencillo", en: "Renzo · New single" },
     artists: ["renzo"],
     start: "2026-11-28T00:00:00-05:00",
@@ -106,6 +113,7 @@ export const events: ForgeEvent[] = [
   {
     id: "renzo-live-sep",
     type: "concert",
+    main: false,
     title: { es: "Renzo en vivo", en: "Renzo live" },
     artists: ["renzo"],
     start: "2026-09-20T22:00:00-05:00",
@@ -161,9 +169,9 @@ export const past = (now: number) =>
     .filter((e) => eventEnd(e) <= now)
     .sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime());
 
-/** The next main event (featured), or undefined. */
-export const nextMain = (now: number) => upcoming(now).find((e) => e.featured);
+/** The next main event (`main: true`), or undefined. */
+export const nextMain = (now: number) => upcoming(now).find((e) => e.main);
 
-/** The next secondary event (not featured), or undefined. */
+/** The next secondary event (`main: false`), or undefined. */
 export const nextSecondary = (now: number) =>
-  upcoming(now).find((e) => !e.featured);
+  upcoming(now).find((e) => !e.main);

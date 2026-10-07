@@ -71,7 +71,7 @@ function EventCard({ e, now }: { e: ForgeEvent; now: number | null }) {
           {t.heat[heat]}
         </span>
         <span className="flex flex-wrap justify-end gap-1.5">
-          {e.featured && !cold && (
+          {e.main && !cold && (
             <span className="readout bg-forge/85 px-2 py-1 text-[0.58rem] text-glow">
               {t.agenda.featured}
             </span>

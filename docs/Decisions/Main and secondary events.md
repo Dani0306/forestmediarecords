@@ -12,7 +12,10 @@ tags:
 The team liked the big countdown panel and the slim heat-line strip, and wanted both.
 
 ## Decision
-`featured: true` events are **main** (hero panel with photo and countdown); others are **secondary** (heat-line strip). Later the main panel lost its card and sits on blurred black glass on the right of the hero; the secondary strip is commented out **on purpose** and will be enabled once there is a real secondary event.
+`main: true` events are **main** (hero panel with photo and countdown); others are **secondary** (heat-line strip). Later the main panel lost its card and sits on blurred black glass on the right of the hero; the secondary strip is commented out **on purpose** and will be enabled once there is a real secondary event.
 
 ## Consequences
 One source of truth (`data/events.ts`) drives both; editors pick main events with a flag.
+
+## Update (2026-10-07)
+The flag is now `main: boolean`, required on every event (it was the optional `featured`), so each entry says plainly whether it is a main event.
