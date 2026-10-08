@@ -306,7 +306,7 @@ function SecondaryHeat({ e, now }: { e?: ForgeEvent; now: number | null }) {
 
 function SecondaryRow({
   e,
-  now,
+  now: initial,
   live,
   heat,
 }: {
@@ -316,6 +316,9 @@ function SecondaryRow({
   heat: Heat;
 }) {
   const { t, lang } = useLang();
+  // the strip ticks on its own 1s clock (the hero's clock only runs every 30s),
+  // so only this row re-renders each second
+  const now = useNow(1000) ?? initial;
   const cd = formatCountdown(new Date(e.start).getTime() - now, lang);
   const date = formatDateParts(e.start, lang);
   const names = artistNames(e);
