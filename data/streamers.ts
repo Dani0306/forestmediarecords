@@ -12,6 +12,17 @@ import { site } from "./site";
  * The next stream is read from `data/events.ts`: any upcoming `stream` whose
  * `url` is this channel (streams with no `url` go out on the label channel).
  */
+export type StreamerPhoto = {
+  src: string;
+  width: number;
+  height: number;
+  lift?: number;
+  /** CSS object-position for the crop; portraits in the wide open panel want the face high, e.g. "50% 40%". */
+  focus?: string;
+  sample?: boolean;
+  alt: { es: string; en: string };
+};
+
 export type Streamer = {
   slug: string;
   /** Full name: shown in the details and the bio. */
@@ -19,16 +30,8 @@ export type Streamer = {
   /** Kick nickname: the big display name. */
   handle: string;
   url: string;
-  photo: {
-    src: string;
-    width: number;
-    height: number;
-    lift?: number;
-    /** CSS object-position for the crop; portraits in the wide open panel want the face high, e.g. "50% 40%". */
-    focus?: string;
-    sample?: boolean;
-    alt: { es: string; en: string };
-  };
+  /** First photo leads (closed panel, Kick channel avatar); more photos add thumbnails to the open channel. */
+  photos: StreamerPhoto[];
   /** Something real that runs on this channel, shown as a small poster. */
   highlight?: {
     title: string;
@@ -55,17 +58,19 @@ export const streamers: Streamer[] = [
     name: "Leonardo Lugo",
     handle: "leolugolive",
     url: site.kick.url,
-    photo: {
-      // cropped from leolugo1.avif (a phone screenshot) to the photo itself
-      src: "/leolugo/leolugo-portrait.avif",
-      width: 738,
-      height: 1095,
-      focus: "50% 42%",
-      alt: {
-        es: "LeoLugoLive de noche en un balcón, con gorra y camiseta negra, frente a los edificios de la ciudad",
-        en: "LeoLugoLive at night on a balcony, in a cap and black tee, with city buildings behind him",
+    photos: [
+      {
+        // cropped from leolugo1.avif (a phone screenshot) to the photo itself
+        src: "/leolugo/leolugo-portrait.avif",
+        width: 738,
+        height: 1095,
+        focus: "50% 42%",
+        alt: {
+          es: "LeoLugoLive de noche en un balcón, con gorra y camiseta negra, frente a los edificios de la ciudad",
+          en: "LeoLugoLive at night on a balcony, in a cap and black tee, with city buildings behind him",
+        },
       },
-    },
+    ],
     highlight: {
       title: "Futuras Promesas #3",
       src: "/trending/ft3.avif",
@@ -106,16 +111,48 @@ export const streamers: Streamer[] = [
     name: "Daniel Triana",
     handle: "trianiss",
     url: "https://kick.com/trianiss",
-    photo: {
-      src: "/triana/triana.avif",
-      width: 1440,
-      height: 1800,
-      focus: "50% 24%",
-      alt: {
-        es: "Trianiss en Stream Fighters, con gorra, gafas oscuras y ropa negra frente al muro de prensa del evento",
-        en: "Trianiss at Stream Fighters, in a cap, dark glasses and black clothes in front of the event's press wall",
+    photos: [
+      {
+        src: "/triana/triana4.avif",
+        width: 1440,
+        height: 1800,
+        focus: "50% 24%",
+        alt: {
+          es: "Trianiss en Stream Fighters, con gorra, gafas oscuras y ropa negra frente al muro de prensa del evento",
+          en: "Trianiss at Stream Fighters, in a cap, dark glasses and black clothes in front of the event's press wall",
+        },
       },
-    },
+      {
+        src: "/triana/triana2.avif",
+        width: 1200,
+        height: 1600,
+        focus: "50% 30%",
+        alt: {
+          es: "Trianiss en la alfombra roja de Stream Fighters, de brazos cruzados frente al muro de patrocinadores",
+          en: "Trianiss on the Stream Fighters red carpet, arms crossed in front of the sponsor wall",
+        },
+      },
+      {
+        src: "/triana/triana1.avif",
+        width: 1600,
+        height: 1066,
+        focus: "35% 35%",
+        alt: {
+          es: "Trianiss con gorra y gafas bajo una estructura de guadua, tapándose la cara con las manos",
+          en: "Trianiss in a cap and glasses under a bamboo structure, covering his face with his hands",
+        },
+      },
+      {
+        src: "/triana/triana3.avif",
+        width: 1200,
+        height: 1600,
+        focus: "50% 30%",
+        alt: {
+          es: "Trianiss posando con un amigo en un evento",
+          en: "Trianiss posing with a friend at an event",
+        },
+      },
+    ],
     profile: {
       role: { es: "Streamer", en: "Streamer" },
       content: {

@@ -60,7 +60,9 @@ function Channel({
   const nextDate = next ? formatDateParts(next.start, lang) : null;
   const heat = next && now !== null ? heatOf(next, now) : "embers";
   const ch = `CH ${String(index + 1).padStart(2, "0")}`;
-  const lift = { "--lift": s.photo.lift ?? 1 } as React.CSSProperties;
+  const [shown, setShown] = useState(0);
+  const photo = s.photos[shown] ?? s.photos[0];
+  const lift = { "--lift": photo.lift ?? 1 } as React.CSSProperties;
 
   return (
     <li
@@ -79,7 +81,7 @@ function Channel({
         {desktop && (
           <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
             <Image
-              src={s.photo.src}
+              src={photo.src}
               alt=""
               fill
               sizes="30vw"
@@ -92,12 +94,17 @@ function Channel({
           style={lift}
         >
           <Image
-            src={s.photo.src}
-            alt={s.photo.alt[lang]}
+            src={photo.src}
+            alt={photo.alt[lang]}
             fill
             sizes="(max-width: 1024px) 100vw, 34vw"
             className="object-cover"
-            style={{ objectPosition: desktop && open ? "50% 20%" : (s.photo.focus ?? "50% 25%") }}
+            style={{
+              objectPosition:
+                desktop && open && photo.height > photo.width
+                  ? "50% 20%"
+                  : (photo.focus ?? "50% 25%"),
+            }}
           />
         </div>
       </div>
@@ -107,10 +114,35 @@ function Channel({
           <Broadcast className="size-3.5 text-ember" />
           {ch}
         </span>
-        {s.photo.sample && (
+        {photo.sample && (
           <span className="readout bg-forge/85 px-2 py-1 text-[0.58rem] text-steel">
             {t.streamers.samplePhoto}
           </span>
+        )}
+        {/* more than one photo: thumbnails switch the picture (open channel only) */}
+        {s.photos.length > 1 && !(desktop && !open) && (
+          <ul aria-label={t.roster.photos} className="ml-auto flex gap-1.5">
+            {s.photos.map((ph, i) => (
+              <li key={ph.src}>
+                <button
+                  type="button"
+                  onClick={() => setShown(i)}
+                  aria-pressed={i === shown}
+                  aria-label={`${t.roster.showPhoto} ${i + 1}`}
+                  className={`relative block size-11 overflow-hidden rounded-[2px] border transition-[border-color,opacity] duration-300 ${i === shown ? "border-ember" : "border-iron/20 opacity-70 hover:opacity-100"}`}
+                >
+                  <Image
+                    src={ph.src}
+                    alt=""
+                    fill
+                    sizes="44px"
+                    className={`object-cover ${i === shown ? "" : "grayscale"}`}
+                    style={{ objectPosition: ph.focus ?? "50% 25%" }}
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
 
@@ -153,12 +185,12 @@ function Channel({
           >
             <div className="stream-photo absolute inset-0">
               <Image
-                src={s.photo.src}
+                src={photo.src}
                 alt=""
                 fill
                 sizes="70vw"
                 className="object-cover"
-          style={{ objectPosition: s.photo.focus ?? "50% 25%" }}
+          style={{ objectPosition: photo.focus ?? "50% 25%" }}
               />
             </div>
           </div>

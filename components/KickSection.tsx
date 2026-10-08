@@ -41,10 +41,10 @@ export default function KickSection() {
       .map((s) => ({
         key: s.slug,
         name: s.handle,
-        img: s.photo.src,
+        img: s.photos[0].src,
         url: s.url,
         handle: s.handle,
-        focus: s.photo.focus ?? "50% 25%",
+        focus: s.photos[0].focus ?? "50% 25%",
         // full-body portraits: zoom the 48px avatar in on the face
         zoom: 2.4,
       })),

@@ -29,7 +29,7 @@ related:
 
 
 ## Trianiss (real, 2026-10-06)
-- Photo `public/triana/triana.avif` (1440×1800, at Stream Fighters), `focus: "50% 24%"`.
+- Photos (2026-10-08): four in `public/triana/` (`triana4` Stream Fighters lead, `triana2` red carpet, `triana1` bamboo, `triana3` with a friend). `photos[]` in `data/streamers.ts`; the open channel shows thumbnails top right to switch them. The first photo is the closed-panel picture and the Kick channel avatar.
 - Bio summarised from Daniel's text: born in Medellín in 2004, started streaming in the US, back in Medellín about two years; Westcol moderator, Stream Fighters guest, collaborations; Kick ~500 followers, Twitch 2,000+, ~25 average viewers, peak 130 (as of 2026-10-06, will go stale).
 
 ## Open issues
