@@ -19,3 +19,6 @@ One source of truth (`data/events.ts`) drives both; editors pick main events wit
 
 ## Update (2026-10-07)
 The flag is now `main: boolean`, required on every event (it was the optional `featured`), so each entry says plainly whether it is a main event.
+
+## Update (2026-10-08)
+The secondary strip is on: it shows the soonest upcoming `main: false` event at the bottom of the first screen, also under the event takeover, and disappears when there is none.

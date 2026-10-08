@@ -244,6 +244,7 @@ A pill bar filled with a gradient from near black through the heat state's coole
 Artist photos are graded into the forge: grayscale with slight contrast lift, overlaid by a heat-ramp duotone in color blend mode. The ramp sweeps up as the photo scrolls into view; hover or focus releases the photo to full color with a 1.03 scale.
 
 ### Hero Heat Line (signature): secondary events
+Shown at the bottom of the first screen in both hero modes (video hero and event takeover) whenever an upcoming `main: false` event exists; not rendered otherwise.
 A 3px full-width rule along the bottom of the video hero, graded from cold steel on the left to the next secondary event's heat on the right (the `[data-heat]` ramp, with a small offset glow). It carries the "Próximo en agenda" strip on forge black at 90%: stamp label with state, stencil date, title, mono meta line, live countdown, sample tag and one ember text action. With no secondary event it shows the line alone.
 
 ### Artist Stage (roster)

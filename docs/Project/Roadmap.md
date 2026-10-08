@@ -27,7 +27,7 @@ tags:
 - [x] Hero button copy fixed: "Forma parte de Forest Media Récords" / "Become part of Forest Media Récords" (2026-10-06)
 - [x] Hero primary button points to `#demos` (2026-10-06)
 - [x] Hero video stays a loop with no pause button (decided: [[Hero video loop without controls]])
-- [ ] Uncomment the **secondary heat strip** in `components/Hero.tsx` once the first real secondary event exists
+- [x] **Secondary heat strip** turned on: soonest `main: false` event, both hero modes (2026-10-08)
 - [ ] New RS photos (`RS1–3.avif`) are well lit but still use `lift: 2.1` (sizes fixed 2026-10-06)
 - [x] Demo deploy on Vercel: https://forestmr.vercel.app (2026-10-06)
 - [x] Domain **forestmediarecords.com** bought on Vercel, attached and set as `metadataBase` (2026-10-07, [[Deploy on Vercel]])

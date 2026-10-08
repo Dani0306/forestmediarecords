@@ -97,7 +97,15 @@ function BigCountdown({ e }: { e: ForgeEvent }) {
  * Its poster (or photo) leads, its own picture glows behind everything, the title
  * is stamped huge and the countdown is the loudest thing on the page.
  */
-function EventTakeover({ e, now }: { e: ForgeEvent; now: number | null }) {
+function EventTakeover({
+  e,
+  now,
+  secondary,
+}: {
+  e: ForgeEvent;
+  now: number | null;
+  secondary?: ForgeEvent;
+}) {
   const { t, lang } = useLang();
   const heat = now === null ? "white" : heatOf(e, now);
   const live = heat === "live";
@@ -255,13 +263,19 @@ function EventTakeover({ e, now }: { e: ForgeEvent; now: number | null }) {
           </div>
         </div>
       </div>
+      {secondary && (
+        <div className="relative z-10">
+          <SecondaryHeat e={secondary} now={now} />
+        </div>
+      )}
     </section>
   );
 }
 
-/** Secondary event, stamped along the hero's heat line.
- * Kept for when the first real secondary event exists; its render is commented out in Hero. */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+/**
+ * Secondary event: the soonest `main: false` event, stamped along a heat line
+ * at the bottom of the first screen (both hero modes). Absent when there is none.
+ */
 function SecondaryHeat({ e, now }: { e?: ForgeEvent; now: number | null }) {
   const heat = e && now !== null ? heatOf(e, now) : "embers";
   const live = heat === "live";
@@ -308,10 +322,10 @@ function SecondaryRow({
 
   return (
     <div className="bg-forge/90 px-[var(--g)]">
-      <div className="flex min-h-20 flex-wrap items-center gap-x-8 gap-y-3 py-4">
+      <div className="flex min-h-20 flex-wrap items-center gap-x-8 gap-y-3 py-4 lg:flex-nowrap">
         <h2
           id="secondary-heat"
-          className="stamp flex items-center gap-2 text-iron"
+          className="stamp flex shrink-0 items-center gap-2 text-iron"
         >
           {t.hero.alsoNext}
           <span style={{ color: "var(--h)" }}>
@@ -319,7 +333,7 @@ function SecondaryRow({
           </span>
         </h2>
 
-        <p className="flex min-w-0 items-baseline gap-4">
+        <p className="flex min-w-0 items-baseline gap-4 max-lg:basis-full lg:flex-1">
           <span
             className="stencil shrink-0 text-[2.25rem] leading-none [--wdth:68]"
             style={{ color: "var(--h)" }}
@@ -339,7 +353,7 @@ function SecondaryRow({
 
         {!live && (
           <p
-            className="readout flex items-baseline gap-1 text-[1.15rem] tracking-normal text-iron"
+            className="readout flex shrink-0 items-baseline gap-1 text-[1.15rem] tracking-normal text-iron"
             aria-live="off"
           >
             <span className="sr-only">{t.hero.startsIn} </span>
@@ -356,7 +370,7 @@ function SecondaryRow({
           </p>
         )}
 
-        <div className="flex items-center gap-4 lg:ml-auto">
+        <div className="flex shrink-0 items-center gap-4 lg:ml-auto">
           {e.sample && (
             <span className="readout rounded-[2px] border border-anvil px-1.5 py-0.5 text-[0.58rem] text-steel">
               {t.agenda.sample}
@@ -377,8 +391,7 @@ export default function Hero() {
   // before the clock mounts, use the build time so server and client agree
   const main = nextMain(now ?? Number(process.env.BUILD_TIME));
   const takeover = Boolean(main);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used by the secondary strip
-  const secondary = now === null ? undefined : nextSecondary(now);
+  const secondary = nextSecondary(now ?? Number(process.env.BUILD_TIME));
 
   useEffect(() => {
     const v = video.current;
@@ -399,7 +412,7 @@ export default function Hero() {
   }, [takeover]);
 
   // a main event takes over the whole first screen; otherwise the artist video leads
-  if (main) return <EventTakeover e={main} now={now} />;
+  if (main) return <EventTakeover e={main} now={now} secondary={secondary} />;
 
   return (
     <section
@@ -459,9 +472,11 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      {/* <div className="relative z-10">
-        <SecondaryHeat e={secondary} now={now} />
-      </div> */}
+      {secondary && (
+        <div className="relative z-10">
+          <SecondaryHeat e={secondary} now={now} />
+        </div>
+      )}
     </section>
   );
 }

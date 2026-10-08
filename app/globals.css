@@ -452,7 +452,7 @@ a {
 }
 @media (min-width: 1024px) {
   .takeover-poster {
-    width: min(100%, calc((100svh - 13rem) * var(--ratio)));
+    width: min(100%, calc((100svh - 18rem) * var(--ratio)));
   }
 }
 /* the seconds land like a stamp on every tick */
