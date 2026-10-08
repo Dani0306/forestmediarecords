@@ -1,7 +1,7 @@
 /**
  * Kick showcase content. Everything here is taken from the official
- * posters in public/kick/ (no dates are printed on them, so none are set).
- * Add the next edition by appending to `editions`; the newest goes first.
+ * posters (public/kick/, public/trending/); only facts printed on them.
+ * Add the next edition at the TOP of `editions`: the first one leads the Kick section.
  */
 export type KickPoster = {
   src: string;
@@ -16,13 +16,54 @@ export type KickEdition = {
   name: string; // series name
   edition: string; // e.g. "#2"
   format: { es: string; en: string };
+  /** Date and time as printed on the poster. */
+  when?: { es: string; en: string };
   winner?: string;
+  /** Where the winner is from, when the poster says. */
+  winnerFrom?: string;
   motto?: { es: string; en: string };
+  /** Competitors' names; empty when the poster doesn't print them. */
   lineup: string[];
+  /** Cities represented, when the poster shows them instead of names. */
+  cities?: string[];
   posters: KickPoster[]; // first = lead poster
 };
 
 export const editions: KickEdition[] = [
+  {
+    id: "futuras-promesas-3",
+    name: "Futuras Promesas",
+    edition: "#3",
+    format: { es: "Sesión de streaming en Kick", en: "Streaming session on Kick" },
+    when: { es: "7 de octubre · 9:00 PM", en: "October 7 · 9:00 PM" },
+    winner: "2BLE B",
+    winnerFrom: "Barranquilla",
+    motto: { es: "El talento también es del Caribe", en: "Talent is from the Caribbean too" },
+    lineup: [], // TODO: competitors' names (not printed on the poster)
+    cities: ["Medellín", "Bogotá", "Barranquilla"],
+    posters: [
+      {
+        src: "/trending/ganadorft3.avif",
+        width: 1254,
+        height: 1254,
+        label: { es: "Ganador", en: "Winner" },
+        alt: {
+          es: "Afiche del ganador de Futuras Promesas #3: 2BLE B, de Barranquilla, con gafas oscuras frente al malecón de noche. Forest Media Récords presenta.",
+          en: "Futuras Promesas #3 winner poster: 2BLE B from Barranquilla, in dark glasses in front of the riverfront at night. Presented by Forest Media Récords.",
+        },
+      },
+      {
+        src: "/trending/ft3.avif",
+        width: 1254,
+        height: 1254,
+        label: { es: "Line-up", en: "Line-up" },
+        alt: {
+          es: "Afiche de Futuras Promesas #3 con los artistas de Medellín, Bogotá y Barranquilla; 7 de octubre, 9:00 PM en kick.com/leolugolive.",
+          en: "Futuras Promesas #3 poster with the artists from Medellín, Bogotá and Barranquilla; October 7, 9:00 PM on kick.com/leolugolive.",
+        },
+      },
+    ],
+  },
   {
     id: "futuras-promesas-2",
     name: "Futuras Promesas",

@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Heat } from "@/data/events";
 import { trending, type Trend } from "@/data/trending";
 import { useLang } from "@/lib/i18n";
-import { ArrowUpRight, Pause, Play } from "./icons";
+import { ArrowDown, ArrowUpRight, Pause, Play } from "./icons";
 
 /** Rank is temperature: the hottest piece leads, the rest cool down the list. */
 const HEAT: Heat[] = ["white", "hot", "hot", "warm", "warm", "embers"];
@@ -212,13 +212,14 @@ function TrendCard({ item, rank }: { item: Trend; rank: number }) {
               item.href && (
                 <a
                   href={item.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${t.trending.open}: ${item.title[lang]}`}
+                  {...(item.href.startsWith("#") ? {} : { target: "_blank", rel: "noreferrer" })}
+                  aria-label={`${item.href.startsWith("#") ? t.trending.agenda : t.trending.open}: ${item.title[lang]}`}
                   className="btn btn-steel min-h-11 px-3 text-[0.9rem]"
                 >
-                  <span className="hidden sm:inline">{t.trending.open}</span>
-                  <ArrowUpRight className="size-4" />
+                  <span className="hidden sm:inline">
+                    {item.href.startsWith("#") ? t.trending.agenda : t.trending.open}
+                  </span>
+                  {item.href.startsWith("#") ? <ArrowDown className="size-4" /> : <ArrowUpRight className="size-4" />}
                 </a>
               )
             )}

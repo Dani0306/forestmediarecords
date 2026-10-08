@@ -39,30 +39,30 @@ export type ForgeEvent = {
 };
 
 export const events: ForgeEvent[] = [
+  // {
+  //   id: "studio-session-lentino",
+  //   type: "stream",
+  //   main: false,
+  //   title: {
+  //     es: "Sesión en vivo desde el estudio",
+  //     en: "Live session from the studio",
+  //   },
+  //   artists: ["lentino"],
+  //   start: "2026-10-09T20:00:00-05:00",
+  //   place: { es: "Kick", en: "Kick" },
+  //   image: "/lentino/lentino2.avif",
+  //   sample: false,
+  // },
   {
-    id: "studio-session-lentino",
-    type: "stream",
+    id: "studio-session-renzo",
+    type: "release",
     main: false,
     title: {
-      es: "Sesión en vivo desde el estudio",
-      en: "Live session from the studio",
-    },
-    artists: ["lentino"],
-    start: "2026-10-09T20:00:00-05:00",
-    place: { es: "Kick", en: "Kick" },
-    image: "/lentino/lentino2.avif",
-    sample: false,
-  },
-  {
-    id: "renzo-stream",
-    type: "stream",
-    main: false,
-    title: {
-      es: "Renzo · Directo y freestyle",
-      en: "Renzo · Live & freestyle",
+      es: "RS el Italiano · En el estudio",
+      en: "RS el Italiano · Studio session",
     },
     artists: ["renzo"],
-    start: "2026-10-16T21:00:00-05:00",
+    start: "2026-10-08T21:00:00-05:00",
     place: { es: "Kick", en: "Kick" },
     image: "/RS/RS2.avif",
     sample: true,
@@ -82,6 +82,24 @@ export const events: ForgeEvent[] = [
     image: "/events/futuraspromesas3.avif",
     poster: { width: 1254, height: 1254 },
     sample: false,
+  },
+  {
+    id: "lanzamiento-web",
+    type: "release",
+    main: false,
+    title: {
+      es: "Presentación de la página web oficial de Forest Media Récords",
+      en: "Forest Media Récords official website launch",
+    },
+    artists: [],
+    // TODO: real date, time and place (placeholder until confirmed; sample tag shows)
+    start: "2026-10-08T20:30:00-05:00",
+    end: "2026-10-08T23:00:00-05:00",
+    place: { es: "Sabaneta · Ant · Medellín", en: "Venue TBA · Medellín" },
+    // TODO: placeholder artwork; replace the file with the real poster (same name)
+    image: "/events/lanzamiento-web.avif",
+    poster: { width: 1254, height: 1254 },
+    sample: true,
   },
   {
     id: "forest-showcase",

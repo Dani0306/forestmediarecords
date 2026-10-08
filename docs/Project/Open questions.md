@@ -21,6 +21,8 @@ Things the code can't answer. Move answers into the relevant note, then tick the
 - [ ] Spotify and YouTube links for Lentino and RS el Italiano ([[Artists]])
 - [ ] When does "Sobrio" (Lentino × RS el Italiano) come out? Not dated yet ([[Artists]], [[Agenda]])
 
+- [ ] Website launch event: real date, time and place? Should it be a main event (takes over the hero)? ([[Agenda]], [[Trending]])
+
 ## Answered (2026-10-06)
 - [x] Domain: **forestmediarecords.com** (bought on Vercel 2026-10-07) → [[Deploy on Vercel]]
 - [x] Lentino joined Forest about two months ago (≈ August 2026) → `since: "2026"`

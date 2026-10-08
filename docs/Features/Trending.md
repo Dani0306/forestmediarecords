@@ -21,18 +21,19 @@ related:
 - Videos play on hover (mouse), when centred in view (touch), or from the "Ver avance" button; under reduced motion only the button plays them. The heat line shows playback progress.
 - Items with `href` get a "Ver en Kick" link (Futuras Promesas #2).
 
-## Current items
-1. Avance del nuevo videoclip (clip-01, sample)
-2. Rodaje nocturno (clip-02, sample)
-3. RS el Italiano en el estudio (`RS2.avif`, sample)
-4. Futuras Promesas #2, winner Jhanky (`kick1.avif`, real, links to Kick)
-5. Lentino: nueva sesión de fotos (`lentino3.avif`, sample)
-6. RS el Italiano de noche (`RS3.avif`, sample)
+## Current items (2026-10-08)
+1. 2BLE B gana Futuras Promesas #3 (`trending/ganadorft3.avif`, real, Barranquilla, "El talento también es del Caribe")
+2. Futuras Promesas #3 (`trending/ft3.avif`, real, 7 Oct on kick.com/leolugolive)
+3. Presentación de la página web oficial (`events/lanzamiento-web.avif`, **placeholder artwork**; links to the agenda)
+4. Jhanky gana Futuras Promesas #2 (`trending/ganadorft2.avif`, real)
+5. Futuras Promesas #2 line-up (`trending/ft2.avif`, real)
+6. Avance del nuevo videoclip (clip-01, sample; kept so the section has a playable loop)
 
-Both clips are cut from the hero video (`videoloop.webm`); the artist and title of that production are unknown.
+Items with an `href` starting with `#` show "Ver en la agenda" and stay on the page; others open in a new tab ("Ver en Kick").
 
 ## Open issues
-- [ ] Real trending projects: titles, artists, links (all but Futuras Promesas are samples)
+- [ ] Real artwork for the website launch (replace `public/events/lanzamiento-web.avif`, same name)
+- [ ] Replace the sample video item with a real production clip
 - [ ] Dedicated 4–8 s clips per production (today both come from the hero video)
 - [ ] Who is in the hero / trending video, and what is the production called?
 

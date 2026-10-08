@@ -118,41 +118,66 @@ export default function KickSection() {
               </h3>
               <p className="readout mt-4 text-[0.68rem] text-steel">
                 {t.kick.presents} · {ed.format[lang]}
+                {ed.when && <> · <span className="text-iron">{ed.when[lang]}</span></>}
               </p>
 
               <dl className="mt-10">
                 {ed.winner && (
                   <div className="flex items-baseline justify-between gap-6 border-t border-iron/15 py-5">
                     <dt className="stamp">{t.kick.winner}</dt>
-                    <dd className="stencil text-[clamp(2.5rem,4.5vw,3.75rem)] leading-none text-ember [--wdth:72]">
-                      {ed.winner}
+                    <dd className="text-right">
+                      <span className="stencil block text-[clamp(2.5rem,4.5vw,3.75rem)] leading-none text-ember [--wdth:72]">
+                        {ed.winner}
+                      </span>
+                      {ed.winnerFrom && (
+                        <span className="readout mt-2 block text-[0.62rem] text-steel">{ed.winnerFrom}</span>
+                      )}
                     </dd>
                   </div>
                 )}
-                <div className="border-y border-iron/15 py-5">
-                  <dt className="stamp">{t.kick.feat}</dt>
-                  <dd className="stencil mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[1.5rem] leading-none [--wdth:80]">
-                    {ed.lineup.map((name, i) => (
-                      <span key={name} className="flex items-baseline gap-3">
-                        {i > 0 && (
+                {ed.lineup.length > 0 && (
+                  <div className="border-y border-iron/15 py-5">
+                    <dt className="stamp">{t.kick.feat}</dt>
+                    <dd className="stencil mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[1.5rem] leading-none [--wdth:80]">
+                      {ed.lineup.map((name, i) => (
+                        <span key={name} className="flex items-baseline gap-3">
+                          {i > 0 && (
+                            <span
+                              aria-hidden="true"
+                              className="text-[1rem] text-steel"
+                            >
+                              ×
+                            </span>
+                          )}
                           <span
-                            aria-hidden="true"
-                            className="text-[1rem] text-steel"
+                            className={
+                              name === ed.winner ? "text-ember" : "text-iron"
+                            }
                           >
-                            ×
+                            {name}
                           </span>
-                        )}
-                        <span
-                          className={
-                            name === ed.winner ? "text-ember" : "text-iron"
-                          }
-                        >
-                          {name}
                         </span>
-                      </span>
-                    ))}
-                  </dd>
-                </div>
+                      ))}
+                    </dd>
+                  </div>
+                )}
+                {ed.lineup.length === 0 && ed.cities && (
+                  <div className="border-y border-iron/15 py-5">
+                    <dt className="stamp">{t.kick.cities}</dt>
+                    <dd className="stencil mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[1.5rem] leading-none [--wdth:80]">
+                      {ed.cities.map((c, i) => (
+                        <span key={c} className="flex items-baseline gap-3">
+                          {i > 0 && (
+                            <span aria-hidden="true" className="text-[1rem] text-steel">
+                              ×
+                            </span>
+                          )}
+                          <span className={c === ed.winnerFrom ? "text-ember" : "text-iron"}>{c}</span>
+                        </span>
+                      ))}
+                    </dd>
+                  </div>
+                )}
               </dl>
 
               {ed.motto && (

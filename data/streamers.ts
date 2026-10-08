@@ -67,8 +67,8 @@ export const streamers: Streamer[] = [
       },
     },
     highlight: {
-      title: "Futuras Promesas #2",
-      src: "/kick/kick1.avif",
+      title: "Futuras Promesas #3",
+      src: "/trending/ft3.avif",
       href: "#kick",
       note: {
         es: "Sesión de streaming en su canal",

@@ -21,7 +21,8 @@ Events as photo cards in a snap **carousel**, filtered by category (Todo, Concie
 - Heat legend (six states) under the intro.
 
 ## Open issues
-- [ ] All events are samples
+- [ ] Website launch ("Presentación de la página web oficial", release, `main: false`): **date 31 Oct 20:00 and place are placeholders** (tagged Ejemplo); artwork is a placeholder
+- [ ] Most other events are samples
 
 ## Decisions
 [[Agenda as photo carousel]], [[Performance pass]]
