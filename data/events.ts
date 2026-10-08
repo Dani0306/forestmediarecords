@@ -70,7 +70,7 @@ export const events: ForgeEvent[] = [
   {
     id: "futuras-promesas-3",
     type: "stream",
-    main: true,
+    main: false,
     title: { es: "Futuras promesas #3", en: "Futuras promesas #3" },
     artists: [""],
     start: "2026-10-07T21:00:00-05:00",
@@ -86,7 +86,7 @@ export const events: ForgeEvent[] = [
   {
     id: "forest-showcase",
     type: "showcase",
-    main: true,
+    main: false,
     title: {
       es: "Showcase Forest: artistas emergentes",
       en: "Forest Showcase: emerging artists",
