@@ -403,6 +403,53 @@ a {
   }
 }
 
+/* the composer's frame shows focus (ember border), so the field itself needs no ring */
+.chat-field:focus-visible {
+  outline: none;
+}
+.chat-launcher {
+  transition: opacity 0.35s var(--ease-hammer), translate 0.35s var(--ease-hammer);
+}
+.chat-launcher[data-hidden] {
+  opacity: 0;
+  translate: 0 1rem;
+  pointer-events: none;
+}
+
+/* chat assistant: the panel rises from the launcher; turns drop in; dots pulse in steps */
+@media (prefers-reduced-motion: no-preference) {
+  .chat-panel {
+    animation: chat-in 0.45s var(--ease-hammer) both;
+    transform-origin: bottom right;
+  }
+  .chat-turn {
+    animation: chat-turn 0.4s var(--ease-hammer) both;
+  }
+  .chat-dot {
+    animation: chat-dot 1s steps(3) infinite;
+  }
+  .chat-online {
+    animation: flicker 2.4s steps(6) infinite;
+  }
+}
+@keyframes chat-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.97);
+  }
+}
+@keyframes chat-turn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.4rem);
+  }
+}
+@keyframes chat-dot {
+  50% {
+    opacity: 0.25;
+  }
+}
+
 /* form "sending" pulse */
 .sending-dot {
   animation: sending 0.8s steps(2) infinite;

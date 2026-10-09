@@ -110,3 +110,23 @@ export const SoundCloud = (p: P) => (
     <path d="M7 17.5v-7M4 17.5v-4.5" />
   </svg>
 );
+
+export const Chat = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M4 5h16v11H9l-5 4z" />
+    <path d="M8 10h8M8 13h5" />
+  </svg>
+);
+
+export const Send = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M4 12h14M12 6l6 6-6 6" />
+  </svg>
+);
+
+export const NewChat = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M12 5H5v14h14v-7" />
+    <path d="M17 3v6M14 6h6" />
+  </svg>
+);

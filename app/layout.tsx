@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Martian_Mono, Saira_Stencil } from "next/font/google";
+import ChatLayout from "@/components/chat/ChatLayout";
 import CookieBanner from "@/components/CookieBanner";
 import { LangProvider } from "@/lib/i18n";
 import "./globals.css";
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <LangProvider>
           {children}
+          <ChatLayout />
           <CookieBanner />
         </LangProvider>
       </body>

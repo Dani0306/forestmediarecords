@@ -37,7 +37,7 @@ Working vault for the **Forest Media Récords** website: a bilingual (ES/EN) lab
 9. [[Demo form]]
 10. [[Follow us]]
 
-Around the page: [[Navigation and footer]], [[Legal pages]] (`/privacidad`, `/terminos`, cookie notice), [[Bilingual copy]].
+Around the page: [[Navigation and footer]], [[Chat assistant]], [[Legal pages]] (`/privacidad`, `/terminos`, cookie notice), [[Bilingual copy]].
 
 ## Decisions
 ![[Decisions.base]]
