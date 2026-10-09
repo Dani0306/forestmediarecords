@@ -113,7 +113,7 @@ export const artists: Artist[] = [
     name: "RS el Italiano",
     photos: [
       {
-        src: "/RS/RS2.avif",
+        src: "/RS/RS4.avif",
         width: 3024,
         height: 4032,
         lift: 1.4,
@@ -272,7 +272,10 @@ export const artists: Artist[] = [
     links: [],
     listen: { spotify: "", youtube: "" },
     profile: {
-      role: { es: "Beatmaker y productor musical", en: "Beatmaker and music producer" },
+      role: {
+        es: "Beatmaker y productor musical",
+        en: "Beatmaker and music producer",
+      },
       genres: [], // TODO: genres he produces
       city: "San Javier, Medellín",
       since: "", // TODO: confirm what 9/10/2018 refers to (start in music? joined Forest?)
