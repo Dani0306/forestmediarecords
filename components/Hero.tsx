@@ -47,7 +47,10 @@ const dayKey = (ms: number) =>
 function BigCountdown({ e }: { e: ForgeEvent }) {
   const { t, lang } = useLang();
   const now = useNow(1000);
-  const cd = now === null ? null : formatCountdown(new Date(e.start).getTime() - now, lang);
+  const cd =
+    now === null
+      ? null
+      : formatCountdown(new Date(e.start).getTime() - now, lang);
   const cells = [
     { v: cd?.d, label: t.hero.units.d },
     { v: cd?.h, label: t.hero.units.h },
@@ -60,7 +63,11 @@ function BigCountdown({ e }: { e: ForgeEvent }) {
       <div
         role="timer"
         aria-live="off"
-        aria-label={cd ? `${t.hero.startsIn} ${cd.d} ${t.hero.units.d}, ${cd.h} ${t.hero.units.h}, ${cd.m} ${t.hero.units.m}` : t.hero.startsIn}
+        aria-label={
+          cd
+            ? `${t.hero.startsIn} ${cd.d} ${t.hero.units.d}, ${cd.h} ${t.hero.units.h}, ${cd.m} ${t.hero.units.m}`
+            : t.hero.startsIn
+        }
         className="grid grid-cols-4 border-y border-iron/15"
       >
         {cells.map((c, i) => (
@@ -78,16 +85,24 @@ function BigCountdown({ e }: { e: ForgeEvent }) {
               }}
             >
               {/* the seconds drop in like a stamp on every tick */}
-              <span key={c.hot ? c.v : undefined} className={`inline-block ${c.hot && c.v ? "tick" : ""}`}>
+              <span
+                key={c.hot ? c.v : undefined}
+                className={`inline-block ${c.hot && c.v ? "tick" : ""}`}
+              >
                 {c.v ?? "--"}
               </span>
             </span>
-            <span className="readout text-[0.58rem] text-steel sm:text-[0.68rem]">{c.label}</span>
+            <span className="readout text-[0.58rem] text-steel sm:text-[0.68rem]">
+              {c.label}
+            </span>
           </div>
         ))}
       </div>
       {/* the heat line under the clock: the event's temperature */}
-      <span aria-hidden="true" className="heat-bar mt-[-1px] block h-[3px] w-full rounded-full" />
+      <span
+        aria-hidden="true"
+        className="heat-bar mt-[-1px] block h-[3px] w-full rounded-full"
+      />
     </div>
   );
 }
@@ -178,17 +193,32 @@ function EventTakeover({
         </div>
 
         <div className="hero-exit min-w-0 lg:col-span-7">
-          <h1 id="hero-title" className="readout flex items-center gap-3 text-[0.7rem] text-iron/90">
-            <Image src="/logo-512.webp" alt="" width={28} height={28} className="size-7" />
+          <h1
+            id="hero-title"
+            className="readout flex items-center gap-3 text-[0.7rem] text-iron/90"
+          >
+            <Image
+              src="/logo-512.webp"
+              alt=""
+              width={28}
+              height={28}
+              className="size-7"
+            />
             <span>
-              Forest Media Récords <span className="text-steel">{t.hero.presents}</span>
+              Forest Media Récords{" "}
+              <span className="text-steel">{t.hero.presents}</span>
             </span>
           </h1>
 
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 lg:mt-6">
             <p className="stamp text-iron">{t.hero.next}</p>
-            <span className="stamp flex items-center gap-2" style={{ color: "var(--h)" }}>
-              <span className={`heat-bar inline-block h-1.5 w-8 rounded-full`} />
+            <span
+              className="stamp flex items-center gap-2"
+              style={{ color: "var(--h)" }}
+            >
+              <span
+                className={`heat-bar inline-block h-1.5 w-8 rounded-full`}
+              />
               {live ? t.hero.liveNow : t.heat[heat]}
             </span>
             {e.sample && (
@@ -210,7 +240,10 @@ function EventTakeover({
 
           <p className="readout mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.72rem] leading-relaxed text-iron/90 sm:text-[0.8rem]">
             {rel && (
-              <span className="rounded-[2px] px-1.5 py-0.5 text-scale" style={{ background: "var(--h)" }}>
+              <span
+                className="rounded-[2px] px-1.5 py-0.5 text-scale"
+                style={{ background: "var(--h)" }}
+              >
                 {rel}
               </span>
             )}
@@ -221,14 +254,23 @@ function EventTakeover({
             <span>{e.place[lang]}</span>
             <span className="text-steel">·</span>
             <span className="text-steel">{t.types[e.type]}</span>
-            {names.length > 0 && <span className="text-steel">· {names.join(", ")}</span>}
+            {names.length > 0 && (
+              <span className="text-steel">· {names.join(", ")}</span>
+            )}
           </p>
 
           <div className="mt-6 lg:mt-10">
             {live ? (
               <div className="border-y border-iron/15 py-5">
-                <p className="stencil flex items-center gap-4 text-[clamp(3.5rem,9vw,8rem)] leading-[0.85] [--wdth:66]" style={{ color: "var(--h)" }}>
-                  <span aria-hidden="true" className="live-dot size-[0.28em] rounded-full" style={{ background: "var(--h)" }} />
+                <p
+                  className="stencil flex items-center gap-4 text-[clamp(3.5rem,9vw,8rem)] leading-[0.85] [--wdth:66]"
+                  style={{ color: "var(--h)" }}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="live-dot size-[0.28em] rounded-full"
+                    style={{ background: "var(--h)" }}
+                  />
                   {t.hero.liveBig}
                 </p>
               </div>
@@ -239,9 +281,18 @@ function EventTakeover({
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             {url ? (
-              <a href={url} target="_blank" rel="noreferrer" className="btn btn-hot">
+              <a
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-hot"
+              >
                 <Broadcast className="size-5" />
-                {live ? t.hero.watchLive : e.type === "stream" ? t.agenda.watch : "Info"}
+                {live
+                  ? t.hero.watchLive
+                  : e.type === "stream"
+                    ? t.agenda.watch
+                    : "Info"}
               </a>
             ) : null}
             {!live && (
@@ -475,11 +526,11 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      {secondary && (
+      {/* {secondary && (
         <div className="relative z-10">
           <SecondaryHeat e={secondary} now={now} />
         </div>
-      )}
+      )} */}
     </section>
   );
 }
