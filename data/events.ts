@@ -86,7 +86,7 @@ export const events: ForgeEvent[] = [
   {
     id: "lanzamiento-web",
     type: "release",
-    main: true,
+    main: false,
     title: {
       es: "Presentación de la página web oficial de Forest Media Récords",
       en: "Forest Media Récords official website launch",
