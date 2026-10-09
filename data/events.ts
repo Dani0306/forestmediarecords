@@ -93,7 +93,7 @@ export const events: ForgeEvent[] = [
     },
     artists: [],
     // TODO: real date, time and place (placeholder until confirmed; sample tag shows)
-    start: "2026-10-08T20:30:00-05:00",
+    start: "2026-10-08T21:30:00-05:00",
     end: "2026-10-08T23:00:00-05:00",
     place: { es: "Sabaneta · Ant · Medellín", en: "Venue TBA · Medellín" },
     // TODO: placeholder artwork; replace the file with the real poster (same name)
