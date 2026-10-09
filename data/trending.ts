@@ -63,6 +63,37 @@ export const trending: Trend[] = [
     href: site.kick.url,
   },
   {
+    id: "rs-estudio-grabando",
+    kind: "studio",
+    title: { es: "RS el Italiano en el estudio", en: "RS el Italiano in the studio" },
+    meta: { es: "Grabando nueva música en Forest Media Récords", en: "Recording new music at Forest Media Récords" },
+    media: {
+      kind: "video",
+      src: "/trending/renzo-estudio-01.webm",
+      poster: "/trending/renzo-estudio-01.webp",
+      width: 1280,
+      height: 960,
+    },
+    alt: {
+      es: "RS el Italiano rapeando en la cabina del estudio bajo luces de colores, con la ciudad de noche en la ventana",
+      en: "RS el Italiano rapping in the studio booth under coloured lights, with the city at night in the window",
+    },
+    focus: "45% 35%",
+  },
+  {
+    id: "nikosan-productor",
+    kind: "studio",
+    title: { es: "Nikosan llega a Forest Media Récords", en: "Nikosan joins Forest Media Récords" },
+    meta: { es: "Beatmaker y productor · San Javier, Medellín", en: "Beatmaker and producer · San Javier, Medellín" },
+    media: { kind: "image", src: "/nicocol/nico1.avif", width: 3024, height: 4032 },
+    alt: {
+      es: "Nikosan produciendo un beat en su portátil bajo luz azul en el estudio",
+      en: "Nikosan producing a beat on his laptop under blue studio light",
+    },
+    focus: "60% 35%",
+    href: "#artistas",
+  },
+  {
     id: "futuras-promesas-3",
     kind: "kick",
     title: { es: "Futuras Promesas #3", en: "Futuras Promesas #3" },
@@ -77,6 +108,24 @@ export const trending: Trend[] = [
     },
     focus: "50% 28%",
     href: site.kick.url,
+  },
+  {
+    id: "rs-estudio-sesion",
+    kind: "studio",
+    title: { es: "Sesión en el estudio", en: "Studio session" },
+    meta: { es: "RS el Italiano · detrás de cámaras", en: "RS el Italiano · behind the scenes" },
+    media: {
+      kind: "video",
+      src: "/trending/renzo-estudio-02.webm",
+      poster: "/trending/renzo-estudio-02.webp",
+      width: 720,
+      height: 960,
+    },
+    alt: {
+      es: "RS el Italiano en una sesión en el estudio, grabado con el celular bajo luces de colores",
+      en: "RS el Italiano during a studio session, filmed on a phone under coloured lights",
+    },
+    focus: "50% 40%",
   },
   // the upcoming website launch (in the agenda too); artwork is a placeholder
   {
@@ -126,26 +175,4 @@ export const trending: Trend[] = [
     href: site.kick.url,
   },
   // the one video loop, so the section keeps a playable piece
-  {
-    id: "videoclip-avance",
-    kind: "video",
-    title: { es: "Avance del nuevo videoclip", en: "New music video preview" },
-    meta: {
-      es: "Producción Forest Media Récords",
-      en: "A Forest Media Récords production",
-    },
-    media: {
-      kind: "video",
-      src: "/trending/clip-01.webm",
-      poster: "/trending/clip-01.webp",
-      width: 1280,
-      height: 720,
-    },
-    alt: {
-      es: "Un artista rapea de noche frente a la cámara durante un rodaje",
-      en: "An artist raps into the camera at night during a shoot",
-    },
-    focus: "45% 40%",
-    sample: true,
-  },
 ];

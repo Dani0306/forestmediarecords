@@ -192,6 +192,7 @@ const es = {
     pause: "Pausar",
     open: "Ver en Kick",
     agenda: "Ver en la agenda",
+    artist: "Conocer al artista",
     kinds: {
       video: "Video",
       studio: "Estudio",
@@ -547,6 +548,7 @@ const en: Dict = {
     pause: "Pause",
     open: "Watch on Kick",
     agenda: "See in the agenda",
+    artist: "Meet the artist",
     kinds: {
       video: "Video",
       studio: "Studio",

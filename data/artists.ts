@@ -114,12 +114,12 @@ export const artists: Artist[] = [
     photos: [
       {
         src: "/RS/RS2.avif",
-        width: 1254,
-        height: 1254,
-        lift: 2.1,
+        width: 3024,
+        height: 4032,
+        lift: 1.4,
         alt: {
-          es: "Renzo en una toma para uno de sus videos musicales.",
-          en: "Renzo on a shooting for one of his music videos.",
+          es: "RS el Italiano en la cabina de grabación bajo luz azul, con Medellín de noche detrás",
+          en: "RS el Italiano in the recording booth under blue light, with Medellín at night behind him",
         },
       },
       {
@@ -134,12 +134,11 @@ export const artists: Artist[] = [
       },
       {
         src: "/RS/RS3.avif",
-        width: 940,
-        height: 960,
-        lift: 2.1,
+        width: 3024,
+        height: 4032,
         alt: {
-          es: "Renzo rapeando frente al público durante un show",
-          en: "Renzo rapping to the crowd during a show",
+          es: "RS el Italiano grabando frente al micrófono en el estudio, bajo luz turquesa",
+          en: "RS el Italiano recording at the mic in the studio, under teal light",
         },
       },
     ],
@@ -227,6 +226,63 @@ export const artists: Artist[] = [
           "His early releases include “Noche Cero” and “Sin Señal”, songs that reflect his evolution and his interest in exploring different sounds within the urban music scene.",
 
           "He is currently working on new music and preparing “Después de las 12”, a collaboration with Colombian artist Jhay Ríos that represents a new chapter in his career and the continued development of his artistic identity.",
+        ],
+      },
+    },
+  },
+  {
+    slug: "nikosan",
+    name: "Nikosan",
+    photos: [
+      {
+        src: "/nicocol/nico1.avif",
+        width: 3024,
+        height: 4032,
+        focus: "60% 30%",
+        alt: {
+          es: "Nikosan produciendo un beat en su portátil, de espaldas bajo luz azul en el estudio",
+          en: "Nikosan producing a beat on his laptop, seen from behind under blue studio light",
+        },
+      },
+      {
+        src: "/nicocol/nico2.avif",
+        width: 3024,
+        height: 4032,
+        focus: "60% 30%",
+        alt: {
+          es: "Nikosan trabajando en un beat junto a los monitores del estudio, bajo luz roja",
+          en: "Nikosan working on a beat next to the studio monitors, under red light",
+        },
+      },
+      {
+        src: "/nicocol/nico3.avif",
+        width: 3024,
+        height: 4032,
+        focus: "60% 45%",
+        alt: {
+          es: "Nikosan con gorra y gafas inclinado sobre su portátil en el estudio, bajo luz verde",
+          en: "Nikosan in a cap and glasses leaning over his laptop in the studio, under green light",
+        },
+      },
+    ],
+    kickUrl: "",
+    links: [],
+    listen: { spotify: "", youtube: "" },
+    profile: {
+      role: { es: "Beatmaker y productor musical", en: "Beatmaker and music producer" },
+      genres: [], // TODO: genres he produces
+      city: "San Javier, Medellín",
+      since: "", // TODO: confirm what 9/10/2018 refers to (start in music? joined Forest?)
+      bio: {
+        es: [
+          "Nicolás Lozano, Nikosan, viene de San Javier, Medellín. Como beatmaker y productor musical de Forest Media Récords, convierte ideas en sonidos, emociones en melodías y sueños en proyectos musicales.",
+          "San Javier es parte de su identidad, sus raíces y su historia. Su camino representa la pasión por crear, aprender y construir algo que trascienda más allá de una canción.",
+          "Hoy su visión va más allá de producir beats: busca aportar al crecimiento de nuevos artistas y demostrar que el talento puede nacer en cualquier lugar y llegar tan lejos como la disciplina y la ambición lo permitan.",
+        ],
+        en: [
+          "Nicolás Lozano, Nikosan, comes from San Javier, Medellín. As a beatmaker and music producer at Forest Media Récords, he turns ideas into sounds, emotions into melodies and dreams into music projects.",
+          "San Javier is part of his identity, his roots and his story. His path is driven by a passion for creating, learning and building something that lasts beyond a single song.",
+          "Today his vision goes beyond making beats: he wants to help new artists grow and prove that talent can come from anywhere and go as far as discipline and ambition allow.",
         ],
       },
     },

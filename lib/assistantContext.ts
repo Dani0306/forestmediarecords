@@ -132,7 +132,7 @@ function roster() {
       ].filter(Boolean);
       return [
         `### ${a.name}`,
-        `- Perfil: ${p.role.es}. Géneros: ${p.genres.join(", ")}. Ciudad: ${p.city}.`,
+        `- Perfil: ${p.role.es}. Géneros: ${p.genres.length ? p.genres.join(", ") : "por confirmar"}. Ciudad: ${p.city}.`,
         `- En Forest Media Récords desde: ${p.since || "por confirmar"}.`,
         p.sample
           ? "- Biografía: aún no publicada (por confirmar)."

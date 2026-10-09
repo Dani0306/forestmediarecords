@@ -228,7 +228,9 @@ function Stage({ a, index }: { a: Artist; index: number }) {
           <dl className="readout grid grid-cols-2 gap-x-6 text-[0.68rem]">
             <div className="border-t border-iron/15 py-3">
               <dt className="text-steel">{t.roster.genre}</dt>
-              <dd className="mt-1 text-iron">{p.genres.join(" · ")}</dd>
+              <dd className={`mt-1 ${p.genres.length ? "text-iron" : "text-steel"}`}>
+                {p.genres.length ? p.genres.join(" · ") : t.roster.tbc}
+              </dd>
             </div>
             <div className="border-t border-iron/15 py-3">
               <dt className="text-steel">{t.roster.city}</dt>

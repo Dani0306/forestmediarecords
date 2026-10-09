@@ -24,7 +24,12 @@ Section title "Nuestros Artistas". One artist at a time:
 ## Lowkey (2026-10-06)
 - Third artist (added by Daniel): photos in `public/lowkey/`. `lowkey1-crop.avif` is cropped from the story screenshot `lowkey1.avif`. Each photo has its own `focus` so the stage centres on him (studio shots with the subject low in the frame); sizes and alt text were fixed (they had been copied from Lentino).
 
+## Nikosan (2026-10-09)
+- Nicolás Lozano, **Nikosan**, beatmaker and music producer from San Javier, Medellín. Photos `public/nicocol/nico1–3.avif` (studio, blue/red/green light). Bio summarised from Daniel's text in three paragraphs.
+- Genres and "En Forest desde" are **por confirmar** (the note "9/10/2018" from the team is unclear: start in music or date he joined?). The stage shows "Por confirmar" when `genres` is empty.
+
 ## Open issues
+- [ ] Nikosan: genres he produces; what "9/10/2018" refers to; Spotify/YouTube
 - [ ] Higher-resolution photos of Lowkey (738 px wide; the first is a 445 px tall crop)
 - [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`)
 - [ ] RS el Italiano bio and facts are mock-ups

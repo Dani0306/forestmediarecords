@@ -17,7 +17,8 @@ const SLOT = [
   "lg:col-span-5",
 ];
 
-function TrendCard({ item, rank }: { item: Trend; rank: number }) {
+/** After the lead three, cards run three across; a last row of one or two stretches to fill it. */
+function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: number }) {
   const { t, lang } = useLang();
   const card = useRef<HTMLLIElement>(null);
   const video = useRef<HTMLVideoElement>(null);
@@ -72,6 +73,10 @@ function TrendCard({ item, rank }: { item: Trend; rank: number }) {
     return () => cancelAnimationFrame(raf);
   }, [playing]);
 
+  // in-page links name their section; others go to Kick
+  const internalLabel = (href: string) =>
+    href === "#artistas" ? t.trending.artist : href.startsWith("#") ? t.trending.agenda : t.trending.open;
+
   const hover = isVideo
     ? {
         onPointerEnter: (e: React.PointerEvent) => {
@@ -88,7 +93,7 @@ function TrendCard({ item, rank }: { item: Trend; rank: number }) {
       ref={card}
       data-heat={heat}
       data-playing={playing || undefined}
-      className={`trend-card trend-in parallax relative flex [container-type:size] h-[min(32rem,76vh)] w-[min(82vw,24rem)] shrink-0 snap-start flex-col overflow-hidden rounded-[3px] border border-anvil bg-forge-3 lg:h-auto lg:w-auto ${SLOT[rank] ?? "lg:col-span-4"}`}
+      className={`trend-card trend-in parallax relative flex [container-type:size] h-[min(32rem,76vh)] w-[min(82vw,24rem)] shrink-0 snap-start flex-col overflow-hidden rounded-[3px] border border-anvil bg-forge-3 lg:h-auto lg:w-auto ${SLOT[rank] ?? (rank >= count - ((count - 3) % 3 || 3) && (count - 3) % 3 === 2 ? "lg:col-span-6" : (count - 3) % 3 === 1 && rank === count - 1 ? "lg:col-span-12" : "lg:col-span-4")}`}
       {...hover}
     >
       <div
@@ -213,11 +218,11 @@ function TrendCard({ item, rank }: { item: Trend; rank: number }) {
                 <a
                   href={item.href}
                   {...(item.href.startsWith("#") ? {} : { target: "_blank", rel: "noreferrer" })}
-                  aria-label={`${item.href.startsWith("#") ? t.trending.agenda : t.trending.open}: ${item.title[lang]}`}
+                  aria-label={`${internalLabel(item.href)}: ${item.title[lang]}`}
                   className="btn btn-steel min-h-11 px-3 text-[0.9rem]"
                 >
                   <span className="hidden sm:inline">
-                    {item.href.startsWith("#") ? t.trending.agenda : t.trending.open}
+                    {internalLabel(item.href)}
                   </span>
                   {item.href.startsWith("#") ? <ArrowDown className="size-4" /> : <ArrowUpRight className="size-4" />}
                 </a>
@@ -270,7 +275,7 @@ export default function Trending() {
           className="mt-12 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:thin] sm:scroll-px-6 sm:px-6 lg:mt-16 lg:grid lg:grid-cols-12 lg:grid-rows-[repeat(2,clamp(16rem,21vw,21rem))] lg:auto-rows-[clamp(20rem,25vw,24rem)] lg:overflow-visible lg:px-0 lg:pb-0"
         >
           {trending.map((item, i) => (
-            <TrendCard key={item.id} item={item} rank={i} />
+            <TrendCard key={item.id} item={item} rank={i} count={trending.length} />
           ))}
         </ol>
       </div>

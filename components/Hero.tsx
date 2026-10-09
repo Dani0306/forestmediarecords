@@ -478,8 +478,8 @@ export default function Hero() {
       <video
         ref={video}
         className="hero-zoom absolute inset-0 size-full object-cover object-[60%_30%] lg:object-[52%_40%]"
-        src="/videoloop-web.webm"
-        poster="/videoloop-poster.webp"
+        src="/videoloop-renzo.webm"
+        poster="/videoloop-renzo-poster.webp"
         muted
         loop
         playsInline

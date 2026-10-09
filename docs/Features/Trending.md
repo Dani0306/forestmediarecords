@@ -21,13 +21,17 @@ related:
 - Videos play on hover (mouse), when centred in view (touch), or from the "Ver avance" button; under reduced motion only the button plays them. The heat line shows playback progress.
 - Items with `href` get a "Ver en Kick" link (Futuras Promesas #2).
 
-## Current items (2026-10-08)
-1. 2BLE B gana Futuras Promesas #3 (`trending/ganadorft3.avif`, real, Barranquilla, "El talento también es del Caribe")
-2. Futuras Promesas #3 (`trending/ft3.avif`, real, 7 Oct on kick.com/leolugolive)
-3. Presentación de la página web oficial (`events/lanzamiento-web.avif`, **placeholder artwork**; links to the agenda)
-4. Jhanky gana Futuras Promesas #2 (`trending/ganadorft2.avif`, real)
-5. Futuras Promesas #2 line-up (`trending/ft2.avif`, real)
-6. Avance del nuevo videoclip (clip-01, sample; kept so the section has a playable loop)
+## Current items (2026-10-09)
+1. 2BLE B gana Futuras Promesas #3 (poster)
+2. RS el Italiano en el estudio (video `trending/renzo-estudio-01.webm`, 6 s, from `renzoclip.webm`)
+3. Nikosan llega a Forest Media Récords (`nicocol/nico1.avif`, links to the artists section: "Conocer al artista")
+4. Futuras Promesas #3 (poster)
+5. Sesión en el estudio (video `trending/renzo-estudio-02.webm`, 6 s vertical, from `renzoclip2.webm`)
+6. Presentación de la página web oficial (placeholder artwork)
+7. Jhanky gana Futuras Promesas #2
+8. Futuras Promesas #2
+
+After the lead three, cards run three across; a last row of two (or one) stretches to fill the width.
 
 Items with an `href` starting with `#` show "Ver en la agenda" and stay on the page; others open in a new tab ("Ver en Kick").
 

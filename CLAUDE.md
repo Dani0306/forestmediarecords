@@ -42,11 +42,11 @@ Marketing and information site for **Forest Media Récords**, a music production
 ## Brand assets (`public/`)
 
 - `logo.png` (1254×1254, used for Open Graph) and `logo-512.webp` (used in the UI): chrome "FR" monogram with a stag head and roots on a vinyl record. Keep it intact.
-- Artist photos (AVIF) in folders: `public/lentino/lentino1–5.avif`; `public/RS/RS1–3.avif` for RS el Italiano (slug `renzo`); `public/lowkey/` for Lowkey (`lowkey1-crop.avif` is the crop of the story screenshot `lowkey1.avif`). Each photo can set `focus` (object-position) when the subject sits low or off-centre. `lift` in `data/artists.ts` brightens dark stage shots. Paths are case-sensitive on Vercel (`/RS/`).
+- Artist photos (AVIF) in folders: `public/lentino/lentino1–5.avif`; `public/RS/RS1–3.avif` for RS el Italiano (slug `renzo`); `public/lowkey/` for Lowkey; `public/nicocol/nico1–3.avif` for Nikosan (producer) (`lowkey1-crop.avif` is the crop of the story screenshot `lowkey1.avif`). Each photo can set `focus` (object-position) when the subject sits low or off-centre. `lift` in `data/artists.ts` brightens dark stage shots. Paths are case-sensitive on Vercel (`/RS/`).
 - Kick posters: `public/kick/kick1.avif` (Futuras Promesas #2 winner) and `kick2.avif` (line-up), described in `data/kick.ts`.
 - Streamers (`data/streamers.ts`): LeoLugoLive (Leonardo Lugo, kick.com/leolugolive) in `public/leolugo/` (`leolugo-portrait.avif` is the crop of the screenshot `leolugo1.avif`) and Trianiss (Daniel Triana, kick.com/trianiss) in `public/triana/triana.avif`. Both profiles are real (from the team).
 - Trending clips: `public/trending/clip-01.webm`, `clip-02.webm` (4–5 s cuts of `videoloop.webm`, ~400 KB each) with `.webp` poster frames (sidecar `.webp.json` records the origin), described in `data/trending.ts`.
-- Hero video: `videoloop-web.webm` (1.08 MB, used) re-encoded from `videoloop.webm` (original, unused); poster `videoloop-poster.webp`.
+- Hero video: `videoloop-renzo.webm` (RS el Italiano in the studio, 1280×960, ~0.8 MB, cut from the original `public/trending/renzoclip.webm`), poster `videoloop-renzo-poster.webp`. The older `videoloop-web.webm` / `videoloop.webm` are unused.
 
 ## Content rules
 
