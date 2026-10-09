@@ -24,6 +24,9 @@ Section title "Nuestros Artistas". One artist at a time:
 ## Lowkey (2026-10-06)
 - Third artist (added by Daniel): photos in `public/lowkey/`. `lowkey1-crop.avif` is cropped from the story screenshot `lowkey1.avif`. Each photo has its own `focus` so the stage centres on him (studio shots with the subject low in the frame); sizes and alt text were fixed (they had been copied from Lentino).
 
+## RS el Italiano (real, 2026-10-09)
+- Renzo Scoppettone: singer, songwriter and producer of Italian descent, 10+ years in urban music, rooted in trap. Bio summarised from Daniel's text in three paragraphs; genres Trap · Música urbana. "En Forest desde" is **por confirmar** (the 2024 placeholder was removed).
+
 ## Nikosan (2026-10-09)
 - Nicolás Lozano, **Nikosan**, beatmaker and music producer from San Javier, Medellín. Photos `public/nicocol/nico1–3.avif` (studio, blue/red/green light). Bio summarised from Daniel's text in three paragraphs.
 - Genres and "En Forest desde" are **por confirmar** (the note "9/10/2018" from the team is unclear: start in music or date he joined?). The stage shows "Por confirmar" when `genres` is empty.

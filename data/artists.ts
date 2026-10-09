@@ -146,21 +146,24 @@ export const artists: Artist[] = [
     links: [],
     listen: { spotify: "", youtube: "" },
     profile: {
-      sample: true, // TODO: replace with RS el Italiano's real data
-      role: { es: "Rapero", en: "Rapper" },
-      genres: ["Rap", "Hip hop"],
+      role: {
+        es: "Cantante, compositor y productor",
+        en: "Singer, songwriter and producer",
+      },
+      genres: ["Trap", "Música urbana"],
       city: "Medellín",
-      since: "2024",
+      // TODO: the bio doesn't say when he joined Forest; "2024" was a placeholder
+      since: "",
       bio: {
         es: [
-          "RS el Italiano es rap de tarima: barras rápidas, presencia fuerte y un público que se sabe sus letras.",
-          "Se curtió en el freestyle y en los escenarios pequeños de la ciudad, donde cada show es una prueba. Con Forest Media Récords lleva ese directo al estudio y a los streams en Kick.",
-          "Sus próximos lanzamientos buscan llevar la energía del vivo a cada canción. Este texto es una biografía de ejemplo y será reemplazado por la historia real del artista.",
+          "Renzo Scoppettone, RS el Italiano, es cantante, compositor y productor de ascendencia italiana, con más de una década en la música urbana. Su propuesta nace del trap y mezcla calle, ambición y evolución, con una identidad que va más allá de un solo género.",
+          "Ha recorrido todas las facetas de la música: la composición, la interpretación, la producción y el desarrollo de proyectos completos. Por eso entiende cada canción como un universo que conecta el sonido con la imagen, la narrativa y el concepto.",
+          "Como artista independiente sigue su propia visión sin perder sus raíces urbanas, y hoy trabaja con la mirada puesta en la expansión internacional y en dejar su huella en la nueva generación de la música urbana.",
         ],
         en: [
-          "RS el Italiano is stage rap: fast bars, a heavy presence and a crowd that knows his lyrics.",
-          "He came up through freestyle and the city's small stages, where every show is a test. With Forest Media Récords he is taking that live energy into the studio and onto Kick streams.",
-          "His upcoming releases aim to carry the energy of his live shows into every song. This is a sample biography and will be replaced with the artist's real story.",
+          "Renzo Scoppettone, RS el Italiano, is a singer, songwriter and producer of Italian descent with more than a decade in urban music. His sound is rooted in trap and blends street, ambition and growth, with an identity that reaches beyond a single genre.",
+          "He has worked every side of music: songwriting, performing, production and building whole projects. That's why he sees each song as a world that connects sound with image, story and concept.",
+          "As an independent artist he follows his own vision without losing his urban roots, and today he's working toward international growth and leaving his mark on the new generation of urban music.",
         ],
       },
     },

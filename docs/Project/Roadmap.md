@@ -19,7 +19,7 @@ tags:
 - [ ] Wire the **studio booking** backend (`lib/booking.ts`) and the **demo** endpoint (`lib/demo.ts`) ([[Studio]], [[Demo form]])
 - [ ] Legal review of [[Legal pages]]; NIT and address
 - [ ] Spotify / YouTube links per artist (`listen` in `data/artists.ts`)
-- [ ] Real **artist profiles and bios**: Lentino done (2026-10-06); RS el Italiano still a mock-up
+- [x] Real **artist profiles and bios**: all four artists (2026-10-09); pending: join year for RS el Italiano and Nikosan
 - [ ] **Social links**: label Instagram done (2026-10-07); YouTube and SoundCloud URLs pending; artist socials pending ([[Follow us]])
 - [x] Images of the Kick channel that supports the company: Futuras Promesas posters and LeoLugoLive photo (2026-10-06)
 

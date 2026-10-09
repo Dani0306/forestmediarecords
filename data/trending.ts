@@ -17,7 +17,10 @@ export type TrendKind = "video" | "studio" | "photo" | "kick" | "live" | "event"
 export type TrendMedia =
   | {
       kind: "video";
+      /** WebM loop (Chrome, Android, desktop). */
       src: string;
+      /** H.264 MP4 copy: iPhones (Safari) play this one. */
+      mp4?: string;
       poster: string;
       width: number;
       height: number;
@@ -70,6 +73,7 @@ export const trending: Trend[] = [
     media: {
       kind: "video",
       src: "/trending/renzo-estudio-01.webm",
+      mp4: "/trending/renzo-estudio-01.mp4",
       poster: "/trending/renzo-estudio-01.webp",
       width: 1280,
       height: 960,
@@ -117,6 +121,7 @@ export const trending: Trend[] = [
     media: {
       kind: "video",
       src: "/trending/renzo-estudio-02.webm",
+      mp4: "/trending/renzo-estudio-02.mp4",
       poster: "/trending/renzo-estudio-02.webp",
       width: 720,
       height: 960,

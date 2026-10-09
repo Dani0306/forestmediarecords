@@ -478,15 +478,19 @@ export default function Hero() {
       <video
         ref={video}
         className="hero-zoom absolute inset-0 size-full object-cover object-[60%_30%] lg:object-[52%_40%]"
-        src="/videoloop-renzo.webm"
         poster="/videoloop-renzo-poster.webp"
         muted
         loop
         playsInline
+        autoPlay
         preload="auto"
         aria-hidden="true"
         tabIndex={-1}
-      />
+      >
+        {/* MP4 (H.264) first: iPhones can't play these WebM files */}
+        <source src="/videoloop-renzo.mp4" type="video/mp4" />
+        <source src="/videoloop-renzo.webm" type="video/webm" />
+      </video>
       {/* scrims keep the type legible without hiding the artist */}
       <div
         aria-hidden="true"

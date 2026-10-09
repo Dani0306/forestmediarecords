@@ -103,7 +103,6 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
         {item.media.kind === "video" ? (
           <video
             ref={video}
-            src={item.media.src}
             poster={item.media.poster}
             muted
             loop
@@ -114,7 +113,11 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
             onPause={() => setPlaying(false)}
             className="absolute inset-0 size-full object-cover"
             style={{ objectPosition: focus }}
-          />
+          >
+            {/* MP4 (H.264) first for iPhones, WebM as the fallback */}
+            {item.media.mp4 && <source src={item.media.mp4} type="video/mp4" />}
+            <source src={item.media.src} type="video/webm" />
+          </video>
         ) : (
           <Image
             src={item.media.src}

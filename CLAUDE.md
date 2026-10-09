@@ -46,7 +46,8 @@ Marketing and information site for **Forest Media Récords**, a music production
 - Kick posters: `public/kick/kick1.avif` (Futuras Promesas #2 winner) and `kick2.avif` (line-up), described in `data/kick.ts`.
 - Streamers (`data/streamers.ts`): LeoLugoLive (Leonardo Lugo, kick.com/leolugolive) in `public/leolugo/` (`leolugo-portrait.avif` is the crop of the screenshot `leolugo1.avif`) and Trianiss (Daniel Triana, kick.com/trianiss) in `public/triana/triana.avif`. Both profiles are real (from the team).
 - Trending clips: `public/trending/clip-01.webm`, `clip-02.webm` (4–5 s cuts of `videoloop.webm`, ~400 KB each) with `.webp` poster frames (sidecar `.webp.json` records the origin), described in `data/trending.ts`.
-- Hero video: `videoloop-renzo.webm` (RS el Italiano in the studio, 1280×960, ~0.8 MB, cut from the original `public/trending/renzoclip.webm`), poster `videoloop-renzo-poster.webp`. The older `videoloop-web.webm` / `videoloop.webm` are unused.
+- Videos ship as **two files**: an H.264 MP4 (`-movflags +faststart`, yuv420p; iPhones only play this) listed first, and the WebM as fallback. Encode MP4s with ffmpeg (installed via Homebrew 2026-10-09).
+- Hero video: `videoloop-renzo.mp4` + `videoloop-renzo.webm` (RS el Italiano in the studio, 1280×960, ~0.8 MB, cut from the original `public/trending/renzoclip.webm`), poster `videoloop-renzo-poster.webp`. The older `videoloop-web.webm` / `videoloop.webm` are unused.
 
 ## Content rules
 
