@@ -128,8 +128,8 @@ export const artists: Artist[] = [
         height: 1280,
         lift: 2.1,
         alt: {
-          es: "Renzo rapeando en vivo bajo luz azul, grabado con un celular",
-          en: "Renzo rapping live under blue light, filmed on a phone",
+          es: "RS el Italiano rapeando en vivo bajo luz azul, grabado con un celular",
+          en: "RS el Italiano rapping live under blue light, filmed on a phone",
         },
       },
       {
