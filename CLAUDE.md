@@ -28,7 +28,7 @@ Marketing and information site for **Forest Media Récords**, a music production
 ## Skills
 
 - **impeccable**: all UI/design work (`/impeccable <command>`: polish, critique, audit, optimize, animate…). Its design detector hook runs after UI edits.
-- **Obsidian vault**: `obsidian-markdown`, `obsidian-bases`, `json-canvas`, `obsidian-cli` (official, by kepano); `obsidian-daily` (daily log), `obsidian-gardener` (links and orphans), `obsidian-ask` (answer from the vault with citations), `obsidian-capture` (clip sources into notes), `obsidian-vault-setup`; `defuddle` and `knap` for web-to-note capture.
+- **Obsidian vault**: `obsidian-markdown`, `obsidian-bases`, `json-canvas`, `obsidian-cli` (official, by kepano); `obsidian-daily` (daily log), `obsidian-gardener` (links and orphans), `obsidian-ask` (answer from the vault with citations), `obsidian-capture` (clip sources into notes), `obsidian-vault-setup`; `defuddle` and `knap` for web-to-note capture. All live in `.claude/skills/` (official ones copied from github.com/kepano/obsidian-skills, MIT; the rest written for this vault). Vault check: `python3 .claude/skills/obsidian-gardener/scripts/check_vault.py docs`.
 
 ## Stack
 

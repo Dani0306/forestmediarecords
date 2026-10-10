@@ -304,8 +304,8 @@ a {
    photo inside this field (.glass-blur), which rasterizes once and scrolls free */
 .glass-field {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3rem);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 3rem);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--feather, 3rem));
+  mask-image: linear-gradient(to bottom, transparent 0, #000 var(--feather, 3rem));
 }
 .glass-field::after {
   content: "";
@@ -355,6 +355,20 @@ a {
 .event-card:hover .iron-photo::after,
 .event-card:focus-within .iron-photo::after {
   opacity: 0;
+}
+/* trending is a media wall: a lighter grade so the picture reads at rest,
+   and a lean glass band that leaves the picture most of the card */
+.trend-card .iron-photo :is(img, video) {
+  filter: grayscale(0.85) contrast(1.08) brightness(var(--lift, 1));
+}
+.trend-card .iron-photo::after {
+  opacity: 0.6;
+}
+.trend-card .glass-field {
+  --feather: 1.5rem;
+}
+.trend-card .glass-field::after {
+  background: linear-gradient(to bottom, rgb(11 11 13 / 0.45), rgb(11 11 13 / 0.78) 60%);
 }
 /* trending cards heat to true colour on hover, focus, or while their clip plays */
 .trend-card:hover .iron-photo :is(img, video),

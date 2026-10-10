@@ -77,6 +77,41 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
   const internalLabel = (href: string) =>
     href === "#artistas" ? t.trending.artist : href.startsWith("#") ? t.trending.agenda : t.trending.open;
 
+  // "Ver avance" for clips, otherwise a link; labelled on the lead card, an icon on the rest
+  const action = (size: string, labelled = false) => {
+    if (isVideo) {
+      const label = playing ? t.trending.pause : t.trending.play;
+      return (
+        <button
+          type="button"
+          onClick={playing ? pause : play}
+          aria-pressed={playing}
+          aria-label={`${label}: ${item.title[lang]}`}
+          title={labelled ? undefined : label}
+          className={`btn btn-steel text-[0.9rem] ${size}`}
+        >
+          {playing ? <Pause className="size-4" /> : <Play className="size-4" />}
+          {labelled && <span className="hidden sm:inline">{label}</span>}
+        </button>
+      );
+    }
+    if (!item.href) return null;
+    const label = internalLabel(item.href);
+    const internal = item.href.startsWith("#");
+    return (
+      <a
+        href={item.href}
+        {...(internal ? {} : { target: "_blank", rel: "noreferrer" })}
+        aria-label={`${label}: ${item.title[lang]}`}
+        title={labelled ? undefined : label}
+        className={`btn btn-steel text-[0.9rem] ${size}`}
+      >
+        {labelled && <span className="hidden sm:inline">{label}</span>}
+        {internal ? <ArrowDown className="size-4" /> : <ArrowUpRight className="size-4" />}
+      </a>
+    );
+  };
+
   const hover = isVideo
     ? {
         onPointerEnter: (e: React.PointerEvent) => {
@@ -98,7 +133,7 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
     >
       <div
         className="iron-photo absolute inset-0"
-        style={{ "--lift": lift ?? 0.9 } as React.CSSProperties}
+        style={{ "--lift": lift ?? 1 } as React.CSSProperties}
       >
         {item.media.kind === "video" ? (
           <video
@@ -152,7 +187,7 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
         <div aria-hidden="true" className="glass-field absolute inset-0 -z-10">
           <div
             className="glass-blur absolute inset-x-0 bottom-0 h-[100cqh]"
-            style={{ "--lift": lift ?? 0.9 } as React.CSSProperties}
+            style={{ "--lift": lift ?? 1 } as React.CSSProperties}
           >
             <div className="iron-photo absolute inset-0">
               <Image
@@ -167,10 +202,10 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
           </div>
         </div>
 
-        <div className={`pb-5 ${lead ? "px-5 pt-12 lg:px-8 lg:pb-8" : "px-5 pt-10"}`}>
+        <div className={lead ? "px-5 pb-5 pt-7 lg:px-8 lg:pb-7" : "px-4 pb-4 pt-5"}>
           <span
             aria-hidden="true"
-            className="mb-4 block h-[3px] overflow-hidden rounded-full bg-iron/10"
+            className="mb-3 block h-[3px] overflow-hidden rounded-full bg-iron/10"
           >
             <span
               ref={bar}
@@ -179,58 +214,32 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
             />
           </span>
 
-          <div className="flex items-end gap-4">
+          <div className="flex items-end gap-3">
             <span
               aria-hidden="true"
-              className={`stencil shrink-0 leading-[0.8] [--wdth:64] ${lead ? "text-[clamp(3.75rem,6vw,5.5rem)]" : "text-[3.25rem]"}`}
+              className={`stencil shrink-0 leading-[0.8] [--wdth:64] ${lead ? "text-[clamp(3.25rem,5vw,4.75rem)]" : "text-[2.5rem]"}`}
               style={{ color: "var(--h)" }}
             >
               {String(rank + 1).padStart(2, "0")}
             </span>
             <h3
-              className={`stencil min-w-0 leading-[0.92] text-iron ${lead ? "text-[clamp(1.6rem,3vw,2.75rem)] [--wdth:76]" : "text-[1.5rem] [--wdth:78]"}`}
+              className={`stencil min-w-0 flex-1 leading-[0.92] text-iron ${lead ? "text-[clamp(1.5rem,2.6vw,2.5rem)] [--wdth:76]" : "text-[1.25rem] [--wdth:78]"}`}
             >
               {item.title[lang]}
             </h3>
+            {/* the action rides the title row as an icon; only the lead on desktop gets a labelled button */}
+            {action(`size-11 min-h-11 shrink-0 px-0 ${lead ? "lg:hidden" : ""}`)}
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-            <p className="readout min-w-0 text-[0.64rem] leading-relaxed text-steel">
+          <div className={`mt-3 flex items-center justify-between gap-x-4 gap-y-3 ${lead ? "flex-wrap" : ""}`}>
+            <p
+              className={`readout min-w-0 text-[0.64rem] leading-relaxed text-steel ${lead ? "" : "truncate"}`}
+              title={lead ? undefined : `${t.trending.kinds[item.kind]} · ${item.meta[lang]}`}
+            >
               {t.trending.kinds[item.kind]} ·{" "}
               <span className="text-iron/80">{item.meta[lang]}</span>
             </p>
-            {isVideo ? (
-              <button
-                type="button"
-                onClick={playing ? pause : play}
-                aria-pressed={playing}
-                aria-label={`${playing ? t.trending.pause : t.trending.play}: ${item.title[lang]}`}
-                className="btn btn-steel min-h-11 px-3 text-[0.9rem]"
-              >
-                {playing ? (
-                  <Pause className="size-4" />
-                ) : (
-                  <Play className="size-4" />
-                )}
-                <span className="hidden sm:inline">
-                  {playing ? t.trending.pause : t.trending.play}
-                </span>
-              </button>
-            ) : (
-              item.href && (
-                <a
-                  href={item.href}
-                  {...(item.href.startsWith("#") ? {} : { target: "_blank", rel: "noreferrer" })}
-                  aria-label={`${internalLabel(item.href)}: ${item.title[lang]}`}
-                  className="btn btn-steel min-h-11 px-3 text-[0.9rem]"
-                >
-                  <span className="hidden sm:inline">
-                    {internalLabel(item.href)}
-                  </span>
-                  {item.href.startsWith("#") ? <ArrowDown className="size-4" /> : <ArrowUpRight className="size-4" />}
-                </a>
-              )
-            )}
+            {lead && action("hidden min-h-11 px-3 lg:inline-flex", true)}
           </div>
         </div>
       </div>

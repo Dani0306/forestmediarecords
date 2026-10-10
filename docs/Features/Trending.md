@@ -20,6 +20,7 @@ related:
 - Media is a short loop (`kind: "video"`, WebM + poster) or a still (`kind: "image"`).
 - Videos play on hover (mouse), when centred in view (touch), or from the "Ver avance" button; under reduced motion only the button plays them. The heat line shows playback progress.
 - Items with `href` get a "Ver en Kick" link (Futuras Promesas #2).
+- Details sit on a lean glass band so the picture keeps most of the card: the action is a 44px icon button beside the title (labelled only on the lead card on desktop), and the meta line is one line on the smaller cards. The photo grade is lighter than in the rest of the site (grayscale 85%, duotone 60%) and still heats to true colour on hover, focus or while a clip plays.
 
 ## Current items (2026-10-09)
 1. 2BLE B gana Futuras Promesas #3 (poster)

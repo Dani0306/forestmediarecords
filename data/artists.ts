@@ -113,13 +113,13 @@ export const artists: Artist[] = [
     name: "RS el Italiano",
     photos: [
       {
-        src: "/RS/RS4.avif",
-        width: 3024,
-        height: 4032,
+        src: "/RS/rsmain.avif",
+        width: 1254,
+        height: 1254,
         lift: 1.4,
         alt: {
-          es: "RS el Italiano en la cabina de grabación bajo luz azul, con Medellín de noche detrás",
-          en: "RS el Italiano in the recording booth under blue light, with Medellín at night behind him",
+          es: "RS el Italiano con gorra negra y camiseta del Barcelona, junto a un micrófono de estudio",
+          en: "RS el Italiano in a black cap and Barcelona shirt, next to a studio microphone",
         },
       },
       {
