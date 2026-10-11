@@ -23,7 +23,7 @@ Marketing and information site for **Forest Media Récords**, a music production
 - `PRODUCT.md`: product truth (users, purpose, principles).
 - `DESIGN.md` + `.impeccable/design.json`: design system (forge world, tokens, components). Update when a durable pattern changes.
 - `.impeccable/surfaces/app-page-tsx.md`: the landing page's direction contract.
-- `data/events.ts`, `data/artists.ts`, `data/site.ts`, `data/kick.ts`, `data/trending.ts`, `data/streamers.ts`, `data/studio.ts` (prices), `data/legal.ts` (privacy and terms): all content. Sending lives in `lib/demo.ts` and `lib/booking.ts` (booking is design only, not wired). `lib/dictionary.ts`: all copy, ES and EN.
+- `data/events.ts`, `data/artists.ts`, `data/site.ts`, `data/kick.ts`, `data/trending.ts`, `data/streamers.ts`, `data/studio.ts` (prices), `data/legal.ts` (privacy and terms): all content. Sending lives in `lib/demo.ts` and `lib/booking.ts` (both hand the message to the visitor's email app via mailto, addressed to the contact email; no backend yet). `lib/dictionary.ts`: all copy, ES and EN.
 
 ## Skills
 
@@ -51,6 +51,6 @@ Marketing and information site for **Forest Media Récords**, a music production
 
 ## Content rules
 
-- Never invent events, dates, venues, release titles, streaming stats, testimonials, bios or social links. Use clearly marked placeholders (`sample: true` shows an "Ejemplo" tag) until the real data exists.
+- Never invent events, dates, venues, release titles, streaming stats, testimonials, bios or social links. The site is live (since 2026-10-10 it carries no sample content): leave a section empty (it has an empty state) rather than add placeholder items. `sample: true` still exists for a clearly tagged exception.
 - Keep content in the `data/` files and copy in `lib/dictionary.ts` (both languages), never hard-coded in components.
 - The site is bilingual: Spanish by default, English toggle (client-side, `lib/i18n.tsx`).

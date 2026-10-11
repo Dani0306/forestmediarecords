@@ -16,7 +16,7 @@ import { hasKick, site } from "@/data/site";
 import { eventPhoto } from "@/lib/eventPhoto";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
 import { icsHref } from "@/lib/ics";
-import { ArrowLeft, ArrowRight, ArrowUpRight, CalendarPlus } from "./icons";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, CalendarPlus } from "./icons";
 
 type Filter = "all" | EventType;
 const FILTERS: Filter[] = ["all", "concert", "stream", "showcase", "release"];
@@ -347,15 +347,23 @@ export default function Agenda() {
         ) : (
           <div className="mt-6 flex flex-col items-start gap-5 border-y border-anvil py-14">
             <p className="stencil max-w-[28ch] text-[2rem] leading-none text-steel [--wdth:80]">
-              {t.agenda.empty}
+              {filter === "all" ? t.agenda.emptyAll : t.agenda.empty}
             </p>
-            <button
-              type="button"
-              className="btn btn-steel"
-              onClick={() => setFilter("all")}
-            >
-              {t.agenda.showAll}
-            </button>
+            {/* nothing scheduled at all: point to the socials, where new dates land first */}
+            {filter === "all" ? (
+              <a href="#siguenos" className="btn btn-steel">
+                {t.agenda.follow}
+                <ArrowDown className="size-4" />
+              </a>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-steel"
+                onClick={() => setFilter("all")}
+              >
+                {t.agenda.showAll}
+              </button>
+            )}
           </div>
         )}
 

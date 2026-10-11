@@ -383,6 +383,24 @@ a {
   opacity: 0;
 }
 
+/* artist social links: steel squares; hover or focus heats the edge and the mark to ember */
+.social-link {
+  transition:
+    border-color 0.25s var(--ease-hammer),
+    color 0.25s var(--ease-hammer),
+    background-color 0.25s var(--ease-hammer),
+    transform 0.12s var(--ease-hammer);
+}
+.social-link:hover,
+.social-link:focus-visible {
+  border-color: var(--color-ember);
+  color: var(--color-ember);
+  background-color: var(--color-forge-2);
+}
+.social-link:active {
+  transform: translateY(1px) scale(0.97);
+}
+
 /* "Escuchar": the equalizer bars rest low and dance while the button is hot */
 .eq-bar {
   transform: scaleY(0.35);

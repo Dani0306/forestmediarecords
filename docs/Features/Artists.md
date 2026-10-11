@@ -18,8 +18,8 @@ Section title "Nuestros Artistas". One artist at a time:
 - **Roster index** (portrait, "01 · 05 fotos", big stencil name, heat rule under the selected one) chooses the artist; arrow keys move between tabs, so it scales to any roster size.
 - **Stage** (74vh / 44rem): photos graded with `.iron-photo` (iron duotone), cross-fading via thumbnails. On desktop the same graded photo, softened, fills the whole stage as the background the black glass sits on, and a sharp copy covers the area left of the profile in its own proportions, so faces stay in frame.
 - **Escuchar** button next to the name: a hot plate with a play key and equalizer bars that opens Spotify / YouTube links from `listen` in `data/artists.ts` (empty shows "Muy pronto").
-- **Profile** on `.glass-side`: role and sample tag, name with the Escuchar button, bio intro + "Leer biografía completa", facts grid (genre, city, since, next date in its heat colour, Kick, links), thumbnails.
-- Data: `data/artists.ts` → `profile`. **Lentino** is real (2026-10-06): bio summarised from Daniel's text (born in Sincelejo in 1997, in Medellín since 2022, reguetón · R&B · trap, songs "La Vuelta" and "BM", upcoming "Sobrio" with RS el Italiano). **RS el Italiano** is still a mock-up (`sample: true`).
+- **Profile** on `.glass-side`: role and sample tag, name with the Escuchar button, bio intro + "Leer biografía completa", facts grid (genre, city, since, next date in its heat colour, then a full-width row of social icon buttons (`links` in `data/artists.ts` names a `platform`: instagram, tiktok, x, threads, youtube, spotify, soundcloud; marks in `components/icons.tsx`); no Kick field, the artists have no Kick channels), thumbnails.
+- Data: `data/artists.ts` → `profile`. **Lentino** is real (2026-10-06): bio summarised from Daniel's text (born in Sincelejo in 1997, in Medellín since 2022, reguetón · R&B · trap, songs "La Vuelta" and "BM", upcoming "Sobrio" with RS el Italiano). **RS el Italiano** has his real bio too (2026-10-09); no artist carries a sample tag.
 
 ## Lowkey (2026-10-06)
 - Third artist (added by Daniel): photos in `public/lowkey/`. `lowkey1-crop.avif` is cropped from the story screenshot `lowkey1.avif`. Each photo has its own `focus` so the stage centres on him (studio shots with the subject low in the frame); sizes and alt text were fixed (they had been copied from Lentino).
@@ -34,7 +34,7 @@ Section title "Nuestros Artistas". One artist at a time:
 ## Open issues
 - [ ] Nikosan: genres he produces; what "9/10/2018" refers to; Spotify/YouTube
 - [ ] Higher-resolution photos of Lowkey (738 px wide; the first is a 445 px tall crop)
-- [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`)
+- [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`): Lentino done 2026-10-10 (Spotify, YouTube @lenttino; links TikTok @lenttino_, X @lentinolr, Threads @lenttino); RS el Italiano, Lowkey and Nikosan pending
 - [ ] RS el Italiano bio and facts are mock-ups
 - [x] Lentino joined Forest about two months before 2026-10-06: `since: "2026"`
 - [ ] Release date of "Sobrio" (not set yet); add it to the [[Agenda]] as a release once dated

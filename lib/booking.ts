@@ -1,29 +1,35 @@
-export type BookingRequest = {
-  service: string;
-  date: string; // YYYY-MM-DD
-  slot: string;
-  blocks: number;
-  total: number;
-  name: string;
-  artist: string;
-  email: string;
-  phone: string;
-  notes: string;
-};
+import { site } from "@/data/site";
+
+export type BookingResult = { ok: true; via: "mailto" | "api" } | { ok: false };
 
 /**
  * Sends a studio booking request.
  *
- * TODO: design only for now. Wire this to the real booking backend (an API
- * route, a calendar or a form service) and return `{ ok }` from its response.
- * Preview the error state with `?booking=error` in the URL.
+ * Hands the request to the visitor's email app, addressed to the label's
+ * contact email (same as the demo form). The caller builds the subject and
+ * the body lines in the visitor's language.
+ *
+ * TODO: replace the mailto hand-off with a real endpoint (an API route, a
+ * calendar or a form service) and return `{ ok: true, via: "api" }` / `{ ok: false }`.
+ *
+ * Preview the states without sending: add `?booking=sent` or `?booking=error` to the URL.
  */
-export async function requestBooking(req: BookingRequest): Promise<{ ok: boolean }> {
-  void req;
-  await new Promise((r) => setTimeout(r, 900));
+export async function requestBooking(subject: string, lines: string[]): Promise<BookingResult> {
   const preview =
     typeof window !== "undefined"
       ? new URLSearchParams(window.location.search).get("booking")
       : null;
-  return { ok: preview !== "error" };
+  if (preview === "error" || preview === "sent") {
+    await new Promise((r) => setTimeout(r, 900));
+    return preview === "error" ? { ok: false } : { ok: true, via: "api" };
+  }
+
+  try {
+    window.location.href = `mailto:${site.contactEmail}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(lines.join("\n"))}`;
+    return { ok: true, via: "mailto" };
+  } catch {
+    return { ok: false };
+  }
 }

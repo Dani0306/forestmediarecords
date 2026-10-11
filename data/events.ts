@@ -2,8 +2,8 @@
  * Agenda: concerts, Kick streams, showcases and releases.
  * Dates are ISO strings in Medellín time (UTC-5).
  *
- * Every entry below is a SAMPLE (`sample: true`) shown with a visible
- * "Example" tag. Replace them with real events and drop the flag.
+ * Only real, confirmed events go here. `sample: true` would show an
+ * "Ejemplo" tag; the live site carries none.
  *
  * MAIN EVENTS: every event says `main: true` or `main: false`.
  *   main: true  → while it is upcoming or live, it takes over the whole first
@@ -54,20 +54,6 @@ export const events: ForgeEvent[] = [
   //   sample: false,
   // },
   {
-    id: "studio-session-renzo",
-    type: "release",
-    main: false,
-    title: {
-      es: "RS el Italiano · En el estudio",
-      en: "RS el Italiano · Studio session",
-    },
-    artists: ["renzo"],
-    start: "2026-10-08T21:00:00-05:00",
-    place: { es: "Kick", en: "Kick" },
-    image: "/RS/RS2.avif",
-    sample: true,
-  },
-  {
     id: "futuras-promesas-3",
     type: "stream",
     main: false,
@@ -82,63 +68,6 @@ export const events: ForgeEvent[] = [
     image: "/events/futuraspromesas3.avif",
     poster: { width: 1254, height: 1254 },
     sample: false,
-  },
-  {
-    id: "lanzamiento-web",
-    type: "release",
-    main: false,
-    title: {
-      es: "Presentación de la página web oficial de Forest Media Récords",
-      en: "Forest Media Récords official website launch",
-    },
-    artists: [],
-    // TODO: real date, time and place (placeholder until confirmed; sample tag shows)
-    start: "2026-10-08T21:30:00-05:00",
-    end: "2026-10-08T23:00:00-05:00",
-    place: { es: "Sabaneta · Ant · Medellín", en: "Venue TBA · Medellín" },
-    // TODO: placeholder artwork; replace the file with the real poster (same name)
-    image: "/events/lanzamiento-web.avif",
-    poster: { width: 1254, height: 1254 },
-    sample: true,
-  },
-  {
-    id: "forest-showcase",
-    type: "showcase",
-    main: false,
-    title: {
-      es: "Showcase Forest: artistas emergentes",
-      en: "Forest Showcase: emerging artists",
-    },
-    artists: ["lentino", "renzo"],
-    start: "2026-11-14T19:00:00-05:00",
-    end: "2026-11-14T23:00:00-05:00",
-    place: { es: "Lugar por confirmar · Medellín", en: "Venue TBA · Medellín" },
-    image: "/lentino/lentino4.avif",
-    sample: true,
-  },
-  {
-    id: "renzo-single",
-    type: "release",
-    main: false,
-    title: { es: "RS el Italiano · Nuevo sencillo", en: "RS el Italiano · New single" },
-    artists: ["renzo"],
-    start: "2026-11-28T00:00:00-05:00",
-    end: "2026-11-28T23:59:00-05:00",
-    place: { es: "Todas las plataformas", en: "All platforms" },
-    image: "/RS/RS1.avif",
-    sample: true,
-  },
-  {
-    id: "renzo-live-sep",
-    type: "concert",
-    main: false,
-    title: { es: "RS el Italiano en vivo", en: "RS el Italiano live" },
-    artists: ["renzo"],
-    start: "2026-09-20T22:00:00-05:00",
-    end: "2026-09-21T01:00:00-05:00",
-    place: { es: "Medellín", en: "Medellín" },
-    image: "/RS/RS3.avif",
-    sample: true,
   },
 ];
 

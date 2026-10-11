@@ -2,10 +2,21 @@
 
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
-import { artists, type Artist } from "@/data/artists";
+import { artists, type Artist, type SocialPlatform } from "@/data/artists";
 import { heatOf, upcoming } from "@/data/events";
 import { formatDateParts, useLang, useNow } from "@/lib/i18n";
-import { ArrowDown, ArrowUpRight, Play } from "./icons";
+import { ArrowDown, ArrowUpRight, Instagram, Play, SoundCloud, Spotify, Threads, TikTok, XMark, YouTube } from "./icons";
+
+/** Platform names stay as brands in both languages; marks come from the icon set. */
+const SOCIAL: Record<SocialPlatform, { name: string; Icon: (p: React.SVGProps<SVGSVGElement>) => React.JSX.Element }> = {
+  instagram: { name: "Instagram", Icon: Instagram },
+  tiktok: { name: "TikTok", Icon: TikTok },
+  x: { name: "X", Icon: XMark },
+  threads: { name: "Threads", Icon: Threads },
+  youtube: { name: "YouTube", Icon: YouTube },
+  spotify: { name: "Spotify", Icon: Spotify },
+  soundcloud: { name: "SoundCloud", Icon: SoundCloud },
+};
 
 /**
  * "Escuchar": a hot plate with a play key and a little equalizer that opens
@@ -257,38 +268,26 @@ function Stage({ a, index }: { a: Artist; index: number }) {
                 )}
               </dd>
             </div>
-            <div className="border-y border-iron/15 py-3">
-              <dt className="text-steel">{t.roster.kick}</dt>
-              <dd className="mt-1">
-                {a.kickUrl ? (
-                  <a
-                    href={a.kickUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-ember hover:text-white-heat"
-                  >
-                    kick.com <ArrowUpRight className="size-3.5" />
-                  </a>
-                ) : (
-                  <span className="text-steel">{t.kick.pending}</span>
-                )}
-              </dd>
-            </div>
-            <div className="border-y border-iron/15 py-3">
+            <div className="col-span-2 border-y border-iron/15 py-3">
               <dt className="text-steel">Links</dt>
-              <dd className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+              <dd className="mt-2 flex flex-wrap gap-2">
                 {a.links.length ? (
-                  a.links.map((l) => (
-                    <a
-                      key={l.url}
-                      href={l.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-iron hover:text-ember"
-                    >
-                      {l.label}
-                    </a>
-                  ))
+                  a.links.map((l) => {
+                    const { name, Icon } = SOCIAL[l.platform];
+                    return (
+                      <a
+                        key={l.url}
+                        href={l.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${a.name} ${t.roster.on} ${name}`}
+                        title={name}
+                        className="social-link grid size-11 place-items-center rounded-[3px] border border-iron/25 bg-forge/60 text-iron"
+                      >
+                        <Icon className="size-5" />
+                      </a>
+                    );
+                  })
                 ) : (
                   <span className="text-steel">{t.roster.soon}</span>
                 )}

@@ -83,6 +83,7 @@ export default function Studio() {
   const [blocks, setBlocks] = useState(1);
   const [errors, setErrors] = useState<Errs>({});
   const [status, setStatus] = useState<Status>("idle");
+  const [via, setVia] = useState<"mailto" | "api">("api");
   const [minDate, setMinDate] = useState<string>();
   const panel = useRef<HTMLDivElement>(null);
   const form = useRef<HTMLFormElement>(null);
@@ -141,18 +142,20 @@ export default function Studio() {
       return;
     }
     setStatus("sending");
-    const res = await requestBooking({
-      service,
-      date,
-      slot,
-      blocks: qty,
-      total,
-      name: v("b-name"),
-      artist: v("b-artist"),
-      email: v("b-email"),
-      phone: v("b-phone"),
-      notes: v("b-notes"),
-    });
+    // the request in the visitor's language, ready to send from their email app
+    const lines = [
+      `${f.step1}: ${chosen?.name[lang] ?? service}${chosen?.blocks ? ` · ${f.blocks}: ${qty}` : ""}`,
+      `${f.date}: ${dateLabel} (${date})`,
+      `${f.slot}: ${chosenSlot ? `${chosenSlot.label[lang]} ${chosenSlot.hours}` : slot}`,
+      `${f.total}: ${formatCOP(total)} COP`,
+      "",
+      `${f.name}: ${v("b-name")}`,
+    ];
+    if (v("b-artist")) lines.push(`${f.artist}: ${v("b-artist")}`);
+    lines.push(`${f.email}: ${v("b-email")}`, `${f.phone}: ${v("b-phone")}`);
+    if (v("b-notes")) lines.push("", `${f.notes}`, v("b-notes"));
+    const res = await requestBooking(`${f.mailSubject} · ${v("b-name")}`, lines);
+    if (res.ok) setVia(res.via);
     setStatus(res.ok ? "sent" : "error");
     requestAnimationFrame(() => panel.current?.focus());
   };
@@ -267,6 +270,9 @@ export default function Studio() {
                 {f.doneTitle}
               </h3>
               <p className="mt-5 max-w-[34rem] text-[1.125rem] leading-relaxed text-iron/90">{f.doneBody}</p>
+              {via === "mailto" && (
+                <p className="mt-4 max-w-[34rem] text-[0.95rem] text-iron/70">{f.doneMailto}</p>
+              )}
               <button type="button" onClick={reset} className="btn btn-steel mt-8">
                 {f.another}
               </button>

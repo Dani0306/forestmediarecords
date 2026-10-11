@@ -12,7 +12,8 @@ tags:
 Things the code can't answer. Move answers into the relevant note, then tick them off.
 
 ## Open
-- [ ] Kick URLs for Lentino and RS el Italiano, if they get their own
+- [ ] Studio hours: are 9–13, 14–18 and 19–23 right? They show without a sample tag since 2026-10-10 ([[Studio]])
+- [ ] Website launch: is there a launch event to announce? The placeholder was removed from the agenda; the [[Trending]] card still says "Muy pronto"
 - [ ] Who is in the hero video and what is the production called? (needed to title the [[Trending]] clips)
 - [ ] Which real projects should appear in [[Trending]], and do they have their own short clips?
 - [ ] Streamers: streaming schedules for both; do any agenda streams go out on kick.com/trianiss? ([[Streamers]])
@@ -26,6 +27,7 @@ Things the code can't answer. Move answers into the relevant note, then tick the
 - [ ] Nikosan: what does "9/10/2018" mean (start in music, or joined Forest)? Which genres? Is `public/RS/rs7.avif` Renzo or Nikosan, and where should it go? ([[Artists]])
 
 ## Answered (2026-10-06)
+- [x] Artist Kick channels: the artists have none (2026-10-10); the field was removed from the stage
 - [x] Domain: **forestmediarecords.com** (bought on Vercel 2026-10-07) → [[Deploy on Vercel]]
 - [x] Lentino joined Forest about two months ago (≈ August 2026) → `since: "2026"`
 - [x] No `/scroll-world` film: keep the free CSS scroll animations

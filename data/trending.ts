@@ -147,7 +147,6 @@ export const trending: Trend[] = [
       en: "Forest Media Récords logo: FR monogram with a stag head on a vinyl record",
     },
     focus: "50% 45%",
-    href: "#agenda",
   },
   // Futuras Promesas #2
   {

@@ -17,12 +17,14 @@ related:
 ## What it does
 "Reserva el estudio", anchor `#estudio` (desktop nav from 1440px; menu and footer always), after [[La forja]] and before the [[Demo form]].
 - **Rate card** (prices from Daniel, COP; recording price and service texts from RS el Italiano, 2026-10-10): Instrumental original $500.000 · Sesión de grabación $150.000 (demo only, with direction in the booth) · Producción, mezcla y máster $200.000 · Producción completa $600.000 (from scratch: exclusive beat, recording, mix and final master; tagged "Todo en uno"; its body lists what is included, so it has no "Incluye" line) · Arriendo del estudio $100.000 per 4 hours. Each row's "Reservar" preselects the service and scrolls to the form.
-- **Booking form** in three numbered steps: service (radio tiles), date (from tomorrow) and time slot (sample hours) plus 4-hour blocks for rentals, then contact details (name, artist name optional, email, WhatsApp, notes). A sticky summary shows the choice and the estimated total, the disclaimer that it's a request, and consent links to the terms and privacy policy.
+- **Booking form** in three numbered steps: service (radio tiles), date (from tomorrow) and time slot (Mañana / Tarde / Noche; hours still to confirm, no longer tagged) plus 4-hour blocks for rentals, then contact details (name, artist name optional, email, WhatsApp, notes). A sticky summary shows the choice and the estimated total, the disclaimer that it's a request, and consent links to the terms and privacy policy.
 - States: validation errors, sending, error (with email fallback) and "Solicitud enviada".
 
 ## Open issues
 - [ ] **Design only**: wire `requestBooking()` in `lib/booking.ts` to the real backend (Daniel will do the logic)
-- [ ] Real studio hours (`slots` in `data/studio.ts` are samples)
+- [ ] Confirm the studio hours (`slots` in `data/studio.ts`: 9–13, 14–18, 19–23 are shown untagged since 2026-10-10)
+- [x] Booking sends: since 2026-10-10 it opens the visitor's email app with the request to the contact email (like the demo form)
+- [ ] A real booking backend (API route, calendar or form service) so requests arrive without the visitor's email app
 - [ ] Deposit, cancellation and rescheduling policy (placeholder in the terms)
 - [x] Does "Producción completa" also include mix and master? Yes (2026-10-10).
 - [ ] Is "Instrumental original" ($500.000) still offered? It was not in the 2026-10-10 service list.

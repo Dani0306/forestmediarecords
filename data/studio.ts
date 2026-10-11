@@ -73,8 +73,8 @@ export const services: StudioService[] = [
   },
 ];
 
-/** SAMPLE hours: replace with the studio's real schedule (the form tags them "Horarios de ejemplo"). */
-export const slotsSample = true;
+/** Time slots a visitor can request; the team confirms each booking. Set `slotsSample` to tag them as provisional. */
+export const slotsSample = false;
 export const slots = [
   { id: "am", label: { es: "Mañana", en: "Morning" }, hours: "9:00 – 13:00" },
   { id: "pm", label: { es: "Tarde", en: "Afternoon" }, hours: "14:00 – 18:00" },

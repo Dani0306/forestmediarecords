@@ -21,8 +21,8 @@ Events as photo cards in a snap **carousel**, filtered by category (Todo, Concie
 - Heat legend (six states) under the intro.
 
 ## Open issues
-- [ ] Website launch ("Presentación de la página web oficial", release, `main: false`): **date 31 Oct 20:00 and place are placeholders** (tagged Ejemplo); artwork is a placeholder
-- [ ] Most other events are samples
+- [x] Sample events removed 2026-10-10 (website launch, Forest showcase, RS el Italiano single, RS live, RS studio session); only real events remain. With nothing upcoming, the agenda says "Nuevas fechas muy pronto" and links to the follow section.
+- [ ] Add the next real events as they are confirmed
 
 ## Decisions
 [[Agenda as photo carousel]], [[Performance pass]]

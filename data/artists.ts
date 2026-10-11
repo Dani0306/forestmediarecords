@@ -1,3 +1,5 @@
+export type SocialPlatform = "instagram" | "tiktok" | "x" | "threads" | "youtube" | "spotify" | "soundcloud";
+
 export type Artist = {
   slug: string;
   name: string;
@@ -12,8 +14,8 @@ export type Artist = {
     focus?: string;
     alt: { es: string; en: string };
   }[];
-  kickUrl: string; // TODO: artist Kick channel
-  links: { label: string; url: string }[]; // TODO: Instagram, TikTok…
+  /** Social profiles, shown as icon buttons on the stage. */
+  links: { platform: SocialPlatform; url: string }[];
   /** Where to hear the music: the stage's "Escuchar" button. Empty shows "Muy pronto". */
   listen: { spotify: string; youtube: string }; // TODO: Spotify artist/playlist and YouTube channel URLs
   profile: ArtistProfile;
@@ -86,9 +88,15 @@ export const artists: Artist[] = [
         },
       },
     ],
-    kickUrl: "",
-    links: [],
-    listen: { spotify: "", youtube: "" },
+    links: [
+      { platform: "tiktok", url: "https://www.tiktok.com/@lenttino_" },
+      { platform: "x", url: "https://x.com/lentinolr" },
+      { platform: "threads", url: "https://www.threads.com/@lenttino" },
+    ],
+    listen: {
+      spotify: "https://open.spotify.com/artist/1FnpqdOMeuitHo76GJc5h4",
+      youtube: "https://www.youtube.com/@lenttino",
+    },
     profile: {
       role: { es: "Artista de música urbana", en: "Urban music artist" },
       genres: ["Reguetón", "R&B", "Trap"],
@@ -142,7 +150,6 @@ export const artists: Artist[] = [
         },
       },
     ],
-    kickUrl: "",
     links: [],
     listen: { spotify: "", youtube: "" },
     profile: {
@@ -206,7 +213,6 @@ export const artists: Artist[] = [
         },
       },
     ],
-    kickUrl: "",
     links: [],
     listen: { spotify: "", youtube: "" },
     profile: {
@@ -268,7 +274,6 @@ export const artists: Artist[] = [
         },
       },
     ],
-    kickUrl: "",
     links: [],
     listen: { spotify: "", youtube: "" },
     profile: {

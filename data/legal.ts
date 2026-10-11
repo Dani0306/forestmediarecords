@@ -264,7 +264,7 @@ export const terms: Record<"es" | "en", LegalDoc> = {
         id: "eventos",
         title: "Agenda y eventos",
         body: [
-          "Las fechas, lugares y lineups pueden cambiar. Las fechas marcadas como «Ejemplo» no son eventos confirmados.",
+          "Las fechas, lugares y lineups pueden cambiar.",
         ],
       },
       {
@@ -344,7 +344,7 @@ export const terms: Record<"es" | "en", LegalDoc> = {
       {
         id: "eventos",
         title: "Agenda and events",
-        body: ["Dates, venues and line-ups may change. Dates tagged “Example” are not confirmed events."],
+        body: ["Dates, venues and line-ups may change."],
       },
       {
         id: "responsabilidad",
