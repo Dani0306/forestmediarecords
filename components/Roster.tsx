@@ -5,7 +5,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { artists, type Artist, type SocialPlatform } from "@/data/artists";
 import { heatOf, upcoming } from "@/data/events";
 import { formatDateParts, useLang, useNow } from "@/lib/i18n";
-import { ArrowDown, ArrowUpRight, Instagram, Play, SoundCloud, Spotify, Threads, TikTok, XMark, YouTube } from "./icons";
+import { ArrowDown, ArrowUpRight, Facebook, Instagram, Play, SoundCloud, Spotify, Threads, TikTok, XMark, YouTube } from "./icons";
 
 /** Platform names stay as brands in both languages; marks come from the icon set. */
 const SOCIAL: Record<SocialPlatform, { name: string; Icon: (p: React.SVGProps<SVGSVGElement>) => React.JSX.Element }> = {
@@ -13,6 +13,7 @@ const SOCIAL: Record<SocialPlatform, { name: string; Icon: (p: React.SVGProps<SV
   tiktok: { name: "TikTok", Icon: TikTok },
   x: { name: "X", Icon: XMark },
   threads: { name: "Threads", Icon: Threads },
+  facebook: { name: "Facebook", Icon: Facebook },
   youtube: { name: "YouTube", Icon: YouTube },
   spotify: { name: "Spotify", Icon: Spotify },
   soundcloud: { name: "SoundCloud", Icon: SoundCloud },

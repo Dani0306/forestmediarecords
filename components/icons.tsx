@@ -131,6 +131,13 @@ export const Threads = (p: P) => (
   </svg>
 );
 
+export const Facebook = (p: P) => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="4" />
+    <path d="M15.5 8h-1.6c-1.3 0-2.2.9-2.2 2.2v10.3M9.5 13h5.5" />
+  </svg>
+);
+
 export const Spotify = (p: P) => (
   <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
     <circle cx="12" cy="12" r="9" />

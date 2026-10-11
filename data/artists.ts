@@ -1,4 +1,4 @@
-export type SocialPlatform = "instagram" | "tiktok" | "x" | "threads" | "youtube" | "spotify" | "soundcloud";
+export type SocialPlatform = "instagram" | "tiktok" | "x" | "threads" | "facebook" | "youtube" | "spotify" | "soundcloud";
 
 export type Artist = {
   slug: string;
@@ -150,8 +150,16 @@ export const artists: Artist[] = [
         },
       },
     ],
-    links: [],
-    listen: { spotify: "", youtube: "" },
+    links: [
+      { platform: "instagram", url: "https://www.instagram.com/rselitaliano/" },
+      { platform: "tiktok", url: "https://www.tiktok.com/@rs_italiano" },
+      { platform: "facebook", url: "https://www.facebook.com/RS.ITALIANO" },
+      { platform: "threads", url: "https://www.threads.com/@rselitaliano" },
+    ],
+    listen: {
+      spotify: "https://open.spotify.com/artist/4EZilV2kRfc5pkbaCb7eDn",
+      youtube: "https://www.youtube.com/@rs.italiano",
+    },
     profile: {
       role: {
         es: "Cantante, compositor y productor",
