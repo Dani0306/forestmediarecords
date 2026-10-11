@@ -16,7 +16,8 @@ Things the code can't answer. Move answers into the relevant note, then tick the
 - [ ] Who is in the hero video and what is the production called? (needed to title the [[Trending]] clips)
 - [ ] Which real projects should appear in [[Trending]], and do they have their own short clips?
 - [ ] Streamers: streaming schedules for both; do any agenda streams go out on kick.com/trianiss? ([[Streamers]])
-- [ ] Studio: real opening hours, deposit/cancellation policy, and does "Producción completa" include mix and master? ([[Studio]])
+- [ ] Studio: real opening hours and deposit/cancellation policy ("Producción completa" does include mix and master, answered 2026-10-10) ([[Studio]])
+- [ ] Studio: is "Instrumental original" ($500.000) still offered? It was missing from the 2026-10-10 service list ([[Studio]])
 - [ ] Company NIT and address for the legal pages ([[Legal pages]])
 - [ ] Spotify and YouTube links for Lentino and RS el Italiano ([[Artists]])
 - [ ] When does "Sobrio" (Lentino × RS el Italiano) come out? Not dated yet ([[Artists]], [[Agenda]])

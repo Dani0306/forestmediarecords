@@ -1,6 +1,7 @@
 /**
  * Recording studio: services, prices (COP) and booking slots.
- * Prices come from the team (2026-10-06).
+ * Prices come from the team (2026-10-06; recording session and service texts
+ * updated 2026-10-10).
  *
  * `unit` sets the price line: per song, per session, or per 4-hour block.
  * `blocks: true` lets the booking form pick several 4-hour blocks.
@@ -31,18 +32,18 @@ export const services: StudioService[] = [
     id: "grabacion",
     name: { es: "Sesión de grabación", en: "Recording session" },
     body: {
-      es: "Graba tus voces en el estudio, con la cabina lista para ti.",
-      en: "Record your vocals in the studio, with the booth ready for you.",
+      es: "Captura tus voces con calidad de audio profesional y dirección en cabina. Solo maqueta.",
+      en: "Capture your vocals with professional audio quality and direction in the booth. Demo only.",
     },
-    price: 200_000,
+    price: 150_000,
     unit: "session",
   },
   {
     id: "mezcla",
     name: { es: "Producción, mezcla y máster", en: "Production, mix and master" },
     body: {
-      es: "Llevamos tu tema a sonido de lanzamiento.",
-      en: "We take your track to release-ready sound.",
+      es: "Procesamiento vocal, mezcla detallada y máster final listo para distribución. Dale a tu canción el brillo, la potencia y el balance necesarios para competir en el mercado.",
+      en: "Vocal processing, a detailed mix and a final master ready for distribution. Give your song the shine, power and balance it needs to compete.",
     },
     price: 200_000,
     unit: "piece",
@@ -51,23 +52,20 @@ export const services: StudioService[] = [
     id: "completa",
     name: { es: "Producción completa", en: "Full production" },
     body: {
-      es: "Tu canción de principio a fin, en un solo paquete.",
-      en: "Your song from start to finish, in one package.",
+      es: "Creamos tu canción desde cero: beat exclusivo, grabación, mezcla y máster final.",
+      en: "We build your song from scratch: an exclusive beat, recording, mix and final master.",
     },
     price: 600_000,
     unit: "piece",
+    // the body already lists what's included, so no "Incluye" line here
     featured: true,
-    includes: {
-      es: ["Instrumental original", "Sesión de grabación"],
-      en: ["Original instrumental", "Recording session"],
-    },
   },
   {
     id: "arriendo",
     name: { es: "Arriendo del estudio", en: "Studio rental" },
     body: {
-      es: "El estudio para ti durante 4 horas, a tu ritmo.",
-      en: "The studio to yourself for 4 hours, at your own pace.",
+      es: "4 horas de uso libre de las instalaciones para tus procesos creativos, maquetas o sesiones.",
+      en: "4 hours of free use of the facilities for your creative work, demos or sessions.",
     },
     price: 100_000,
     unit: "block",
