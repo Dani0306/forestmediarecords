@@ -145,6 +145,13 @@ export const Spotify = (p: P) => (
   </svg>
 );
 
+export const Crown = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M4 17 3 7l5 4 4-6 4 6 5-4-1 10z" />
+    <path d="M5 20h14" />
+  </svg>
+);
+
 export const Chat = (p: P) => (
   <svg {...base} {...p}>
     <path d="M4 5h16v11H9l-5 4z" />

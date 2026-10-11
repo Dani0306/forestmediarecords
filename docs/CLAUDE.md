@@ -7,7 +7,7 @@ The project's working vault: knowledge about the Forest Media Récords website (
 - `Home.md`: index linking everything; embeds `Decisions.base`.
 - `Project/`: Overview, Tech stack, Architecture, Conventions, Content guide, Roadmap, Open questions.
 - `Design/`: Design system (short version of `../DESIGN.md`).
-- `Features/`: one note per page section (Hero, Agenda, Trending, Artists, Streamers, Kick section, La forja, Studio, Demo form, Legal pages, Navigation and footer, Bilingual copy).
+- `Features/`: one note per page section (Hero, Agenda, Mundial de Tiraderas, Trending, Artists, Streamers, Kick section, La forja, Studio, Demo form, Legal pages, Navigation and footer, Bilingual copy).
 - `Decisions/`: one note per durable decision (context, decision, consequences).
 - `Daily/YYYY-MM-DD.md`: work logs (core Daily notes, template `Templates/Daily`).
 - `Templates/`: Daily, Decision, Feature (core Templates syntax `{{date:YYYY-MM-DD}}`, `{{title}}`).

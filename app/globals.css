@@ -401,6 +401,45 @@ a {
   transform: translateY(1px) scale(0.97);
 }
 
+/* Mundial de Tiraderas bracket: anvil hairline connectors (columns sit 2rem apart);
+   the final's line into the champion carries the heat of the final */
+.bracket-pair::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 25%;
+  bottom: 25%;
+  width: 1rem;
+  border: 1px solid var(--color-anvil);
+  border-left: 0;
+  pointer-events: none;
+}
+.bracket-in-line::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 1rem;
+  height: 1px;
+  background: var(--color-anvil);
+}
+.bracket-out-line::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: 2rem;
+  height: 2px;
+  margin-top: -0.5px;
+  background: linear-gradient(90deg, var(--color-anvil), var(--h, var(--color-ember)));
+}
+.champion {
+  border-color: color-mix(in oklab, var(--h) 55%, var(--color-anvil));
+  background:
+    radial-gradient(120% 90% at 50% 0%, color-mix(in oklab, var(--h) 16%, transparent), transparent 70%),
+    var(--color-forge);
+}
+
 /* "Escuchar": the equalizer bars rest low and dance while the button is hot */
 .eq-bar {
   transform: scaleY(0.35);

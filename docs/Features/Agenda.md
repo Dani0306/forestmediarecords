@@ -23,6 +23,7 @@ Events as photo cards in a snap **carousel**, filtered by category (Todo, Concie
 ## Open issues
 - [x] Sample events removed 2026-10-10 (website launch, Forest showcase, RS el Italiano single, RS live, RS studio session); only real events remain. With nothing upcoming, the agenda says "Nuevas fechas muy pronto" and links to the follow section.
 - [ ] Add the next real events as they are confirmed
+- [x] Mundial de Tiraderas rounds added 2026-10-10 (16 Oct, 23 Oct, 6 Nov, 13 Nov, 21 Nov; 21:00, Kick) → [[Mundial de Tiraderas]]
 
 ## Decisions
 [[Agenda as photo carousel]], [[Performance pass]]

@@ -1,4 +1,5 @@
 import Agenda from "@/components/Agenda";
+import Tiraderas from "@/components/Tiraderas";
 import DemoForm from "@/components/DemoForm";
 import FollowUs from "@/components/FollowUs";
 import ForgeProcess from "@/components/ForgeProcess";
@@ -18,6 +19,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Agenda />
+        <Tiraderas />
         <Trending />
         <Roster />
         <Streamers />

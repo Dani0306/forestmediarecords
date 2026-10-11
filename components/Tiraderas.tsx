@@ -1,0 +1,327 @@
+"use client";
+
+import { eventEnd, events, heatOf, type ForgeEvent, type Heat } from "@/data/events";
+import { hasKick, site } from "@/data/site";
+import { tiraderas as T } from "@/data/tiraderas";
+import { formatCOP } from "@/data/studio";
+import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
+import { icsHref } from "@/lib/ics";
+import { ArrowUpRight, CalendarPlus, Crown } from "./icons";
+
+type Lang = "es" | "en";
+
+const roundEvent = (id: string) => events.find((e) => e.id === id) as ForgeEvent | undefined;
+
+/** One competitor slot in the bracket: a name once known, else a quiet placeholder. */
+function Slot({ name, empty }: { name: string; empty: string }) {
+  return (
+    <div className="flex h-10 items-center border-b border-anvil px-3 last:border-b-0">
+      {name ? (
+        <span className="stencil truncate text-[1rem] leading-none text-iron [--wdth:80]">{name}</span>
+      ) : (
+        <span className="readout truncate text-[0.6rem] text-steel/70">{empty}</span>
+      )}
+    </div>
+  );
+}
+
+function Match({ pair, empty }: { pair: [string, string]; empty: string }) {
+  return (
+    <div
+      className={`relative w-full rounded-[3px] border bg-forge ${pair[0] || pair[1] ? "border-steel/40" : "border-anvil"}`}
+    >
+      <Slot name={pair[0]} empty={empty} />
+      <Slot name={pair[1]} empty={empty} />
+    </div>
+  );
+}
+
+/** Column header: stage name and its date, coloured by how close that round is. */
+function StageHead({ label, e, heat, lang }: { label: string; e?: ForgeEvent; heat: Heat; lang: Lang }) {
+  const d = e ? formatDateParts(e.start, lang) : null;
+  return (
+    <div data-heat={heat} className="mb-4 border-b border-anvil pb-3">
+      <p className="stencil text-[1.15rem] leading-none text-iron [--wdth:80]">{label}</p>
+      {d && (
+        <p className="readout mt-1.5 text-[0.62rem]" style={{ color: heat === "cold" ? undefined : "var(--h)" }}>
+          {d.day} {d.month}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** Mundial de Tiraderas: LeoLugoLive's tournament with the label, its calendar, bracket and rules. */
+export default function Tiraderas() {
+  const { t, lang } = useLang();
+  const now = useNow(1000);
+  const c = t.tiraderas;
+
+  const rounds = T.rounds
+    .map((r) => ({ ...r, e: roundEvent(r.eventId) }))
+    .filter((r): r is typeof r & { e: ForgeEvent } => Boolean(r.e));
+  if (rounds.length === 0) return null;
+
+  // until the clock mounts, every round renders as upcoming so server and client agree
+  const heat = (e?: ForgeEvent): Heat => (e && now !== null ? heatOf(e, now) : "embers");
+  const nextIdx = now === null ? 0 : rounds.findIndex((r) => eventEnd(r.e) > now);
+  const next = nextIdx >= 0 ? rounds[nextIdx] : undefined;
+
+  const byId = (id: string) => rounds.find((r) => r.eventId === id)?.e;
+  const qf = byId("tiraderas-cuartos");
+  const sf = byId("tiraderas-semifinal");
+  const fin = byId("tiraderas-final");
+  const drawn = T.bracket.quarterfinals.some(([a, b]) => a || b);
+  const b = T.bracket;
+
+  return (
+    <section id="tiraderas" aria-labelledby="tiraderas-title" className="relative overflow-clip border-t border-anvil">
+      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-10 lg:py-28">
+        {/* heading, intro, prize and the one hot action */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <h2
+              id="tiraderas-title"
+              className="stencil drop text-[clamp(3.25rem,9.5vw,6rem)] leading-[0.86] [--wdth:66]"
+            >
+              {T.name}
+            </h2>
+            <p className="readout mt-5 flex items-center gap-3 text-[0.72rem] text-iron/80">
+              <span aria-hidden="true" className="h-px w-10 bg-iron/40" />
+              {c.caption}
+            </p>
+            <p className="mt-8 max-w-[36rem] text-[1.0625rem] leading-relaxed text-iron/85">{T.intro[lang]}</p>
+            <p className="readout mt-4 text-[0.68rem] text-glow">{c.tagline}</p>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="border-y border-anvil py-5">
+              <p className="stamp text-steel">{c.prize}</p>
+              <p className="readout mt-2 flex items-baseline gap-3 leading-none">
+                <span className="text-[clamp(2.75rem,6vw,4.25rem)] tracking-normal text-glow">
+                  {formatCOP(T.prize.amount)}
+                </span>
+                <span className="text-[0.8rem] text-iron/80">COP</span>
+              </p>
+              <p className="mt-3 max-w-[30rem] text-[0.95rem] leading-relaxed text-iron/75">{T.prize.note[lang]}</p>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              {hasKick && (
+                <a href={site.kick.url} target="_blank" rel="noreferrer" className="btn btn-hot">
+                  {c.watch}
+                  <ArrowUpRight className="size-5" />
+                </a>
+              )}
+              {next && (
+                <a
+                  href={icsHref(next.e, lang)}
+                  download={`${next.e.id}.ics`}
+                  className="btn btn-steel"
+                  aria-label={`${t.agenda.addCal}: ${next.e.title[lang]}`}
+                >
+                  <CalendarPlus className="size-5" />
+                  {t.agenda.addCal}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-14 grid grid-cols-1 gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
+          {/* the calendar: one row per round, heated by how close it is */}
+          <div className="lg:col-span-5">
+            <h3 className="stamp mb-2 text-steel">{c.calendar}</h3>
+            <ol>
+              {rounds.map((r, i) => {
+                const h = heat(r.e);
+                const d = formatDateParts(r.e.start, lang);
+                const isNext = i === nextIdx;
+                const done = h === "cold";
+                return (
+                  <li
+                    key={r.eventId}
+                    data-heat={h}
+                    className={`drop relative grid grid-cols-[4.25rem_1fr] gap-x-5 border-b border-anvil py-6 first:border-t ${done ? "opacity-60" : ""}`}
+                  >
+                    <div className="text-center">
+                      <span
+                        className="stencil block text-[3rem] leading-[0.85] [--wdth:66]"
+                        style={{ color: done ? "var(--color-steel)" : "var(--h)" }}
+                      >
+                        {d.day}
+                      </span>
+                      <span className="readout mt-1 block text-[0.62rem] text-iron/80">{d.month}</span>
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="stencil text-[1.45rem] leading-[0.95] text-iron [--wdth:80]">{r.name[lang]}</p>
+                        {!done && (
+                          <a
+                            href={icsHref(r.e, lang)}
+                            download={`${r.e.id}.ics`}
+                            className="btn btn-steel -mt-1 size-11 min-h-11 shrink-0 px-0"
+                            aria-label={`${t.agenda.addCal}: ${r.e.title[lang]}`}
+                            title={t.agenda.addCal}
+                          >
+                            <CalendarPlus className="size-5" />
+                          </a>
+                        )}
+                      </div>
+                      <p className="mt-2 text-[0.95rem] leading-relaxed text-iron/75">{r.body[lang]}</p>
+                      <p className="readout mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.62rem] text-steel">
+                        <span>
+                          {d.weekday} · {d.time} · {r.e.place[lang]}
+                        </span>
+                        {h === "live" ? (
+                          <span style={{ color: "var(--h)" }}>{t.heat.live}</span>
+                        ) : done ? (
+                          <span>{c.done}</span>
+                        ) : isNext && now !== null ? (
+                          <span style={{ color: "var(--h)" }}>
+                            {c.next} · {formatCountdown(new Date(r.e.start).getTime() - now, lang).short}
+                          </span>
+                        ) : null}
+                      </p>
+                      {isNext && (
+                        <span aria-hidden="true" className="heat-bar mt-4 block h-[3px] w-full rounded-full" />
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+
+          {/* the bracket: 8 slots to one champion, filled in as the rounds run */}
+          <div className="lg:col-span-7">
+            <div className="forge-in plate rounded-[3px] border border-anvil p-5 sm:p-6 lg:sticky lg:top-24">
+              <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="stamp text-steel">{c.bracket}</h3>
+                <p className="readout text-[0.62rem] text-iron/70">
+                  {T.players} streamers · {T.judges.length} {c.judges.toLowerCase()}
+                </p>
+              </div>
+              <div className="-mx-5 overflow-x-auto px-5 pb-2 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
+                <div className="bracket grid min-w-[40rem] grid-cols-4 gap-x-8">
+                  <div className="flex flex-col">
+                    <StageHead label={c.stages.quarterfinals} e={qf} heat={heat(qf)} lang={lang} />
+                    <div className="flex flex-1 flex-col gap-3">
+                      {[0, 1].map((p) => (
+                        <div key={p} className="bracket-pair relative flex flex-1 flex-col gap-3">
+                          {[0, 1].map((m) => (
+                            <div key={m} className="flex flex-1 items-center">
+                              <Match pair={b.quarterfinals[p * 2 + m]} empty={drawn ? c.tbdLater : c.tbd} />
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <StageHead label={c.stages.semifinals} e={sf} heat={heat(sf)} lang={lang} />
+                    <div className="bracket-pair relative flex flex-1 flex-col gap-3">
+                      {[0, 1].map((m) => (
+                        <div key={m} className="bracket-in-line relative flex flex-1 items-center">
+                          <Match pair={b.semifinals[m]} empty={c.tbdLater} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <StageHead label={c.stages.final} e={fin} heat={heat(fin)} lang={lang} />
+                    <div className="bracket-in-line bracket-out-line relative flex flex-1 items-center">
+                      <Match pair={b.final} empty={c.tbdLater} />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col" data-heat={heat(fin) === "cold" ? "white" : heat(fin)}>
+                    <StageHead label={c.stages.champion} e={fin} heat={heat(fin)} lang={lang} />
+                    <div className="relative flex flex-1 items-center">
+                      <div className="champion relative w-full overflow-hidden rounded-[3px] border p-4 text-center">
+                        <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-[3px]" />
+                        <Crown className="mx-auto size-7" style={{ color: "var(--h)" }} />
+                        {b.champion ? (
+                          <p className="stencil mt-3 text-[1.35rem] leading-none text-white-heat [--wdth:78]">{b.champion}</p>
+                        ) : (
+                          <p className="readout mt-3 text-[0.6rem] text-steel">{c.tbdLater}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p className="readout mt-3 text-[0.6rem] text-steel lg:hidden">{c.bracketHint}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* how it works: rule-separated rows */}
+        <dl className="mt-14 grid grid-cols-1 gap-x-10 lg:mt-20 lg:grid-cols-2">
+          <div className="border-t border-anvil py-7">
+            <dt className="stamp text-steel">{c.judges}</dt>
+            <dd className="mt-3 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+              {T.judges.map((j, i) => (
+                <span key={j.name} className="stencil text-[1.75rem] leading-none [--wdth:78]">
+                  {j.url ? (
+                    <a href={j.url} target="_blank" rel="noreferrer" className="text-iron hover:text-ember">
+                      {j.name}
+                    </a>
+                  ) : (
+                    <span className="text-iron">{j.name}</span>
+                  )}
+                  {/* the separator trails its name so a wrapped line never starts with it */}
+                  {i < T.judges.length - 1 && <span aria-hidden="true" className="ml-4 text-anvil">/</span>}
+                </span>
+              ))}
+            </dd>
+          </div>
+
+          <div className="border-t border-anvil py-7">
+            <dt className="stamp text-steel">{c.scoring}</dt>
+            <dd className="mt-3">
+              <ul className="grid grid-cols-3 gap-4">
+                {T.criteria.map((k) => (
+                  <li key={k.es}>
+                    <p className="stencil text-[1.35rem] leading-none text-iron [--wdth:80]">{k[lang]}</p>
+                    {/* three rods: the most a criterion can score */}
+                    <span aria-hidden="true" data-heat="hot" className="mt-3 flex gap-1.5">
+                      {[0, 1, 2].map((n) => (
+                        <span key={n} className="heat-bar block h-1.5 flex-1 rounded-full" />
+                      ))}
+                    </span>
+                    <p className="readout mt-2 text-[0.6rem] text-steel">{c.points}</p>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-iron/75">{c.scoringNote}</p>
+            </dd>
+          </div>
+
+          <div className="border-t border-anvil py-7 lg:border-b">
+            <dt className="stamp text-steel">{c.making}</dt>
+            <dd className="mt-3">
+              <ul className="space-y-2">
+                {T.making.map((m) => (
+                  <li key={m.es} className="flex gap-3 text-[0.98rem] leading-relaxed text-iron/85">
+                    <span aria-hidden="true" className="mt-[0.7em] h-px w-4 shrink-0 bg-ember" />
+                    {m[lang]}
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+
+          <div className="border-y border-anvil py-7">
+            <dt className="stamp text-steel">{c.winner}</dt>
+            <dd className="mt-3">
+              <p className="readout text-[clamp(2.25rem,4vw,3rem)] leading-none tracking-normal text-glow">3:00</p>
+              <p className="mt-3 max-w-[34rem] text-[0.98rem] leading-relaxed text-iron/85">{T.winnerMoment[lang]}</p>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  );
+}

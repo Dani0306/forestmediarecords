@@ -4,6 +4,7 @@ import { editions } from "@/data/kick";
 import { site } from "@/data/site";
 import { streamers } from "@/data/streamers";
 import { formatCOP, services, slots, slotsSample } from "@/data/studio";
+import { tiraderas as T } from "@/data/tiraderas";
 import { dictionaries } from "@/lib/dictionary";
 
 /**
@@ -184,6 +185,26 @@ function kick() {
   );
 }
 
+function tiraderasInfo() {
+  const b = T.bracket;
+  const drawn = b.quarterfinals.some(([x, y]) => x || y);
+  return section(`${T.name} ${T.year} (torneo de tiraderas en Kick)`, [
+    `- Qué es: torneo de ${T.host} con Forest Media Récords. ${T.intro.es}`,
+    `- Participantes: ${T.players} streamers${drawn ? "" : " (se conocen en el sorteo)"}.`,
+    `- Jueces: ${T.judges.map((j) => j.name).join(", ")}.`,
+    `- Puntuación: ${T.criteria.map((k) => k.es).join(", ")}, de 1 a 3 puntos cada uno (hasta 9 por tiradera).`,
+    `- Premio: ${formatCOP(T.prize.amount)} COP. ${T.prize.note.es}`,
+    `- Rondas (todas a las 9:00 p. m., hora de Medellín, por Kick en todos los canales; fechas exactas en la Agenda):`,
+    ...T.rounds.map((r) => `  - ${r.name.es}: ${r.body.es}`),
+    `- Momento del ganador: ${T.winnerMoment.es}`,
+    `- Cómo se hacen las tiraderas: ${T.making.map((m) => m.es).join(" ")}`,
+    drawn
+      ? `- Cuartos de final: ${b.quarterfinals.map(([x, y]) => `${x || "?"} vs ${y || "?"}`).join("; ")}.`
+      : "- Los enfrentamientos aún no se han sorteado.",
+    b.champion ? `- Campeón: ${b.champion}.` : "",
+  ].filter(Boolean));
+}
+
 function studio() {
   return section("Estudio de grabación: servicios y precios (pesos colombianos, COP)", [
     ...services.map(
@@ -263,6 +284,7 @@ export function buildAssistantContext(now: Date = new Date()) {
     roster(),
     streamersInfo(),
     kick(),
+    tiraderasInfo(),
     studio(),
     demos(),
     contact(),

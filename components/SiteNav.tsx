@@ -36,6 +36,7 @@ export default function SiteNav() {
 
   const links = [
     { href: "/#agenda", label: t.nav.agenda },
+    { href: "/#tiraderas", label: t.nav.tiraderas },
     { href: "/#tendencia", label: t.nav.trending },
     { href: "/#artistas", label: t.nav.artists },
     { href: "/#streamers", label: t.nav.streamers },
@@ -95,7 +96,7 @@ export default function SiteNav() {
             <li
               key={l.href}
               className={
-                l.href === "/#estudio"
+                l.href === "/#estudio" || l.href === "/#tiraderas"
                   ? "hidden min-[1440px]:block"
                   : l.href === "/#tendencia" || l.href === "/#streamers"
                     ? "hidden xl:block"
