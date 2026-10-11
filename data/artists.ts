@@ -1,4 +1,12 @@
-export type SocialPlatform = "instagram" | "tiktok" | "x" | "threads" | "facebook" | "youtube" | "spotify" | "soundcloud";
+export type SocialPlatform =
+  | "instagram"
+  | "tiktok"
+  | "x"
+  | "threads"
+  | "facebook"
+  | "youtube"
+  | "spotify"
+  | "soundcloud";
 
 export type Artist = {
   slug: string;
@@ -169,7 +177,7 @@ export const artists: Artist[] = [
       genres: ["Trap", "Música urbana"],
       city: "Medellín",
       // TODO: the bio doesn't say when he joined Forest; "2024" was a placeholder
-      since: "",
+      since: "2026",
       bio: {
         es: [
           "Renzo Scoppettone, RS el Italiano, es cantante, compositor y productor de ascendencia italiana, con más de una década en la música urbana. Su propuesta nace del trap y mezcla calle, ambición y evolución, con una identidad que va más allá de un solo género.",
@@ -292,7 +300,7 @@ export const artists: Artist[] = [
       },
       genres: [], // TODO: genres he produces
       city: "San Javier, Medellín",
-      since: "", // TODO: confirm what 9/10/2018 refers to (start in music? joined Forest?)
+      since: "2026", // TODO: confirm what 9/10/2018 refers to (start in music? joined Forest?)
       bio: {
         es: [
           "Nicolás Lozano, Nikosan, viene de San Javier, Medellín. Como beatmaker y productor musical de Forest Media Récords, convierte ideas en sonidos, emociones en melodías y sueños en proyectos musicales.",
