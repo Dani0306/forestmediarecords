@@ -1,4 +1,4 @@
-import { site } from "@/data/site";
+import { previewState, sendForm } from "./sendForm";
 
 export type DemoPayload = {
   name: string;
@@ -6,46 +6,26 @@ export type DemoPayload = {
   city: string;
   link: string;
   message: string;
+  /** Honeypot value. */
+  website: string;
 };
 
-export type DemoResult = { ok: true; via: "mailto" | "api" } | { ok: false };
-
 /**
- * Sends a demo submission.
- *
- * TODO: replace the mailto hand-off with a real endpoint (an API route or a
- * form service) and return `{ ok: true, via: "api" }` / `{ ok: false }` from
- * its response. The form already shows sending, thanks and error states.
- *
+ * Sends a demo submission to the label's inbox (via `/api/contact` and Resend).
  * Preview the states without sending: add `?demo=sent` or `?demo=error` to the URL.
  */
 export async function sendDemo(
   p: DemoPayload,
-  labels: { subject: string; name: string; email: string; city: string; link: string },
-): Promise<DemoResult> {
-  const preview =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("demo")
-      : null;
-  if (preview === "error") {
-    await new Promise((r) => setTimeout(r, 900));
-    return { ok: false };
-  }
-  if (preview === "sent") {
-    await new Promise((r) => setTimeout(r, 900));
-    return { ok: true, via: "api" };
-  }
-
-  try {
-    const lines = [`${labels.name}: ${p.name}`, `${labels.email}: ${p.email}`];
-    if (p.city) lines.push(`${labels.city}: ${p.city}`);
-    lines.push(`${labels.link}: ${p.link}`);
-    if (p.message) lines.push("", p.message);
-    window.location.href = `mailto:${site.contactEmail}?subject=${encodeURIComponent(
-      `${labels.subject} · ${p.name}`,
-    )}&body=${encodeURIComponent(lines.join("\n"))}`;
-    return { ok: true, via: "mailto" };
-  } catch {
-    return { ok: false };
-  }
+  labels: { name: string; email: string; city: string; link: string; message: string },
+): Promise<{ ok: boolean }> {
+  const preview = await previewState("demo");
+  if (preview) return preview;
+  const fields: [string, string][] = [
+    [labels.name, p.name],
+    [labels.email, p.email],
+  ];
+  if (p.city) fields.push([labels.city, p.city]);
+  fields.push([labels.link, p.link]);
+  if (p.message) fields.push([labels.message, p.message]);
+  return sendForm({ kind: "demo", subject: p.name, replyTo: p.email, fields, website: p.website });
 }

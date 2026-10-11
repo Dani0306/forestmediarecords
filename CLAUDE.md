@@ -23,7 +23,7 @@ Marketing and information site for **Forest Media Récords**, a music production
 - `PRODUCT.md`: product truth (users, purpose, principles).
 - `DESIGN.md` + `.impeccable/design.json`: design system (forge world, tokens, components). Update when a durable pattern changes.
 - `.impeccable/surfaces/app-page-tsx.md`: the landing page's direction contract.
-- `data/events.ts`, `data/artists.ts`, `data/site.ts`, `data/kick.ts`, `data/trending.ts`, `data/streamers.ts`, `data/studio.ts` (prices), `data/legal.ts` (privacy and terms): all content. Sending lives in `lib/demo.ts` and `lib/booking.ts` (both hand the message to the visitor's email app via mailto, addressed to the contact email; no backend yet). `lib/dictionary.ts`: all copy, ES and EN.
+- `data/events.ts`, `data/artists.ts`, `data/site.ts`, `data/kick.ts`, `data/trending.ts`, `data/streamers.ts`, `data/studio.ts` (prices), `data/legal.ts` (privacy and terms): all content. Sending: `lib/demo.ts` and `lib/booking.ts` post to `app/api/contact/route.ts`, which emails the contact inbox through Resend (needs `RESEND_API_KEY` in Vercel; see `.env.example`). `lib/dictionary.ts`: all copy, ES and EN.
 
 ## Skills
 
@@ -37,7 +37,7 @@ Marketing and information site for **Forest Media Récords**, a music production
 - Fonts via `next/font/google`: Saira Stencil, Martian Mono, Archivo.
 - Scripts: `npm run dev`, `npm run build`, `npm run lint`. Judge performance on `npm run build && npm start`, not on `next dev`.
 - Deployment: Vercel project `dani0306s-projects/forestmr`, live at **https://forestmediarecords.com** (domain bought on Vercel 2026-10-07; `www.` and `forestmr.vercel.app` also serve it). Deploy from the local folder with `npx vercel@latest --prod` (the global CLI 41 is too old). `metadataBase` in `app/layout.tsx` is the domain. `.vercelignore` keeps `docs/`, `.impeccable/` and unused originals out of the upload.
-- Live links: Kick channel `https://kick.com/leolugolive`, email `forestmediarecords@gmail.com` and Instagram `https://www.instagram.com/forestmediarecords/` (all in `data/site.ts`; YouTube and SoundCloud URLs pending, shown as "Muy pronto").
+- Live links: Kick channel `https://kick.com/leolugolive`, email `forestmediarecords@gmail.com`, WhatsApp `+57 304 464 6964` (`site.whatsapp`; so far only the chat assistant uses it) and Instagram `https://www.instagram.com/forestmediarecords/` (all in `data/site.ts`; YouTube and SoundCloud URLs pending, shown as "Muy pronto").
 
 ## Brand assets (`public/`)
 

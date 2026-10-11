@@ -14,8 +14,10 @@ export const site = {
   name: "Forest Media Récords",
   city: "Medellín",
   country: "Colombia",
-  /** Demo submissions open a pre-filled email to this address. */
+  /** The forms (demo, studio booking) are emailed to this address. */
   contactEmail: "forestmediarecords@gmail.com",
+  /** Contact WhatsApp: display form and the digits for wa.me links. */
+  whatsapp: { display: "+57 304 464 6964", number: "573044646964" },
   kick: {
     /** The Kick channel that supports Forest Media Récords; label streams go out here. */
     url: "https://kick.com/leolugolive",

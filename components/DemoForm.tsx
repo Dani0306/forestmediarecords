@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { site } from "@/data/site";
-import { sendDemo, type DemoResult } from "@/lib/demo";
+import { sendDemo } from "@/lib/demo";
 import { useLang } from "@/lib/i18n";
 import { ArrowUpRight } from "./icons";
 
@@ -73,7 +73,6 @@ export default function DemoForm() {
   const f = t.demo.fields;
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [via, setVia] = useState<"mailto" | "api">("api");
   const [who, setWho] = useState({ name: "", link: "" });
   const panel = useRef<HTMLDivElement>(null);
   const open = site.contactEmail.length > 0;
@@ -95,12 +94,18 @@ export default function DemoForm() {
     }
     if (!open) return;
     setStatus("sending");
-    const res: DemoResult = await sendDemo(
-      { name: v("name"), email: v("email"), city: v("city"), link: v("link"), message: v("message") },
-      { subject: t.demo.subject, name: f.name, email: f.email, city: f.city, link: f.link },
+    const res = await sendDemo(
+      {
+        name: v("name"),
+        email: v("email"),
+        city: v("city"),
+        link: v("link"),
+        message: v("message"),
+        website: String(data.get("website") ?? ""),
+      },
+      { name: f.name, email: f.email, city: f.city, link: f.link, message: f.message },
     );
     if (res.ok) {
-      setVia(res.via);
       setWho({ name: v("name"), link: v("link") });
       setStatus("sent");
     } else setStatus("error");
@@ -143,9 +148,6 @@ export default function DemoForm() {
                 {t.demo.thanksTitle}
               </h3>
               <p className="mt-5 max-w-[34rem] text-[1.125rem] leading-relaxed text-iron/90">{t.demo.thanksBody}</p>
-              {via === "mailto" && (
-                <p className="mt-4 max-w-[34rem] text-[0.95rem] text-iron/70">{t.demo.thanksMailto}</p>
-              )}
               <p className="readout mt-8 truncate border-t border-iron/15 pt-4 text-[0.62rem] text-steel">
                 {f.link}: <span className="text-iron">{who.link}</span>
               </p>
@@ -165,8 +167,15 @@ export default function DemoForm() {
               noValidate
               onSubmit={onSubmit}
               aria-busy={status === "sending"}
-              className="plate grid gap-6 rounded-[3px] border border-anvil p-5 sm:grid-cols-2 sm:p-8"
+              className="plate relative grid gap-6 rounded-[3px] border border-anvil p-5 sm:grid-cols-2 sm:p-8"
             >
+              {/* honeypot: hidden from people and screen readers; bots that fill it are dropped */}
+              <div aria-hidden="true" className="absolute -left-[9999px] size-px overflow-hidden">
+                <label>
+                  Website
+                  <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+                </label>
+              </div>
               {status === "error" && (
                 <div
                   ref={panel}

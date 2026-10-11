@@ -21,10 +21,11 @@ related:
 - States: validation errors, sending, error (with email fallback) and "Solicitud enviada".
 
 ## Open issues
-- [ ] **Design only**: wire `requestBooking()` in `lib/booking.ts` to the real backend (Daniel will do the logic)
+- [x] Wired: `requestBooking()` posts to `app/api/contact/route.ts`, emailed through Resend (2026-10-11, [[Forms send through Resend]])
 - [ ] Confirm the studio hours (`slots` in `data/studio.ts`: 9–13, 14–18, 19–23 are shown untagged since 2026-10-10)
 - [x] Booking sends: since 2026-10-10 it opens the visitor's email app with the request to the contact email (like the demo form)
-- [ ] A real booking backend (API route, calendar or form service) so requests arrive without the visitor's email app
+- [x] Requests arrive without the visitor's email app (2026-10-11)
+- [ ] Calendar availability (optional, later)
 - [ ] Deposit, cancellation and rescheduling policy (placeholder in the terms)
 - [x] Does "Producción completa" also include mix and master? Yes (2026-10-10).
 - [ ] Is "Instrumental original" ($500.000) still offered? It was not in the 2026-10-10 service list.

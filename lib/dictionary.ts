@@ -251,13 +251,10 @@ const es = {
     closed:
       "Los envíos abren muy pronto: estamos conectando el correo de demos.",
     emailPending: "correo por confirmar",
-    subject: "Demo",
     sending: "Enviando…",
     thanksTitle: "¡Gracias por aplicar!",
     thanksBody:
       "Gracias por aplicar a Forest Media Récords. Vamos a escuchar tu música con calma y te responderemos muy pronto.",
-    thanksMailto:
-      "Abrimos tu app de correo con todo listo: dale enviar para que nos llegue.",
     sentFrom: "Enviado por",
     sendAnother: "Enviar otra demo",
     errorTitle: "No pudimos enviar tu demo",
@@ -317,8 +314,6 @@ const es = {
       },
       failTitle: "No pudimos enviar tu solicitud",
       failBody: "Inténtalo otra vez en un momento o escríbenos a",
-      mailSubject: "Solicitud de reserva del estudio",
-      doneMailto: "Abrimos tu app de correo con la solicitud lista: dale enviar para que nos llegue.",
       doneTitle: "Solicitud enviada",
       doneBody:
         "Recibimos tu solicitud de reserva. Te escribiremos para confirmar la fecha, la hora y el pago.",
@@ -633,13 +628,10 @@ const en: Dict = {
       "Done. We opened your email app with the demo ready; just hit send.",
     closed: "Submissions open soon: we are connecting the demo inbox.",
     emailPending: "email to be confirmed",
-    subject: "Demo",
     sending: "Sending…",
     thanksTitle: "Thanks for applying!",
     thanksBody:
       "Thanks for applying to Forest Media Récords. We'll give your music a proper listen and get back to you shortly.",
-    thanksMailto:
-      "We opened your email app with everything ready: hit send so it reaches us.",
     sentFrom: "Sent by",
     sendAnother: "Send another demo",
     errorTitle: "We couldn't send your demo",
@@ -695,8 +687,6 @@ const en: Dict = {
       },
       failTitle: "We couldn't send your request",
       failBody: "Try again in a moment or write to us at",
-      mailSubject: "Studio booking request",
-      doneMailto: "We opened your email app with the request ready: hit send so it reaches us.",
       doneTitle: "Request sent",
       doneBody:
         "We got your booking request. We'll write to confirm the date, time and payment.",

@@ -16,7 +16,8 @@ tags:
 - [x] **Contact / demo email**: `forestmediarecords@gmail.com` (2026-10-06)
 - [ ] Real **trending projects** and their 4–8 s clips in `data/trending.ts` ([[Trending]])
 - [x] Real **streamer photos and profiles** for LeoLugoLive and Trianiss (2026-10-06, [[Streamers]])
-- [ ] Wire the **studio booking** backend (`lib/booking.ts`) and the **demo** endpoint (`lib/demo.ts`) ([[Studio]], [[Demo form]])
+- [x] **Demo** and **booking** forms send through Resend via `app/api/contact/route.ts` (2026-10-11, [[Forms send through Resend]])
+- [x] Resend setup: account, `forestmediarecords.com` verified, `RESEND_API_KEY` in Vercel Production (2026-10-11)
 - [ ] Legal review of [[Legal pages]]; NIT and address
 - [ ] Spotify / YouTube links per artist (`listen` in `data/artists.ts`)
 - [x] Real **artist profiles and bios**: all four artists (2026-10-09); pending: join year for RS el Italiano and Nikosan

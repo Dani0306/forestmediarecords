@@ -83,7 +83,6 @@ export default function Studio() {
   const [blocks, setBlocks] = useState(1);
   const [errors, setErrors] = useState<Errs>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [via, setVia] = useState<"mailto" | "api">("api");
   const [minDate, setMinDate] = useState<string>();
   const panel = useRef<HTMLDivElement>(null);
   const form = useRef<HTMLFormElement>(null);
@@ -142,20 +141,23 @@ export default function Studio() {
       return;
     }
     setStatus("sending");
-    // the request in the visitor's language, ready to send from their email app
-    const lines = [
-      `${f.step1}: ${chosen?.name[lang] ?? service}${chosen?.blocks ? ` · ${f.blocks}: ${qty}` : ""}`,
-      `${f.date}: ${dateLabel} (${date})`,
-      `${f.slot}: ${chosenSlot ? `${chosenSlot.label[lang]} ${chosenSlot.hours}` : slot}`,
-      `${f.total}: ${formatCOP(total)} COP`,
-      "",
-      `${f.name}: ${v("b-name")}`,
+    // the request as label/value pairs in the visitor's language
+    const fields: [string, string][] = [
+      [f.step1, `${chosen?.name[lang] ?? service}${chosen?.blocks ? ` · ${f.blocks}: ${qty}` : ""}`],
+      [f.date, `${dateLabel} (${date})`],
+      [f.slot, chosenSlot ? `${chosenSlot.label[lang]} ${chosenSlot.hours}` : slot],
+      [f.total, `${formatCOP(total)} COP`],
+      [f.name, v("b-name")],
     ];
-    if (v("b-artist")) lines.push(`${f.artist}: ${v("b-artist")}`);
-    lines.push(`${f.email}: ${v("b-email")}`, `${f.phone}: ${v("b-phone")}`);
-    if (v("b-notes")) lines.push("", `${f.notes}`, v("b-notes"));
-    const res = await requestBooking(`${f.mailSubject} · ${v("b-name")}`, lines);
-    if (res.ok) setVia(res.via);
+    if (v("b-artist")) fields.push([f.artist, v("b-artist")]);
+    fields.push([f.email, v("b-email")], [f.phone, v("b-phone")]);
+    if (v("b-notes")) fields.push([f.notes, v("b-notes")]);
+    const res = await requestBooking({
+      name: v("b-name"),
+      email: v("b-email"),
+      fields,
+      website: String(data.get("website") ?? ""),
+    });
     setStatus(res.ok ? "sent" : "error");
     requestAnimationFrame(() => panel.current?.focus());
   };
@@ -270,9 +272,7 @@ export default function Studio() {
                 {f.doneTitle}
               </h3>
               <p className="mt-5 max-w-[34rem] text-[1.125rem] leading-relaxed text-iron/90">{f.doneBody}</p>
-              {via === "mailto" && (
-                <p className="mt-4 max-w-[34rem] text-[0.95rem] text-iron/70">{f.doneMailto}</p>
-              )}
+
               <button type="button" onClick={reset} className="btn btn-steel mt-8">
                 {f.another}
               </button>
@@ -283,8 +283,15 @@ export default function Studio() {
               noValidate
               onSubmit={onSubmit}
               aria-busy={status === "sending"}
-              className="forge-in grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8"
+              className="forge-in relative grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8"
             >
+              {/* honeypot: hidden from people and screen readers; bots that fill it are dropped */}
+              <div aria-hidden="true" className="absolute -left-[9999px] size-px overflow-hidden">
+                <label>
+                  Website
+                  <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+                </label>
+              </div>
               <div className="plate flex flex-col gap-8 rounded-[3px] border border-anvil p-5 sm:p-8 lg:col-span-8">
                 <h3 className="stencil text-[clamp(2.25rem,4vw,3.25rem)] leading-[0.9] [--wdth:72]">{f.title}</h3>
 

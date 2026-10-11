@@ -1,1 +1,27 @@
-{ "buildPath": "code" }
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "arial",
+        "files": [
+          "app/api/contact/route.ts"
+        ],
+        "createdAt": "2026-10-11T15:53:35.776Z",
+        "reason": "Claude: notification email HTML; email clients don't load the site's web fonts, so an email-safe system font is required"
+      },
+      {
+        "rule": "overused-font",
+        "value": "arial",
+        "files": [
+          "app/api/contact/route.ts"
+        ],
+        "createdAt": "2026-10-11T15:55:13.430Z",
+        "reason": "Claude: notification email HTML; email clients don't load web fonts, so an email-safe system font is required"
+      }
+    ]
+  }
+}
