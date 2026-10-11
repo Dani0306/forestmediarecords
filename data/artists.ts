@@ -89,6 +89,7 @@ export const artists: Artist[] = [
       },
     ],
     links: [
+      { platform: "instagram", url: "https://www.instagram.com/lenttino/" },
       { platform: "tiktok", url: "https://www.tiktok.com/@lenttino_" },
       { platform: "x", url: "https://x.com/lentinolr" },
       { platform: "threads", url: "https://www.threads.com/@lenttino" },

@@ -34,7 +34,7 @@ Section title "Nuestros Artistas". One artist at a time:
 ## Open issues
 - [ ] Nikosan: genres he produces; what "9/10/2018" refers to; Spotify/YouTube
 - [ ] Higher-resolution photos of Lowkey (738 px wide; the first is a 445 px tall crop)
-- [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`): Lentino done 2026-10-10 (Spotify, YouTube @lenttino; links TikTok @lenttino_, X @lentinolr, Threads @lenttino); RS el Italiano done 2026-10-10 (Spotify artist 4EZilV2kRfc5pkbaCb7eDn, YouTube @rs.italiano; links Instagram rselitaliano, TikTok @rs_italiano, Facebook RS.ITALIANO, Threads @rselitaliano); Lowkey and Nikosan pending
+- [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`): Lentino done 2026-10-10 (Spotify, YouTube @lenttino; links Instagram lenttino, TikTok @lenttino_, X @lentinolr, Threads @lenttino); RS el Italiano done 2026-10-10 (Spotify artist 4EZilV2kRfc5pkbaCb7eDn, YouTube @rs.italiano; links Instagram rselitaliano, TikTok @rs_italiano, Facebook RS.ITALIANO, Threads @rselitaliano); Lowkey and Nikosan pending
 - [ ] RS el Italiano bio and facts are mock-ups
 - [x] Lentino joined Forest about two months before 2026-10-06: `since: "2026"`
 - [ ] Release date of "Sobrio" (not set yet); add it to the [[Agenda]] as a release once dated
