@@ -440,6 +440,26 @@ a {
     var(--color-forge);
 }
 
+/* footer maker's mark: a cold stamp that heats to ember when the row is hovered */
+.maker-stamp {
+  border-color: var(--color-anvil);
+  color: var(--color-steel);
+  transition:
+    border-color 0.35s var(--ease-hammer),
+    color 0.35s var(--ease-hammer),
+    box-shadow 0.35s var(--ease-hammer);
+}
+/* a short heat line marks the start of the credit band */
+.maker-heat {
+  background: linear-gradient(90deg, var(--color-cherry), var(--color-ember), var(--color-glow));
+}
+.maker-mark:hover .maker-stamp,
+.maker-mark:focus-within .maker-stamp {
+  border-color: var(--color-ember);
+  color: var(--color-glow);
+  box-shadow: 0 6px 18px -8px rgb(255 90 17 / 0.7);
+}
+
 /* "Escuchar": the equalizer bars rest low and dance while the button is hot */
 .eq-bar {
   transform: scaleY(0.35);

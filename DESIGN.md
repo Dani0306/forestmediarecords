@@ -271,6 +271,9 @@ Prices are a rule-separated rate card, never pricing cards: index, stencil servi
 ### Form States (demo and booking)
 Sending: the hot button shows a stepped pulsing dot and "Enviando…". Error: a cherry-bordered alert at the top of the form (10% cherry fill, stencil title in light orange-red, body with the email fallback, no side stripe), fields keep their values and the action becomes "Reintentar". Success: the form is replaced by a steel plate with a full-width heat line on top (white heat state), a glow mono line, a stencil thank-you title, what happens next, and a steel action to start again; focus moves to it.
 
+### Maker's Mark (footer credit)
+Its own band at the end of the footer, between the main footer and the legal readout row, opened by an anvil rule with a short cherry-to-glow heat line at its left. A 64px stamp with the builder's initials in stencil (anvil border, steel letters), then a steel mono "Diseño y desarrollo" label, the name in stencil up to 2.1rem (width 80), the line "Desarrollador de software oficial de Forest Media Récords" in Archivo, and the role in mono at 55% iron. On the right (below on phones), 44px steel icon squares for Instagram, LinkedIn and email (`.social-link`). Hovering or focusing the band heats the stamp: ember border, glow letters, a small ember glow beneath. Data in `site.credits` (`data/site.ts`), copy in `footer.credit*`.
+
 ### Cookie Notice and Legal Pages
 The cookie notice is a bottom steel plate (max 56rem, deep panel lift) with the copy, a privacy link and two actions: steel "Solo necesarias" and hot "Aceptar todas"; it rises in once after 0.8s. Legal pages use the Read layout: back link, stencil title, mono updated date with a "Borrador" tag, a sticky numbered contents list on desktop, and a 68ch column with numbered stencil headings and ember hairline bullets.
 

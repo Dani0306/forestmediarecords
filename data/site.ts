@@ -16,6 +16,18 @@ export const site = {
   country: "Colombia",
   /** The forms (demo, studio booking) are emailed to this address. */
   contactEmail: "forestmediarecords@gmail.com",
+  /** Maker's mark at the very bottom of the footer: who designed and built the site. */
+  credits: {
+    name: "Daniel Colorado",
+    initials: "DC",
+    role: "Digital Product & Operations Director",
+    unit: "Digital Systems & Software",
+    email: "danielcolorado.dev@gmail.com",
+    links: [
+      { platform: "instagram", label: "Instagram", url: "https://www.instagram.com/daniel1colorado1/" },
+      { platform: "linkedin", label: "LinkedIn", url: "https://www.linkedin.com/in/daniel-colorado-774b632b1/" },
+    ] as { platform: "instagram" | "linkedin"; label: string; url: string }[],
+  },
   /** Contact WhatsApp: display form and the digits for wa.me links. */
   whatsapp: { display: "+57 304 464 6964", number: "573044646964" },
   kick: {

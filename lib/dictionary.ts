@@ -375,6 +375,10 @@ const es = {
   footer: {
     tag: "Forjado en Medellín, Colombia",
     rights: "Todos los derechos reservados.",
+    credit: "Diseño y desarrollo",
+    creditLine: "Desarrollador de software oficial de Forest Media Récords",
+    creditOn: "en",
+    creditMail: "Escribirle a",
   },
 };
 
@@ -748,6 +752,10 @@ const en: Dict = {
   footer: {
     tag: "Forged in Medellín, Colombia",
     rights: "All rights reserved.",
+    credit: "Design & development",
+    creditLine: "Official software developer at Forest Media Récords",
+    creditOn: "on",
+    creditMail: "Email",
   },
 };
 

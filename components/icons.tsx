@@ -138,6 +138,20 @@ export const Facebook = (p: P) => (
   </svg>
 );
 
+export const LinkedIn = (p: P) => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+    <path d="M8 10.5V16.5M8 7.6v.01M11.5 16.5v-6M11.5 13.2a2.5 2.5 0 0 1 5 0v3.3" />
+  </svg>
+);
+
+export const Mail = (p: P) => (
+  <svg {...base} strokeLinejoin="round" {...p}>
+    <rect x="3" y="5.5" width="18" height="13" rx="2" />
+    <path d="m3.5 6.5 8.5 6.5 8.5-6.5" />
+  </svg>
+);
+
 export const Spotify = (p: P) => (
   <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
     <circle cx="12" cy="12" r="9" />
