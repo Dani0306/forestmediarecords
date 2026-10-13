@@ -17,7 +17,15 @@ export type Round = {
   body: { es: string; en: string };
 };
 
-export type Judge = { name: string; url?: string };
+/** A confirmed competitor: Kick name, channel and photo (`public/participants/`). */
+export type Participant = {
+  name: string;
+  url: string;
+  photo: { src: string; width: number; height: number; focus?: string };
+};
+
+/** A confirmed judge: same shape as a participant (Kick name, channel, photo). */
+export type Judge = Participant;
 
 export const tiraderas = {
   name: "Mundial de Tiraderas",
@@ -28,10 +36,58 @@ export const tiraderas = {
     en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. Every date streams on Kick, on all channels.",
   },
   players: 8,
+  /**
+   * Confirmed competitors (from the team, 2026-10-12). Fewer than `players`
+   * means the rest are still to be announced: the UI fills the gap with
+   * "Por anunciar" slots. Bracket names match these `name`s to show the photo.
+   */
+  participants: [
+    {
+      name: "valedanyy07",
+      url: "https://kick.com/valedanyy07",
+      // crop of valedanyy07.avif without the pixelated strip on its left edge
+      photo: { src: "/participants/valedanyy07-crop.avif", width: 524, height: 1280, focus: "50% 22%" },
+    },
+    {
+      name: "ElFerpo2",
+      url: "https://kick.com/elferpo2",
+      photo: { src: "/participants/ElFerpo2.avif", width: 900, height: 1600, focus: "50% 40%" },
+    },
+    {
+      name: "soyjosema",
+      url: "https://kick.com/soyjosema",
+      photo: { src: "/participants/soyjosema.avif", width: 1200, height: 1600, focus: "60% 50%" },
+    },
+    {
+      name: "Emvy_29",
+      url: "https://kick.com/emvy-29",
+      photo: { src: "/participants/Emvy_29.avif", width: 1200, height: 1600, focus: "50% 30%" },
+    },
+    {
+      name: "Cuartiz",
+      url: "https://kick.com/cuartiz",
+      photo: { src: "/participants/Cuartiz.avif", width: 540, height: 808, focus: "50% 60%" },
+    },
+    {
+      name: "Edisson",
+      url: "https://kick.com/edisson",
+      photo: { src: "/participants/Edisson.avif", width: 1200, height: 1600, focus: "50% 45%" },
+    },
+  ] as Participant[],
+  /** Seats on the panel; fewer `judges` than this shows "Por confirmar" for the rest. */
+  judgeSeats: 3,
+  /** From the team, 2026-10-13: Jaycol and LeoLugoLive; the third judge is still to be confirmed. */
   judges: [
-    { name: "Jaycol" },
-    { name: "Trianiss", url: "https://kick.com/trianiss" },
-    { name: "LeoLugoLive", url: site.kick.url },
+    {
+      name: "Jaycol",
+      url: "https://kick.com/jaycol",
+      photo: { src: "/juries/jaycol.avif", width: 447, height: 447, focus: "50% 55%" },
+    },
+    {
+      name: "LeoLugoLive",
+      url: site.kick.url,
+      photo: { src: "/leolugo/leolugo-portrait.avif", width: 738, height: 1095, focus: "50% 22%" },
+    },
   ] as Judge[],
   /** Each tiradera is scored 1–3 on every criterion. */
   criteria: [
@@ -122,3 +178,7 @@ export const tiraderas = {
     champion: "",
   },
 };
+
+/** The participant behind a bracket name, if confirmed (case-insensitive). */
+export const participantByName = (name: string) =>
+  name ? tiraderas.participants.find((p) => p.name.toLowerCase() === name.toLowerCase()) : undefined;

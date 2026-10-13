@@ -190,8 +190,8 @@ function tiraderasInfo() {
   const drawn = b.quarterfinals.some(([x, y]) => x || y);
   return section(`${T.name} ${T.year} (torneo de tiraderas en Kick)`, [
     `- Qué es: torneo de ${T.host} con Forest Media Récords. ${T.intro.es}`,
-    `- Participantes: ${T.players} streamers${drawn ? "" : " (se conocen en el sorteo)"}.`,
-    `- Jueces: ${T.judges.map((j) => j.name).join(", ")}.`,
+    `- Participantes: ${T.players} streamers. Confirmados hasta ahora (nombre y canal de Kick): ${T.participants.map((p) => `${p.name} (${p.url})`).join(", ")}.${T.participants.length < T.players ? ` Faltan ${T.players - T.participants.length} por anunciar.` : ""}${drawn ? "" : " Los enfrentamientos se conocen en el sorteo."}`,
+    `- Jueces (${T.judgeSeats}): ${T.judges.map((j) => `${j.name} (${j.url})`).join(", ")}${T.judges.length < T.judgeSeats ? `; ${T.judgeSeats - T.judges.length === 1 ? "el otro, por confirmar" : `${T.judgeSeats - T.judges.length} por confirmar`}` : ""}.`,
     `- Puntuación: ${T.criteria.map((k) => k.es).join(", ")}, de 1 a 3 puntos cada uno (hasta 9 por tiradera).`,
     `- Premio: ${formatCOP(T.prize.amount)} COP. ${T.prize.note.es}`,
     `- Rondas (todas a las 9:00 p. m., hora de Medellín, por Kick en todos los canales; fechas exactas en la Agenda):`,

@@ -383,6 +383,33 @@ a {
   opacity: 0;
 }
 
+/* tiraderas line-up: faces read at rest (lighter grade), true colour on hover or focus,
+   and a heat line rises along the bottom edge */
+.fighter .iron-photo :is(img, video) {
+  filter: grayscale(0.8) contrast(1.08) brightness(var(--lift, 1));
+}
+.fighter .iron-photo::after {
+  opacity: 0.55;
+}
+.fighter .fighter-heat {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-hammer);
+}
+.fighter:hover .iron-photo :is(img, video),
+.fighter:focus-visible .iron-photo :is(img, video) {
+  filter: none;
+  transform: scale(1.03);
+}
+.fighter:hover .iron-photo::after,
+.fighter:focus-visible .iron-photo::after {
+  opacity: 0;
+}
+.fighter:hover .fighter-heat,
+.fighter:focus-visible .fighter-heat {
+  transform: scaleX(1);
+}
+
 /* artist social links: steel squares; hover or focus heats the edge and the mark to ember */
 .social-link {
   transition:

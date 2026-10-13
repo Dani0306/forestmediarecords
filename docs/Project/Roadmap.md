@@ -34,7 +34,7 @@ tags:
 - [x] Domain **forestmediarecords.com** bought on Vercel, attached and set as `metadataBase` (2026-10-07, [[Deploy on Vercel]])
 - [ ] Optional: make `www` and `forestmr.vercel.app` redirect to `forestmediarecords.com` (Vercel → Settings → Domains)
 - [ ] Move to Vercel Pro before the public launch (Hobby is non-commercial)
-- [ ] Connect the repo to Vercel (`vercel git connect`) once the work is committed, so pushes deploy automatically
+- [x] Repo connected to Vercel: pushes to `main` deploy automatically (confirmed 2026-10-12; one push, `a5d69ef`, was missed by the webhook and deployed by hand)
 - [ ] Clean unused assets: `public/lowkey/lowkey1.avif` (original screenshot), `public/videoloop.webm` (5.7 MB original; source of the trending clips), `public/leolugo/leolugo1.avif` (original screenshot of the cropped portrait), `videoloop-poster.webp.json`
 - [ ] Align font sizes with the `DESIGN.md` type ramp (detector flags about 45 sizes)
 - [ ] Replace the create-next-app `README.md`

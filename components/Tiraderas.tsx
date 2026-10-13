@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { eventEnd, events, heatOf, type ForgeEvent, type Heat } from "@/data/events";
 import { hasKick, site } from "@/data/site";
-import { tiraderas as T } from "@/data/tiraderas";
+import { participantByName, tiraderas as T, type Participant } from "@/data/tiraderas";
 import { formatCOP } from "@/data/studio";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
 import { icsHref } from "@/lib/ics";
@@ -12,10 +13,90 @@ type Lang = "es" | "en";
 
 const roundEvent = (id: string) => events.find((e) => e.id === id) as ForgeEvent | undefined;
 
-/** One competitor slot in the bracket: a name once known, else a quiet placeholder. */
-function Slot({ name, empty }: { name: string; empty: string }) {
+/** One competitor in the line-up: the photo, then the name and their Kick channel. */
+function Fighter({ p, label, judge = false }: { p: Participant; label: string; judge?: boolean }) {
+  const [host, ...path] = p.url.replace(/^https?:\/\//, "").split("/");
   return (
-    <div className="flex h-10 items-center border-b border-anvil px-3 last:border-b-0">
+    <li>
+      <a
+        href={p.url}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`${label} ${p.name}`}
+        className="fighter group block rounded-[3px]"
+      >
+        <div
+          className={`iron-photo relative rounded-[3px] border border-anvil bg-forge-2 ${judge ? "aspect-square" : "aspect-[3/4]"}`}
+        >
+          <Image
+            src={p.photo.src}
+            alt=""
+            fill
+            sizes={judge ? "(min-width: 1024px) 18rem, (min-width: 640px) 30vw, 50vw" : "(min-width: 1280px) 12vw, (min-width: 640px) 24vw, 50vw"}
+            className="object-cover"
+            style={{ objectPosition: p.photo.focus ?? "50% 30%" }}
+          />
+          <span aria-hidden="true" data-heat="hot" className="fighter-heat heat-bar absolute inset-x-0 bottom-0 z-10 block h-[3px]" />
+        </div>
+        <p
+          className={`stencil mt-3 break-words leading-[0.95] text-iron [--wdth:78] ${judge ? "text-[clamp(1.15rem,2.4vw,2rem)]" : "text-[clamp(1.15rem,1.6vw,1.35rem)]"}`}
+        >
+          {p.name}
+        </p>
+        <p className="readout mt-1.5 flex items-center gap-1 text-[0.58rem] text-steel transition-colors group-hover:text-ember group-focus-visible:text-ember">
+          <span className="truncate">
+            {host}/
+            {path.join("/")}
+          </span>
+          <ArrowUpRight className="size-3 shrink-0" />
+        </p>
+      </a>
+    </li>
+  );
+}
+
+/** A place still to be announced: same footprint, no face yet. */
+function OpenSlot({
+  label,
+  aspect = "aspect-[3/2] sm:aspect-[3/4]",
+  className,
+}: {
+  label: string;
+  aspect?: string;
+  className?: string;
+}) {
+  return (
+    <li aria-label={label} className={className}>
+      <div
+        aria-hidden="true"
+        className={`flex ${aspect} items-center justify-center rounded-[3px] border border-anvil bg-[repeating-linear-gradient(135deg,transparent_0_10px,rgb(42_45_49/0.35)_10px_11px)]`}
+      >
+        <span className="stencil text-[3.5rem] leading-none text-anvil [--wdth:66]">?</span>
+      </div>
+      <p aria-hidden="true" className="readout mt-3 text-[0.62rem] text-steel">
+        {label}
+      </p>
+    </li>
+  );
+}
+
+/** One competitor slot in the bracket: a name once known (with the photo when confirmed), else a quiet placeholder. */
+function Slot({ name, empty }: { name: string; empty: string }) {
+  const p = participantByName(name);
+  return (
+    <div className="flex h-10 items-center gap-2 border-b border-anvil px-3 last:border-b-0">
+      {p && (
+        <span className="relative size-6 shrink-0 overflow-hidden rounded-[2px] border border-anvil">
+          <Image
+            src={p.photo.src}
+            alt=""
+            fill
+            sizes="24px"
+            className="object-cover grayscale"
+            style={{ objectPosition: p.photo.focus ?? "50% 30%" }}
+          />
+        </span>
+      )}
       {name ? (
         <span className="stencil truncate text-[1rem] leading-none text-iron [--wdth:80]">{name}</span>
       ) : (
@@ -127,6 +208,79 @@ export default function Tiraderas() {
           </div>
         </div>
 
+        {/* the people: the judges' panel leads (they score every tiradera), the competitors line up right under it */}
+        <div className="mt-14 lg:mt-20">
+          <div
+            data-heat="hot"
+            className="forge-in plate relative grid grid-cols-1 gap-x-10 gap-y-7 overflow-hidden rounded-[3px] border border-anvil p-5 sm:p-7 lg:grid-cols-12 lg:p-8"
+          >
+            <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-[3px]" />
+            <div className="lg:col-span-4 lg:col-start-1 lg:row-start-1">
+              <h3 className="stencil text-[clamp(2.25rem,4.5vw,3.25rem)] leading-[0.9] text-iron [--wdth:70]">
+                {c.judges}
+              </h3>
+              <p className="readout mt-2 text-[0.62rem] text-iron/70">
+                {Math.min(T.judges.length, T.judgeSeats)} / {T.judgeSeats} {c.confirmed}
+              </p>
+            </div>
+
+            {/* each confirmed judge links to their Kick channel; open seats until all are known */}
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-5 lg:col-span-8 lg:col-start-5 lg:row-span-2 lg:row-start-1">
+              {T.judges.slice(0, T.judgeSeats).map((j) => (
+                <Fighter key={j.url} p={j} label={c.channel} judge />
+              ))}
+              {Array.from({ length: Math.max(0, T.judgeSeats - T.judges.length) }, (_, i) => (
+                <OpenSlot
+                  key={i}
+                  label={c.tbc}
+                  aspect="aspect-[5/1] sm:aspect-square"
+                  className="col-span-2 sm:col-span-1"
+                />
+              ))}
+            </ul>
+
+            {/* how they score, next to who scores */}
+            <div className="border-t border-anvil pt-6 lg:col-span-4 lg:col-start-1 lg:row-start-2 lg:self-end">
+              <h4 className="stamp text-steel">{c.scoring}</h4>
+              <ul className="mt-3 grid grid-cols-3 gap-4">
+                {T.criteria.map((k) => (
+                  <li key={k.es}>
+                    <p className="stencil text-[1.1rem] leading-none text-iron [--wdth:80] sm:text-[1.35rem]">{k[lang]}</p>
+                    {/* three rods: the most a criterion can score */}
+                    <span aria-hidden="true" className="mt-3 flex gap-1.5">
+                      {[0, 1, 2].map((n) => (
+                        <span key={n} className="heat-bar block h-1.5 flex-1 rounded-full" />
+                      ))}
+                    </span>
+                    <p className="readout mt-2 text-[0.6rem] text-steel">{c.points}</p>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-iron/75">{c.scoringNote}</p>
+            </div>
+          </div>
+
+          {/* the line-up: every confirmed competitor and their Kick channel; open slots until all are known */}
+          {T.participants.length > 0 && (
+            <div className="mt-10">
+              <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="stamp text-steel">{c.lineup}</h3>
+                <p className="readout text-[0.62rem] text-iron/70">
+                  {Math.min(T.participants.length, T.players)} / {T.players} {c.announced}
+                </p>
+              </div>
+              <ul className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-4 sm:gap-x-4 xl:grid-cols-8">
+                {T.participants.slice(0, T.players).map((p) => (
+                  <Fighter key={p.url} p={p} label={c.channel} />
+                ))}
+                {Array.from({ length: Math.max(0, T.players - T.participants.length) }, (_, i) => (
+                  <OpenSlot key={i} label={c.toAnnounce} />
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
         <div className="mt-14 grid grid-cols-1 gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
           {/* the calendar: one row per round, heated by how close it is */}
           <div className="lg:col-span-5">
@@ -198,7 +352,7 @@ export default function Tiraderas() {
               <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="stamp text-steel">{c.bracket}</h3>
                 <p className="readout text-[0.62rem] text-iron/70">
-                  {T.players} streamers · {T.judges.length} {c.judges.toLowerCase()}
+                  {T.players} streamers · {T.judgeSeats} {c.judges.toLowerCase()}
                 </p>
               </div>
               <div className="-mx-5 overflow-x-auto px-5 pb-2 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
@@ -259,46 +413,6 @@ export default function Tiraderas() {
 
         {/* how it works: rule-separated rows */}
         <dl className="mt-14 grid grid-cols-1 gap-x-10 lg:mt-20 lg:grid-cols-2">
-          <div className="border-t border-anvil py-7">
-            <dt className="stamp text-steel">{c.judges}</dt>
-            <dd className="mt-3 flex flex-wrap items-baseline gap-x-4 gap-y-2">
-              {T.judges.map((j, i) => (
-                <span key={j.name} className="stencil text-[1.75rem] leading-none [--wdth:78]">
-                  {j.url ? (
-                    <a href={j.url} target="_blank" rel="noreferrer" className="text-iron hover:text-ember">
-                      {j.name}
-                    </a>
-                  ) : (
-                    <span className="text-iron">{j.name}</span>
-                  )}
-                  {/* the separator trails its name so a wrapped line never starts with it */}
-                  {i < T.judges.length - 1 && <span aria-hidden="true" className="ml-4 text-anvil">/</span>}
-                </span>
-              ))}
-            </dd>
-          </div>
-
-          <div className="border-t border-anvil py-7">
-            <dt className="stamp text-steel">{c.scoring}</dt>
-            <dd className="mt-3">
-              <ul className="grid grid-cols-3 gap-4">
-                {T.criteria.map((k) => (
-                  <li key={k.es}>
-                    <p className="stencil text-[1.35rem] leading-none text-iron [--wdth:80]">{k[lang]}</p>
-                    {/* three rods: the most a criterion can score */}
-                    <span aria-hidden="true" data-heat="hot" className="mt-3 flex gap-1.5">
-                      {[0, 1, 2].map((n) => (
-                        <span key={n} className="heat-bar block h-1.5 flex-1 rounded-full" />
-                      ))}
-                    </span>
-                    <p className="readout mt-2 text-[0.6rem] text-steel">{c.points}</p>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-[0.95rem] leading-relaxed text-iron/75">{c.scoringNote}</p>
-            </dd>
-          </div>
-
           <div className="border-t border-anvil py-7 lg:border-b">
             <dt className="stamp text-steel">{c.making}</dt>
             <dd className="mt-3">
