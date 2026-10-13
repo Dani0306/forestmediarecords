@@ -32,10 +32,11 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow, con la canción creada en vivo frente al chat. Todas las fechas se transmiten por Kick en todos los canales.",
-    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. Every date streams on Kick, on all channels.",
+    es: "Seis streamers se enfrentan en tiraderas: barras, indirectas y flow, con la canción creada en vivo frente al chat. Todas las fechas se transmiten por Kick en todos los canales.",
+    en: "Six streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. Every date streams on Kick, on all channels.",
   },
-  players: 8,
+  /** Six since 2026-10-13: the two pending places were never filled, so the format changed (see `bracket`). */
+  players: 6,
   /**
    * Confirmed competitors (from the team, 2026-10-12). Fewer than `players`
    * means the rest are still to be announced: the UI fills the gap with
@@ -126,27 +127,27 @@ export const tiraderas = {
       },
     },
     {
-      eventId: "tiraderas-cuartos",
-      name: { es: "Cuartos de final", en: "Quarter-finals" },
+      eventId: "tiraderas-batallas",
+      name: { es: "Primera ronda · 1 vs 1", en: "First round · 1 vs 1" },
       body: {
-        es: "Cuatro enfrentamientos. Una ruleta virtual decide el orden y empieza la puntuación.",
-        en: "Four battles. A virtual wheel picks the order and the scoring begins.",
+        es: "Tres batallas uno contra uno. Una ruleta virtual decide el orden y empieza la puntuación. Los tres ganadores pasan al battle royale.",
+        en: "Three one-on-one battles. A virtual wheel picks the order and the scoring begins. The three winners move on to the battle royale.",
       },
     },
     {
-      eventId: "tiraderas-semifinal",
-      name: { es: "Semifinal", en: "Semi-final" },
+      eventId: "tiraderas-battle-royale",
+      name: { es: "Battle royale", en: "Battle royale" },
       body: {
-        es: "Los cuatro clasificados se enfrentan otra vez por un puesto en la gran final.",
-        en: "The four who advanced meet again for a place in the grand final.",
+        es: "Los tres ganadores se enfrentan entre ellos, los tres a la vez. Los dos mejores pasan a la gran final.",
+        en: "The three winners face each other, all three at once. The top two go through to the grand final.",
       },
     },
     {
       eventId: "tiraderas-final",
       name: { es: "Gran final", en: "Grand final" },
       body: {
-        es: "Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
-        en: "The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
+        es: "Los dos clasificados del battle royale, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
+        en: "The two who came through the battle royale, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
       },
     },
   ] as Round[],
@@ -168,18 +169,18 @@ export const tiraderas = {
       en: "They're written live so the chat sees the song take shape. A music video is optional.",
     },
   ],
-  /** Fill in as the competition runs; "" = not known yet. */
+  /**
+   * Format (2026-10-13): three 1 vs 1 battles → a battle royale between the
+   * three winners → a final between the top two of the royale.
+   * Fill in as the competition runs; "" = not known yet.
+   */
   bracket: {
-    quarterfinals: [
-      ["", ""],
+    battles: [
       ["", ""],
       ["", ""],
       ["", ""],
     ] as [string, string][],
-    semifinals: [
-      ["", ""],
-      ["", ""],
-    ] as [string, string][],
+    royale: ["", "", ""] as [string, string, string],
     final: ["", ""] as [string, string],
     champion: "",
   },

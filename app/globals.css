@@ -440,16 +440,28 @@ a {
 
 /* Mundial de Tiraderas bracket: anvil hairline connectors (columns sit 2rem apart);
    the final's line into the champion carries the heat of the final */
-.bracket-pair::after {
+/* three battles into one battle royale: a bracket from the first battle's
+   centre to the last's (column gap 0.75rem, so each centre sits at (100% - 1.5rem) / 6) */
+.bracket-trio::after {
   content: "";
   position: absolute;
   left: 100%;
-  top: 25%;
-  bottom: 25%;
+  top: calc((100% - 1.5rem) / 6);
+  bottom: calc((100% - 1.5rem) / 6);
   width: 1rem;
   border: 1px solid var(--color-anvil);
   border-left: 0;
   pointer-events: none;
+}
+/* a short hairline out of the right side: the middle battle, and the royale into the final */
+.bracket-stub::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: 1rem;
+  height: 1px;
+  background: var(--color-anvil);
 }
 .bracket-in-line::before {
   content: "";

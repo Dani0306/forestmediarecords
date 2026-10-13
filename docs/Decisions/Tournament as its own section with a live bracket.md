@@ -13,7 +13,7 @@ The team sent the full announcement for the Mundial de Tiraderas 2026 (five date
 
 ## Decision
 - Each round is a regular `stream` event in `data/events.ts` (`main: false`, 21:00, Kick), so the agenda, Kick list and streamer panel pick it up from one source.
-- The tournament gets its own section after the agenda ([[Mundial de Tiraderas]]): calendar heated by proximity, an 8-player bracket filled in as results come in, and rule-separated rows for judges, scoring, making and the winner's moment. Content lives in `data/tiraderas.ts`, linked to the events by id.
+- The tournament gets its own section after the agenda ([[Mundial de Tiraderas]]): calendar heated by proximity, a bracket filled in as results come in (8 players at first; 6 with a battle royale since [[Six-player format with a battle royale]]), and rule-separated rows for judges, scoring, making and the winner's moment. Content lives in `data/tiraderas.ts`, linked to the events by id.
 - No hero takeover: the rounds stay `main: false` so the artist video keeps the first screen.
 
 ## Consequences

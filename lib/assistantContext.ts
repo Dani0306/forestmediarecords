@@ -187,19 +187,22 @@ function kick() {
 
 function tiraderasInfo() {
   const b = T.bracket;
-  const drawn = b.quarterfinals.some(([x, y]) => x || y);
+  const drawn = b.battles.some(([x, y]) => x || y);
   return section(`${T.name} ${T.year} (torneo de tiraderas en Kick)`, [
     `- Qué es: torneo de ${T.host} con Forest Media Récords. ${T.intro.es}`,
     `- Participantes: ${T.players} streamers. Confirmados hasta ahora (nombre y canal de Kick): ${T.participants.map((p) => `${p.name} (${p.url})`).join(", ")}.${T.participants.length < T.players ? ` Faltan ${T.players - T.participants.length} por anunciar.` : ""}${drawn ? "" : " Los enfrentamientos se conocen en el sorteo."}`,
     `- Jueces (${T.judgeSeats}): ${T.judges.map((j) => `${j.name} (${j.url})`).join(", ")}${T.judges.length < T.judgeSeats ? `; ${T.judgeSeats - T.judges.length === 1 ? "el otro, por confirmar" : `${T.judgeSeats - T.judges.length} por confirmar`}` : ""}.`,
     `- Puntuación: ${T.criteria.map((k) => k.es).join(", ")}, de 1 a 3 puntos cada uno (hasta 9 por tiradera).`,
     `- Premio: ${formatCOP(T.prize.amount)} COP. ${T.prize.note.es}`,
+    "- Formato: tres batallas 1 vs 1; los tres ganadores van a un battle royale (los tres a la vez); los dos mejores del battle royale disputan la gran final.",
     `- Rondas (todas a las 9:00 p. m., hora de Medellín, por Kick en todos los canales; fechas exactas en la Agenda):`,
     ...T.rounds.map((r) => `  - ${r.name.es}: ${r.body.es}`),
     `- Momento del ganador: ${T.winnerMoment.es}`,
     `- Cómo se hacen las tiraderas: ${T.making.map((m) => m.es).join(" ")}`,
     drawn
-      ? `- Cuartos de final: ${b.quarterfinals.map(([x, y]) => `${x || "?"} vs ${y || "?"}`).join("; ")}.`
+      ? `- Primera ronda (1 vs 1): ${b.battles.map(([x, y]) => `${x || "?"} vs ${y || "?"}`).join("; ")}.` +
+        (b.royale.some(Boolean) ? ` Battle royale: ${b.royale.map((x) => x || "?").join(", ")}.` : "") +
+        (b.final.some(Boolean) ? ` Final: ${b.final.map((x) => x || "?").join(" vs ")}.` : "")
       : "- Los enfrentamientos aún no se han sorteado.",
     b.champion ? `- Campeón: ${b.champion}.` : "",
   ].filter(Boolean));
