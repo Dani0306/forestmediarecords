@@ -76,12 +76,18 @@ export const tiraderas = {
   ] as Participant[],
   /** Seats on the panel; fewer `judges` than this shows "Por confirmar" for the rest. */
   judgeSeats: 3,
-  /** From the team, 2026-10-13: Jaycol and LeoLugoLive; the third judge is still to be confirmed. */
+  /** From the team, 2026-10-13: Jaycol, Trianiss and LeoLugoLive (Trianiss and Leo reuse their streamer photos). */
   judges: [
     {
       name: "Jaycol",
       url: "https://kick.com/jaycol",
       photo: { src: "/juries/jaycol.avif", width: 447, height: 447, focus: "50% 55%" },
+    },
+    {
+      name: "Trianiss",
+      url: "https://kick.com/trianiss",
+      // triana1: frames him well square, and no sponsor backdrop behind him
+      photo: { src: "/triana/triana1.avif", width: 1600, height: 1066, focus: "45% 30%" },
     },
     {
       name: "LeoLugoLive",

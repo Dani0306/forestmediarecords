@@ -410,6 +410,16 @@ a {
   transform: scaleX(1);
 }
 
+/* judges sit two across on phones: an odd last judge takes the whole row as a wide card */
+@media (max-width: 639px) {
+  .judges > li:last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
+  .judges > li:last-child:nth-child(odd) .iron-photo {
+    aspect-ratio: 2 / 1;
+  }
+}
+
 /* artist social links: steel squares; hover or focus heats the edge and the mark to ember */
 .social-link {
   transition:

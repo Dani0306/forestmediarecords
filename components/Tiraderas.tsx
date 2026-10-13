@@ -225,7 +225,7 @@ export default function Tiraderas() {
             </div>
 
             {/* each confirmed judge links to their Kick channel; open seats until all are known */}
-            <ul className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-5 lg:col-span-8 lg:col-start-5 lg:row-span-2 lg:row-start-1">
+            <ul className="judges grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-5 lg:col-span-8 lg:col-start-5 lg:row-span-2 lg:row-start-1">
               {T.judges.slice(0, T.judgeSeats).map((j) => (
                 <Fighter key={j.url} p={j} label={c.channel} judge />
               ))}
