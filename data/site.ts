@@ -41,7 +41,7 @@ export const site = {
    */
   socials: [
     { id: "instagram", label: "Instagram", handle: "@forestmediarecords", url: "https://www.instagram.com/forestmediarecords/" },
-    { id: "youtube", label: "YouTube", handle: "", url: "" }, // TODO: YouTube channel URL
+    { id: "youtube", label: "YouTube", handle: "@forestmediarecords", url: "https://www.youtube.com/@forestmediarecords" },
     { id: "soundcloud", label: "SoundCloud", handle: "", url: "" }, // TODO: SoundCloud profile URL
   ] as SocialLink[],
 };

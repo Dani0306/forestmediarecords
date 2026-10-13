@@ -53,6 +53,13 @@ export type Trend = {
   sample?: boolean;
 };
 
+// the full Futuras Promesas sessions, uploaded to YouTube after each stream
+const FP3 = "https://www.youtube.com/watch?v=N9ULbUEwrAA";
+const FP2 = "https://www.youtube.com/watch?v=xcGN1dQ535c";
+// the winner cards go to the winner's own Instagram (same links as `winnerUrl` in data/kick.ts)
+const FP3_WINNER = "https://www.instagram.com/el2ble_b/";
+const FP2_WINNER = "https://www.instagram.com/jhanky.10/";
+
 export const trending: Trend[] = [
   // Futuras Promesas #3 (2026-10-07) leads: the latest edition
   {
@@ -77,7 +84,7 @@ export const trending: Trend[] = [
       en: "Futuras Promesas #3 winner poster: 2BLE B from Barranquilla, in front of the riverfront at night",
     },
     focus: "50% 30%",
-    href: site.kick.url,
+    href: FP3_WINNER,
   },
   {
     id: "lentino-estudio-grabando",
@@ -171,7 +178,7 @@ export const trending: Trend[] = [
       en: "Futuras Promesas #3 poster with the competing artists from Medellín, Bogotá and Barranquilla",
     },
     focus: "50% 28%",
-    href: site.kick.url,
+    href: FP3,
   },
   {
     id: "rs-estudio-sesion",
@@ -242,7 +249,7 @@ export const trending: Trend[] = [
       en: "Futuras Promesas #2 winner poster: Jhanky on a bicycle",
     },
     focus: "50% 40%",
-    href: site.kick.url,
+    href: FP2_WINNER,
   },
   {
     id: "futuras-promesas-2",
@@ -263,7 +270,7 @@ export const trending: Trend[] = [
       en: "Futuras Promesas #2 poster with the streaming session line-up",
     },
     focus: "50% 45%",
-    href: site.kick.url,
+    href: FP2,
   },
   // the one video loop, so the section keeps a playable piece
 ];

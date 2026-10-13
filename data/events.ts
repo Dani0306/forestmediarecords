@@ -99,7 +99,10 @@ export const events: ForgeEvent[] = [
     artists: [],
     start: "2026-11-06T21:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
-    image: "/leolugo/leolugo-portrait.avif",
+    // the team asked for Jaycol (judge) on this round, watched from his channel;
+    // jaycol-tall.avif is jaycol.avif over a soft mirror of its own bottom: the tall card shows him whole, face above the glass
+    image: "/juries/jaycol-tall.avif",
+    url: "https://kick.com/jaycol",
   },
   {
     id: "tiraderas-battle-royale",

@@ -6,7 +6,7 @@ import { editions } from "@/data/kick";
 import { hasKick, site } from "@/data/site";
 import { streamers } from "@/data/streamers";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
-import { ArrowUpRight, Broadcast } from "./icons";
+import { ArrowUpRight, Broadcast, Instagram } from "./icons";
 
 /**
  * Kick: the latest showcase leads (its posters, pinned like prints over a
@@ -126,9 +126,22 @@ export default function KickSection() {
                   <div className="flex items-baseline justify-between gap-6 border-t border-iron/15 py-5">
                     <dt className="stamp">{t.kick.winner}</dt>
                     <dd className="text-right">
-                      <span className="stencil block text-[clamp(2.5rem,4.5vw,3.75rem)] leading-none text-ember [--wdth:72]">
-                        {ed.winner}
-                      </span>
+                      {ed.winnerUrl ? (
+                        <a
+                          href={ed.winnerUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`${ed.winner} ${t.roster.on} Instagram`}
+                          className="stencil inline-flex items-start gap-2 text-[clamp(2.5rem,4.5vw,3.75rem)] leading-none text-ember [--wdth:72] hover:text-glow focus-visible:text-glow"
+                        >
+                          {ed.winner}
+                          <Instagram className="mt-1 size-5 shrink-0 text-iron/70" />
+                        </a>
+                      ) : (
+                        <span className="stencil block text-[clamp(2.5rem,4.5vw,3.75rem)] leading-none text-ember [--wdth:72]">
+                          {ed.winner}
+                        </span>
+                      )}
                       {ed.winnerFrom && (
                         <span className="readout mt-2 block text-[0.62rem] text-steel">{ed.winnerFrom}</span>
                       )}

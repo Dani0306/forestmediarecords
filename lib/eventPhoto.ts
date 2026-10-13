@@ -1,6 +1,7 @@
 import { artists } from "@/data/artists";
 import { streamers } from "@/data/streamers";
 import type { ForgeEvent } from "@/data/events";
+import { tiraderas } from "@/data/tiraderas";
 
 export type EventPhoto = {
   src: string;
@@ -23,6 +24,22 @@ export function eventPhoto(e: ForgeEvent): EventPhoto | undefined {
   for (const st of streamers) {
     const match = st.photos.find((p) => p.src === e.image);
     if (match) return match;
+  }
+  // Mundial de Tiraderas judges and competitors
+  // (a "-tall" version of a photo counts as that photo)
+  const judge = tiraderas.judges.find((j) => j.photo.src === e.image?.replace("-tall.", "."));
+  if (judge) {
+    return {
+      src: e.image,
+      alt: { es: `${judge.name}, juez del ${tiraderas.name}`, en: `${judge.name}, ${tiraderas.name} judge` },
+    };
+  }
+  const player = tiraderas.participants.find((p) => p.photo.src === e.image);
+  if (player) {
+    return {
+      src: e.image,
+      alt: { es: `${player.name}, competidor del ${tiraderas.name}`, en: `${player.name}, ${tiraderas.name} competitor` },
+    };
   }
   return { src: e.image, alt: { es: e.title.es, en: e.title.en } };
 }

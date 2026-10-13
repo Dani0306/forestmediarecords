@@ -73,9 +73,17 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
     return () => cancelAnimationFrame(raf);
   }, [playing]);
 
-  // in-page links name their section; others go to Kick
+  // in-page links name their section; outside links name where they go (YouTube, Instagram or Kick)
   const internalLabel = (href: string) =>
-    href === "#artistas" ? t.trending.artist : href.startsWith("#") ? t.trending.agenda : t.trending.open;
+    href === "#artistas"
+      ? t.trending.artist
+      : href.startsWith("#")
+        ? t.trending.agenda
+        : /youtube\.com|youtu\.be/.test(href)
+          ? t.trending.youtube
+          : /instagram\.com/.test(href)
+            ? t.trending.instagram
+            : t.trending.open;
 
   // "Ver avance" for clips, otherwise a link; labelled on the lead card, an icon on the rest
   const action = (size: string, labelled = false) => {

@@ -21,6 +21,9 @@ related:
 - Bottom plate: upcoming streams (from `data/events.ts`, heat-coloured dates) and the channel **`leolugolive`** with "Ir al canal". Every "Ver en Kick" action links to `https://kick.com/leolugolive`.
 - Channels: the supporting channel **`leolugolive`** first (logo), then the team's other Kick channels taken from `data/streamers.ts` (today **`trianiss`**, with his photo zoomed on the face). Artist channels were removed earlier.
 
+## Winner links
+The lead edition's winner name links to their Instagram when `winnerUrl` is set in `data/kick.ts` (Instagram mark beside it): 2BLE B → instagram.com/el2ble_b, Jhanky → instagram.com/jhanky.10 (2026-10-13).
+
 ## Open issues
 - [x] `leolugolive` is LeoLugoLive (Leonardo Lugo), see [[Streamers]]
 - [ ] Artist Kick channels, if any

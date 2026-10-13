@@ -19,6 +19,8 @@ export type KickEdition = {
   /** Date and time as printed on the poster. */
   when?: { es: string; en: string };
   winner?: string;
+  /** The winner's own profile (Instagram), linked from their name. */
+  winnerUrl?: string;
   /** Where the winner is from, when the poster says. */
   winnerFrom?: string;
   motto?: { es: string; en: string };
@@ -37,6 +39,7 @@ export const editions: KickEdition[] = [
     format: { es: "Sesión de streaming en Kick", en: "Streaming session on Kick" },
     when: { es: "7 de octubre · 9:00 PM", en: "October 7 · 9:00 PM" },
     winner: "2BLE B",
+    winnerUrl: "https://www.instagram.com/el2ble_b/",
     winnerFrom: "Barranquilla",
     motto: { es: "El talento también es del Caribe", en: "Talent is from the Caribbean too" },
     lineup: [], // TODO: competitors' names (not printed on the poster)
@@ -70,6 +73,7 @@ export const editions: KickEdition[] = [
     edition: "#2",
     format: { es: "Sesión de streaming en Kick", en: "Streaming session on Kick" },
     winner: "Jhanky",
+    winnerUrl: "https://www.instagram.com/jhanky.10/",
     motto: { es: "El talento también se premia", en: "Talent gets rewarded too" },
     lineup: ["Jhanky", "Kamerongray", "Superwil", "Vcelest", "Falo KLK"],
     posters: [

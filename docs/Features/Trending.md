@@ -19,7 +19,7 @@ related:
 - Items in `data/trending.ts`, ranked by order: the first takes the big slot. Rank colours the numeral by heat.
 - Media is a short loop (`kind: "video"`, WebM + poster) or a still (`kind: "image"`).
 - Videos play on hover (mouse), when centred in view (touch), or from the "Ver avance" button; under reduced motion only the button plays them. The heat line shows playback progress.
-- Items with `href` get a "Ver en Kick" link (Futuras Promesas #2).
+- Items with `href` get a link. The four Futuras Promesas cards (#3 and #2, winner and line-up) link to the full sessions on YouTube since 2026-10-13 (#3 `N9ULbUEwrAA`, #2 `xcGN1dQ535c`; constants `FP3`/`FP2` in `data/trending.ts`), labelled "Ver en YouTube"; the two winner cards go to the winner's Instagram instead ("Ver en Instagram": 2BLE B instagram.com/el2ble_b, Jhanky instagram.com/jhanky.10).
 - Details sit on a lean glass band so the picture keeps most of the card: the action is a 44px icon button beside the title (labelled only on the lead card on desktop), and the meta line is one line on the smaller cards. The photo grade is lighter than in the rest of the site (grayscale 85%, duotone 60%) and still heats to true colour on hover, focus or while a clip plays.
 
 ## Current items (2026-10-09)
@@ -34,7 +34,7 @@ related:
 
 After the lead three, cards run three across; a last row of two (or one) stretches to fill the width.
 
-Items with an `href` starting with `#` show "Ver en la agenda" and stay on the page; others open in a new tab ("Ver en Kick").
+Items with an `href` starting with `#` show "Ver en la agenda" and stay on the page; others open in a new tab, labelled "Ver en YouTube" for YouTube links and "Ver en Kick" otherwise (`t.trending.youtube` / `t.trending.open`).
 
 ## Open issues
 - [ ] Real artwork for the website launch (replace `public/events/lanzamiento-web.avif`, same name)
