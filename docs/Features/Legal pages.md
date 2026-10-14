@@ -12,15 +12,17 @@ related:
 
 # Legal pages
 
-**Code:** `app/privacidad/page.tsx`, `app/terminos/page.tsx`, `components/LegalPage.tsx`, `data/legal.ts`, `components/CookieBanner.tsx`
+**Code:** `app/privacidad/page.tsx`, `app/terminos/page.tsx`, `components/LegalPage.tsx`, `data/legal.ts`, `components/CookieBanner.tsx`, `components/SiteAnalytics.tsx`
 
 ## What it does
 - `/privacidad`: privacy policy written for Colombia (Ley 1581 de 2012, Decreto 1377 de 2013): controller, data collected (demos, bookings, browser preferences), purposes, cookies, sharing, rights, how to exercise them (10/15 business days), retention, security, minors, changes.
 - `/terminos`: site use, IP, demo submissions (artists keep their rights), studio bookings (COP, request until confirmed), external links, events, liability, Colombian law and Medellín courts.
 - Reading layout: sticky numbered contents, 68ch column, "Borrador · pendiente de revisión legal" tag while `legalMeta.draft` is true. Both languages.
-- **Cookie notice**: bottom plate until the visitor picks "Aceptar todas" or "Solo necesarias" (stored as `fmr-consent` in localStorage); "Preferencias de cookies" in the footer reopens it.
+- **Cookie notice**: bottom plate until the visitor picks "Aceptar todas" or "Solo necesarias" (stored as `fmr-consent` in localStorage); "Preferencias de cookies" in the footer reopens it. Every choice fires `fmr:consent` on window.
+- **Analytics**: Vercel Web Analytics loads only after "Aceptar todas" (see [[Analytics after cookie consent]]).
 
 ## Open issues
 - [ ] Lawyer review, then set `draft: false`
 - [ ] Company NIT and address (`legalMeta` in `data/legal.ts`)
-- [ ] Load analytics only after `choice === "all"` if analytics are added
+- [x] Load analytics only after `choice === "all"` (Vercel Web Analytics, 2026-10-13)
+- [ ] Enable Web Analytics in the Vercel dashboard

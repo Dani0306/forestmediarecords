@@ -6,6 +6,8 @@ import { useLang } from "@/lib/i18n";
 
 const KEY = "fmr-consent";
 export const OPEN_COOKIES = "fmr:cookies";
+/** Fired on window after the visitor makes (or changes) a choice. */
+export const CONSENT_CHANGED = "fmr:consent";
 
 type Consent = { choice: "all" | "necessary"; date: string };
 
@@ -22,7 +24,7 @@ export function readConsent(): Consent | null {
 /**
  * Cookie notice: a steel plate pinned to the bottom until the visitor chooses.
  * The footer's "Preferencias de cookies" reopens it (window event `fmr:cookies`).
- * TODO: load analytics only when `readConsent()?.choice === "all"`.
+ * Analytics (`SiteAnalytics`) loads only when `readConsent()?.choice === "all"`.
  */
 export default function CookieBanner() {
   const { t } = useLang();
@@ -42,6 +44,7 @@ export default function CookieBanner() {
     } catch {
       /* storage blocked: the choice holds for this visit */
     }
+    window.dispatchEvent(new Event(CONSENT_CHANGED));
     setOpen(false);
   };
 
