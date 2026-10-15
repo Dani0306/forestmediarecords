@@ -1,6 +1,6 @@
 ---
 type: decision
-status: accepted
+status: superseded
 date: 2026-10-13
 tags:
   - decision
@@ -11,6 +11,8 @@ related:
 ---
 
 # Six-player format with a battle royale
+
+> Superseded on 2026-10-14 by [[Eight-player bracket with a surprise entrant]].
 
 ## Context
 The [[Mundial de Tiraderas]] was announced for 8 streamers, but the last two places were never filled. The team changed the format (2026-10-13).

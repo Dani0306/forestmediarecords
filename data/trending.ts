@@ -1,5 +1,3 @@
-import { site } from "./site";
-
 /**
  * "En tendencia": the latest productions and projects, hottest first.
  * Order is rank: the first item takes the big slot.

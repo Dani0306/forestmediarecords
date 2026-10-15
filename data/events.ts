@@ -69,7 +69,7 @@ export const events: ForgeEvent[] = [
     poster: { width: 1254, height: 1254 },
     sample: false,
   },
-  // Mundial de Tiraderas 2026 (data/tiraderas.ts): every round 9 PM on Kick, all channels.
+  // Mundial de Tiraderas 2026 (data/tiraderas.ts): every round 8 PM (Colombia time) on Kick, all channels.
   // TODO: swap `image` for the official poster when it's ready.
   {
     id: "tiraderas-sorteo",
@@ -77,7 +77,7 @@ export const events: ForgeEvent[] = [
     main: false,
     title: { es: "Mundial de Tiraderas · Sorteo", en: "Mundial de Tiraderas · The draw" },
     artists: [],
-    start: "2026-10-16T21:00:00-05:00",
+    start: "2026-10-16T20:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     image: "/leolugo/leolugo-portrait.avif",
   },
@@ -87,17 +87,17 @@ export const events: ForgeEvent[] = [
     main: false,
     title: { es: "Mundial de Tiraderas · Face off", en: "Mundial de Tiraderas · Face off" },
     artists: [],
-    start: "2026-10-23T21:00:00-05:00",
+    start: "2026-10-23T20:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     image: "/triana/triana4.avif",
   },
   {
-    id: "tiraderas-batallas",
+    id: "tiraderas-cuartos",
     type: "stream",
     main: false,
-    title: { es: "Mundial de Tiraderas · Primera ronda", en: "Mundial de Tiraderas · First round" },
+    title: { es: "Mundial de Tiraderas · Cuartos de final", en: "Mundial de Tiraderas · Quarter-finals" },
     artists: [],
-    start: "2026-11-06T21:00:00-05:00",
+    start: "2026-11-06T20:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     // the team asked for Jaycol (judge) on this round, watched from his channel;
     // jaycol-tall.avif is jaycol.avif over a soft mirror of its own bottom: the tall card shows him whole, face above the glass
@@ -105,12 +105,12 @@ export const events: ForgeEvent[] = [
     url: "https://kick.com/jaycol",
   },
   {
-    id: "tiraderas-battle-royale",
+    id: "tiraderas-semifinal",
     type: "stream",
     main: false,
-    title: { es: "Mundial de Tiraderas · Battle royale", en: "Mundial de Tiraderas · Battle royale" },
+    title: { es: "Mundial de Tiraderas · Semifinal", en: "Mundial de Tiraderas · Semi-final" },
     artists: [],
-    start: "2026-11-13T21:00:00-05:00",
+    start: "2026-11-13T20:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     image: "/triana/triana2.avif",
   },
@@ -120,7 +120,7 @@ export const events: ForgeEvent[] = [
     main: false,
     title: { es: "Mundial de Tiraderas · Gran final", en: "Mundial de Tiraderas · Grand final" },
     artists: [],
-    start: "2026-11-21T21:00:00-05:00",
+    start: "2026-11-21T20:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     image: "/leolugo/leolugo-portrait.avif",
   },

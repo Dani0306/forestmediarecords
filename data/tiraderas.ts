@@ -32,11 +32,13 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Seis streamers se enfrentan en tiraderas: barras, indirectas y flow, con la canción creada en vivo frente al chat. Todas las fechas se transmiten por Kick en todos los canales.",
-    en: "Six streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. Every date streams on Kick, on all channels.",
+    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow, con la canción creada en vivo frente al chat. Todas las fechas son a las 8:00 p. m. (hora de Colombia) y se transmiten por Kick en todos los canales.",
+    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. Every date starts at 8:00 PM Colombia time (UTC−5) and streams on Kick, on all channels.",
   },
-  /** Six since 2026-10-13: the two pending places were never filled, so the format changed (see `bracket`). */
-  players: 6,
+  /** Eight since 2026-10-14: seven confirmed plus one surprise entrant revealed later (see `surprise`). */
+  players: 8,
+  /** The places left after `participants` are a surprise (revealed later), not "to be announced". */
+  surprise: true,
   /**
    * Confirmed competitors (from the team, 2026-10-12). Fewer than `players`
    * means the rest are still to be announced: the UI fills the gap with
@@ -46,8 +48,8 @@ export const tiraderas = {
     {
       name: "valedanyy07",
       url: "https://kick.com/valedanyy07",
-      // crop of valedanyy07.avif without the pixelated strip on its left edge
-      photo: { src: "/participants/valedanyy07-crop.avif", width: 524, height: 1280, focus: "50% 22%" },
+      // new photo from the team, 2026-10-14 (a landscape stream capture: focus keeps her face in the tall card)
+      photo: { src: "/participants/valedanyy07-1.avif", width: 606, height: 497, focus: "58% 30%" },
     },
     {
       name: "ElFerpo2",
@@ -73,6 +75,12 @@ export const tiraderas = {
       name: "Edisson",
       url: "https://kick.com/edisson",
       photo: { src: "/participants/Edisson.avif", width: 1200, height: 1600, focus: "50% 45%" },
+    },
+    {
+      // added 2026-10-14
+      name: "Cang5",
+      url: "https://kick.com/cang5",
+      photo: { src: "/participants/Cang5.avif", width: 1011, height: 1167, focus: "52% 45%" },
     },
   ] as Participant[],
   /** Seats on the panel; fewer `judges` than this shows "Por confirmar" for the rest. */
@@ -127,27 +135,27 @@ export const tiraderas = {
       },
     },
     {
-      eventId: "tiraderas-batallas",
-      name: { es: "Primera ronda · 1 vs 1", en: "First round · 1 vs 1" },
+      eventId: "tiraderas-cuartos",
+      name: { es: "Cuartos de final", en: "Quarter-finals" },
       body: {
-        es: "Tres batallas uno contra uno. Una ruleta virtual decide el orden y empieza la puntuación. Los tres ganadores pasan al battle royale.",
-        en: "Three one-on-one battles. A virtual wheel picks the order and the scoring begins. The three winners move on to the battle royale.",
+        es: "Cuatro batallas uno contra uno entre los ocho competidores. Una ruleta virtual decide el orden y empieza la puntuación. Las cuatro mejores tiraderas pasan a la semifinal.",
+        en: "Four one-on-one battles between the eight competitors. A virtual wheel picks the order and the scoring begins. The four best tiraderas go through to the semi-final.",
       },
     },
     {
-      eventId: "tiraderas-battle-royale",
-      name: { es: "Battle royale", en: "Battle royale" },
+      eventId: "tiraderas-semifinal",
+      name: { es: "Semifinal", en: "Semi-final" },
       body: {
-        es: "Los tres ganadores se enfrentan entre ellos, los tres a la vez. Los dos mejores pasan a la gran final.",
-        en: "The three winners face each other, all three at once. The top two go through to the grand final.",
+        es: "Los cuatro clasificados, en dos batallas. Los dos ganadores pasan a la gran final.",
+        en: "The four who went through, in two battles. The two winners go on to the grand final.",
       },
     },
     {
       eventId: "tiraderas-final",
       name: { es: "Gran final", en: "Grand final" },
       body: {
-        es: "Los dos clasificados del battle royale, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
-        en: "The two who came through the battle royale, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
+        es: "Los dos ganadores de la semifinal, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
+        en: "The two semi-final winners, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
       },
     },
   ] as Round[],
@@ -158,7 +166,10 @@ export const tiraderas = {
   },
   /** How a tiradera is made. */
   making: [
-    { es: "Se producen en BandLab.", en: "Produced in BandLab." },
+    {
+      es: "Cada competidor hace su tiradera como quiera.",
+      en: "Each competitor makes their tiradera however they like.",
+    },
     {
       es: "Con un beat de YouTube o uno propio; crear el beat suma en creatividad.",
       en: "On a YouTube beat or an original one; making your own beat helps on creativity.",
@@ -170,17 +181,20 @@ export const tiraderas = {
     },
   ],
   /**
-   * Format (2026-10-13): three 1 vs 1 battles → a battle royale between the
-   * three winners → a final between the top two of the royale.
-   * Fill in as the competition runs; "" = not known yet.
+   * Format (2026-10-14): eight competitors → four quarter-final battles →
+   * two semi-finals → the final. Fill in as the competition runs; "" = not known yet.
    */
   bracket: {
-    battles: [
+    quarterfinals: [
+      ["", ""],
       ["", ""],
       ["", ""],
       ["", ""],
     ] as [string, string][],
-    royale: ["", "", ""] as [string, string, string],
+    semifinals: [
+      ["", ""],
+      ["", ""],
+    ] as [string, string][],
     final: ["", ""] as [string, string],
     champion: "",
   },

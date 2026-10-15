@@ -32,7 +32,7 @@ function Fighter({ p, label, judge = false }: { p: Participant; label: string; j
             src={p.photo.src}
             alt=""
             fill
-            sizes={judge ? "(min-width: 1024px) 18rem, (min-width: 640px) 30vw, 50vw" : "(min-width: 1280px) 16vw, (min-width: 640px) 32vw, 50vw"}
+            sizes={judge ? "(min-width: 1024px) 18rem, (min-width: 640px) 30vw, 50vw" : "(min-width: 1280px) 12vw, (min-width: 640px) 24vw, 50vw"}
             className="object-cover"
             style={{ objectPosition: p.photo.focus ?? "50% 30%" }}
           />
@@ -60,10 +60,13 @@ function OpenSlot({
   label,
   aspect = "aspect-[3/2] sm:aspect-[3/4]",
   className,
+  surprise = false,
 }: {
   label: string;
   aspect?: string;
   className?: string;
+  /** A surprise entrant (known, revealed later): the "?" glows instead of sitting cold. */
+  surprise?: boolean;
 }) {
   return (
     <li aria-label={label} className={className}>
@@ -71,7 +74,7 @@ function OpenSlot({
         aria-hidden="true"
         className={`flex ${aspect} items-center justify-center rounded-[3px] border border-anvil bg-[repeating-linear-gradient(135deg,transparent_0_10px,rgb(42_45_49/0.35)_10px_11px)]`}
       >
-        <span className="stencil text-[3.5rem] leading-none text-anvil [--wdth:66]">?</span>
+        <span className={`stencil text-[3.5rem] leading-none [--wdth:66] ${surprise ? "text-ember" : "text-anvil"}`}>?</span>
       </div>
       <p aria-hidden="true" className="readout mt-3 text-[0.62rem] text-steel">
         {label}
@@ -106,8 +109,8 @@ function Slot({ name, empty }: { name: string; empty: string }) {
   );
 }
 
-/** A battle: two slots for a 1 vs 1, three for the battle royale (`foot` adds a line under them). */
-function Match({ names, empty, foot }: { names: string[]; empty: string; foot?: React.ReactNode }) {
+/** A battle: two slots, one per competitor. */
+function Match({ names, empty }: { names: string[]; empty: string }) {
   return (
     <div
       className={`relative w-full rounded-[3px] border bg-forge ${names.some(Boolean) ? "border-steel/40" : "border-anvil"}`}
@@ -115,7 +118,6 @@ function Match({ names, empty, foot }: { names: string[]; empty: string; foot?: 
       {names.map((n, i) => (
         <Slot key={i} name={n} empty={empty} />
       ))}
-      {foot}
     </div>
   );
 }
@@ -152,10 +154,10 @@ export default function Tiraderas() {
   const next = nextIdx >= 0 ? rounds[nextIdx] : undefined;
 
   const byId = (id: string) => rounds.find((r) => r.eventId === id)?.e;
-  const r1 = byId("tiraderas-batallas");
-  const br = byId("tiraderas-battle-royale");
+  const qf = byId("tiraderas-cuartos");
+  const sf = byId("tiraderas-semifinal");
   const fin = byId("tiraderas-final");
-  const drawn = T.bracket.battles.some(([a, b]) => a || b);
+  const drawn = T.bracket.quarterfinals.some(([a, b]) => a || b);
   const b = T.bracket;
 
   return (
@@ -269,17 +271,25 @@ export default function Tiraderas() {
               <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="stamp text-steel">{c.lineup}</h3>
                 <p className="readout text-[0.62rem] text-iron/70">
-                  {T.participants.length < T.players
-                    ? `${T.participants.length} / ${T.players} ${c.announced}`
-                    : `${T.players} streamers`}
+                  {T.participants.length >= T.players
+                    ? `${T.players} streamers`
+                    : T.surprise
+                      ? `${T.participants.length} + ${T.players - T.participants.length} ${c.surpriseCount}`
+                      : `${T.participants.length} / ${T.players} ${c.announced}`}
                 </p>
               </div>
-              <ul className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-4 xl:grid-cols-6">
+              <ul className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-4 sm:gap-x-4 xl:grid-cols-8">
                 {T.participants.slice(0, T.players).map((p) => (
                   <Fighter key={p.url} p={p} label={c.channel} />
                 ))}
                 {Array.from({ length: Math.max(0, T.players - T.participants.length) }, (_, i) => (
-                  <OpenSlot key={i} label={c.toAnnounce} />
+                  <OpenSlot
+                    key={i}
+                    label={T.surprise ? c.surprise : c.toAnnounce}
+                    surprise={T.surprise}
+                    // a surprise sits beside a face card, so it keeps the same 3:4 frame on phones too
+                    aspect={T.surprise ? "aspect-[3/4]" : undefined}
+                  />
                 ))}
               </ul>
             </div>
@@ -329,7 +339,7 @@ export default function Tiraderas() {
                       <p className="mt-2 text-[0.95rem] leading-relaxed text-iron/75">{r.body[lang]}</p>
                       <p className="readout mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.62rem] text-steel">
                         <span>
-                          {d.weekday} · {d.time} · {r.e.place[lang]}
+                          {d.weekday} · {d.time} {c.tz} · {r.e.place[lang]}
                         </span>
                         {h === "live" ? (
                           <span style={{ color: "var(--h)" }}>{t.heat.live}</span>
@@ -351,7 +361,7 @@ export default function Tiraderas() {
             </ol>
           </div>
 
-          {/* the bracket: 3 battles → battle royale → final → champion, filled in as the rounds run */}
+          {/* the bracket: quarter-finals → semi-finals → final → champion, filled in as the rounds run */}
           <div className="lg:col-span-7">
             <div className="forge-in plate rounded-[3px] border border-anvil p-5 sm:p-6 lg:sticky lg:top-24">
               <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -363,34 +373,29 @@ export default function Tiraderas() {
               <div className="-mx-5 overflow-x-auto px-5 pb-2 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
                 <div className="bracket grid min-w-[40rem] grid-cols-4 gap-x-8">
                   <div className="flex flex-col">
-                    <StageHead label={c.stages.battles} e={r1} heat={heat(r1)} lang={lang} />
-                    {/* three 1 vs 1 battles, bracketed into the battle royale */}
-                    <div className="bracket-trio relative flex flex-1 flex-col gap-3">
-                      {b.battles.map((pair, m) => (
-                        <div key={m} className={`relative flex flex-1 items-center ${m === 1 ? "bracket-stub" : ""}`}>
-                          <Match names={pair} empty={drawn ? c.tbdLater : c.tbd} />
+                    <StageHead label={c.stages.quarterfinals} e={qf} heat={heat(qf)} lang={lang} />
+                    {/* four battles, bracketed two by two into the semi-finals */}
+                    <div className="flex flex-1 flex-col gap-3">
+                      {[0, 1].map((p) => (
+                        <div key={p} className="bracket-pair relative flex flex-1 flex-col gap-3">
+                          {[0, 1].map((m) => (
+                            <div key={m} className="flex flex-1 items-center">
+                              <Match names={b.quarterfinals[p * 2 + m]} empty={drawn ? c.tbdLater : c.tbd} />
+                            </div>
+                          ))}
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex flex-col" data-heat={heat(br)}>
-                    <StageHead label={c.stages.royale} e={br} heat={heat(br)} lang={lang} />
-                    {/* the three winners at once; two go through */}
-                    <div className="bracket-in-line bracket-stub relative flex flex-1 items-center">
-                      <Match
-                        names={b.royale}
-                        empty={c.tbdLater}
-                        foot={
-                          <p className="readout flex items-center gap-2 border-t border-anvil px-3 py-2 text-[0.58rem] text-iron/80">
-                            <span aria-hidden="true" className="flex gap-1">
-                              <span className="heat-bar block h-1.5 w-3 rounded-full" />
-                              <span className="heat-bar block h-1.5 w-3 rounded-full" />
-                            </span>
-                            {c.advance}
-                          </p>
-                        }
-                      />
+                  <div className="flex flex-col">
+                    <StageHead label={c.stages.semifinals} e={sf} heat={heat(sf)} lang={lang} />
+                    <div className="bracket-pair relative flex flex-1 flex-col gap-3">
+                      {b.semifinals.map((pair, m) => (
+                        <div key={m} className="bracket-in-line relative flex flex-1 items-center">
+                          <Match names={pair} empty={c.tbdLater} />
+                        </div>
+                      ))}
                     </div>
                   </div>
 
