@@ -111,7 +111,7 @@ export const tiraderas = {
     { es: "Creatividad", en: "Creativity" },
   ],
   prize: {
-    amount: 100_000,
+    amount: 500_000,
     note: {
       es: "Lo aporta LeoLugoLive desde el fondo de inversión de Forest Media Récords. Y puede haber premios sorpresa.",
       en: "Put up by LeoLugoLive from the Forest Media Récords investment fund. Surprise prizes may also appear.",
