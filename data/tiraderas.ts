@@ -122,8 +122,8 @@ export const tiraderas = {
       eventId: "tiraderas-sorteo",
       name: { es: "Sorteo", en: "The draw" },
       body: {
-        es: "Una ruleta física define los enfrentamientos. Ese día se conocen los cruces, las fechas de cada ronda y los premios.",
-        en: "A physical wheel sets the match-ups. That day we learn the pairings, the date of each round and the prizes.",
+        es: "El sorteo se hace con papeles, no con una ruleta física, y define los enfrentamientos. Ese día se conocen los cruces, las fechas de cada ronda y los premios.",
+        en: "The draw is done with slips of paper, not a physical wheel, and sets the match-ups. That day we learn the pairings, the date of each round and the prizes.",
       },
     },
     {
