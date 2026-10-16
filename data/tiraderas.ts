@@ -46,10 +46,10 @@ export const tiraderas = {
    */
   participants: [
     {
-      name: "valedanyy07",
-      url: "https://kick.com/valedanyy07",
-      // new photo from the team, 2026-10-14 (a landscape stream capture: focus keeps her face in the tall card)
-      photo: { src: "/participants/valedanyy07-1.avif", width: 606, height: 497, focus: "58% 30%" },
+      // replaced valedanyy07 on 2026-10-16
+      name: "Carlogato",
+      url: "https://kick.com/carlogato",
+      photo: { src: "/participants/carlogato.avif", width: 1034, height: 1379, focus: "50% 38%" },
     },
     {
       name: "ElFerpo2",
