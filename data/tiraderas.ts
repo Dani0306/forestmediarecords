@@ -35,10 +35,10 @@ export const tiraderas = {
     es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow, con la canción creada en vivo frente al chat. Todas las fechas son a las 8:00 p. m. (hora de Colombia) y se transmiten por Kick en todos los canales.",
     en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. Every date starts at 8:00 PM Colombia time (UTC−5) and streams on Kick, on all channels.",
   },
-  /** Eight since 2026-10-14: seven confirmed plus one surprise entrant revealed later (see `surprise`). */
+  /** Eight since 2026-10-14; all eight confirmed on 2026-10-16 (the eighth was a surprise until then). */
   players: 8,
-  /** The places left after `participants` are a surprise (revealed later), not "to be announced". */
-  surprise: true,
+  /** True while a place is a surprise (revealed later) instead of "to be announced". Off since 2026-10-16: all eight are known. */
+  surprise: false,
   /**
    * Confirmed competitors (from the team, 2026-10-12). Fewer than `players`
    * means the rest are still to be announced: the UI fills the gap with
@@ -81,6 +81,12 @@ export const tiraderas = {
       name: "Cang5",
       url: "https://kick.com/cang5",
       photo: { src: "/participants/Cang5.avif", width: 1011, height: 1167, focus: "52% 45%" },
+    },
+    {
+      // the eighth, revealed 2026-10-16
+      name: "Pablomeji4",
+      url: "https://kick.com/pablomeji4",
+      photo: { src: "/participants/Pablomeji4.avif", width: 1179, height: 1268, focus: "45% 35%" },
     },
   ] as Participant[],
   /** Seats on the panel; fewer `judges` than this shows "Por confirmar" for the rest. */
