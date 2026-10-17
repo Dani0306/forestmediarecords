@@ -17,7 +17,7 @@ A day after the [[Six-player format with a battle royale]], the team confirmed a
 
 ## Decision
 - Eight players: **quarter-finals** (four 1 vs 1 battles; the four best tiraderas go through) → **semi-final** (two battles) → **final**. No battle royale.
-- Same dates as before: quarter-finals 6 Nov, semi-final 13 Nov, final 21 Nov. Every round now starts at **8:00 p. m. Colombia time** (was 9:00). Event ids are `tiraderas-cuartos` and `tiraderas-semifinal` again.
+- Same dates as before: quarter-finals 6 Nov, semi-final 13 Nov, final 21 Nov. The draw is at **8:00 p. m. Colombia time** (was 9:00) and, from 2026-10-16, every later round at **7:00 p. m.**. Event ids are `tiraderas-cuartos` and `tiraderas-semifinal` again.
 - `surprise: true` in `data/tiraderas.ts` marks the open place as a surprise: an ember "?" card, "Sorpresa · se revela pronto", and the readout "7 + 1 sorpresa". The chat assistant says the eighth is a surprise and doesn't guess who.
 - The tiradera-making rules no longer require BandLab: each competitor makes theirs however they like.
 

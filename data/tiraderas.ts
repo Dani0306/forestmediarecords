@@ -32,8 +32,8 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow, con la canción creada en vivo frente al chat. Todas las fechas son a las 8:00 p. m. (hora de Colombia) y se transmiten por Kick en todos los canales.",
-    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. Every date starts at 8:00 PM Colombia time (UTC−5) and streams on Kick, on all channels.",
+    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow, con la canción creada en vivo frente al chat. El sorteo es a las 8:00 p. m. y el resto de las fechas, a las 7:00 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
+    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. The draw is at 8:00 PM and every other date at 7:00 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
   /** Eight since 2026-10-14; all eight confirmed on 2026-10-16 (the eighth was a surprise until then). */
   players: 8,
@@ -191,11 +191,12 @@ export const tiraderas = {
    * two semi-finals → the final. Fill in as the competition runs; "" = not known yet.
    */
   bracket: {
+    // drawn with slips of paper on 2026-10-16
     quarterfinals: [
-      ["", ""],
-      ["", ""],
-      ["", ""],
-      ["", ""],
+      ["Cang5", "Pablomeji4"],
+      ["Edisson", "Carlogato"],
+      ["Cuartiz", "ElFerpo2"],
+      ["Emvy_29", "soyjosema"],
     ] as [string, string][],
     semifinals: [
       ["", ""],
