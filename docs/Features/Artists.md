@@ -32,7 +32,8 @@ Section title "Nuestros Artistas". One artist at a time:
 - Genres and "En Forest desde" are **por confirmar** (the note "9/10/2018" from the team is unclear: start in music or date he joined?). The stage shows "Por confirmar" when `genres` is empty.
 
 ## Open issues
-- [ ] Nikosan: genres he produces; what "9/10/2018" refers to; Spotify/YouTube
+- [x] Nikosan genres: Rap, BoomBap, Trap, Drumless (2026-10-17)
+- [ ] Nikosan: what "9/10/2018" refers to; Spotify/YouTube
 - [ ] Higher-resolution photos of Lowkey (738 px wide; the first is a 445 px tall crop)
 - [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`): Lentino done 2026-10-10 (Spotify, YouTube @lenttino; links Instagram lenttino, TikTok @lenttino_, X @lentinolr, Threads @lenttino); RS el Italiano done 2026-10-10 (Spotify artist 4EZilV2kRfc5pkbaCb7eDn, YouTube @rs.italiano; links Instagram rselitaliano, TikTok @rs_italiano, Facebook RS.ITALIANO, Threads @rselitaliano); Lowkey and Nikosan pending
 - [ ] RS el Italiano bio and facts are mock-ups

@@ -298,7 +298,7 @@ export const artists: Artist[] = [
         es: "Beatmaker y productor musical",
         en: "Beatmaker and music producer",
       },
-      genres: [], // TODO: genres he produces
+      genres: ["Rap", "BoomBap", "Trap", "Drumless"],
       city: "San Javier, Medellín",
       since: "2026", // TODO: confirm what 9/10/2018 refers to (start in music? joined Forest?)
       bio: {
