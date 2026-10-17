@@ -291,7 +291,7 @@ export const artists: Artist[] = [
         },
       },
     ],
-    links: [],
+    links: [{ platform: "instagram", url: "https://www.instagram.com/nicolozanoo_/" }],
     listen: { spotify: "", youtube: "" },
     profile: {
       role: {

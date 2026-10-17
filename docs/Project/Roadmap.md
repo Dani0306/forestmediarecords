@@ -21,7 +21,7 @@ tags:
 - [ ] Legal review of [[Legal pages]]; NIT and address
 - [ ] Spotify / YouTube links per artist (`listen` in `data/artists.ts`)
 - [x] Real **artist profiles and bios**: all four artists (2026-10-09); pending: join year for RS el Italiano and Nikosan
-- [ ] **Social links**: label Instagram done (2026-10-07); YouTube and SoundCloud URLs pending; artist socials pending ([[Follow us]])
+- [ ] **Social links**: label Instagram done (2026-10-07); YouTube done (2026-10-13); SoundCloud URL pending; artist socials: Lentino, RS el Italiano and Nikosan (Instagram, 2026-10-17) done, Lowkey pending ([[Follow us]])
 - [x] Images of the Kick channel that supports the company: Futuras Promesas posters and LeoLugoLive photo (2026-10-06)
 
 ## Fixes and polish
