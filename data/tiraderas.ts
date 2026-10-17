@@ -15,6 +15,8 @@ export type Round = {
   eventId: string;
   name: { es: string; en: string };
   body: { es: string; en: string };
+  /** Recording of the round on YouTube, once it exists. */
+  watchUrl?: string;
 };
 
 /** A confirmed competitor: Kick name, channel and photo (`public/participants/`). */
@@ -32,8 +34,8 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow, con la canción creada en vivo frente al chat. El sorteo es a las 8:00 p. m. y el resto de las fechas, a las 7:00 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
-    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow, with each song made live in front of the chat. The draw is at 8:00 PM and every other date at 7:00 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
+    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow. El sorteo es a las 8:00 p. m. y el resto de las fechas, a las 7:00 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
+    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow. The draw is at 8:00 PM and every other date at 7:00 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
   /** Eight since 2026-10-14; all eight confirmed on 2026-10-16 (the eighth was a surprise until then). */
   players: 8,
@@ -110,7 +112,7 @@ export const tiraderas = {
       photo: { src: "/leolugo/leolugo-portrait.avif", width: 738, height: 1095, focus: "50% 22%" },
     },
   ] as Judge[],
-  /** Each tiradera is scored 1–3 on every criterion. */
+  /** What each tiradera is scored on. */
   criteria: [
     { es: "Letra", en: "Lyrics" },
     { es: "Ritmo", en: "Rhythm" },
@@ -119,14 +121,15 @@ export const tiraderas = {
   prize: {
     amount: 500_000,
     note: {
-      es: "Lo aporta LeoLugoLive desde el fondo de inversión de Forest Media Récords. Y puede haber premios sorpresa.",
-      en: "Put up by LeoLugoLive from the Forest Media Récords investment fund. Surprise prizes may also appear.",
+      es: "Lo aporta LeoLugoLive desde el fondo de inversión de Forest Media Récords.",
+      en: "Put up by LeoLugoLive from the Forest Media Récords investment fund.",
     },
   },
   rounds: [
     {
       eventId: "tiraderas-sorteo",
       name: { es: "Sorteo", en: "The draw" },
+      watchUrl: "https://youtu.be/bVALI_U5n5g",
       body: {
         es: "El sorteo se hace con papeles, no con una ruleta física, y define los enfrentamientos. Ese día se conocen los cruces, las fechas de cada ronda y los premios.",
         en: "The draw is done with slips of paper, not a physical wheel, and sets the match-ups. That day we learn the pairings, the date of each round and the prizes.",
@@ -165,11 +168,6 @@ export const tiraderas = {
       },
     },
   ] as Round[],
-  /** After every scored battle the winner gets this moment. */
-  winnerMoment: {
-    es: "Cada ganador tiene 3 minutos en Discord con la cámara prendida: hablarle al público, celebrar con el chat y decirle al rival «te gané».",
-    en: "Every winner gets 3 minutes on Discord with the camera on: talk to the audience, celebrate with the chat and tell the rival “I beat you”.",
-  },
   /** How a tiradera is made. */
   making: [
     {
@@ -181,10 +179,7 @@ export const tiraderas = {
       en: "On a YouTube beat or an original one; making your own beat helps on creativity.",
     },
     { es: "Duran de 3 a 8 minutos.", en: "They run 3 to 8 minutes." },
-    {
-      es: "Se crean en directo, para que el chat vea cómo nace la canción. El videoclip es opcional.",
-      en: "They're written live so the chat sees the song take shape. A music video is optional.",
-    },
+    { es: "El videoclip es opcional.", en: "A music video is optional." },
   ],
   /**
    * Format (2026-10-14): eight competitors → four quarter-final battles →
