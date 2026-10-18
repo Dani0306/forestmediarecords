@@ -5,7 +5,7 @@ import Image from "next/image";
 import { site } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { OPEN_COOKIES } from "./CookieBanner";
-import { ArrowUpRight, Instagram, LinkedIn, Mail } from "./icons";
+import { ArrowUpRight, Globe, Instagram, LinkedIn, Mail } from "./icons";
 
 export default function SiteFooter() {
   const { t } = useLang();
@@ -53,6 +53,18 @@ export default function SiteFooter() {
             </div>
           </div>
           <ul className="flex gap-2 sm:shrink-0">
+            <li>
+              <a
+                href={c.website}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${t.footer.creditSite} ${c.name}: ${c.website.replace(/^https?:\/\//, "")}`}
+                title={c.website.replace(/^https?:\/\//, "")}
+                className="social-link grid size-11 place-items-center rounded-[3px] border border-iron/25 bg-forge/60 text-iron"
+              >
+                <Globe className="size-5" />
+              </a>
+            </li>
             {c.links.map((l) => {
               const Icon = l.platform === "instagram" ? Instagram : LinkedIn;
               return (

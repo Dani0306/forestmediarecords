@@ -145,6 +145,13 @@ export const LinkedIn = (p: P) => (
   </svg>
 );
 
+export const Globe = (p: P) => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5Z" />
+  </svg>
+);
+
 export const Mail = (p: P) => (
   <svg {...base} strokeLinejoin="round" {...p}>
     <rect x="3" y="5.5" width="18" height="13" rx="2" />

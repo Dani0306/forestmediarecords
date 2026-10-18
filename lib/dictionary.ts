@@ -387,6 +387,7 @@ const es = {
     credit: "Diseño y desarrollo",
     creditLine: "Desarrollador de software oficial de Forest Media Récords",
     creditOn: "en",
+    creditSite: "Sitio web de",
     creditMail: "Escribirle a",
   },
 };
@@ -773,6 +774,7 @@ const en: Dict = {
     credit: "Design & development",
     creditLine: "Official software developer at Forest Media Récords",
     creditOn: "on",
+    creditSite: "Website of",
     creditMail: "Email",
   },
 };

@@ -23,6 +23,7 @@ export const site = {
     role: "Digital Product & Operations Director",
     unit: "Digital Systems & Software",
     email: "danielcolorado.dev@gmail.com",
+    website: "https://danielcolorado.dev",
     links: [
       { platform: "instagram", label: "Instagram", url: "https://www.instagram.com/daniel1colorado1/" },
       { platform: "linkedin", label: "LinkedIn", url: "https://www.linkedin.com/in/daniel-colorado-774b632b1/" },
