@@ -244,6 +244,19 @@ function contact() {
   ]);
 }
 
+/** Who built the site: from `site.credits` (the maker's mark in the footer). */
+function developer() {
+  const c = site.credits;
+  return section("Quién desarrolló este sitio web", [
+    `- El diseño y desarrollo del sitio es de ${c.name}, ${es.footer.creditLine}.`,
+    `- Cargo: ${c.role}. Área: ${c.unit}.`,
+    `- Su sitio web: ${c.website}`,
+    `- Su correo: ${c.email}`,
+    ...c.links.map((l) => `- ${l.label}: ${l.url}`),
+    "- Si preguntan por quién hizo la página, quién es el desarrollador o cómo contactarlo para un proyecto, responde con estos datos. Para consultas sobre la compañía (artistas, estudio, eventos) usa el contacto del equipo, no el suyo.",
+  ]);
+}
+
 /* ── changing part ──────────────────────────────────────────── */
 
 function eventLine(e: ForgeEvent, now: number) {
@@ -292,6 +305,7 @@ export function buildAssistantContext(now: Date = new Date()) {
     tiraderasInfo(),
     studio(),
     demos(),
+    developer(),
     contact(),
     // changes on every request: keep it last so the part above can be cached
     section("Fecha y hora actual", [`Hoy es ${fmtDate(ms)}, ${fmtTime(ms)} (hora de Medellín).`]),
