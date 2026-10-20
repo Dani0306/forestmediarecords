@@ -480,8 +480,8 @@ export default function Hero() {
       {/* background: artist loop */}
       <video
         ref={video}
-        className="hero-zoom absolute inset-0 size-full object-cover object-[60%_30%] lg:object-[52%_40%]"
-        poster="/videoloop-renzo-poster.webp"
+        className="hero-zoom absolute inset-0 size-full object-cover object-[50%_30%] lg:object-[52%_40%]"
+        poster="/videoloop-hero-2-poster.webp"
         muted
         loop
         playsInline
@@ -491,8 +491,8 @@ export default function Hero() {
         tabIndex={-1}
       >
         {/* MP4 (H.264) first: iPhones can't play these WebM files */}
-        <source src="/videoloop-renzo.mp4" type="video/mp4" />
-        <source src="/videoloop-renzo.webm" type="video/webm" />
+        <source src="/videoloop-hero-2.mp4" type="video/mp4" />
+        <source src="/videoloop-hero-2.webm" type="video/webm" />
       </video>
       {/* scrims keep the type legible without hiding the artist */}
       <div

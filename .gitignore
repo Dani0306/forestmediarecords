@@ -45,3 +45,6 @@ next-env.d.ts
 docs/.obsidian/workspace*.json
 docs/.obsidian/cache
 docs/.trash/
+
+# ad videos (large; kept locally, not part of the site)
+/marketing/

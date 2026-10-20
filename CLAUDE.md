@@ -49,7 +49,7 @@ Marketing and information site for **Forest Media Récords**, a music production
 - Streamers (`data/streamers.ts`): LeoLugoLive (Leonardo Lugo, kick.com/leolugolive) in `public/leolugo/` (`leolugo-portrait.avif` is the crop of the screenshot `leolugo1.avif`) and Trianiss (Daniel Triana, kick.com/trianiss) in `public/triana/triana.avif`. Both profiles are real (from the team).
 - Trending clips: `public/trending/clip-01.webm`, `clip-02.webm` (4–5 s cuts of `videoloop.webm`, ~400 KB each) with `.webp` poster frames (sidecar `.webp.json` records the origin), described in `data/trending.ts`.
 - Videos ship as **two files**: an H.264 MP4 (`-movflags +faststart`, yuv420p; iPhones only play this) listed first, and the WebM as fallback. Encode MP4s with ffmpeg (installed via Homebrew 2026-10-09).
-- Hero video: `videoloop-renzo.mp4` + `videoloop-renzo.webm` (RS el Italiano in the studio, 1280×960, ~0.8 MB, cut from the original `public/trending/renzoclip.webm`), poster `videoloop-renzo-poster.webp`. The older `videoloop-web.webm` / `videoloop.webm` are unused.
+- Hero video (since 2026-10-20): `videoloop-hero-2.mp4` + `videoloop-hero-2.webm` (RS el Italiano in the studio, 1024×576, 16.6 s, no audio, ~1 MB and ~0.8 MB, encoded from the team's `public/poster1.webm`), poster `videoloop-hero-2-poster.webp`. The older `videoloop-renzo.*`, `videoloop-web.webm` and `videoloop.webm` are unused.
 
 ## Content rules
 
