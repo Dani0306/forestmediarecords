@@ -22,7 +22,8 @@ related:
 - Items with `href` get a link. The four Futuras Promesas cards (#3 and #2, winner and line-up) link to the full sessions on YouTube since 2026-10-13 (#3 `N9ULbUEwrAA`, #2 `xcGN1dQ535c`; constants `FP3`/`FP2` in `data/trending.ts`), labelled "Ver en YouTube"; the two winner cards go to the winner's Instagram instead ("Ver en Instagram": 2BLE B instagram.com/el2ble_b, Jhanky instagram.com/jhanky.10).
 - Details sit on a lean glass band so the picture keeps most of the card: the action is a 44px icon button beside the title (labelled only on the lead card on desktop), and the meta line is one line on the smaller cards. The photo grade is lighter than in the rest of the site (grayscale 85%, duotone 60%) and still heats to true colour on hover, focus or while a clip plays.
 
-## Current items (2026-10-09)
+## Current items (2026-10-21)
+- Added 2026-10-21 (slot 2): **Lentino graba su nueva canción** (video `trending/lentino-nueva-cancion.mp4`/`.webm`, 8 s cut of the team's `poster1.webm`, 1024×576; meta "Nueva canción muy pronto", no release date given). The older "Lentino en el estudio" card (`lentino.webm`) stays right after it. The list below is the 2026-10-09 order.
 1. 2BLE B gana Futuras Promesas #3 (poster)
 2. RS el Italiano en el estudio (video `trending/renzo-estudio-01.webm`, 6 s, from `renzoclip.webm`)
 3. Nikosan llega a Forest Media Récords (`nicocol/nico1.avif`, links to the artists section: "Conocer al artista")

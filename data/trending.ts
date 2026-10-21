@@ -85,6 +85,31 @@ export const trending: Trend[] = [
     href: FP3_WINNER,
   },
   {
+    id: "lentino-nueva-cancion",
+    kind: "studio",
+    title: {
+      es: "Lentino graba su nueva canción",
+      en: "Lentino records his new song",
+    },
+    meta: {
+      es: "Nueva canción muy pronto · Forest Media Récords",
+      en: "Coming soon · Forest Media Récords",
+    },
+    media: {
+      kind: "video",
+      src: "/trending/lentino-nueva-cancion.webm",
+      mp4: "/trending/lentino-nueva-cancion.mp4",
+      poster: "/trending/lentino-nueva-cancion.webp",
+      width: 1024,
+      height: 576,
+    },
+    alt: {
+      es: "Lentino en el estudio durante la grabación de su nueva canción, con luz azul y una pared de piedra al fondo",
+      en: "Lentino in the studio recording his new song, under blue light with a stone wall behind him",
+    },
+    focus: "40% 30%",
+  },
+  {
     id: "lentino-estudio-grabando",
     kind: "studio",
     title: {
