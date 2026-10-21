@@ -84,6 +84,31 @@ export const trending: Trend[] = [
     focus: "50% 30%",
     href: FP3_WINNER,
   },
+  // the Mundial de Tiraderas draw (2026-10-16, on Leo's Kick channel; full video on YouTube)
+  {
+    id: "sorteo-mundial-tiraderas",
+    kind: "live",
+    title: {
+      es: "El sorteo del Mundial de Tiraderas",
+      en: "The Mundial de Tiraderas draw",
+    },
+    meta: {
+      es: "16 de octubre · kick.com/leolugolive",
+      en: "October 16 · kick.com/leolugolive",
+    },
+    media: {
+      kind: "image",
+      src: "/trending/sorteo-tiraderas.avif",
+      width: 1280,
+      height: 720,
+    },
+    alt: {
+      es: "Tres streamers en videollamada durante el sorteo del Mundial de Tiraderas",
+      en: "Three streamers on a video call during the Mundial de Tiraderas draw",
+    },
+    focus: "50% 35%",
+    href: "https://youtu.be/bVALI_U5n5g",
+  },
   {
     id: "lentino-nueva-cancion",
     kind: "studio",
