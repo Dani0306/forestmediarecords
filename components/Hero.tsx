@@ -14,7 +14,13 @@ import { hasKick, site } from "@/data/site";
 import { eventPhoto } from "@/lib/eventPhoto";
 import { icsHref } from "@/lib/ics";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
-import { ArrowDown, ArrowUpRight, Broadcast, CalendarPlus, YouTube } from "./icons";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Broadcast,
+  CalendarPlus,
+  YouTube,
+} from "./icons";
 
 /** The label's YouTube channel: the video hero's second button. */
 const youtube = site.socials.find((s) => s.id === "youtube")?.url;
@@ -523,7 +529,12 @@ export default function Hero() {
               {t.hero.ctaJoin}
             </a>
             {youtube && (
-              <a href={youtube} target="_blank" rel="noreferrer" className="btn btn-steel">
+              <a
+                href={youtube}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-steel"
+              >
                 <YouTube className="size-5 text-ember" />
                 {t.hero.ctaYouTube}
               </a>
@@ -531,11 +542,11 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      {/* {secondary && (
+      {secondary && (
         <div className="relative z-10">
           <SecondaryHeat e={secondary} now={now} />
         </div>
-      )} */}
+      )}
     </section>
   );
 }
