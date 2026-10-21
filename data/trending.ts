@@ -250,7 +250,7 @@ export const trending: Trend[] = [
     },
     focus: "50% 40%",
   },
-  // the upcoming website launch (in the agenda too); artwork is a placeholder
+  // the upcoming website launch (in the agenda too); the card plays the promo ad (made with Higgsfield)
   {
     id: "lanzamiento-web",
     kind: "event",
@@ -263,14 +263,16 @@ export const trending: Trend[] = [
       en: "Forest Media Récords",
     },
     media: {
-      kind: "image",
-      src: "/events/lanzamiento-web.avif",
-      width: 1254,
-      height: 1254,
+      kind: "video",
+      src: "/trending/anuncio-web.webm",
+      mp4: "/trending/anuncio-web.mp4",
+      poster: "/trending/anuncio-web.webp",
+      width: 1280,
+      height: 720,
     },
     alt: {
-      es: "Logo de Forest Media Récords: monograma FR con cabeza de venado sobre un vinilo",
-      en: "Forest Media Récords logo: FR monogram with a stag head on a vinyl record",
+      es: "Anuncio de la página: un micrófono en el estudio, la web de Forest Media Récords y el logo con forestmediarecords.com",
+      en: "Site promo: a studio microphone, the Forest Media Récords website and the logo with forestmediarecords.com",
     },
     focus: "50% 45%",
   },
