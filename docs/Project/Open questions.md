@@ -24,7 +24,7 @@ Things the code can't answer. Move answers into the relevant note, then tick the
 - [ ] When does "Sobrio" (Lentino × RS el Italiano) come out? Not dated yet ([[Artists]], [[Agenda]])
 
 - [ ] Website launch event: real date, time and place? Should it be a main event (takes over the hero)? ([[Agenda]], [[Trending]])
-- [ ] Nikosan: what does "9/10/2018" mean (start in music, or joined Forest)? (Genres are now set: Rap, BoomBap, Trap, Drumless.) Is `public/RS/rs7.avif` Renzo or Nikosan, and where should it go? ([[Artists]])
+- [ ] Nikosan: what does "9/10/2018" mean (start in music, or joined Forest)? (Genres are now set: Rap, BoomBap, Trap, Drumless.) ([[Artists]])
 
 ## Answered (2026-10-06)
 - [x] Artist Kick channels: the artists have none (2026-10-10); the field was removed from the stage
