@@ -51,44 +51,44 @@ export const tiraderas = {
       // replaced valedanyy07 on 2026-10-16
       name: "Carlogato",
       url: "https://kick.com/carlogato",
-      photo: { src: "/participants/carlogato.avif", width: 1034, height: 1379, focus: "50% 38%" },
+      photo: { src: "/tiraderas/participants/carlogato.avif", width: 1034, height: 1379, focus: "50% 38%" },
     },
     {
       name: "ElFerpo2",
       url: "https://kick.com/elferpo2",
-      photo: { src: "/participants/ElFerpo2.avif", width: 900, height: 1600, focus: "50% 40%" },
+      photo: { src: "/tiraderas/participants/elferpo2.avif", width: 900, height: 1600, focus: "50% 40%" },
     },
     {
       name: "soyjosema",
       url: "https://kick.com/soyjosema",
-      photo: { src: "/participants/soyjosema.avif", width: 1200, height: 1600, focus: "60% 50%" },
+      photo: { src: "/tiraderas/participants/soyjosema.avif", width: 1200, height: 1600, focus: "60% 50%" },
     },
     {
       name: "Emvy_29",
       url: "https://kick.com/emvy-29",
-      photo: { src: "/participants/Emvy_29.avif", width: 1200, height: 1600, focus: "50% 30%" },
+      photo: { src: "/tiraderas/participants/emvy_29.avif", width: 1200, height: 1600, focus: "50% 30%" },
     },
     {
       name: "Cuartiz",
       url: "https://kick.com/cuartiz",
-      photo: { src: "/participants/Cuartiz.avif", width: 540, height: 808, focus: "50% 60%" },
+      photo: { src: "/tiraderas/participants/cuartiz.avif", width: 540, height: 808, focus: "50% 60%" },
     },
     {
       name: "Edisson",
       url: "https://kick.com/edisson",
-      photo: { src: "/participants/Edisson.avif", width: 1200, height: 1600, focus: "50% 45%" },
+      photo: { src: "/tiraderas/participants/edisson.avif", width: 1200, height: 1600, focus: "50% 45%" },
     },
     {
       // added 2026-10-14
       name: "Cang5",
       url: "https://kick.com/cang5",
-      photo: { src: "/participants/Cang5.avif", width: 1011, height: 1167, focus: "52% 45%" },
+      photo: { src: "/tiraderas/participants/cang5.avif", width: 1011, height: 1167, focus: "52% 45%" },
     },
     {
       // the eighth, revealed 2026-10-16
       name: "Pablomeji4",
       url: "https://kick.com/pablomeji4",
-      photo: { src: "/participants/Pablomeji4.avif", width: 1179, height: 1268, focus: "45% 35%" },
+      photo: { src: "/tiraderas/participants/pablomeji4.avif", width: 1179, height: 1268, focus: "45% 35%" },
     },
   ] as Participant[],
   /** Seats on the panel; fewer `judges` than this shows "Por confirmar" for the rest. */
@@ -98,18 +98,18 @@ export const tiraderas = {
     {
       name: "Jaycol",
       url: "https://kick.com/jaycol",
-      photo: { src: "/juries/jaycol.avif", width: 447, height: 447, focus: "50% 55%" },
+      photo: { src: "/tiraderas/juries/jaycol.avif", width: 447, height: 447, focus: "50% 55%" },
     },
     {
       name: "Trianiss",
       url: "https://kick.com/trianiss",
       // triana1: frames him well square, and no sponsor backdrop behind him
-      photo: { src: "/triana/triana1.avif", width: 1600, height: 1066, focus: "45% 30%" },
+      photo: { src: "/streamers/trianiss/trianiss-1.avif", width: 1600, height: 1066, focus: "45% 30%" },
     },
     {
       name: "LeoLugoLive",
       url: site.kick.url,
-      photo: { src: "/leolugo/leolugo-portrait.avif", width: 738, height: 1095, focus: "50% 22%" },
+      photo: { src: "/streamers/leolugo/leolugo-portrait.avif", width: 738, height: 1095, focus: "50% 22%" },
     },
   ] as Judge[],
   /** What each tiradera is scored on. */

@@ -17,7 +17,7 @@ tags:
 | Language | TypeScript 5 | `@/*` path alias to the repo root. |
 | Lint | ESLint 9 + `eslint-config-next` | `npm run lint` |
 | Fonts | `next/font/google` | **Saira Stencil** (display, `wdth` axis), **Martian Mono** (readouts), **Archivo** (body). |
-| Media | AVIF photos, WebM video | Hero loop `public/videoloop-web.webm` (1.08 MB re-encode of `videoloop.webm`). |
+| Media | AVIF photos, WebM video | Hero loop `source/hero/videoloop-web.webm` (1.08 MB re-encode of `source/hero/videoloop.webm`). |
 
 ## Scripts
 - `npm run dev`: dev server. Heavier than production; the first scroll after a restart can stutter while images are optimised on demand.

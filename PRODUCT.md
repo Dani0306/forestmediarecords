@@ -38,13 +38,13 @@ A Medellín label whose purpose is developing emerging artists, with streaming a
 ## Brand Commitments
 
 - Name: **Forest Media Récords** (keep the accent on "Récords").
-- Logo: `public/logo.png`, a chrome "FR" monogram with a stag head and tree roots on a black vinyl record label. It is the primary mark and must stay intact.
+- Logo: `public/brand/logo.png`, a chrome "FR" monogram with a stag head and tree roots on a black vinyl record label. It is the primary mark and must stay intact.
 - Kick is a confirmed supporter and should be visibly credited.
 - The user asked for a modern, striking site with high-end design and impressive animations.
 
 ## Evidence on Hand
 
-- Logo: `public/logo.png` (1254×1254).
+- Logo: `public/brand/logo.png` (1254×1254).
 - Artist photos: `public/lentino1–5.avif`, `public/renzo1–3.avif`. Names come from the filenames; confirm their spelling.
 - Still to come from the user: Kick channel URLs, more artist photos, and images of the Kick channel that supports the company.
 - Not available, so never fabricate: event dates and venues, release titles, streaming numbers, follower counts, testimonials, press. Use marked placeholders until real data arrives.

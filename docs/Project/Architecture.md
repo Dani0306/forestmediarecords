@@ -25,7 +25,7 @@ graph TD
 - `components/`: one file per section, in page order: [[Hero]], [[Agenda]], [[Trending]], [[Artists]] (`Roster.tsx`), [[Streamers]], [[Kick section]], [[La forja]] (`ForgeProcess.tsx`), [[Studio]], [[Demo form]]; plus `SiteNav.tsx`, `SiteFooter.tsx`, `LegalPage.tsx`, `CookieBanner.tsx` and `icons.tsx` (hand-drawn SVG icons).
 - `data/`: content. `events.ts` (agenda + heat helpers), `artists.ts`, `streamers.ts`, `trending.ts`, `kick.ts`, `studio.ts` (prices, slots), `legal.ts` (privacy and terms text), `site.ts` (contact email, Kick, socials).
 - `lib/`: `dictionary.ts` (all ES/EN copy), `i18n.tsx` (`LangProvider`, `useLang`, `useNow`, date/countdown formatting in `America/Bogota`), `ics.ts` (add-to-calendar files), `eventPhoto.ts` (picture lookup for an event), `demo.ts` (`sendDemo`, mailto for now), `booking.ts` (`requestBooking`, a stub).
-- `public/`: logo, photos by folder (`lentino/`, `RS/`, `leolugo/`, `triana/`, `kick/`), trending clips (`trending/`), hero video and poster.
+- `public/`: logo, photos by folder (`artists/<name>/`, `streamers/<name>/`, `tiraderas/{participants,juries}/`, `futuras-promesas/` posters, `brand/` logo), trending clips (`trending/`), hero video and poster (`hero/`). Unused originals, video sources and duplicate files live in `source/` at the repo root (not served).
 
 ## Key mechanisms
 - **Heat as state**: `heatOf(event, now)` → `live | white | hot | warm | embers | cold` and `heatLevel()` 0–1. Drives colours (`[data-heat]` CSS variables `--h`/`--h2`) across the agenda, hero and artist stage. See [[Design system]].

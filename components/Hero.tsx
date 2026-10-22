@@ -207,7 +207,7 @@ function EventTakeover({
             className="readout flex items-center gap-3 text-[0.7rem] text-iron/90"
           >
             <Image
-              src="/logo-512.webp"
+              src="/brand/logo-512.webp"
               alt=""
               width={28}
               height={28}
@@ -487,7 +487,7 @@ export default function Hero() {
       <video
         ref={video}
         className="hero-zoom absolute inset-0 size-full object-cover object-[50%_30%] lg:object-[52%_40%]"
-        poster="/videoloop-hero-2-poster.webp"
+        poster="/hero/hero-loop-poster.webp"
         muted
         loop
         playsInline
@@ -497,8 +497,8 @@ export default function Hero() {
         tabIndex={-1}
       >
         {/* MP4 (H.264) first: iPhones can't play these WebM files */}
-        <source src="/videoloop-hero-2.mp4" type="video/mp4" />
-        <source src="/videoloop-hero-2.webm" type="video/webm" />
+        <source src="/hero/hero-loop.mp4" type="video/mp4" />
+        <source src="/hero/hero-loop.webm" type="video/webm" />
       </video>
       {/* scrims keep the type legible without hiding the artist */}
       <div

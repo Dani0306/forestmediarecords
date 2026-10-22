@@ -24,11 +24,11 @@ related:
 
 ## Current items (2026-10-21)
 - 2026-10-21: the "Presentación de la página web oficial" card now plays the promo ad (`trending/anuncio-web.mp4`/`.webm`, 12 s, 1280×720, muted, ~1.1 MB each, from `marketing/anuncio-2026-10/forest-anuncio-16x9-sin-voz.mp4`; replaces the placeholder artwork).
-- Added 2026-10-21 (slot 2): **El sorteo del Mundial de Tiraderas** (16 Oct, Leo's Kick channel; image `trending/sorteo-tiraderas.avif` is the YouTube thumbnail of the draw video; links to https://youtu.be/bVALI_U5n5g, "Ver en YouTube"). See [[Mundial de Tiraderas]].
-- Added 2026-10-21 (slot 3): **Lentino graba su nueva canción** (video `trending/lentino-nueva-cancion.mp4`/`.webm`, 8 s cut of the team's `poster1.webm`, 1024×576; meta "Nueva canción muy pronto", no release date given). The older "Lentino en el estudio" card (`lentino.webm`) stays right after it. The list below is the 2026-10-09 order.
+- Added 2026-10-21 (slot 2): **El sorteo del Mundial de Tiraderas** (16 Oct, Leo's Kick channel; image `tiraderas/sorteo.avif` is the YouTube thumbnail of the draw video; links to https://youtu.be/bVALI_U5n5g, "Ver en YouTube"). See [[Mundial de Tiraderas]].
+- Added 2026-10-21 (slot 3): **Lentino graba su nueva canción** (video `trending/lentino-nueva-cancion.mp4`/`.webm`, 8 s cut of the team's `source/hero/poster1-lentino.webm`, 1024×576; meta "Nueva canción muy pronto", no release date given). The older "Lentino en el estudio" card (`lentino.webm`) stays right after it. The list below is the 2026-10-09 order.
 1. 2BLE B gana Futuras Promesas #3 (poster)
 2. RS el Italiano en el estudio (video `trending/renzo-estudio-01.webm`, 6 s, from `renzoclip.webm`)
-3. Nikosan llega a Forest Media Récords (`nicocol/nico1.avif`, links to the artists section: "Conocer al artista")
+3. Nikosan llega a Forest Media Récords (`artists/nikosan/nikosan-1.avif`, links to the artists section: "Conocer al artista")
 4. Futuras Promesas #3 (poster)
 5. Sesión en el estudio (video `trending/renzo-estudio-02.webm`, 6 s vertical, from `renzoclip2.webm`)
 6. Presentación de la página web oficial (placeholder artwork)
@@ -40,7 +40,7 @@ After the lead three, cards run three across; a last row of two (or one) stretch
 Items with an `href` starting with `#` show "Ver en la agenda" and stay on the page; others open in a new tab, labelled "Ver en YouTube" for YouTube links and "Ver en Kick" otherwise (`t.trending.youtube` / `t.trending.open`).
 
 ## Open issues
-- [ ] Real artwork for the website launch (replace `public/events/lanzamiento-web.avif`, same name)
+- [ ] Real artwork for the website launch (replace `source/events/lanzamiento-web.avif`, same name)
 - [ ] Replace the sample video item with a real production clip
 - [ ] Dedicated 4–8 s clips per production (today both come from the hero video)
 - [ ] Who is in the hero / trending video, and what is the production called?

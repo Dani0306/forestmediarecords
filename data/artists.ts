@@ -51,7 +51,7 @@ export const artists: Artist[] = [
     name: "Lentino",
     photos: [
       {
-        src: "/lentino/lentino3.avif",
+        src: "/artists/lentino/lentino-3.avif",
         width: 1023,
         height: 1280,
         alt: {
@@ -60,7 +60,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/lentino/lentino1.avif",
+        src: "/artists/lentino/lentino-1.avif",
         width: 1280,
         height: 1023,
         alt: {
@@ -69,7 +69,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/lentino/lentino2.avif",
+        src: "/artists/lentino/lentino-2.avif",
         width: 1023,
         height: 1280,
         alt: {
@@ -78,7 +78,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/lentino/lentino4.avif",
+        src: "/artists/lentino/lentino-4.avif",
         width: 1023,
         height: 1280,
         alt: {
@@ -87,7 +87,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/lentino/lentino5.avif",
+        src: "/artists/lentino/lentino-5.avif",
         width: 852,
         height: 1280,
         alt: {
@@ -130,7 +130,7 @@ export const artists: Artist[] = [
     name: "RS el Italiano",
     photos: [
       {
-        src: "/RS/rsmain.avif",
+        src: "/artists/rs-el-italiano/rs-main.avif",
         width: 1254,
         height: 1254,
         lift: 1.4,
@@ -140,7 +140,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/RS/rs-estudio-1.avif",
+        src: "/artists/rs-el-italiano/rs-estudio-1.avif",
         width: 3024,
         height: 4032,
         focus: "35% 55%",
@@ -150,7 +150,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/RS/rs-estudio-2.avif",
+        src: "/artists/rs-el-italiano/rs-estudio-2.avif",
         width: 3024,
         height: 4032,
         focus: "55% 45%",
@@ -160,7 +160,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/RS/rs-estudio-3.avif",
+        src: "/artists/rs-el-italiano/rs-estudio-3.avif",
         width: 3024,
         height: 4032,
         focus: "55% 45%",
@@ -170,7 +170,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/RS/rs-estudio-4.avif",
+        src: "/artists/rs-el-italiano/rs-estudio-4.avif",
         width: 3024,
         height: 4032,
         focus: "60% 45%",
@@ -219,7 +219,7 @@ export const artists: Artist[] = [
     photos: [
       {
         // cropped from lowkey1.avif (a phone story screenshot) to the photo itself
-        src: "/lowkey/lowkey3.avif",
+        src: "/artists/lowkey/lowkey-3.avif",
 
         width: 738,
         height: 445,
@@ -230,7 +230,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/lowkey/lowkey2.avif",
+        src: "/artists/lowkey/lowkey-2.avif",
         width: 738,
         height: 899,
         focus: "50% 78%",
@@ -240,7 +240,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/lowkey/lowkey1-crop.avif",
+        src: "/artists/lowkey/lowkey-1.avif",
 
         width: 691,
         height: 974,
@@ -282,7 +282,7 @@ export const artists: Artist[] = [
     name: "Nikosan",
     photos: [
       {
-        src: "/nicocol/nico1.avif",
+        src: "/artists/nikosan/nikosan-1.avif",
         width: 3024,
         height: 4032,
         focus: "60% 30%",
@@ -292,7 +292,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/nicocol/nico2.avif",
+        src: "/artists/nikosan/nikosan-2.avif",
         width: 3024,
         height: 4032,
         focus: "60% 30%",
@@ -302,7 +302,7 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/nicocol/nico3.avif",
+        src: "/artists/nikosan/nikosan-3.avif",
         width: 3024,
         height: 4032,
         focus: "60% 45%",

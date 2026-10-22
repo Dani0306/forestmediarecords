@@ -50,7 +50,7 @@ export const events: ForgeEvent[] = [
   //   artists: ["lentino"],
   //   start: "2026-10-09T20:00:00-05:00",
   //   place: { es: "Kick", en: "Kick" },
-  //   image: "/lentino/lentino2.avif",
+  //   image: "/artists/lentino/lentino-2.avif",
   //   sample: false,
   // },
   {
@@ -65,7 +65,7 @@ export const events: ForgeEvent[] = [
       es: "Estudio Forest Media · Sabaneta",
       en: "Forest Media headquarters · Medellín",
     },
-    image: "/events/futuraspromesas3.avif",
+    image: "/futuras-promesas/ft3-poster.avif",
     poster: { width: 1254, height: 1254 },
     sample: false,
   },
@@ -82,7 +82,7 @@ export const events: ForgeEvent[] = [
     artists: [],
     start: "2026-10-16T20:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
-    image: "/leolugo/leolugo-portrait.avif",
+    image: "/streamers/leolugo/leolugo-portrait.avif",
   },
   {
     id: "tiraderas-face-off",
@@ -95,7 +95,7 @@ export const events: ForgeEvent[] = [
     artists: [],
     start: "2026-10-23T19:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
-    image: "/triana/triana4.avif",
+    image: "/streamers/trianiss/trianiss-4.avif",
   },
   {
     id: "tiraderas-cuartos",
@@ -110,7 +110,7 @@ export const events: ForgeEvent[] = [
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     // the team asked for Jaycol (judge) on this round, watched from his channel;
     // jaycol-tall.avif is jaycol.avif over a soft mirror of its own bottom: the tall card shows him whole, face above the glass
-    image: "/juries/jaycol-tall.avif",
+    image: "/tiraderas/juries/jaycol-tall.avif",
     url: "https://kick.com/jaycol",
   },
   {
@@ -124,7 +124,7 @@ export const events: ForgeEvent[] = [
     artists: [],
     start: "2026-11-13T19:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
-    image: "/triana/triana2.avif",
+    image: "/streamers/trianiss/trianiss-2.avif",
   },
   {
     id: "tiraderas-final",
@@ -137,7 +137,7 @@ export const events: ForgeEvent[] = [
     artists: [],
     start: "2026-11-21T19:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
-    image: "/leolugo/leolugo-portrait.avif",
+    image: "/streamers/leolugo/leolugo-portrait.avif",
   },
 ];
 

@@ -61,7 +61,7 @@ export const streamers: Streamer[] = [
     photos: [
       {
         // cropped from leolugo1.avif (a phone screenshot) to the photo itself
-        src: "/leolugo/leolugo-portrait.avif",
+        src: "/streamers/leolugo/leolugo-portrait.avif",
         width: 738,
         height: 1095,
         focus: "50% 42%",
@@ -73,7 +73,7 @@ export const streamers: Streamer[] = [
     ],
     highlight: {
       title: "Futuras Promesas #3",
-      src: "/trending/ft3.avif",
+      src: "/futuras-promesas/ft3-poster.avif",
       href: "#kick",
       note: {
         es: "Sesión de streaming en su canal",
@@ -113,7 +113,7 @@ export const streamers: Streamer[] = [
     url: "https://kick.com/trianiss",
     photos: [
       {
-        src: "/triana/triana4.avif",
+        src: "/streamers/trianiss/trianiss-4.avif",
         width: 1440,
         height: 1800,
         focus: "50% 24%",
@@ -123,7 +123,7 @@ export const streamers: Streamer[] = [
         },
       },
       {
-        src: "/triana/triana2.avif",
+        src: "/streamers/trianiss/trianiss-2.avif",
         width: 1200,
         height: 1600,
         focus: "50% 30%",
@@ -133,7 +133,7 @@ export const streamers: Streamer[] = [
         },
       },
       {
-        src: "/triana/triana1.avif",
+        src: "/streamers/trianiss/trianiss-1.avif",
         width: 1600,
         height: 1066,
         focus: "35% 35%",
@@ -143,7 +143,7 @@ export const streamers: Streamer[] = [
         },
       },
       {
-        src: "/triana/triana3.avif",
+        src: "/streamers/trianiss/trianiss-3.avif",
         width: 1200,
         height: 1600,
         focus: "50% 30%",

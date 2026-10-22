@@ -157,6 +157,7 @@ export default function Tiraderas() {
   const qf = byId("tiraderas-cuartos");
   const sf = byId("tiraderas-semifinal");
   const fin = byId("tiraderas-final");
+  const youtubeUrl = site.socials.find((x) => x.id === "youtube")?.url;
   const drawUrl = rounds.find((r) => r.eventId === "tiraderas-sorteo")?.watchUrl;
   const drawn = T.bracket.quarterfinals.some(([a, b]) => a || b);
   const b = T.bracket;
@@ -197,6 +198,12 @@ export default function Tiraderas() {
                 <a href={site.kick.url} target="_blank" rel="noreferrer" className="btn btn-hot">
                   {c.watch}
                   <ArrowUpRight className="size-5" />
+                </a>
+              )}
+              {youtubeUrl && (
+                <a href={youtubeUrl} target="_blank" rel="noreferrer" className="btn btn-steel">
+                  <YouTube className="size-5" />
+                  {c.watchYoutube}
                 </a>
               )}
               {next && (

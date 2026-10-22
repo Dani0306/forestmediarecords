@@ -16,5 +16,5 @@ Lead the section with the latest Kick edition: posters shown untreated as pinned
 
 ## Consequences
 - Real proof of activity on Kick instead of placeholders.
-- New editions only need a `data/kick.ts` entry and posters in `public/kick/` ([[Content guide]]).
+- New editions only need a `data/kick.ts` entry and posters in `public/futuras-promesas/` ([[Content guide]]).
 - Posters bring Kick's green into the forge palette in this one section, by design.

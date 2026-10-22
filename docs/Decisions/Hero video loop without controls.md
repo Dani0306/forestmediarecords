@@ -9,7 +9,7 @@ tags:
 # Hero video loop without controls
 
 ## Context
-The hero background video (`public/videoloop-web.webm`) shows the company's latest productions. A pause button was added for accessibility and later removed.
+The hero background video (`source/hero/videoloop-web.webm`) shows the company's latest productions. A pause button was added for accessibility and later removed.
 
 ## Decision
 The video stays a muted, silent loop with **no pause button**. It pauses automatically when the hero is off-screen, and visitors who prefer reduced motion see the still poster instead of the loop.

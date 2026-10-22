@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Forest Media Récords",
     description: "Forjamos artistas emergentes en Medellín. Con el apoyo de Kick.",
-    images: ["/logo.png"],
+    images: ["/brand/logo.png"],
     locale: "es_CO",
     type: "website",
   },

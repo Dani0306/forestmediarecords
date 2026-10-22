@@ -98,7 +98,7 @@ export default function SiteFooter() {
       <div className="mx-auto grid max-w-[1440px] gap-12 px-4 pb-10 pt-20 sm:px-6 lg:grid-cols-12 lg:px-10">
         <div className="group flex items-center gap-6 lg:col-span-7">
           <Image
-            src="/logo-512.webp"
+            src="/brand/logo-512.webp"
             alt="Forest Media Récords"
             width={160}
             height={160}

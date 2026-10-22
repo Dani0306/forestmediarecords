@@ -73,7 +73,7 @@ export const trending: Trend[] = [
     },
     media: {
       kind: "image",
-      src: "/trending/ganadorft3.avif",
+      src: "/futuras-promesas/ft3-ganador.avif",
       width: 1254,
       height: 1254,
     },
@@ -98,7 +98,7 @@ export const trending: Trend[] = [
     },
     media: {
       kind: "image",
-      src: "/trending/sorteo-tiraderas.avif",
+      src: "/tiraderas/sorteo.avif",
       width: 1280,
       height: 720,
     },
@@ -148,7 +148,7 @@ export const trending: Trend[] = [
     media: {
       kind: "video",
       src: "/trending/lentino.webm",
-      poster: "/lentino/lentino1.avif",
+      poster: "/artists/lentino/lentino-1.avif",
       width: 1280,
       height: 960,
     },
@@ -196,7 +196,7 @@ export const trending: Trend[] = [
     },
     media: {
       kind: "image",
-      src: "/nicocol/nico1.avif",
+      src: "/artists/nikosan/nikosan-1.avif",
       width: 3024,
       height: 4032,
     },
@@ -217,7 +217,7 @@ export const trending: Trend[] = [
     },
     media: {
       kind: "image",
-      src: "/trending/ft3.avif",
+      src: "/futuras-promesas/ft3-poster.avif",
       width: 1254,
       height: 1254,
     },
@@ -290,7 +290,7 @@ export const trending: Trend[] = [
     },
     media: {
       kind: "image",
-      src: "/trending/ganadorft2.avif",
+      src: "/futuras-promesas/ft2-ganador.avif",
       width: 1313,
       height: 1751,
     },
@@ -311,7 +311,7 @@ export const trending: Trend[] = [
     },
     media: {
       kind: "image",
-      src: "/trending/ft2.avif",
+      src: "/futuras-promesas/ft2-poster.avif",
       width: 675,
       height: 794,
     },

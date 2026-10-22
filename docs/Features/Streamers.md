@@ -24,12 +24,12 @@ related:
 - Details differ from the artists: channel number (CH 01), Kick handle, content chips, schedule, next stream (from `data/events.ts` streams whose `url` is the channel; streams with no `url` count as leolugolive), "En su canal" highlight.
 
 ## LeoLugoLive (real, 2026-10-06)
-- Photo `public/leolugo/leolugo-portrait.avif`, cropped from Daniel's phone screenshot `leolugo1.avif` (status bar and chat bar removed); `focus: "50% 42%"` keeps the face high in the wide open panel.
+- Photo `public/streamers/leolugo/leolugo-portrait.avif`, cropped from Daniel's phone screenshot `leolugo1.avif` (status bar and chat bar removed); `focus: "50% 42%"` keeps the face high in the wide open panel.
 - Bio summarised from Daniel's text in three paragraphs (born in Villavicencio in 2003, in Medellín for two years, on-camera presence, Forest projects joining streaming and music, his goals). Details: Nombre, De (Villavicencio → Medellín), content chips.
 
 
 ## Trianiss (real, 2026-10-06)
-- Photos (2026-10-08): four in `public/triana/` (`triana4` Stream Fighters lead, `triana2` red carpet, `triana1` bamboo, `triana3` with a friend). `photos[]` in `data/streamers.ts`; the open channel shows thumbnails top right to switch them. The first photo is the closed-panel picture and the Kick channel avatar.
+- Photos (2026-10-08): four in `public/streamers/trianiss/` (`trianiss-4` Stream Fighters lead, `trianiss-2` red carpet, `trianiss-1` bamboo, `trianiss-3` with a friend). `photos[]` in `data/streamers.ts`; the open channel shows thumbnails top right to switch them. The first photo is the closed-panel picture and the Kick channel avatar.
 - Bio summarised from Daniel's text: born in Medellín in 2004, started streaming in the US, back in Medellín about two years; Westcol moderator, Stream Fighters guest, collaborations; Kick ~500 followers, Twitch 2,000+, ~25 average viewers, peak 130 (as of 2026-10-06, will go stale).
 
 ## Open issues

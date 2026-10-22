@@ -72,7 +72,7 @@ export default function SiteNav() {
           className="group flex shrink-0 items-center gap-3"
         >
           <Image
-            src="/logo-512.webp"
+            src="/brand/logo-512.webp"
             alt=""
             width={40}
             height={40}

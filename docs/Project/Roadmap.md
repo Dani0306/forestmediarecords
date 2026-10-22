@@ -35,7 +35,7 @@ tags:
 - [ ] Optional: make `www` and `forestmr.vercel.app` redirect to `forestmediarecords.com` (Vercel → Settings → Domains)
 - [ ] Move to Vercel Pro before the public launch (Hobby is non-commercial)
 - [x] Repo connected to Vercel: pushes to `main` deploy automatically (confirmed 2026-10-12; one push, `a5d69ef`, was missed by the webhook and deployed by hand)
-- [ ] Clean unused assets: `public/lowkey/lowkey1.avif` (original screenshot), `public/videoloop.webm` (5.7 MB original; source of the trending clips), `public/leolugo/leolugo1.avif` (original screenshot of the cropped portrait), `videoloop-poster.webp.json`
+- [ ] Clean unused assets: `source/artists/lowkey1-screenshot.avif` (original screenshot), `source/hero/videoloop.webm` (5.7 MB original; source of the trending clips), `source/artists/leolugo1-screenshot.avif` (original screenshot of the cropped portrait), `source/hero/videoloop-poster.webp.json`
 - [ ] Align font sizes with the `DESIGN.md` type ramp (detector flags about 45 sizes)
 - [ ] Replace the create-next-app `README.md`
 - [ ] Commit the work since `57d4b6f`

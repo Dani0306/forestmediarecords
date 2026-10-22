@@ -46,7 +46,7 @@ export const editions: KickEdition[] = [
     cities: ["Medellín", "Bogotá", "Barranquilla"],
     posters: [
       {
-        src: "/trending/ganadorft3.avif",
+        src: "/futuras-promesas/ft3-ganador.avif",
         width: 1254,
         height: 1254,
         label: { es: "Ganador", en: "Winner" },
@@ -56,7 +56,7 @@ export const editions: KickEdition[] = [
         },
       },
       {
-        src: "/trending/ft3.avif",
+        src: "/futuras-promesas/ft3-poster.avif",
         width: 1254,
         height: 1254,
         label: { es: "Line-up", en: "Line-up" },
@@ -78,7 +78,7 @@ export const editions: KickEdition[] = [
     lineup: ["Jhanky", "Kamerongray", "Superwil", "Vcelest", "Falo KLK"],
     posters: [
       {
-        src: "/kick/kick1.avif",
+        src: "/futuras-promesas/ft2-ganador.avif",
         width: 1313,
         height: 1751,
         label: { es: "Ganador", en: "Winner" },
@@ -88,7 +88,7 @@ export const editions: KickEdition[] = [
         },
       },
       {
-        src: "/kick/kick2.avif",
+        src: "/futuras-promesas/ft2-poster.avif",
         width: 675,
         height: 794,
         label: { es: "Line-up", en: "Line-up" },

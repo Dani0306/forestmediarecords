@@ -21,7 +21,7 @@ export default function ChatHeader({
   return (
     <header className="flex items-center gap-3 border-b border-anvil px-4 py-3">
       <Image
-        src="/logo-512.webp"
+        src="/brand/logo-512.webp"
         alt=""
         width={40}
         height={40}

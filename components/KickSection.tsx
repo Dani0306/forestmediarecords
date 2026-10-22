@@ -29,7 +29,7 @@ export default function KickSection() {
     {
       key: "forest",
       name: site.kick.handle || t.kick.label,
-      img: "/logo-512.webp",
+      img: "/brand/logo-512.webp",
       url: site.kick.url,
       handle: site.kick.handle,
       focus: "50% 50%",
