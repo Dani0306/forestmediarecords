@@ -7,6 +7,7 @@ import { participantByName, tiraderas as T, type Participant } from "@/data/tira
 import { formatCOP } from "@/data/studio";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
 import { icsHref } from "@/lib/ics";
+import { resolveBracket, useWinners } from "@/lib/winners";
 import { ArrowUpRight, CalendarPlus, Crown, YouTube } from "./icons";
 
 type Lang = "es" | "en";
@@ -84,10 +85,23 @@ function OpenSlot({
 }
 
 /** One competitor slot in the bracket: a name once known (with the photo when confirmed), else a quiet placeholder. */
-function Slot({ name, empty }: { name: string; empty: string }) {
+function Slot({
+  name,
+  empty,
+  won = false,
+  lost = false,
+  onPick,
+}: {
+  name: string;
+  empty: string;
+  won?: boolean;
+  lost?: boolean;
+  /** Admin mode: makes the slot a button that marks this competitor as the winner. */
+  onPick?: () => void;
+}) {
   const p = participantByName(name);
-  return (
-    <div className="flex h-10 items-center gap-2 border-b border-anvil px-3 last:border-b-0">
+  const inner = (
+    <>
       {p && (
         <span className="relative size-6 shrink-0 overflow-hidden rounded-[2px] border border-anvil">
           <Image
@@ -101,22 +115,57 @@ function Slot({ name, empty }: { name: string; empty: string }) {
         </span>
       )}
       {name ? (
-        <span className="stencil truncate text-[1rem] leading-none text-iron [--wdth:80]">{name}</span>
+        <span
+          className={`stencil truncate text-[1rem] leading-none [--wdth:80] ${won ? "text-glow" : lost ? "text-iron/40" : "text-iron"}`}
+        >
+          {name}
+        </span>
       ) : (
         <span className="readout truncate text-[0.6rem] text-steel/70">{empty}</span>
       )}
-    </div>
+      {won && <Crown className="ml-auto size-4 shrink-0 text-glow" />}
+    </>
+  );
+  const cls = `flex h-10 w-full items-center gap-2 border-b border-anvil px-3 last:border-b-0 ${won ? "bg-ember/10" : ""}`;
+  return onPick && name ? (
+    <button
+      type="button"
+      onClick={onPick}
+      aria-pressed={won}
+      className={`${cls} cursor-pointer text-left outline-offset-[-2px] hover:bg-ember/15 focus-visible:outline-2 focus-visible:outline-ember`}
+    >
+      {inner}
+    </button>
+  ) : (
+    <div className={cls}>{inner}</div>
   );
 }
 
-/** A battle: two slots, one per competitor. */
-function Match({ names, empty }: { names: string[]; empty: string }) {
+/** A battle: two slots, one per competitor; the winner (when picked) is lit and the other dims. */
+function Match({
+  names,
+  empty,
+  winner = "",
+  onPick,
+}: {
+  names: string[];
+  empty: string;
+  winner?: string;
+  onPick?: (name: string) => void;
+}) {
   return (
     <div
       className={`relative w-full rounded-[3px] border bg-forge ${names.some(Boolean) ? "border-steel/40" : "border-anvil"}`}
     >
       {names.map((n, i) => (
-        <Slot key={i} name={n} empty={empty} />
+        <Slot
+          key={i}
+          name={n}
+          empty={empty}
+          won={Boolean(winner) && n === winner}
+          lost={Boolean(winner) && n !== winner}
+          onPick={onPick ? () => onPick(n) : undefined}
+        />
       ))}
     </div>
   );
@@ -142,6 +191,7 @@ export default function Tiraderas() {
   const { t, lang } = useLang();
   const now = useNow(1000);
   const c = t.tiraderas;
+  const { winners, admin, shared, error, pickWinner } = useWinners();
 
   const rounds = T.rounds
     .map((r) => ({ ...r, e: roundEvent(r.eventId) }))
@@ -160,7 +210,8 @@ export default function Tiraderas() {
   const youtubeUrl = site.socials.find((x) => x.id === "youtube")?.url;
   const drawUrl = rounds.find((r) => r.eventId === "tiraderas-sorteo")?.watchUrl;
   const drawn = T.bracket.quarterfinals.some(([a, b]) => a || b);
-  const b = T.bracket;
+  const b = resolveBracket(winners);
+  const pick = (id: string) => (admin ? (name: string) => void pickWinner(id, name) : undefined);
 
   return (
     <section id="tiraderas" aria-labelledby="tiraderas-title" className="relative overflow-clip border-t border-anvil">
@@ -318,6 +369,12 @@ export default function Tiraderas() {
               {T.players} streamers · {T.judgeSeats} {c.judges.toLowerCase()}
             </p>
           </div>
+          {admin && (
+            <p role="status" className="readout mb-5 border border-ember/50 bg-ember/10 px-3 py-2 text-[0.62rem] text-glow">
+              {c.adminHint} · {shared ? c.adminShared : c.adminLocal}
+              {error && <span className="ml-2 text-white-heat">{error}</span>}
+            </p>
+          )}
           <div className="-mx-5 overflow-x-auto px-5 pb-2 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
             <div className="bracket grid min-w-[40rem] grid-cols-4 gap-x-8">
               <div className="flex flex-col">
@@ -328,7 +385,12 @@ export default function Tiraderas() {
                     <div key={p} className="bracket-pair relative flex flex-1 flex-col gap-3">
                       {[0, 1].map((m) => (
                         <div key={m} className="flex flex-1 items-center">
-                          <Match names={b.quarterfinals[p * 2 + m]} empty={drawn ? c.tbdLater : c.tbd} />
+                          <Match
+                            names={b.quarterfinals[p * 2 + m]}
+                            empty={drawn ? c.tbdLater : c.tbd}
+                            winner={b.winners[`qf${p * 2 + m}`]}
+                            onPick={pick(`qf${p * 2 + m}`)}
+                          />
                         </div>
                       ))}
                     </div>
@@ -341,7 +403,7 @@ export default function Tiraderas() {
                 <div className="bracket-pair relative flex flex-1 flex-col gap-3">
                   {b.semifinals.map((pair, m) => (
                     <div key={m} className="bracket-in-line relative flex flex-1 items-center">
-                      <Match names={pair} empty={c.tbdLater} />
+                      <Match names={pair} empty={c.tbdLater} winner={b.winners[`sf${m}`]} onPick={pick(`sf${m}`)} />
                     </div>
                   ))}
                 </div>
@@ -350,7 +412,7 @@ export default function Tiraderas() {
               <div className="flex flex-col">
                 <StageHead label={c.stages.final} e={fin} heat={heat(fin)} lang={lang} />
                 <div className="bracket-in-line bracket-out-line relative flex flex-1 items-center">
-                  <Match names={b.final} empty={c.tbdLater} />
+                  <Match names={b.final} empty={c.tbdLater} winner={b.winners.final} onPick={pick("final")} />
                 </div>
               </div>
 
