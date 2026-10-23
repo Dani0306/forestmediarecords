@@ -31,3 +31,5 @@ Full-viewport opening.
 
 ## 2026-10-22: new loop, AV1 first
 The hero plays the team's `poster.mov` (8 s, 1024×576), re-encoded without audio: AV1 WebM (~420 KB, first `<source>` with an AV1 `codecs` hint) then H.264 MP4 (~600 KB). The original was 1.07 MB. Crop `object-[40%_30%]` on phones (he sits left of centre), `lg:object-[0%_40%]` on desktop. Higher sharpness needs a higher-resolution source (1024 px wide is upscaled on big screens). Old loop: `source/hero/previous-hero-loop/`.
+
+**Quality bump (2026-10-22):** after comparing sharper-upscale variants (about 1 MB, barely visible gain) the loop went to AV1 CRF 26 (~700 KB) and H.264 CRF 21 (~780 KB), still 1024×576. A real step up needs a 1080p export of the clip.
