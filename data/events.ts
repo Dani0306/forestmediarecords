@@ -87,7 +87,7 @@ export const events: ForgeEvent[] = [
   {
     id: "tiraderas-face-off",
     type: "stream",
-    main: false,
+    main: true,
     title: {
       es: "Mundial de Tiraderas · Face off",
       en: "Mundial de Tiraderas · Face off",
