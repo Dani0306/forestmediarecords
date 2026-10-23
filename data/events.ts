@@ -110,7 +110,7 @@ export const events: ForgeEvent[] = [
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     // the team asked for Jaycol (judge) on this round, watched from his channel;
     // jaycol-tall.avif is jaycol.avif over a soft mirror of its own bottom: the tall card shows him whole, face above the glass
-    image: "/tiraderas/juries/jaycol-tall.avif",
+    image: "/tiraderas/juries/jaycol.jpg",
     url: "https://kick.com/jaycol",
   },
   {

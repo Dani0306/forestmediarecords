@@ -141,8 +141,8 @@ export const artists: Artist[] = [
       },
       {
         src: "/artists/rs-el-italiano/rs-estudio-1.avif",
-        width: 3024,
-        height: 4032,
+        width: 1440,
+        height: 1920,
         focus: "35% 55%",
         alt: {
           es: "RS el Italiano con audífonos y gorra, inclinado sobre el portátil en el estudio, bajo luz roja",
@@ -151,8 +151,8 @@ export const artists: Artist[] = [
       },
       {
         src: "/artists/rs-el-italiano/rs-estudio-2.avif",
-        width: 3024,
-        height: 4032,
+        width: 1440,
+        height: 1920,
         focus: "55% 45%",
         alt: {
           es: "RS el Italiano grabándose con el celular junto al filtro del micrófono, con la ciudad de noche en la ventana",
@@ -161,8 +161,8 @@ export const artists: Artist[] = [
       },
       {
         src: "/artists/rs-el-italiano/rs-estudio-3.avif",
-        width: 3024,
-        height: 4032,
+        width: 1440,
+        height: 1920,
         focus: "55% 45%",
         alt: {
           es: "RS el Italiano de espaldas, grabando frente al micrófono en el estudio bajo luz roja, con las luces de Medellín al fondo",
@@ -171,8 +171,8 @@ export const artists: Artist[] = [
       },
       {
         src: "/artists/rs-el-italiano/rs-estudio-4.avif",
-        width: 3024,
-        height: 4032,
+        width: 1440,
+        height: 1920,
         focus: "60% 45%",
         alt: {
           es: "RS el Italiano cantando frente al micrófono mientras se graba con el celular, bajo luz roja",

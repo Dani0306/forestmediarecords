@@ -39,7 +39,7 @@ Section title "Nuestros Artistas". One artist at a time:
 - [ ] RS el Italiano bio and facts are mock-ups
 - [x] Lentino joined Forest about two months before 2026-10-06: `since: "2026"`
 - [ ] Release date of "Sobrio" (not set yet); add it to the [[Agenda]] as a release once dated
-- [x] RS photos replaced 2026-10-21: `rsmain.avif` + `rs-estudio-1–4.avif` (3024×4032, red-lit studio session, each with a `focus`; no `lift`)
+- [x] RS photos replaced 2026-10-21: `rsmain.avif` + `rs-estudio-1–4.avif` (re-encoded 2026-10-21 to 1440×1920 4:2:0, ~20 KB each, because the 3024×4032 4:4:4 originals were heavy for the image optimizer; originals in `source/artists/rs-originals/`; red-lit studio session, each with a `focus`; no `lift`)
 
 ## Decisions
 [[Artist stage with tabs]], [[Artist stage as a reel]] (superseded)
