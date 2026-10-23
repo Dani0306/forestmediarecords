@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { artists } from "@/data/artists";
 import {
+  eventEnd,
   heatOf,
   nextMain,
   nextSecondary,
@@ -52,10 +53,45 @@ function EventAction({ e }: { e: ForgeEvent }) {
 const dayKey = (ms: number) =>
   new Intl.DateTimeFormat("en-CA", { timeZone: "America/Bogota" }).format(ms);
 
-/** The countdown, big: four measured cells; only this block re-renders each second. */
-function BigCountdown({ e }: { e: ForgeEvent }) {
+/** On air: the stamp "En vivo" and one big "Ver en vivo" button to the stream. */
+function LiveBlock({ url }: { url: string }) {
+  const { t } = useLang();
+  return (
+    <div className="border-y border-iron/15 py-5">
+      <p
+        className="stencil flex items-center gap-4 text-[clamp(3.5rem,9vw,8rem)] leading-[0.85] [--wdth:66]"
+        style={{ color: "var(--h)" }}
+      >
+        <span
+          aria-hidden="true"
+          className="live-dot size-[0.28em] rounded-full"
+          style={{ background: "var(--h)" }}
+        />
+        {t.hero.liveBig}
+      </p>
+      {url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn-hot mt-6 min-h-20 w-full justify-center px-8 text-[clamp(1.5rem,3.4vw,2.5rem)] sm:w-auto"
+        >
+          <Broadcast className="size-[1.2em]" />
+          {t.hero.watchLive}
+          <ArrowUpRight className="size-[1em]" />
+        </a>
+      )}
+    </div>
+  );
+}
+
+/** The countdown, big: four measured cells; only this block re-renders each second. At zero it turns into the live block on its own. */
+function BigCountdown({ e, url }: { e: ForgeEvent; url: string }) {
   const { t, lang } = useLang();
   const now = useNow(1000);
+  if (now !== null && new Date(e.start).getTime() <= now && now < eventEnd(e)) {
+    return <LiveBlock url={url} />;
+  }
   const cd =
     now === null
       ? null
@@ -123,7 +159,7 @@ function BigCountdown({ e }: { e: ForgeEvent }) {
  */
 function EventTakeover({
   e,
-  now,
+  now: slowNow,
   secondary,
 }: {
   e: ForgeEvent;
@@ -131,6 +167,8 @@ function EventTakeover({
   secondary?: ForgeEvent;
 }) {
   const { t, lang } = useLang();
+  // 1s clock so the buttons switch to "live" at the very second the countdown hits zero
+  const now = useNow(1000) ?? slowNow;
   const heat = now === null ? "white" : heatOf(e, now);
   const live = heat === "live";
   const date = formatDateParts(e.start, lang);
@@ -269,27 +307,11 @@ function EventTakeover({
           </p>
 
           <div className="mt-6 lg:mt-10">
-            {live ? (
-              <div className="border-y border-iron/15 py-5">
-                <p
-                  className="stencil flex items-center gap-4 text-[clamp(3.5rem,9vw,8rem)] leading-[0.85] [--wdth:66]"
-                  style={{ color: "var(--h)" }}
-                >
-                  <span
-                    aria-hidden="true"
-                    className="live-dot size-[0.28em] rounded-full"
-                    style={{ background: "var(--h)" }}
-                  />
-                  {t.hero.liveBig}
-                </p>
-              </div>
-            ) : (
-              <BigCountdown e={e} />
-            )}
+            {live ? <LiveBlock url={url} /> : <BigCountdown e={e} url={url} />}
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            {url ? (
+            {url && !live ? (
               <a
                 href={url}
                 target="_blank"
@@ -297,11 +319,7 @@ function EventTakeover({
                 className="btn btn-hot"
               >
                 <Broadcast className="size-5" />
-                {live
-                  ? t.hero.watchLive
-                  : e.type === "stream"
-                    ? t.agenda.watch
-                    : "Info"}
+                {e.type === "stream" ? t.agenda.watch : "Info"}
               </a>
             ) : null}
             {!live && (

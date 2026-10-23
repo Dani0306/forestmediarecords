@@ -93,7 +93,7 @@ export const events: ForgeEvent[] = [
       en: "Mundial de Tiraderas · Face off",
     },
     artists: [],
-    start: "2026-10-23T19:00:00-05:00",
+    start: "2026-10-23T19:30:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     image: "/streamers/trianiss/trianiss-4.avif",
   },
