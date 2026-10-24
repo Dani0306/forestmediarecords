@@ -59,7 +59,33 @@ const FP3_WINNER = "https://www.instagram.com/el2ble_b/";
 const FP2_WINNER = "https://www.instagram.com/jhanky.10/";
 
 export const trending: Trend[] = [
-  // Futuras Promesas #3 (2026-10-07) leads: the latest edition
+  // the "FMR" teaser (new song) leads
+  {
+    id: "fmr-avance",
+    kind: "video",
+    title: {
+      es: "Avance de «FMR»",
+      en: "“FMR” teaser",
+    },
+    meta: {
+      es: "Nueva canción · Forest Media Récords",
+      en: "New song · Forest Media Récords",
+    },
+    media: {
+      kind: "video",
+      src: "/trending/fmr.webm",
+      mp4: "/trending/fmr.mp4",
+      poster: "/trending/fmr.webp",
+      width: 1280,
+      height: 720,
+    },
+    alt: {
+      es: "Un artista con gorra negra y camiseta sin mangas se mueve frente a la cámara en un parqueadero de noche, en el avance de «FMR»",
+      en: "An artist in a black cap and sleeveless shirt moves in front of the camera in a parking garage at night, in the “FMR” teaser",
+    },
+    focus: "50% 35%",
+  },
+  // Futuras Promesas #3 (2026-10-07), the latest edition, follows the new-song teaser
   {
     id: "futuras-promesas-3-ganador",
     kind: "kick",
@@ -122,7 +148,7 @@ export const trending: Trend[] = [
     },
     media: { kind: "image", src: "/artists/rs-el-italiano/rs-fmr-1.avif", width: 1440, height: 1920, lift: 1.25 },
     alt: {
-      es: "RS el Italiano recostado contra un carro oscuro en un parqueadero de noche, durante el rodaje del videoclip de «FMR»",
+      es: "RS el Italiano recostado contra un carro oscuro en un parqueadero de noche, en el avance de «FMR»",
       en: "RS el Italiano leaning on a dark car in a parking garage at night, on the shoot of the “FMR” video",
     },
     focus: "50% 24%",

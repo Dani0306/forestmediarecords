@@ -152,13 +152,14 @@ export const artists: Artist[] = [
     name: "RS el Italiano",
     photos: [
       {
-        src: "/artists/rs-el-italiano/rs-main.avif",
-        width: 1254,
-        height: 1254,
-        lift: 1.4,
+        src: "/artists/rs-el-italiano/rs-fmr-2.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 24%",
+        lift: 1.25,
         alt: {
-          es: "RS el Italiano con gorra negra y camiseta del Barcelona, junto a un micrófono de estudio",
-          en: "RS el Italiano in a black cap and Barcelona shirt, next to a studio microphone",
+          es: "RS el Italiano señalando a la cámara en el parqueadero, durante el rodaje de «FMR»",
+          en: "RS el Italiano pointing at the camera in the parking garage, on the “FMR” shoot",
         },
       },
       {
@@ -170,17 +171,6 @@ export const artists: Artist[] = [
         alt: {
           es: "RS el Italiano recostado contra un carro oscuro en un parqueadero, de noche, durante la grabación del videoclip «FMR»",
           en: "RS el Italiano leaning on a dark car in a parking garage at night, during the shoot of the “FMR” video",
-        },
-      },
-      {
-        src: "/artists/rs-el-italiano/rs-fmr-2.avif",
-        width: 1440,
-        height: 1920,
-        focus: "50% 24%",
-        lift: 1.25,
-        alt: {
-          es: "RS el Italiano señalando a la cámara en el parqueadero, durante el rodaje de «FMR»",
-          en: "RS el Italiano pointing at the camera in the parking garage, on the “FMR” shoot",
         },
       },
       {
