@@ -47,3 +47,5 @@ Items with an `href` starting with `#` show "Ver en la agenda" and stay on the p
 
 ## Decisions
 [[Placeholder content policy]], [[Trending as a ranked media mosaic]]
+
+- 2026-10-23: two photo cards from the "FMR" video shoot (`fmr-rs-videoclip`, `fmr-lentino-videoclip`) sit before the Lentino new-song card.

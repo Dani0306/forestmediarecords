@@ -110,6 +110,42 @@ export const trending: Trend[] = [
     href: "https://youtu.be/bVALI_U5n5g",
   },
   {
+    id: "fmr-rs-videoclip",
+    kind: "photo",
+    title: {
+      es: "RS el Italiano graba el videoclip de «FMR»",
+      en: "RS el Italiano shoots the “FMR” video",
+    },
+    meta: {
+      es: "Nueva canción · Forest Media Récords",
+      en: "New song · Forest Media Récords",
+    },
+    media: { kind: "image", src: "/artists/rs-el-italiano/rs-fmr-1.avif", width: 1440, height: 1920, lift: 1.25 },
+    alt: {
+      es: "RS el Italiano recostado contra un carro oscuro en un parqueadero de noche, durante el rodaje del videoclip de «FMR»",
+      en: "RS el Italiano leaning on a dark car in a parking garage at night, on the shoot of the “FMR” video",
+    },
+    focus: "50% 24%",
+  },
+  {
+    id: "fmr-lentino-videoclip",
+    kind: "photo",
+    title: {
+      es: "Lentino en el rodaje de «FMR»",
+      en: "Lentino on the “FMR” shoot",
+    },
+    meta: {
+      es: "Nueva canción · Forest Media Récords",
+      en: "New song · Forest Media Récords",
+    },
+    media: { kind: "image", src: "/artists/lentino/lentino-fmr-1.avif", width: 1440, height: 1920, lift: 1.25 },
+    alt: {
+      es: "Lentino con gorra roja y chaqueta negra frente a un carro, durante el rodaje del videoclip de «FMR»",
+      en: "Lentino in a red cap and black jacket in front of a car, on the shoot of the “FMR” video",
+    },
+    focus: "50% 22%",
+  },
+  {
     id: "lentino-nueva-cancion",
     kind: "studio",
     title: {

@@ -43,3 +43,5 @@ Section title "Nuestros Artistas". One artist at a time:
 
 ## Decisions
 [[Artist stage with tabs]], [[Artist stage as a reel]] (superseded)
+
+- 2026-10-23: added the "FMR" video-shoot photos (`rs-fmr-1…6`, after `rs-main`; `lentino-fmr-1…2`, before the first existing photo).

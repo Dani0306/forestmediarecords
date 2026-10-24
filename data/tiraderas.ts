@@ -34,8 +34,8 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow. El sorteo es a las 8:00 p. m. y el resto de las fechas, a las 7:00 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
-    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow. The draw is at 8:00 PM and every other date at 7:00 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
+    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow. El sorteo es a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
+    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow. The draw is at 8:00 PM and every other date at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
   /** Eight since 2026-10-14; all eight confirmed on 2026-10-16 (the eighth was a surprise until then). */
   players: 8,

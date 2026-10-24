@@ -69,7 +69,7 @@ export const events: ForgeEvent[] = [
     poster: { width: 1254, height: 1254 },
     sample: false,
   },
-  // Mundial de Tiraderas 2026 (data/tiraderas.ts): the draw is at 8 PM and every later round at 7 PM (Colombia time), on Kick, all channels.
+  // Mundial de Tiraderas 2026 (data/tiraderas.ts): the draw is at 8 PM and every later round at 7:30 PM (Colombia time), on Kick, all channels.
   // TODO: swap `image` for the official poster when it's ready.
   {
     id: "tiraderas-sorteo",
@@ -106,7 +106,7 @@ export const events: ForgeEvent[] = [
       en: "Mundial de Tiraderas · Quarter-finals",
     },
     artists: [],
-    start: "2026-11-06T19:00:00-05:00",
+    start: "2026-11-06T19:30:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     // the team asked for Jaycol (judge) on this round, watched from his channel;
     // jaycol-tall.avif is jaycol.avif over a soft mirror of its own bottom: the tall card shows him whole, face above the glass
@@ -122,7 +122,7 @@ export const events: ForgeEvent[] = [
       en: "Mundial de Tiraderas · Semi-final",
     },
     artists: [],
-    start: "2026-11-13T19:00:00-05:00",
+    start: "2026-11-13T19:30:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     image: "/streamers/trianiss/trianiss-2.avif",
   },
@@ -135,7 +135,7 @@ export const events: ForgeEvent[] = [
       en: "Mundial de Tiraderas · Grand final",
     },
     artists: [],
-    start: "2026-11-21T19:00:00-05:00",
+    start: "2026-11-21T19:30:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     image: "/streamers/leolugo/leolugo-portrait.avif",
   },

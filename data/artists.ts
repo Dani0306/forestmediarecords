@@ -60,6 +60,28 @@ export const artists: Artist[] = [
         },
       },
       {
+        src: "/artists/lentino/lentino-fmr-1.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 22%",
+        lift: 1.25,
+        alt: {
+          es: "Lentino con gorra roja y chaqueta negra, con la mirada baja frente a un carro, en el rodaje de «FMR»",
+          en: "Lentino in a red cap and black jacket, eyes down in front of a car, on the “FMR” shoot",
+        },
+      },
+      {
+        src: "/artists/lentino/lentino-fmr-2.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 24%",
+        lift: 1.25,
+        alt: {
+          es: "Lentino con gorra roja mirando de lado, en el parqueadero, durante el rodaje de «FMR»",
+          en: "Lentino in a red cap looking off to the side, in the parking garage, on the “FMR” shoot",
+        },
+      },
+      {
         src: "/artists/lentino/lentino-1.avif",
         width: 1280,
         height: 1023,
@@ -137,6 +159,72 @@ export const artists: Artist[] = [
         alt: {
           es: "RS el Italiano con gorra negra y camiseta del Barcelona, junto a un micrófono de estudio",
           en: "RS el Italiano in a black cap and Barcelona shirt, next to a studio microphone",
+        },
+      },
+      {
+        src: "/artists/rs-el-italiano/rs-fmr-1.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 24%",
+        lift: 1.25,
+        alt: {
+          es: "RS el Italiano recostado contra un carro oscuro en un parqueadero, de noche, durante la grabación del videoclip «FMR»",
+          en: "RS el Italiano leaning on a dark car in a parking garage at night, during the shoot of the “FMR” video",
+        },
+      },
+      {
+        src: "/artists/rs-el-italiano/rs-fmr-2.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 24%",
+        lift: 1.25,
+        alt: {
+          es: "RS el Italiano señalando a la cámara en el parqueadero, durante el rodaje de «FMR»",
+          en: "RS el Italiano pointing at the camera in the parking garage, on the “FMR” shoot",
+        },
+      },
+      {
+        src: "/artists/rs-el-italiano/rs-fmr-3.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 24%",
+        lift: 1.25,
+        alt: {
+          es: "RS el Italiano con la mano en la gorra, mirando a la cámara, en el rodaje de «FMR»",
+          en: "RS el Italiano with a hand on his cap, looking into the lens, on the “FMR” shoot",
+        },
+      },
+      {
+        src: "/artists/rs-el-italiano/rs-fmr-4.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 28%",
+        lift: 1.25,
+        alt: {
+          es: "RS el Italiano apoyado en el carro con el brazo tatuado cruzado, en el parqueadero",
+          en: "RS el Italiano propped on the car with his tattooed arm crossed, in the parking garage",
+        },
+      },
+      {
+        src: "/artists/rs-el-italiano/rs-fmr-5.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 28%",
+        lift: 1.25,
+        alt: {
+          es: "RS el Italiano de medio cuerpo, mirando a la cámara con camiseta sin mangas, en el parqueadero",
+          en: "RS el Italiano from the waist up in a sleeveless shirt, looking at the lens, in the parking garage",
+        },
+      },
+      {
+        src: "/artists/rs-el-italiano/rs-fmr-6.avif",
+        width: 1440,
+        height: 1920,
+        focus: "50% 30%",
+        lift: 1.25,
+        alt: {
+          es: "RS el Italiano de pie frente al carro, con la cabeza baja, en el parqueadero",
+          en: "RS el Italiano standing in front of the car, head down, in the parking garage",
         },
       },
       {

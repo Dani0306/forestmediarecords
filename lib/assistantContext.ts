@@ -197,7 +197,7 @@ function tiraderasInfo() {
     `- Premio: ${formatCOP(T.prize.amount)} COP. ${T.prize.note.es}`,
     "- Formato: ocho competidores; cuartos de final (cuatro batallas 1 vs 1), las cuatro mejores tiraderas pasan a la semifinal (dos batallas) y los dos ganadores disputan la gran final.",
     T.rounds.some((r) => r.watchUrl) ? `- El sorteo ya se hizo y se puede ver en YouTube: ${T.rounds.find((r) => r.watchUrl)?.watchUrl}` : "",
-    `- Rondas (el sorteo a las 8:00 p. m. y el resto a las 7:00 p. m., hora de Colombia, por Kick en todos los canales; fechas exactas en la Agenda):`,
+    `- Rondas (el sorteo a las 8:00 p. m. y el resto a las 7:30 p. m., hora de Colombia, por Kick en todos los canales; fechas exactas en la Agenda):`,
     ...T.rounds.map((r) => `  - ${r.name.es}: ${r.body.es}`),
     `- Cómo se hacen las tiraderas: ${T.making.map((m) => m.es).join(" ")}`,
     drawn
