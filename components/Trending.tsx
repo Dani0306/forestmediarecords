@@ -136,7 +136,7 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
       ref={card}
       data-heat={heat}
       data-playing={playing || undefined}
-      className={`trend-card trend-in parallax relative flex [container-type:size] h-[min(32rem,76vh)] w-[min(82vw,24rem)] shrink-0 snap-start flex-col overflow-hidden rounded-[3px] border border-anvil bg-forge-3 lg:h-auto lg:w-auto ${SLOT[rank] ?? (rank >= count - ((count - 3) % 3 || 3) && (count - 3) % 3 === 2 ? "lg:col-span-6" : (count - 3) % 3 === 1 && rank === count - 1 ? "lg:col-span-12" : "lg:col-span-4")}`}
+      className={`trend-card trend-in parallax relative flex [container-type:size] h-[min(32rem,76vh)] w-[min(82vw,24rem)] shrink-0 snap-start flex-col overflow-hidden rounded-[3px] border border-anvil bg-forge-3 lg:h-auto lg:w-auto ${/* a last card alone on its row keeps the normal 4-column size instead of stretching to the full width (that warps its crop) */ SLOT[rank] ?? (rank >= count - ((count - 3) % 3 || 3) && (count - 3) % 3 === 2 ? "lg:col-span-6" : "lg:col-span-4")}`}
       {...hover}
     >
       <div

@@ -49,3 +49,5 @@ Items with an `href` starting with `#` show "Ver en la agenda" and stay on the p
 [[Placeholder content policy]], [[Trending as a ranked media mosaic]]
 
 - 2026-10-23: two photo cards from the "FMR" video shoot (`fmr-rs-videoclip`, `fmr-lentino-videoclip`) sit before the Lentino new-song card.
+
+- 2026-10-23: a last card alone on its row (desktop) stays 4 columns wide instead of spanning all 12, so its crop keeps the same ratio as the others.
