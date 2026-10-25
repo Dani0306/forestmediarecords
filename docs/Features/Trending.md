@@ -53,3 +53,5 @@ Items with an `href` starting with `#` show "Ver en la agenda" and stay on the p
 - 2026-10-23: two photo cards from the "FMR" video shoot (`fmr-rs-videoclip`, `fmr-lentino-videoclip`) sit before the Lentino new-song card.
 
 - 2026-10-23: a last card alone on its row (desktop) stays 4 columns wide instead of spanning all 12, so its crop keeps the same ratio as the others.
+
+- 2026-10-24: `fmr-bts` card (portrait phone clip, 464×832) at rank 2; `focus: "50% 24%"` keeps the heads in the wide desktop crop.

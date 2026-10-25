@@ -85,6 +85,32 @@ export const trending: Trend[] = [
     },
     focus: "50% 35%",
   },
+  // behind the scenes of the "FMR" shoot (2026-10-23): a portrait phone clip, so the card crops it
+  {
+    id: "fmr-bts",
+    kind: "video",
+    title: {
+      es: "Detrás de cámaras de «FMR»",
+      en: "Behind the scenes of “FMR”",
+    },
+    meta: {
+      es: "RS el Italiano y Lentino · Forest Media Récords",
+      en: "RS el Italiano and Lentino · Forest Media Récords",
+    },
+    media: {
+      kind: "video",
+      src: "/trending/bts-fmr.webm",
+      mp4: "/trending/bts-fmr.mp4",
+      poster: "/trending/bts-fmr.webp",
+      width: 464,
+      height: 832,
+    },
+    alt: {
+      es: "Dos artistas en un parqueadero mojado de noche durante la grabación de «FMR»: uno rapea con la mano en la cabeza y el otro mira con gorra negra",
+      en: "Two artists in a wet parking garage at night during the “FMR” shoot: one raps with a hand on his head, the other watches in a black cap",
+    },
+    focus: "50% 24%",
+  },
   // Futuras Promesas #3 (2026-10-07), the latest edition, follows the new-song teaser
   {
     id: "futuras-promesas-3-ganador",
