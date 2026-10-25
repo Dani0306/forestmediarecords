@@ -485,7 +485,7 @@ export default function Tiraderas() {
                           className="btn btn-steel mt-4 min-h-11 px-4 text-[0.9rem]"
                         >
                           <YouTube className="size-5 text-ember" />
-                          {c.watchDraw}
+                          {r.watchLabel?.[lang] ?? c.watchDraw}
                           <ArrowUpRight className="size-4" />
                         </a>
                       )}

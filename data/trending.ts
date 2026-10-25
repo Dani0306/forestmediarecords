@@ -110,6 +110,31 @@ export const trending: Trend[] = [
     focus: "50% 30%",
     href: FP3_WINNER,
   },
+  // the Mundial de Tiraderas face off (2026-10-23, Kick; full video on YouTube)
+  {
+    id: "face-off-mundial-tiraderas",
+    kind: "live",
+    title: {
+      es: "El face off del Mundial de Tiraderas",
+      en: "The Mundial de Tiraderas face off",
+    },
+    meta: {
+      es: "23 de octubre · kick.com/leolugolive",
+      en: "October 23 · kick.com/leolugolive",
+    },
+    media: {
+      kind: "image",
+      src: "/tiraderas/face-off.avif",
+      width: 1280,
+      height: 720,
+    },
+    alt: {
+      es: "Cinco streamers en videollamada durante el face off del Mundial de Tiraderas",
+      en: "Five streamers on a video call during the Mundial de Tiraderas face off",
+    },
+    focus: "50% 40%",
+    href: "https://youtu.be/HAtpw_8Kbb8",
+  },
   // the Mundial de Tiraderas draw (2026-10-16, on Leo's Kick channel; full video on YouTube)
   {
     id: "sorteo-mundial-tiraderas",

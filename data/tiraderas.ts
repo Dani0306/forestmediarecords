@@ -17,6 +17,8 @@ export type Round = {
   body: { es: string; en: string };
   /** Recording of the round on YouTube, once it exists. */
   watchUrl?: string;
+  /** Button text for `watchUrl` when it isn't the draw's. */
+  watchLabel?: { es: string; en: string };
 };
 
 /** A confirmed competitor: Kick name, channel and photo (`public/participants/`). */
@@ -193,6 +195,8 @@ export const tiraderas = {
     {
       eventId: "tiraderas-face-off",
       name: { es: "Face off · Cara a cara", en: "Face off" },
+      watchUrl: "https://youtu.be/HAtpw_8Kbb8",
+      watchLabel: { es: "Ver el face off", en: "Watch the face off" },
       body: {
         es: "Cinco minutos frente a frente: indirectas, verdades, provocaciones y apuestas entre rivales para prender la rivalidad.",
         en: "Five minutes head to head: shots, truths, taunts and bets between rivals to light up the rivalry.",

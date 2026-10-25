@@ -52,3 +52,5 @@ LeoLugoLive's tiradera (diss track) tournament with Forest Media Récords, from 
 ## Picking winners (2026-10-23)
 
 Open the site with `/?admin` (that browser stays in admin mode; `?admin=off` leaves it). In the bracket, tap a competitor to mark the winner of that battle; tap again to clear. Winners advance by themselves (quarter-finals → semi-finals → final → champion), logic in `lib/winners.ts`. Picks are saved in that browser's localStorage. If the shared store is configured (`KV_REST_API_URL`, `KV_REST_API_TOKEN`, `WINNERS_PASSWORD` in Vercel, an Upstash Redis from the Marketplace), `app/api/winners/route.ts` also saves them there and every visitor sees them; without it only the admin's browser shows them.
+
+- 2026-10-24: the face off round carries the YouTube replay (`https://youtu.be/HAtpw_8Kbb8`) as a "Ver el face off" button; Trending card `face-off-mundial-tiraderas` sits third.
