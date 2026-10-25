@@ -32,6 +32,37 @@ export type KickEdition = {
 };
 
 export const editions: KickEdition[] = [
+  // the Mundial de Tiraderas has no printed poster yet: its two stream screenshots stand in (face off and draw)
+  {
+    id: "mundial-tiraderas",
+    name: "Mundial de Tiraderas",
+    edition: "Face off",
+    format: { es: "Competencia de tiraderas en Kick", en: "Tiraderas competition on Kick" },
+    when: { es: "23 de octubre · 7:30 PM", en: "October 23 · 7:30 PM" },
+    lineup: ["Cang5", "Pablomeji4", "Edisson", "Carlogato", "Cuartiz", "ElFerpo2", "Emvy_29", "soyjosema"],
+    posters: [
+      {
+        src: "/tiraderas/face-off.avif",
+        width: 1280,
+        height: 720,
+        label: { es: "Face off", en: "Face off" },
+        alt: {
+          es: "Cinco streamers en videollamada durante el face off del Mundial de Tiraderas, en Kick.",
+          en: "Five streamers on a video call during the Mundial de Tiraderas face off, on Kick.",
+        },
+      },
+      {
+        src: "/tiraderas/sorteo.avif",
+        width: 1280,
+        height: 720,
+        label: { es: "Sorteo", en: "The draw" },
+        alt: {
+          es: "Tres streamers en videollamada durante el sorteo del Mundial de Tiraderas, en Kick.",
+          en: "Three streamers on a video call during the Mundial de Tiraderas draw, on Kick.",
+        },
+      },
+    ],
+  },
   {
     id: "futuras-promesas-3",
     name: "Futuras Promesas",

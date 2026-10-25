@@ -32,3 +32,5 @@ The lead edition's winner name links to their Instagram when `winnerUrl` is set 
 
 ## Decisions
 [[Placeholder content policy]], [[Kick section led by Futuras Promesas]]
+
+- 2026-10-24: the lead edition is the Mundial de Tiraderas (`mundial-tiraderas` in `data/kick.ts`, stream screenshots stand in for a poster); no winner or motto until confirmed. Futuras Promesas #3 and #2 remain in the data.
