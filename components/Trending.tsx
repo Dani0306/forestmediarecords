@@ -81,9 +81,11 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
         ? t.trending.agenda
         : /youtube\.com|youtu\.be/.test(href)
           ? t.trending.youtube
-          : /instagram\.com/.test(href)
-            ? t.trending.instagram
-            : t.trending.open;
+          : /spotify\.com/.test(href)
+            ? t.trending.spotify
+            : /instagram\.com/.test(href)
+              ? t.trending.instagram
+              : t.trending.open;
 
   // "Ver avance" for clips, otherwise a link; labelled on the lead card, an icon on the rest
   const action = (size: string, labelled = false) => {

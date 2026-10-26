@@ -11,6 +11,7 @@ export default function SiteFooter() {
   const { t } = useLang();
   const c = site.credits;
   const links = [
+    { href: "/#lanzamientos", label: t.nav.releases },
     { href: "/#agenda", label: t.nav.agenda },
     { href: "/#tendencia", label: t.nav.trending },
     { href: "/#artistas", label: t.nav.artists },

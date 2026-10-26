@@ -5,6 +5,7 @@ import FollowUs from "@/components/FollowUs";
 import ForgeProcess from "@/components/ForgeProcess";
 import Hero from "@/components/Hero";
 import KickSection from "@/components/KickSection";
+import Releases from "@/components/Releases";
 import Roster from "@/components/Roster";
 import SiteFooter from "@/components/SiteFooter";
 import SiteNav from "@/components/SiteNav";
@@ -18,6 +19,7 @@ export default function Home() {
       <SiteNav />
       <main id="main">
         <Hero />
+        <Releases />
         <Agenda />
         <Tiraderas />
         <Trending />

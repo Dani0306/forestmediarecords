@@ -23,6 +23,7 @@ related:
 - Details sit on a lean glass band so the picture keeps most of the card: the action is a 44px icon button beside the title (labelled only on the lead card on desktop), and the meta line is one line on the smaller cards. The photo grade is lighter than in the rest of the site (grayscale 85%, duotone 60%) and still heats to true colour on hover, focus or while a clip plays.
 
 ## Current items (2026-10-21)
+- 2026-10-26: **Coronao** (slot 1) and **La Vuelta** (slot 4), Lentino's new singles, kind `music`, linking to Spotify. See [[Releases]]. The FMR teaser moved to slot 2.
 - 2026-10-24: **Avance de «FMR»** now leads (slot 1); the 2BLE B Futuras Promesas #3 winner card is slot 2.
 - 2026-10-23: added **Avance de «FMR»** (`fmr-avance`, video `trending/fmr.mp4`/`.webm`, 10 s, 1280×720, muted, 1.6 MB / 1.1 MB). Encoded from the team's 4K HEVC `fmr.mov`; its rotation tag was wrong (landscape footage), so it is rotated `transpose=2`. Original in `source/trending/fmr-original.mov`. Sits just before the two "FMR" photo cards.
 - 2026-10-21: the "Presentación de la página web oficial" card now plays the promo ad (`trending/anuncio-web.mp4`/`.webm`, 12 s, 1280×720, muted, ~1.1 MB each, from `marketing/anuncio-2026-10/forest-anuncio-16x9-sin-voz.mp4`; replaces the placeholder artwork).

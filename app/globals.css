@@ -889,3 +889,20 @@ a.follow-row:is(:hover, :focus-visible) .follow-cta {
     transform: rotate(360deg);
   }
 }
+
+/* ── Releases: the record slides out of the sleeve ────────────────── */
+@layer components {
+  .vinyl {
+    width: 94%;
+    translate: 0 0;
+    transition:
+      translate 0.7s var(--ease-hammer),
+      rotate 1.2s var(--ease-hammer);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .group:is(:hover, :focus-within) .vinyl {
+      translate: 22% 0;
+      rotate: 140deg;
+    }
+  }
+}

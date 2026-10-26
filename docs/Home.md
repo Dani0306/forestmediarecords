@@ -30,13 +30,14 @@ Working vault for the **Forest Media Récords** website: a bilingual (ES/EN) lab
 2. [[Agenda]]
 3. [[Mundial de Tiraderas]]
 4. [[Trending]]
-5. [[Artists]]
-6. [[Streamers]]
-7. [[Kick section]]
-8. [[La forja]]
-9. [[Studio]]
-10. [[Demo form]]
-11. [[Follow us]]
+5. [[Releases]]
+6. [[Artists]]
+7. [[Streamers]]
+8. [[Kick section]]
+9. [[La forja]]
+10. [[Studio]]
+11. [[Demo form]]
+12. [[Follow us]]
 
 Around the page: [[Navigation and footer]], [[Chat assistant]], [[Legal pages]] (`/privacidad`, `/terminos`, cookie notice), [[Bilingual copy]].
 

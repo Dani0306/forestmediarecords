@@ -35,6 +35,7 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false);
 
   const links = [
+    { href: "/#lanzamientos", label: t.nav.releases },
     { href: "/#agenda", label: t.nav.agenda },
     { href: "/#tiraderas", label: t.nav.tiraderas },
     { href: "/#tendencia", label: t.nav.trending },
@@ -92,15 +93,17 @@ export default function SiteNav() {
 
         <ul className="ml-auto hidden items-center gap-1 lg:flex">
           {links.map((l) => (
-            // the bar is full at 1024px: Tendencia and Streamers join it from 1280px (always in the menu)
+            // the bar is full at 1024px: Lanzamientos joins it from 1280px, Tiraderas and Estudio from 1440px, Tendencia and Streamers from 1600px (always in the menu)
             <li
               key={l.href}
               className={
-                l.href === "/#estudio" || l.href === "/#tiraderas"
-                  ? "hidden min-[1440px]:block"
-                  : l.href === "/#tendencia" || l.href === "/#streamers"
-                    ? "hidden xl:block"
-                    : undefined
+                l.href === "/#tendencia" || l.href === "/#streamers"
+                  ? "hidden min-[1600px]:block"
+                  : l.href === "/#estudio" || l.href === "/#tiraderas"
+                    ? "hidden min-[1440px]:block"
+                    : l.href === "/#lanzamientos"
+                      ? "hidden xl:block"
+                      : undefined
               }
             >
               <Link

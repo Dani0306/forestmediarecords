@@ -1,3 +1,5 @@
+import { releases } from "./releases";
+
 /**
  * "En tendencia": the latest productions and projects, hottest first.
  * Order is rank: the first item takes the big slot.
@@ -12,6 +14,7 @@
  */
 export type TrendKind =
   | "video"
+  | "music"
   | "studio"
   | "photo"
   | "kick"
@@ -59,6 +62,20 @@ const FP3_WINNER = "https://www.instagram.com/el2ble_b/";
 const FP2_WINNER = "https://www.instagram.com/jhanky.10/";
 
 export const trending: Trend[] = [
+  // Lentino's new singles (2026-10-10) lead; the covers also live in "Lo nuevo" (data/releases.ts)
+  {
+    id: "coronao",
+    kind: "music",
+    title: { es: "Coronao", en: "Coronao" },
+    meta: {
+      es: "Lentino · Nuevo sencillo",
+      en: "Lentino · New single",
+    },
+    media: { kind: "image", src: "/releases/coronao-cover.webp", width: 736, height: 736 },
+    alt: releases[0].cover.alt,
+    focus: "50% 50%",
+    href: releases[0].spotify,
+  },
   // the "FMR" teaser (new song) leads
   {
     id: "fmr-avance",
@@ -110,6 +127,20 @@ export const trending: Trend[] = [
       en: "Two artists in a wet parking garage at night during the “FMR” shoot: one raps with a hand on his head, the other watches in a black cap",
     },
     focus: "50% 24%",
+  },
+  // the second single sits right behind the video cards
+  {
+    id: "la-vuelta",
+    kind: "music",
+    title: { es: "La Vuelta", en: "La Vuelta" },
+    meta: {
+      es: "Lentino · Nuevo sencillo",
+      en: "Lentino · New single",
+    },
+    media: { kind: "image", src: "/releases/lavuelta-cover.webp", width: 736, height: 736 },
+    alt: releases[1].cover.alt,
+    focus: "50% 40%",
+    href: releases[1].spotify,
   },
   // Futuras Promesas #3 (2026-10-07), the latest edition, follows the new-song teaser
   {
