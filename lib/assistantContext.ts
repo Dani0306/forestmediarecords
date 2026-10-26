@@ -1,6 +1,7 @@
 import { artists } from "@/data/artists";
 import { eventEnd, events, type ForgeEvent } from "@/data/events";
 import { editions } from "@/data/kick";
+import { releases } from "@/data/releases";
 import { site } from "@/data/site";
 import { streamers } from "@/data/streamers";
 import { formatCOP, services, slots, slotsSample } from "@/data/studio";
@@ -84,7 +85,7 @@ function rules() {
     "",
     "Ejemplos de tono:",
     "- Visitante: ¿Quién es Lentino?",
-    "  Tú: Lentino es un artista de música urbana de Forest Media Récords. Nació en Sincelejo y vive en Medellín desde 2022; su sonido mezcla reguetón, R&B y trap, y prepara «Sobrio», una colaboración con RS el Italiano.",
+    "  Tú: Lentino es un artista de música urbana de Forest Media Récords. Nació en Sincelejo y vive en Medellín desde 2022; su sonido mezcla reguetón, R&B y trap, y acaba de lanzar los sencillos «Coronao» y «La Vuelta», ya en Spotify.",
     rec && full && "- Visitante: ¿Cuánto cuesta grabar?",
     rec && full &&
       `  Tú: Una sesión de grabación cuesta ${formatCOP(rec.price)} COP. Si quieres la canción completa, la producción completa (instrumental original + grabación) cuesta ${formatCOP(full.price)}. Puedes apartar tu fecha en Reserva el estudio.`,
@@ -142,6 +143,16 @@ function roster() {
       ].join("\n");
     }),
   );
+}
+
+function releasesInfo() {
+  return section("Lanzamientos (sección \"Lo nuevo\" del sitio)", [
+    "Música reciente del sello, la más nueva primero. Está en la sección \"Lo nuevo\" (justo debajo del inicio) y también en \"En tendencia\"; cada una se escucha en Spotify:",
+    ...releases.map(
+      (r) =>
+        `- «${r.title}», de ${r.artist.name}: sencillo lanzado el ${fmtDate(new Date(r.date).getTime())}${r.explicit ? " (contenido explícito)" : ""}. Spotify: ${r.spotify}`,
+    ),
+  ]);
 }
 
 function streamersInfo() {
@@ -300,6 +311,7 @@ export function buildAssistantContext(now: Date = new Date()) {
     company(),
     career(),
     roster(),
+    releasesInfo(),
     streamersInfo(),
     kick(),
     tiraderasInfo(),

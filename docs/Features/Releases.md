@@ -30,3 +30,6 @@ related:
 
 ## Also in Trending (2026-10-26)
 Both singles are cards in `data/trending.ts` (kind `music`, label "Música"): **Coronao** leads the mosaic (slot 1), **La Vuelta** is slot 4 (the wide slots 2 and 3 would crop the square cover). They link to Spotify ("Escuchar en Spotify"). The data comes from `data/releases.ts`, so alt text and links live in one place.
+
+## Chat assistant
+`lib/assistantContext.ts` has a "Lanzamientos" section built from `data/releases.ts` (title, artist, date, explicit, Spotify link), so Sorner Morrison answers questions about the new singles and stays current when the list changes. The Lentino tone example now mentions them.
