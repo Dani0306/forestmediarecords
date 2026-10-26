@@ -42,6 +42,14 @@ const es = {
     pause: "Pausar video",
     play: "Reproducir video",
     origin: "Medellín · Colombia",
+    newMusic: "Nuevo en Spotify",
+    quick: {
+      label: "Accesos rápidos",
+      music: { tag: "Música", title: "Escucha lo nuevo" },
+      agenda: { tag: "Eventos y streams", title: "Ver la agenda" },
+      tiraderas: { tag: "Torneo en Kick", title: "Mundial de Tiraderas" },
+      studio: { tag: "Estudio", title: "Reserva el estudio" },
+    },
   },
   forge: {
     title: "Así se forja una carrera",
@@ -451,6 +459,14 @@ const en: Dict = {
     pause: "Pause video",
     play: "Play video",
     origin: "Medellín · Colombia",
+    newMusic: "New on Spotify",
+    quick: {
+      label: "Quick links",
+      music: { tag: "Music", title: "Hear what's new" },
+      agenda: { tag: "Events and streams", title: "See the agenda" },
+      tiraderas: { tag: "Kick tournament", title: "Mundial de Tiraderas" },
+      studio: { tag: "Studio", title: "Book the studio" },
+    },
   },
   forge: {
     title: "How a career gets forged",

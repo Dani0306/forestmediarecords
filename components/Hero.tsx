@@ -11,6 +11,7 @@ import {
   type ForgeEvent,
   type Heat,
 } from "@/data/events";
+import { releases } from "@/data/releases";
 import { hasKick, site } from "@/data/site";
 import { eventPhoto } from "@/lib/eventPhoto";
 import { icsHref } from "@/lib/ics";
@@ -25,6 +26,14 @@ import {
 
 /** The label's YouTube channel: the video hero's second button. */
 const youtube = site.socials.find((s) => s.id === "youtube")?.url;
+
+/** The video hero's shortcuts: the actions worth finding in the first screen. Order is priority. */
+const QUICK = [
+  { href: "#lanzamientos", id: "music" },
+  { href: "#agenda", id: "agenda" },
+  { href: "#tiraderas", id: "tiraderas" },
+  { href: "#estudio", id: "studio" },
+] as const;
 
 const artistNames = (e: ForgeEvent) =>
   e.artists
@@ -530,6 +539,17 @@ export default function Hero() {
 
       <div className="relative z-10 grid flex-1 grid-cols-1 content-end gap-10 px-[var(--g)] pb-10 pt-28 lg:grid-cols-12 lg:items-end lg:gap-8 lg:pb-12">
         <div className="hero-exit lg:col-span-6 xl:col-span-7">
+          {releases.length > 0 && (
+            <a
+              href="#lanzamientos"
+              className="readout group mb-5 inline-flex min-h-11 max-w-full items-center gap-3 rounded-full border border-iron/25 bg-forge/55 py-1 pl-3 pr-4 text-[0.64rem] text-iron backdrop-blur-sm transition-colors hover:border-ember hover:text-white-heat"
+            >
+              <span aria-hidden="true" className="live-dot size-2 shrink-0 rounded-full bg-ember" />
+              <span className="text-ember">{t.hero.newMusic}</span>
+              <span className="truncate">{releases.map((r) => r.title).join(" · ")}</span>
+              <ArrowDown className="size-3.5 shrink-0 text-ember transition-transform group-hover:translate-y-0.5" />
+            </a>
+          )}
           <h1
             id="hero-title"
             className="stencil hot-type cool-in text-[clamp(3.25rem,13vw,6rem)] [--wdth:70] lg:text-[6rem]"
@@ -564,6 +584,35 @@ export default function Hero() {
           </div>
         </div>
       </div>
+      {/* shortcuts: one hairline strip, text only, so the loop stays the picture */}
+      <nav
+        aria-label={t.hero.quick.label}
+        className="relative z-10 border-t border-iron/15"
+      >
+        <ul className="flex snap-x overflow-x-auto px-[var(--g)] [scrollbar-width:none] md:grid md:grid-cols-4 md:overflow-visible">
+          {QUICK.map((q, i) => (
+            <li
+              key={q.id}
+              className={`shrink-0 snap-start max-md:w-[min(62vw,15rem)] ${i > 0 ? "border-l border-iron/10 pl-4 md:pl-6" : ""} ${i < QUICK.length - 1 ? "pr-4" : ""}`}
+            >
+              <a
+                href={q.href}
+                className="group flex min-h-16 items-center justify-between gap-3 py-3"
+              >
+                <span className="min-w-0">
+                  <span className="readout block text-[0.58rem] text-steel">
+                    {t.hero.quick[q.id].tag}
+                  </span>
+                  <span className="stencil mt-1 block truncate text-[1.15rem] leading-none text-iron transition-colors [--wdth:80] group-hover:text-white-heat">
+                    {t.hero.quick[q.id].title}
+                  </span>
+                </span>
+                <ArrowDown className="size-4 shrink-0 text-ember transition-transform duration-300 group-hover:translate-y-0.5" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
       {/* {secondary && (
         <div className="relative z-10">
           <SecondaryHeat e={secondary} now={now} />

@@ -41,3 +41,9 @@ At zero the takeover swaps the countdown for `LiveBlock` ("En vivo" + a big "Ver
 ## New loop from the FMR shoot (2026-10-24)
 
 The hero now plays the team's new `poster.mov` (4K HEVC 10-bit, 10.5 s, flat log-style footage of RS el Italiano and Lentino on the "FMR" shoot). Graded (the source sat in luma 72-128, so levels 0.26-0.68, gamma 1.25, saturation 1.25), denoised (`hqdn3d=4:4:8:8`, night noise costs bytes) and scaled to 1280×720, trimmed to 10 s. AV1 WebM CRF 40 preset 2 (~1.3 MB, VMAF ~86) first, then H.264 CRF 28 (~1.5 MB) for older iPhones and Safari. The same quality needs about 2 MB in H.264. Heavier than the old 700 KB loop because the footage is noisy and handheld. Files renamed `hero-fmr.*` so cached visitors get the new clip. Crop `object-[48%_30%]` on phones, `lg:object-[50%_40%]`. The 74 MB original lives in git-ignored `marketing/hero-source/`; the previous Lentino loop in `source/hero/previous-hero-loop-lentino-poster/`.
+
+## Shortcuts on the video hero (2026-10-26)
+So visitors find the key actions without covering the loop (`components/Hero.tsx`, copy in `hero.quick` and `hero.newMusic`):
+- A small pill above the title, "Nuevo en Spotify · Coronao · La Vuelta" (titles from `data/releases.ts`), links to `#lanzamientos`. Hidden when there are no releases.
+- A hairline strip along the bottom edge, text only, no panels: Escucha lo nuevo, Ver la agenda, Mundial de Tiraderas, Reserva el estudio. Order is priority. Four columns from 768px; on phones a snap-scrolling row.
+- The existing "Forma parte" and YouTube buttons stay. The main-event takeover (when an event is on) has its own actions and does not show the strip.
