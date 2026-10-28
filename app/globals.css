@@ -346,16 +346,6 @@ a {
     0 40px 80px -24px rgb(0 0 0 / 0.9);
 }
 
-/* hovering anywhere on an event card heats its picture to true colour */
-.event-card:hover .iron-photo img,
-.event-card:focus-within .iron-photo :is(img, video) {
-  filter: none;
-  transform: scale(1.03);
-}
-.event-card:hover .iron-photo::after,
-.event-card:focus-within .iron-photo::after {
-  opacity: 0;
-}
 /* trending is a media wall: a lighter grade so the picture reads at rest,
    and a lean glass band that leaves the picture most of the card */
 .trend-card .iron-photo :is(img, video) {
@@ -905,4 +895,111 @@ a.follow-row:is(:hover, :focus-visible) .follow-cta {
       rotate: 140deg;
     }
   }
+}
+
+/* ── Agenda: the heat rod ─────────────────────────────────────────
+   The cold side (before "today") is there from the start; the heat wipes
+   out from the needle as the rod scrolls in, and each notch drops in as the
+   front passes it. A newly chosen event's title and picture are struck in. */
+@layer components {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .rod-heat {
+        animation: rod-heat linear both;
+        animation-timeline: view();
+        animation-range: cover 12% cover 36%;
+      }
+      .rod-pin {
+        animation: rod-pin linear both;
+        animation-timeline: view();
+      }
+    }
+    .agenda-swap {
+      animation: agenda-swap 0.55s var(--ease-hammer) both;
+    }
+    /* the next heat: a spark runs along the fuse toward it, its notch pulses */
+    .rod-spark {
+      animation: rod-spark 2.4s cubic-bezier(0.55, 0, 0.75, 0.3) infinite;
+    }
+    .spine-spark {
+      animation: spine-spark 2s cubic-bezier(0.55, 0, 0.75, 0.3) infinite;
+    }
+    .rod-beacon::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border: 2px solid var(--h);
+      border-radius: 2px;
+      animation: rod-beacon 1.8s var(--ease-hammer) infinite;
+    }
+  }
+}
+@keyframes rod-heat {
+  from {
+    clip-path: inset(0 calc(100% - var(--now, 0%)) 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes rod-pin {
+  from {
+    opacity: 0;
+    transform: translateY(-1.25rem);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(0.15rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes agenda-swap {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(-0.6rem);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+@keyframes rod-spark {
+  from {
+    translate: -100% 0;
+  }
+  to {
+    translate: 100% 0;
+  }
+}
+@keyframes spine-spark {
+  from {
+    translate: 0 -4rem;
+  }
+  to {
+    translate: 0 12rem;
+  }
+}
+@keyframes rod-beacon {
+  from {
+    opacity: 0.9;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 2.2;
+  }
+}
+/* the fuse: the stretch of rod between today and the next heat, burning brighter */
+.rod-fuse {
+  background: linear-gradient(90deg, rgb(255 243 196 / 0.15), rgb(255 166 43 / 0.25));
+}
+.rod-spark {
+  background: linear-gradient(90deg, transparent 55%, rgb(255 166 43 / 0.6) 85%, var(--color-white-heat) 97%, transparent);
+  filter: drop-shadow(0 0 6px var(--color-glow));
+}
+.spine-spark {
+  background: linear-gradient(to bottom, transparent, var(--color-white-heat) 70%, transparent);
 }

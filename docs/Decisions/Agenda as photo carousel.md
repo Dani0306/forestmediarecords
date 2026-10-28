@@ -1,6 +1,6 @@
 ---
 type: decision
-status: accepted
+status: superseded
 date: 2026-10-05
 tags:
   - decision
@@ -16,3 +16,5 @@ Agenda rows became photo cards with details on black glass, in a category-filter
 
 ## Consequences
 With few events, one row per category would be sparse; a single filtered carousel stays full.
+
+> [!note] Superseded 2026-10-27 by [[Agenda as a heat rod timeline]].
