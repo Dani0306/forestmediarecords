@@ -41,6 +41,8 @@ const useDesktop = () =>
 const startOf = (e: ForgeEvent) => new Date(e.start).getTime();
 const watchUrl = (e: ForgeEvent) =>
   e.url || (e.type === "stream" && hasKick ? site.kick.url : "");
+/** Where to watch a finished event: its recording, else (streams) the Kick channel. */
+const replayUrl = (e: ForgeEvent) => e.replay || (e.type === "stream" && hasKick ? site.kick.url : "");
 const names = (e: ForgeEvent) =>
   e.artists
     .map((s) => artists.find((a) => a.slug === s)?.name)
@@ -287,6 +289,12 @@ function Detail({
           {!cold && url && (
             <a href={url} target="_blank" rel="noreferrer" className="btn btn-hot">
               {e.type === "stream" ? t.agenda.watch : "Info"}
+              <ArrowUpRight className="size-4" />
+            </a>
+          )}
+          {cold && replayUrl(e) && (
+            <a href={replayUrl(e)} target="_blank" rel="noreferrer" className="btn btn-hot">
+              {t.agenda.watchReplay}
               <ArrowUpRight className="size-4" />
             </a>
           )}

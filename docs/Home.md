@@ -32,12 +32,13 @@ Working vault for the **Forest Media Récords** website: a bilingual (ES/EN) lab
 4. [[Trending]]
 5. [[Releases]]
 6. [[Artists]]
-7. [[Streamers]]
-8. [[Kick section]]
-9. [[La forja]]
-10. [[Studio]]
-11. [[Demo form]]
-12. [[Follow us]]
+7. [[Top songs]]
+8. [[Streamers]]
+9. [[Kick section]]
+10. [[La forja]]
+11. [[Studio]]
+12. [[Demo form]]
+13. [[Follow us]]
 
 Around the page: [[Navigation and footer]], [[Chat assistant]], [[Legal pages]] (`/privacidad`, `/terminos`, cookie notice), [[Bilingual copy]].
 

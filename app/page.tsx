@@ -11,6 +11,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteNav from "@/components/SiteNav";
 import Studio from "@/components/Studio";
 import Streamers from "@/components/Streamers";
+import TopSongs from "@/components/TopSongs";
 import Trending from "@/components/Trending";
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
         <Tiraderas />
         <Trending />
         <Roster />
+        <TopSongs />
         <Streamers />
         <KickSection />
         <ForgeProcess />

@@ -26,6 +26,8 @@ export type ForgeEvent = {
   /** Venue name for live shows; for streams use "Kick". */
   place: { es: string; en: string };
   url?: string; // tickets, Kick channel or release link
+  /** Recording of a finished event (Kick VOD, YouTube). Streams without one fall back to the Kick channel. */
+  replay?: string;
   /** Main event? true → takes over the hero's first screen (see the note above). Required. */
   main: boolean;
   /** Event picture (agenda card and hero); defaults to the lead artist's photo. */

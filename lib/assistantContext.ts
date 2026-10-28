@@ -3,6 +3,7 @@ import { eventEnd, events, type ForgeEvent } from "@/data/events";
 import { editions } from "@/data/kick";
 import { releases } from "@/data/releases";
 import { site } from "@/data/site";
+import { topSongs } from "@/data/topSongs";
 import { streamers } from "@/data/streamers";
 import { formatCOP, services, slots, slotsSample } from "@/data/studio";
 import { tiraderas as T } from "@/data/tiraderas";
@@ -151,6 +152,22 @@ function releasesInfo() {
     ...releases.map(
       (r) =>
         `- «${r.title}», de ${r.artist.name}: sencillo lanzado el ${fmtDate(new Date(r.date).getTime())}${r.explicit ? " (contenido explícito)" : ""}. Spotify: ${r.spotify}`,
+    ),
+  ]);
+}
+
+/** "Lo más escuchado": left out until the team fills data/topSongs.ts (sample songs never count). */
+function topSongsInfo() {
+  const sides = topSongs
+    .map((s) => ({ name: artists.find((a) => a.slug === s.artist)?.name ?? s.artist, songs: s.songs.filter((x) => !x.sample) }))
+    .filter((s) => s.songs.length > 0);
+  if (sides.length === 0) return "";
+  return section("Canciones más escuchadas (sección \"Lo más escuchado\")", [
+    ...sides.map(
+      (s) =>
+        `- ${s.name}: ${s.songs
+          .map((x, i) => `${i + 1}. «${x.title}»${x.plays ? ` (${x.plays} reproducciones)` : ""}${x.spotify ? ` ${x.spotify}` : x.youtube ? ` ${x.youtube}` : ""}`)
+          .join("; ")}.`,
     ),
   ]);
 }
@@ -312,6 +329,7 @@ export function buildAssistantContext(now: Date = new Date()) {
     career(),
     roster(),
     releasesInfo(),
+    topSongsInfo(),
     streamersInfo(),
     kick(),
     tiraderasInfo(),
@@ -322,5 +340,7 @@ export function buildAssistantContext(now: Date = new Date()) {
     // changes on every request: keep it last so the part above can be cached
     section("Fecha y hora actual", [`Hoy es ${fmtDate(ms)}, ${fmtTime(ms)} (hora de Medellín).`]),
     agenda(ms),
-  ].join("\n\n");
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 }

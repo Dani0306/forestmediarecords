@@ -23,7 +23,7 @@ Marketing and information site for **Forest Media Récords**, a music production
 - `PRODUCT.md`: product truth (users, purpose, principles).
 - `DESIGN.md` + `.impeccable/design.json`: design system (forge world, tokens, components). Update when a durable pattern changes.
 - `.impeccable/surfaces/app-page-tsx.md`: the landing page's direction contract.
-- `data/events.ts`, `data/artists.ts`, `data/site.ts`, `data/kick.ts`, `data/trending.ts`, `data/streamers.ts`, `data/studio.ts` (prices), `data/legal.ts` (privacy and terms): all content. Sending: `lib/demo.ts` and `lib/booking.ts` post to `app/api/contact/route.ts`, which emails the contact inbox through Resend (needs `RESEND_API_KEY` in Vercel; see `.env.example`). `lib/dictionary.ts`: all copy, ES and EN.
+- `data/events.ts`, `data/artists.ts`, `data/site.ts`, `data/kick.ts`, `data/trending.ts`, `data/streamers.ts`, `data/studio.ts` (prices), `data/releases.ts` (new releases), `data/topSongs.ts` (top 3 songs per artist, "Lo más escuchado"), `data/legal.ts` (privacy and terms): all content. Sending: `lib/demo.ts` and `lib/booking.ts` post to `app/api/contact/route.ts`, which emails the contact inbox through Resend (needs `RESEND_API_KEY` in Vercel; see `.env.example`). `lib/dictionary.ts`: all copy, ES and EN.
 
 ## Skills
 
