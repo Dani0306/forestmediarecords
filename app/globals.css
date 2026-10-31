@@ -1191,3 +1191,48 @@ a.follow-row:is(:hover, :focus-visible) .follow-cta {
     transform: scaleY(1);
   }
 }
+
+/* Halloween 2026-10-31: one-day decoration (components/Halloween.tsx). Remove with the component. */
+.hw-glow {
+  background:
+    radial-gradient(60% 100% at 50% 110%, rgb(255 90 17 / 0.34), transparent 70%),
+    radial-gradient(30% 70% at 8% 110%, rgb(255 166 43 / 0.2), transparent 70%),
+    radial-gradient(30% 70% at 92% 110%, rgb(194 30 14 / 0.22), transparent 70%);
+}
+.hw-bat {
+  filter: drop-shadow(0 0 5px rgb(255 90 17 / 0.5));
+  transform: translateX(-20vw);
+}
+.hw-pill {
+  box-shadow: 0 0 18px rgb(255 90 17 / 0.35);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hw-glow {
+    animation: hw-flicker 3.4s steps(1, end) infinite;
+  }
+  .hw-bat {
+    animation: hw-fly var(--d, 20s) linear var(--dl, 0s) infinite;
+  }
+  .hw-flap {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hw-flap 0.28s ease-in-out infinite alternate;
+  }
+  .hw-spider {
+    animation: hw-drop 5s var(--ease-hammer) infinite alternate;
+  }
+  .hw-pill {
+    animation: hw-pill 2.6s ease-in-out infinite alternate;
+  }
+}
+@keyframes hw-fly {
+  from { transform: translate(-20vw, 0) rotate(-4deg); }
+  50% { transform: translate(60vw, var(--y, 0)) rotate(4deg); }
+  to { transform: translate(120vw, 0) rotate(-4deg); }
+}
+@keyframes hw-flap { from { transform: scaleY(1); } to { transform: scaleY(0.45); } }
+@keyframes hw-drop { from { transform: translateY(-2.5rem); } to { transform: translateY(1.5rem); } }
+@keyframes hw-pill { from { box-shadow: 0 0 10px rgb(255 90 17 / 0.25); } to { box-shadow: 0 0 26px rgb(255 90 17 / 0.55); } }
+@keyframes hw-flicker {
+  0%, 100% { opacity: 1; } 8% { opacity: 0.72; } 11% { opacity: 1; } 47% { opacity: 0.85; } 50% { opacity: 1; } 78% { opacity: 0.7; } 80% { opacity: 1; }
+}

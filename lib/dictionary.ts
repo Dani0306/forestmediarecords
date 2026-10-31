@@ -257,6 +257,7 @@ const es = {
     explicit: "Contenido explícito",
     kinds: { single: "Sencillo" },
   },
+  halloween: { greeting: "Feliz Halloween" },
   top: {
     title: "Lo más escuchado",
     intro:
@@ -685,6 +686,7 @@ const en: Dict = {
     explicit: "Explicit content",
     kinds: { single: "Single" },
   },
+  halloween: { greeting: "Happy Halloween" },
   top: {
     title: "Most played",
     intro:
