@@ -99,7 +99,7 @@ export const streamers: Streamer[] = [
           "Su meta es seguir creciendo en la industria digital, fortalecer su comunidad y crear nuevos proyectos que unan streaming, música y entretenimiento.",
         ],
         en: [
-          "Leonardo Lugo Gómez was born in Villavicencio in 2003 and has lived in Medellín for two years, where he's building his path in digital entertainment and streaming. He stands out for his on-camera presence and his connection with his audience.",
+          "Leonardo Lugo Gómez was born in Villavicencio in 2004 and has lived in Medellín for two years, where he's building his path in digital entertainment and streaming. He stands out for his on-camera presence and his connection with his audience.",
           "He's part of the Forest Media Récords projects that bring streaming and music together, opening space for emerging artists and creators. Sessions like Futuras Promesas go out on his channel.",
           "His goal is to keep growing in the digital industry, strengthen his community and build new projects that join streaming, music and entertainment.",
         ],
