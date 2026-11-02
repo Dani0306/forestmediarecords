@@ -41,7 +41,6 @@ export default function SiteNav() {
     { href: "/#tendencia", label: t.nav.trending },
     { href: "/#artistas", label: t.nav.artists },
     { href: "/#streamers", label: t.nav.streamers },
-    { href: "/#forja", label: t.nav.forge },
     { href: "/#estudio", label: t.nav.studio },
     { href: "/#kick", label: t.nav.kick },
     { href: "/#demos", label: t.nav.demos },
