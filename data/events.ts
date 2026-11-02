@@ -100,12 +100,12 @@ export const events: ForgeEvent[] = [
     image: "/streamers/trianiss/trianiss-4.avif",
   },
   {
-    id: "tiraderas-cuartos",
+    id: "tiraderas-ronda-1",
     type: "stream",
     main: false,
     title: {
-      es: "Mundial de Tiraderas · Cuartos de final",
-      en: "Mundial de Tiraderas · Quarter-finals",
+      es: "Mundial de Tiraderas · Primera ronda",
+      en: "Mundial de Tiraderas · Round 1",
     },
     artists: [],
     start: "2026-11-06T19:30:00-05:00",
@@ -115,12 +115,12 @@ export const events: ForgeEvent[] = [
     url: "https://kick.com/jaycol",
   },
   {
-    id: "tiraderas-semifinal",
+    id: "tiraderas-battle-royale",
     type: "stream",
     main: false,
     title: {
-      es: "Mundial de Tiraderas · Semifinal",
-      en: "Mundial de Tiraderas · Semi-final",
+      es: "Mundial de Tiraderas · Battle royale",
+      en: "Mundial de Tiraderas · Battle royale",
     },
     artists: [],
     start: "2026-11-13T19:30:00-05:00",

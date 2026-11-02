@@ -1,6 +1,6 @@
 ---
 type: decision
-status: accepted
+status: superseded
 date: 2026-10-14
 tags:
   - decision
@@ -11,6 +11,8 @@ related:
 ---
 
 # Eight-player bracket with a surprise entrant
+
+> Superseded on 2026-11-02 by [[Six players, best three to a battle royale]].
 
 ## Context
 A day after the [[Six-player format with a battle royale]], the team confirmed a seventh competitor (Cang5) and an eighth who will be a surprise, revealed later (2026-10-14).

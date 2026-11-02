@@ -141,32 +141,38 @@ function Slot({
   );
 }
 
-/** A battle: two slots, one per competitor; the winner (when picked) is lit and the other dims. */
+/** One stage of the bracket: a slot per competitor; those who go through are lit, and once the stage is settled the rest dim. */
 function Match({
   names,
   empty,
-  winner = "",
+  through = [],
+  settled = false,
   onPick,
 }: {
   names: string[];
   empty: string;
-  winner?: string;
+  through?: string[];
+  /** Everyone who goes through is known: the others dim. */
+  settled?: boolean;
   onPick?: (name: string) => void;
 }) {
   return (
     <div
       className={`relative w-full rounded-[3px] border bg-forge ${names.some(Boolean) ? "border-steel/40" : "border-anvil"}`}
     >
-      {names.map((n, i) => (
-        <Slot
-          key={i}
-          name={n}
-          empty={empty}
-          won={Boolean(winner) && n === winner}
-          lost={Boolean(winner) && n !== winner}
-          onPick={onPick ? () => onPick(n) : undefined}
-        />
-      ))}
+      {names.map((n, i) => {
+        const won = Boolean(n) && through.includes(n);
+        return (
+          <Slot
+            key={i}
+            name={n}
+            empty={empty}
+            won={won}
+            lost={settled && Boolean(n) && !won}
+            onPick={onPick ? () => onPick(n) : undefined}
+          />
+        );
+      })}
     </div>
   );
 }
@@ -204,14 +210,13 @@ export default function Tiraderas() {
   const next = nextIdx >= 0 ? rounds[nextIdx] : undefined;
 
   const byId = (id: string) => rounds.find((r) => r.eventId === id)?.e;
-  const qf = byId("tiraderas-cuartos");
-  const sf = byId("tiraderas-semifinal");
+  const r1 = byId("tiraderas-ronda-1");
+  const royale = byId("tiraderas-battle-royale");
   const fin = byId("tiraderas-final");
   const youtubeUrl = site.socials.find((x) => x.id === "youtube")?.url;
   const drawUrl = rounds.find((r) => r.eventId === "tiraderas-sorteo")?.watchUrl;
-  const drawn = T.bracket.quarterfinals.some(([a, b]) => a || b);
   const b = resolveBracket(winners);
-  const pick = (id: string) => (admin ? (name: string) => void pickWinner(id, name) : undefined);
+  const pick = (id: string) => (admin ? (name: string) => void pickWinner(id === "final" ? id : `${id}:${name}`, name) : undefined);
 
   return (
     <section id="tiraderas" aria-labelledby="tiraderas-title" className="relative overflow-clip border-t border-anvil">
@@ -330,7 +335,7 @@ export default function Tiraderas() {
                       : `${T.participants.length} / ${T.players} ${c.announced}`}
                 </p>
               </div>
-              <ul className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-4 sm:gap-x-4 xl:grid-cols-8">
+              <ul className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-4 xl:grid-cols-6">
                 {T.participants.slice(0, T.players).map((p) => (
                   <Fighter key={p.url} p={p} label={c.channel} />
                 ))}
@@ -378,41 +383,41 @@ export default function Tiraderas() {
           <div className="-mx-5 overflow-x-auto px-5 pb-2 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
             <div className="bracket grid min-w-[40rem] grid-cols-4 gap-x-8">
               <div className="flex flex-col">
-                <StageHead label={c.stages.quarterfinals} e={qf} heat={heat(qf)} lang={lang} />
-                {/* four battles, bracketed two by two into the semi-finals */}
-                <div className="flex flex-1 flex-col gap-3">
-                  {[0, 1].map((p) => (
-                    <div key={p} className="bracket-pair relative flex flex-1 flex-col gap-3">
-                      {[0, 1].map((m) => (
-                        <div key={m} className="flex flex-1 items-center">
-                          <Match
-                            names={b.quarterfinals[p * 2 + m]}
-                            empty={drawn ? c.tbdLater : c.tbd}
-                            winner={b.winners[`qf${p * 2 + m}`]}
-                            onPick={pick(`qf${p * 2 + m}`)}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+                <StageHead label={c.stages.round1} e={r1} heat={heat(r1)} lang={lang} />
+                <div className="bracket-out relative flex flex-1 items-center">
+                  <Match
+                    names={b.round1}
+                    empty={c.tbd}
+                    through={b.through1}
+                    settled={b.through1.length >= T.bracket.advance1}
+                    onPick={pick("r1")}
+                  />
                 </div>
               </div>
 
               <div className="flex flex-col">
-                <StageHead label={c.stages.semifinals} e={sf} heat={heat(sf)} lang={lang} />
-                <div className="bracket-pair relative flex flex-1 flex-col gap-3">
-                  {b.semifinals.map((pair, m) => (
-                    <div key={m} className="bracket-in-line relative flex flex-1 items-center">
-                      <Match names={pair} empty={c.tbdLater} winner={b.winners[`sf${m}`]} onPick={pick(`sf${m}`)} />
-                    </div>
-                  ))}
+                <StageHead label={c.stages.royale} e={royale} heat={heat(royale)} lang={lang} />
+                <div className="bracket-in-line bracket-out relative flex flex-1 items-center">
+                  <Match
+                    names={b.royale}
+                    empty={c.tbdLater}
+                    through={b.through2}
+                    settled={b.through2.length >= T.bracket.advance2}
+                    onPick={pick("r2")}
+                  />
                 </div>
               </div>
 
               <div className="flex flex-col">
                 <StageHead label={c.stages.final} e={fin} heat={heat(fin)} lang={lang} />
                 <div className="bracket-in-line bracket-out-line relative flex flex-1 items-center">
-                  <Match names={b.final} empty={c.tbdLater} winner={b.winners.final} onPick={pick("final")} />
+                  <Match
+                    names={b.final}
+                    empty={c.tbdLater}
+                    through={b.champion ? [b.champion] : []}
+                    settled={Boolean(b.champion)}
+                    onPick={pick("final")}
+                  />
                 </div>
               </div>
 

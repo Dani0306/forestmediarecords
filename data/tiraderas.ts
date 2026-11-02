@@ -36,12 +36,12 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow. El sorteo es a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
-    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow. The draw is at 8:00 PM and every other date at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
+    es: "Seis streamers se enfrentan en tiraderas: barras, indirectas y flow. Los tres mejores pasan a un battle royale y los dos mejores de ese, a la final. El sorteo fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
+    en: "Six streamers face off in tiraderas (diss tracks): bars, shots and flow. The best three go through to a battle royale, and the best two of that to the final. The draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
-  /** Eight since 2026-10-14; all eight confirmed on 2026-10-16 (the eighth was a surprise until then). */
-  players: 8,
-  /** True while a place is a surprise (revealed later) instead of "to be announced". Off since 2026-10-16: all eight are known. */
+  /** Eight until 2026-11-02, when Carlogato and Edisson dropped out and the format became six. */
+  players: 6,
+  /** True while a place is a surprise (revealed later) instead of "to be announced". Off since 2026-10-16: all are known. */
   surprise: false,
   /**
    * Confirmed competitors (from the team, 2026-10-12). Fewer than `players`
@@ -49,17 +49,6 @@ export const tiraderas = {
    * "Por anunciar" slots. Bracket names match these `name`s to show the photo.
    */
   participants: [
-    {
-      // replaced valedanyy07 on 2026-10-16
-      name: "Carlogato",
-      url: "https://kick.com/carlogato",
-      photo: {
-        src: "/tiraderas/participants/carlogato.avif",
-        width: 1034,
-        height: 1379,
-        focus: "50% 38%",
-      },
-    },
     {
       name: "ElFerpo2",
       url: "https://kick.com/elferpo2",
@@ -98,16 +87,6 @@ export const tiraderas = {
         width: 540,
         height: 808,
         focus: "50% 60%",
-      },
-    },
-    {
-      name: "Edisson",
-      url: "https://kick.com/edisson",
-      photo: {
-        src: "/tiraderas/participants/edisson.avif",
-        width: 1200,
-        height: 1600,
-        focus: "50% 45%",
       },
     },
     {
@@ -203,27 +182,27 @@ export const tiraderas = {
       },
     },
     {
-      eventId: "tiraderas-cuartos",
-      name: { es: "Cuartos de final", en: "Quarter-finals" },
+      eventId: "tiraderas-ronda-1",
+      name: { es: "Primera ronda", en: "Round 1" },
       body: {
-        es: "Cuatro batallas uno contra uno entre los ocho competidores. Una ruleta virtual decide el orden y empieza la puntuación. Las cuatro mejores tiraderas pasan a la semifinal.",
-        en: "Four one-on-one battles between the eight competitors. A virtual wheel picks the order and the scoring begins. The four best tiraderas go through to the semi-final.",
+        es: "Los seis competidores hacen su tiradera y se puntúan. Los tres mejores pasan al battle royale.",
+        en: "The six competitors each deliver their tiradera and are scored. The best three go through to the battle royale.",
       },
     },
     {
-      eventId: "tiraderas-semifinal",
-      name: { es: "Semifinal", en: "Semi-final" },
+      eventId: "tiraderas-battle-royale",
+      name: { es: "Battle royale", en: "Battle royale" },
       body: {
-        es: "Los cuatro clasificados, en dos batallas. Los dos ganadores pasan a la gran final.",
-        en: "The four who went through, in two battles. The two winners go on to the grand final.",
+        es: "Los tres clasificados se enfrentan entre sí en un battle royale. Los dos mejores pasan a la gran final.",
+        en: "The three who went through face each other in a battle royale. The best two go on to the grand final.",
       },
     },
     {
       eventId: "tiraderas-final",
       name: { es: "Gran final", en: "Grand final" },
       body: {
-        es: "Los dos ganadores de la semifinal, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
-        en: "The two semi-final winners, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
+        es: "Los dos clasificados del battle royale, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
+        en: "The two who came through the battle royale, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
       },
     },
   ] as Round[],
@@ -241,22 +220,16 @@ export const tiraderas = {
     { es: "El videoclip es opcional.", en: "A music video is optional." },
   ],
   /**
-   * Format (2026-10-14): eight competitors → four quarter-final battles →
-   * two semi-finals → the final. Fill in as the competition runs; "" = not known yet.
+   * Format (2026-11-02): six competitors → the best three go to a battle royale
+   * → the best two go to the final. Round 1 lists the six; the draw order is
+   * not set yet. Who advances is picked in the bracket (admin mode); "" = not known yet.
    */
   bracket: {
-    // drawn with slips of paper on 2026-10-16
-    quarterfinals: [
-      ["Cang5", "Pablomeji4"],
-      ["Edisson", "Carlogato"],
-      ["Cuartiz", "ElFerpo2"],
-      ["Emvy_29", "soyjosema"],
-    ] as [string, string][],
-    semifinals: [
-      ["", ""],
-      ["", ""],
-    ] as [string, string][],
-    final: ["", ""] as [string, string],
+    round1: ["Cang5", "Pablomeji4", "Cuartiz", "ElFerpo2", "Emvy_29", "soyjosema"] as string[],
+    /** How many go through from round 1 to the battle royale. */
+    advance1: 3,
+    /** How many go through from the battle royale to the final. */
+    advance2: 2,
     champion: "",
   },
 };

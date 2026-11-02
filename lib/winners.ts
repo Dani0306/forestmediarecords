@@ -4,8 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 import { tiraderas } from "@/data/tiraderas";
 
 /**
- * Winners of the Mundial de Tiraderas battles, picked from the bracket in admin mode.
- * Keys: "qf0".."qf3" (quarter-finals), "sf0", "sf1" (semi-finals), "final". Value: the winner's name.
+ * Who goes through each round of the Mundial de Tiraderas, picked from the bracket in admin mode.
+ * Keys: "r1:<name>" (goes through from round 1 to the battle royale), "r2:<name>" (from the
+ * battle royale to the final) and "final" (the champion). Value: that competitor's name.
  *
  * Stored in this browser's localStorage (instant, no setup). When the shared store is set up
  * (`app/api/winners`), the same picks are also saved there so every visitor sees them.
@@ -23,28 +24,23 @@ const read = (): Winners => {
   }
 };
 
-/** The bracket with the winners applied: each round fills the next, and the final's winner is the champion. */
+/** The bracket with the picks applied: each round fills the next, and the final's winner is the champion. */
 export function resolveBracket(w: Winners) {
   const b = tiraderas.bracket;
-  const pick = (id: string, pair: string[]) => (pair.includes(w[id]) ? w[id] : "");
-  const quarterWinners = b.quarterfinals.map((p, i) => pick(`qf${i}`, p));
-  const semifinals = [
-    [quarterWinners[0], quarterWinners[1]],
-    [quarterWinners[2], quarterWinners[3]],
-  ] as [string, string][];
-  const semiWinners = semifinals.map((p, i) => pick(`sf${i}`, p));
-  const final = [semiWinners[0], semiWinners[1]] as [string, string];
+  const through = (round: string, names: string[]) => names.filter((n) => n && w[`${round}:${n}`] === n);
+  const royale = through("r1", b.round1).slice(0, b.advance1);
+  const finalists = through("r2", royale).slice(0, b.advance2);
+  const final = Array.from({ length: b.advance2 }, (_, i) => finalists[i] ?? "");
+  const champion = final.includes(w.final) ? w.final : "";
   return {
-    quarterfinals: b.quarterfinals,
-    semifinals,
+    round1: b.round1,
+    /** Round 1 → battle royale: the three slots fill in as picks are made. */
+    royale: Array.from({ length: b.advance1 }, (_, i) => royale[i] ?? ""),
     final,
-    champion: pick("final", final),
-    /** Match id → winner, only picks that still hold. */
-    winners: {
-      ...Object.fromEntries(quarterWinners.map((n, i) => [`qf${i}`, n])),
-      ...Object.fromEntries(semiWinners.map((n, i) => [`sf${i}`, n])),
-      final: pick("final", final),
-    } as Winners,
+    champion,
+    /** Names that go through round 1, and the battle royale; only picks that still hold. */
+    through1: royale,
+    through2: finalists,
   };
 }
 

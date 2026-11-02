@@ -17,7 +17,7 @@ const clean = (input: unknown) => {
   const out: Record<string, string> = {};
   if (input && typeof input === "object") {
     for (const [k, v] of Object.entries(input).slice(0, 20)) {
-      if (/^(qf[0-3]|sf[01]|final)$/.test(k) && typeof v === "string") out[k] = v.slice(0, 60);
+      if (/^(r[12]:[\w-]{1,30}|final)$/.test(k) && typeof v === "string") out[k] = v.slice(0, 60);
     }
   }
   return out;
