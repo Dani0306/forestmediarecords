@@ -184,7 +184,8 @@ function EventTakeover({
   const names = artistNames(e);
   const photo = eventPhoto(e);
   const title = e.title[lang];
-  const split = title.match(/^(.*?)\s*(#\s?\d+)$/);
+  // a trailing edition number ("#3", "4") takes the heat colour
+  const split = title.match(/^(.*?)\s+(#?\s?\d{1,2})$/);
   const startMs = new Date(e.start).getTime();
   const rel =
     now === null
@@ -224,10 +225,10 @@ function EventTakeover({
 
       <div className="grid flex-1 grid-cols-1 items-center gap-6 px-[var(--g)] pb-8 pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-10 lg:pt-28">
         {/* the poster, whole, in its own shape */}
-        <div className="flex justify-center lg:col-span-5 lg:justify-start">
+        <div className={`flex justify-center lg:col-span-5 ${e.gallery?.length ? "" : "lg:justify-start"}`}>
           {photo && (
             <div
-              className={`takeover-poster relative overflow-hidden rounded-[3px] bg-forge-3 shadow-[0_40px_90px_-30px_rgb(0_0_0/0.95)] ${e.poster ? "" : "iron-photo"}`}
+              className={`takeover-poster relative rounded-[3px] bg-forge-3 shadow-[0_40px_90px_-30px_rgb(0_0_0/0.95)] ${e.poster ? "" : "iron-photo overflow-hidden"} ${e.gallery?.length ? "takeover-fan isolate" : ""}`}
               style={
                 {
                   "--ratio": ratio,
@@ -236,14 +237,27 @@ function EventTakeover({
                 } as React.CSSProperties
               }
             >
-              <Image
-                src={photo.src}
-                alt={photo.alt[lang]}
-                fill
-                preload
-                sizes="(max-width: 1024px) 90vw, 40vw"
-                className="object-cover"
-              />
+              {/* the event's other posters, fanned out behind the lead */}
+              {e.gallery?.map((src, i) => (
+                <div
+                  key={src}
+                  aria-hidden="true"
+                  className="takeover-fan-card absolute inset-0 z-0 overflow-hidden rounded-[3px] bg-forge-3"
+                  style={{ "--i": i % 2 === 0 ? -1 : 1 } as React.CSSProperties}
+                >
+                  <Image src={src} alt="" fill sizes="(max-width: 1024px) 60vw, 30vw" className="object-cover" />
+                </div>
+              ))}
+              <div className="absolute inset-0 z-10 overflow-hidden rounded-[3px]">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt[lang]}
+                  fill
+                  preload
+                  sizes="(max-width: 1024px) 90vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
           )}
         </div>
@@ -339,6 +353,15 @@ function EventTakeover({
               >
                 <CalendarPlus className={`size-5 ${url ? "text-ember" : ""}`} />
                 {t.agenda.addCal}
+              </a>
+            )}
+            {/* an event with its own section (Futuras Promesas) points there first */}
+            {e.id === "futuras-promesas-4" && (
+              <a
+                href="#futuras-promesas"
+                className="readout inline-flex min-h-11 items-center gap-2 px-2 text-xs text-iron hover:text-white-heat"
+              >
+                {t.hero.lineup} <ArrowDown className="size-4 text-ember" />
               </a>
             )}
             <a

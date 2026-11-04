@@ -324,6 +324,150 @@ a {
   filter: blur(18px) saturate(0.8);
 }
 
+/* Futuras Promesas: the posters' case board, forged in steel. The prints hang
+   from their pins (rotation pivots on the pin), straighten and lift toward you on
+   hover; red string runs from each competitor to the guest judge and heats to
+   ember while you handle either end. */
+.fp-board {
+  background:
+    linear-gradient(rgb(236 230 218 / 0.035) 1px, transparent 1px) 0 0 / 100% 2.5rem,
+    linear-gradient(90deg, rgb(236 230 218 / 0.035) 1px, transparent 1px) 0 0 / 2.5rem 100%,
+    repeating-linear-gradient(90deg, rgb(154 158 165 / 0.35) 0 1px, transparent 1px 0.5rem) 0 0 / 100% 0.45rem no-repeat,
+    repeating-linear-gradient(90deg, rgb(154 158 165 / 0.5) 0 1px, transparent 1px 2.5rem) 0 0 / 100% 0.8rem no-repeat,
+    rgb(19 19 22 / 0.82);
+  box-shadow: 0 1px 0 rgb(236 230 218 / 0.05) inset;
+}
+.fp-print {
+  rotate: var(--lean, 0deg);
+  transform-origin: 50% 0;
+}
+.fp-sheet {
+  transition:
+    rotate 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    translate 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.fp-tilt {
+  box-shadow:
+    0 0 0 1px rgb(236 230 218 / 0.08),
+    0 30px 60px -26px rgb(0 0 0 / 0.9);
+  transition:
+    transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+.fp-gloss {
+  background: linear-gradient(160deg, rgb(255 243 196 / 0.09), transparent 38%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .fp-print:hover .fp-sheet {
+    rotate: calc(var(--lean, 0deg) * -1);
+    translate: 0 -8px;
+  }
+  .fp-print:hover .fp-tilt {
+    transition-duration: 0.12s, 0.5s;
+    box-shadow:
+      0 0 0 1px rgb(236 230 218 / 0.16),
+      0 44px 80px -26px rgb(0 0 0 / 0.95);
+  }
+  .fp-print:hover .fp-gloss {
+    opacity: 1;
+  }
+}
+.fp-pin {
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 30%, #ff8a6a, var(--color-cherry) 55%, #5a0c05);
+  box-shadow: 0 3px 5px -1px rgb(0 0 0 / 0.75);
+}
+.fp-string {
+  fill: none;
+  stroke: var(--color-cherry);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.6));
+  transition: stroke 0.25s ease, stroke-width 0.25s ease;
+}
+.fp-string.is-hot {
+  stroke: var(--color-ember);
+  stroke-width: 2;
+  filter: drop-shadow(0 2px 6px rgb(255 90 17 / 0.65));
+}
+/* a rubber stamp pressed across the guest's print */
+.fp-stamp {
+  rotate: -9deg;
+  padding: 0.35em 0.6em 0.3em;
+  border: 3px solid currentColor;
+  border-radius: 3px;
+  color: var(--color-ember);
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  background: rgb(11 11 13 / 0.7);
+  box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.8);
+  --wdth: 84;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* prints are pinned on as the board scrolls in; then the string runs */
+    .fp-in {
+      animation: fp-pin-on linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 26%;
+    }
+    .fp-string {
+      animation: fp-string linear both;
+      animation-timeline: view();
+    }
+    .fp-stamp {
+      animation: fp-stamp linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 40%;
+    }
+  }
+}
+@keyframes fp-pin-on {
+  0% {
+    opacity: 0;
+    transform: translateY(-3rem) rotate(-2.5deg);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(4px) rotate(0.6deg);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fp-string {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fp-stamp {
+  0% {
+    opacity: 0;
+    scale: 1.6;
+  }
+  60% {
+    opacity: 1;
+    scale: 0.96;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
 /* Kick posters: real printed artwork, pinned like prints. Shown untreated
    (no duotone); hover straightens one and lifts it to the front. */
 .kick-poster {
@@ -629,6 +773,34 @@ a {
 @media (min-width: 1024px) {
   .takeover-poster {
     width: min(100%, calc((100svh - 18rem) * var(--ratio)));
+  }
+}
+/* a takeover with more than one poster: the others fan out behind the lead,
+   opening once on load like a hand of prints being spread on the bench */
+.takeover-fan {
+  /* room on both sides for the fanned prints */
+  width: min(68%, calc(34svh * var(--ratio)));
+}
+@media (min-width: 1024px) {
+  .takeover-fan {
+    width: min(68%, calc((100svh - 18rem) * var(--ratio)));
+  }
+}
+.takeover-fan-card {
+  transform-origin: 50% 100%;
+  transform: translateX(calc(var(--i) * 21%)) rotate(calc(var(--i) * 6deg)) scale(0.9);
+  filter: brightness(0.62) saturate(0.9);
+  box-shadow: 0 30px 60px -28px rgb(0 0 0 / 0.95);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .takeover-fan-card {
+    animation: fan-open 0.95s var(--ease-hammer) 0.35s both;
+  }
+}
+@keyframes fan-open {
+  from {
+    transform: translateX(0) rotate(0deg) scale(0.9);
+    filter: brightness(0.3) saturate(0.9);
   }
 }
 /* the seconds land like a stamp on every tick */

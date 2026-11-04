@@ -15,6 +15,8 @@ related:
 **Code:** `components/KickSection.tsx`, `data/kick.ts`
 
 ## What it does
+Since 2026-11-04 the section leads with **Futuras Promesas #4** (7 Nov, 9:00 PM; Colmaill × Leykan; a "Jurado invitado" row with Lowkey; posters: the guest judge in front, Colmaill behind). See [[Futuras Promesas 4]]. The Tiraderas edition's line-up no longer lists Carlogato and Edisson.
+
 "En vivo en Kick", led by the latest **Kick edition** from `data/kick.ts` (the first entry): since 2026-10-08 **Futuras Promesas #3** (7 Oct, 9:00 PM), winner **2BLE B** from Barranquilla, motto "El talento también es del Caribe". Its poster prints cities, not names, so the row shows **Ciudades: Medellín × Bogotá × Barranquilla** (winner's city in ember) until the competitors' names exist. Posters: `futuras-promesas/ft3-ganador.avif` (winner, front) and `futuras-promesas/ft3-poster.avif` (line-up, behind). Futuras Promesas #2 (Jhanky) stays in `editions` as the previous edition.
 - Background: the lead poster blurred into a dark glow (static, cheap to scroll).
 - Posters `public/futuras-promesas/ft2-ganador.avif` (winner) and `kick2.avif` (line-up) pinned like prints; hover straightens one.

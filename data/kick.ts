@@ -24,6 +24,8 @@ export type KickEdition = {
   /** Where the winner is from, when the poster says. */
   winnerFrom?: string;
   motto?: { es: string; en: string };
+  /** A guest invited for this edition (e.g. the guest judge), as the poster prints it. */
+  guest?: { name: string; role: { es: string; en: string } };
   /** Competitors' names; empty when the poster doesn't print them. */
   lineup: string[];
   /** Cities represented, when the poster shows them instead of names. */
@@ -32,6 +34,38 @@ export type KickEdition = {
 };
 
 export const editions: KickEdition[] = [
+  // the next edition (data/futurasPromesas.ts has the full announcement)
+  {
+    id: "futuras-promesas-4",
+    name: "Futuras Promesas",
+    edition: "#4",
+    format: { es: "Sesión de streaming en Kick", en: "Streaming session on Kick" },
+    when: { es: "7 de noviembre · 9:00 PM", en: "November 7 · 9:00 PM" },
+    guest: { name: "Lowkey", role: { es: "Jurado invitado", en: "Guest judge" } },
+    lineup: ["Colmaill", "Leykan"],
+    posters: [
+      {
+        src: "/futuras-promesas/ft4-lowkey-jurado.webp",
+        width: 1024,
+        height: 1536,
+        label: { es: "Jurado invitado", en: "Guest judge" },
+        alt: {
+          es: "Afiche de Futuras Promesas 4: Lowkey, jurado invitado; 7 de noviembre, 9 PM, kick.com/leolugolive.",
+          en: "Futuras Promesas 4 poster: Lowkey, guest judge; November 7, 9 PM, kick.com/leolugolive.",
+        },
+      },
+      {
+        src: "/futuras-promesas/ft4-colmaill.webp",
+        width: 738,
+        height: 1107,
+        label: { es: "Line-up", en: "Line-up" },
+        alt: {
+          es: "Afiche de Futuras Promesas 4 con Colmaill; 7 de noviembre, 9 PM, kick.com/leolugolive.",
+          en: "Futuras Promesas 4 poster with Colmaill; November 7, 9 PM, kick.com/leolugolive.",
+        },
+      },
+    ],
+  },
   // the Mundial de Tiraderas has no printed poster yet: its two stream screenshots stand in (face off and draw)
   {
     id: "mundial-tiraderas",
@@ -39,7 +73,7 @@ export const editions: KickEdition[] = [
     edition: "Face off",
     format: { es: "Competencia de tiraderas en Kick", en: "Tiraderas competition on Kick" },
     when: { es: "23 de octubre · 7:30 PM", en: "October 23 · 7:30 PM" },
-    lineup: ["Cang5", "Pablomeji4", "Edisson", "Carlogato", "Cuartiz", "ElFerpo2", "Emvy_29", "soyjosema"],
+    lineup: ["Cang5", "Pablomeji4", "Cuartiz", "ElFerpo2", "Emvy_29", "soyjosema"],
     posters: [
       {
         src: "/tiraderas/face-off.avif",

@@ -1,6 +1,7 @@
 import { artists } from "@/data/artists";
 import { streamers } from "@/data/streamers";
 import type { ForgeEvent } from "@/data/events";
+import { futurasPromesas } from "@/data/futurasPromesas";
 import { tiraderas } from "@/data/tiraderas";
 
 export type EventPhoto = {
@@ -41,5 +42,8 @@ export function eventPhoto(e: ForgeEvent): EventPhoto | undefined {
       alt: { es: `${player.name}, competidor del ${tiraderas.name}`, en: `${player.name}, ${tiraderas.name} competitor` },
     };
   }
+  // Futuras Promesas posters (the guest judge's and the competitors')
+  const fp = [futurasPromesas.guest.poster, ...futurasPromesas.competitors.map((c) => c.poster)].find((p) => p.src === e.image);
+  if (fp) return { src: e.image, alt: fp.alt };
   return { src: e.image, alt: { es: e.title.es, en: e.title.en } };
 }

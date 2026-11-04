@@ -148,6 +148,14 @@ export default function KickSection() {
                     </dd>
                   </div>
                 )}
+                {ed.guest && (
+                  <div className="flex items-baseline justify-between gap-6 border-t border-iron/15 py-5">
+                    <dt className="stamp">{ed.guest.role[lang]}</dt>
+                    <dd className="stencil text-right text-[clamp(2.5rem,4.5vw,3.75rem)] leading-none text-ember [--wdth:72]">
+                      {ed.guest.name}
+                    </dd>
+                  </div>
+                )}
                 {ed.lineup.length > 0 && (
                   <div className="border-y border-iron/15 py-5">
                     <dt className="stamp">{t.kick.feat}</dt>

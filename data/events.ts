@@ -37,6 +37,8 @@ export type ForgeEvent = {
    * shows it whole, in full colour, in its own shape (the panel sizes around it).
    */
   poster?: { width: number; height: number };
+  /** More posters of the same event (same shape as `image`), fanned behind it in the takeover. */
+  gallery?: string[];
   sample?: boolean;
 };
 
@@ -55,6 +57,21 @@ export const events: ForgeEvent[] = [
   //   image: "/artists/lentino/lentino-2.avif",
   //   sample: false,
   // },
+  // Futuras Promesas 4 (data/futurasPromesas.ts): the three posters print 7 de noviembre, 9 PM, kick.com/leolugolive.
+  {
+    id: "futuras-promesas-4",
+    type: "stream",
+    main: true,
+    title: { es: "Futuras Promesas 4", en: "Futuras Promesas 4" },
+    artists: [],
+    start: "2026-11-07T21:00:00-05:00",
+    place: { es: "Kick · kick.com/leolugolive", en: "Kick · kick.com/leolugolive" },
+    url: "https://kick.com/leolugolive",
+    // the guest judge's poster leads; the competitors' fan out behind it
+    image: "/futuras-promesas/ft4-lowkey-jurado.webp",
+    poster: { width: 1024, height: 1536 },
+    gallery: ["/futuras-promesas/ft4-colmaill.webp", "/futuras-promesas/ft4-leykan.webp"],
+  },
   {
     id: "futuras-promesas-3",
     type: "stream",
@@ -89,7 +106,7 @@ export const events: ForgeEvent[] = [
   {
     id: "tiraderas-face-off",
     type: "stream",
-    main: true,
+    main: false,
     title: {
       es: "Mundial de Tiraderas · Face off",
       en: "Mundial de Tiraderas · Face off",

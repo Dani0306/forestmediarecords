@@ -2,6 +2,7 @@ import Agenda from "@/components/Agenda";
 import Tiraderas from "@/components/Tiraderas";
 import DemoForm from "@/components/DemoForm";
 import FollowUs from "@/components/FollowUs";
+import FuturasPromesas from "@/components/FuturasPromesas";
 import ForgeProcess from "@/components/ForgeProcess";
 import Hero from "@/components/Hero";
 import KickSection from "@/components/KickSection";
@@ -20,6 +21,7 @@ export default function Home() {
       <SiteNav />
       <main id="main">
         <Hero />
+        <FuturasPromesas />
         <Releases />
         <Agenda />
         <Tiraderas />
