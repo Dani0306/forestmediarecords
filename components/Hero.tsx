@@ -355,6 +355,13 @@ function EventTakeover({
                 {t.agenda.addCal}
               </a>
             )}
+            {/* the label's standing invitation stays on screen whatever the main event is */}
+            <a
+              href="#demos"
+              className="btn btn-steel max-w-full whitespace-normal py-3 text-center leading-tight sm:whitespace-nowrap"
+            >
+              {t.hero.ctaJoin}
+            </a>
             {/* an event with its own section (Futuras Promesas) points there first */}
             {e.id === "futuras-promesas-4" && (
               <a
