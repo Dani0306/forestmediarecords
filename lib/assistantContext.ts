@@ -205,6 +205,9 @@ function kick() {
             `- Ganador: ${e.winner}${e.winnerFrom ? ` (${e.winnerFrom})` : ""}${e.winnerUrl ? `, Instagram ${e.winnerUrl}` : ""}.`,
           e.guest && `- ${e.guest.role.es}: ${e.guest.name} (invitado especial de esta edición).`,
           e.lineup.length > 0 && `- Participantes: ${e.lineup.join(", ")}.`,
+          e.slots &&
+            e.slots > e.lineup.length &&
+            `- Compiten ${e.slots} en total; ${e.slots - e.lineup.length} se anuncian en los próximos días (no adivines quiénes).`,
           e.lineup.length === 0 && e.cities && `- Ciudades participantes: ${e.cities.join(", ")}.`,
           e.motto && `- Lema: "${e.motto.es}".`,
         ]

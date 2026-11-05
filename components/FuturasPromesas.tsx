@@ -3,12 +3,30 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { events, eventEnd, heatOf, type ForgeEvent } from "@/data/events";
-import { futurasPromesas as FP, type Poster } from "@/data/futurasPromesas";
+import { futurasPromesas as FP, type Poster, type Promesa } from "@/data/futurasPromesas";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
 import { icsHref } from "@/lib/ics";
 import { ArrowDown, Broadcast, CalendarPlus } from "./icons";
 
 const event = events.find((e) => e.id === FP.eventId) as ForgeEvent | undefined;
+
+type Slot = { n: number; who: Promesa | null };
+
+// every slot on the board, revealed or not; they alternate left and right of the
+// guest, and an odd one out hangs under the guest's print
+const slots: Slot[] = Array.from({ length: Math.max(FP.slots, FP.competitors.length) }, (_, n) => ({ n, who: FP.competitors[n] ?? null }));
+const under = slots.length % 2 === 1 ? slots[slots.length - 1] : null;
+const sides = under ? slots.slice(0, -1) : slots;
+const left = sides.filter((s) => s.n % 2 === 0);
+const right = sides.filter((s) => s.n % 2 === 1);
+
+// the strings: the top prints run to the guest's pin, lower ones to a pin on the
+// guest's near edge, so no string crosses the guest's face. Unrevealed slots hang loose.
+const links = sides
+  .filter((s) => s.who)
+  .map((s) => ({ id: s.who!.name, to: s.n < 2 ? "guest" : s.n % 2 === 0 ? "guest-l" : "guest-r" }));
+// the guest's edge pins, only where a string ties on
+const guestEdges = (["l", "r"] as const).filter((e) => links.some((l) => l.to === `guest-${e}`));
 
 /** The poster leans toward the mouse: perspective tilt written straight to the element (no re-render). */
 function useTilt(max = 7) {
@@ -33,22 +51,30 @@ function useTilt(max = 7) {
 function Pinned({
   id,
   poster,
+  sheet,
   lean,
   sizes,
   pin,
+  edges,
   onHeat,
   lang,
   children,
 }: {
   id: string;
-  poster: Poster;
+  /** The print; without one, `sheet` is drawn in its place (a slot still to be revealed). */
+  poster?: Poster;
+  sheet?: React.ReactNode;
   lean: number;
-  sizes: string;
-  pin: (el: HTMLSpanElement | null) => void;
+  sizes?: string;
+  /** Registers a pin on the board by id: this print's is `id`, its edge pins `id-l` and `id-r`. */
+  pin: (id: string) => (el: HTMLSpanElement | null) => void;
+  /** Extra pins on the print's left ("l") and right ("r") edges, for the lower strings. */
+  edges?: readonly ("l" | "r")[];
   onHeat: (id: string | null) => void;
   lang: "es" | "en";
   children: React.ReactNode;
 }) {
+  const ratio = poster ? `${poster.width} / ${poster.height}` : "2 / 3";
   const [tilt, tiltHandlers] = useTilt();
   return (
     <figure
@@ -61,11 +87,21 @@ function Pinned({
       }}
       onPointerMove={tiltHandlers.onPointerMove}
     >
-      
-      <span ref={pin} aria-hidden="true" className="fp-pin absolute left-1/2 top-0 z-30 -ml-[7px] -mt-[7px]" />
+      <span ref={pin(id)} aria-hidden="true" className="fp-pin absolute left-1/2 top-0 z-30 -ml-[7px] -mt-[7px]" />
+      {!poster && (
+        <svg aria-hidden="true" className="fp-loose absolute left-1/2 top-0 z-30 -ml-[3px] overflow-visible" width="20" height="64" viewBox="0 0 20 64">
+          <path d="M3 1 C 14 18, -2 30, 9 46 S 12 58, 6 63" />
+        </svg>
+      )}
+      {edges && edges.length > 0 && (
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-30" style={{ aspectRatio: ratio }}>
+          {edges.includes("l") && <span ref={pin(`${id}-l`)} className="fp-pin absolute left-0 top-[58%] -ml-[5px]" />}
+          {edges.includes("r") && <span ref={pin(`${id}-r`)} className="fp-pin absolute right-0 top-[58%] -mr-[5px]" />}
+        </div>
+      )}
       <div className="fp-sheet">
-        <div ref={tilt} className="fp-tilt relative overflow-hidden rounded-[3px]" style={{ aspectRatio: `${poster.width} / ${poster.height}` }}>
-          <Image src={poster.src} alt={poster.alt[lang]} fill sizes={sizes} className="object-cover" />
+        <div ref={tilt} className="fp-tilt relative overflow-hidden rounded-[3px]" style={{ aspectRatio: ratio }}>
+          {poster ? <Image src={poster.src} alt={poster.alt[lang]} fill sizes={sizes} className="object-cover" /> : sheet}
           <span aria-hidden="true" className="fp-gloss pointer-events-none absolute inset-0" />
         </div>
       </div>
@@ -97,16 +133,16 @@ function Strings({ board, pins, hot }: { board: React.RefObject<HTMLDivElement |
         }
         return node === el ? { x, y } : null;
       };
-      const guest = at("guest");
       const next: { id: string; d: string }[] = [];
-      if (guest && window.matchMedia("(min-width: 1024px)").matches) {
-        for (const c of FP.competitors) {
-          const from = at(c.name);
-          if (!from) continue;
+      if (window.matchMedia("(min-width: 1024px)").matches) {
+        for (const l of links) {
+          const from = at(l.id);
+          const guest = at(l.to);
+          if (!from || !guest) continue;
           const sag = Math.hypot(guest.x - from.x, guest.y - from.y) * 0.16;
           const mx = (from.x + guest.x) / 2;
           const my = Math.max(from.y, guest.y) + sag;
-          next.push({ id: c.name, d: `M${from.x.toFixed(1)} ${from.y.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${guest.x.toFixed(1)} ${guest.y.toFixed(1)}` });
+          next.push({ id: l.id, d: `M${from.x.toFixed(1)} ${from.y.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${guest.x.toFixed(1)} ${guest.y.toFixed(1)}` });
         }
       }
       setBox({ w: b.width, h: b.height });
@@ -183,25 +219,50 @@ export default function FuturasPromesas() {
     if (el) pins.set(id, el);
     else pins.delete(id);
   };
-  // competitors alternate left and right of the guest
-  const left = FP.competitors.filter((_, i) => i % 2 === 0);
-  const right = FP.competitors.filter((_, i) => i % 2 === 1);
-
-  const competitor = (p: (typeof FP.competitors)[number], i: number, side: number) => (
-    <Pinned
-      key={p.name}
-      id={p.name}
-      poster={p.poster}
-      lean={side * (3.5 + (i % 2) * 1.5)}
-      sizes="(max-width: 1024px) 46vw, 22rem"
-      pin={pin(p.name)}
-      onHeat={setHot}
-      lang={lang}
-    >
-      <p className="readout text-[0.6rem] text-steel">{c.competitor}</p>
-      <p className="stencil mt-1.5 text-[clamp(1.75rem,3vw,2.75rem)] leading-[0.9] text-iron [--wdth:74]">{p.name}</p>
-    </Pinned>
-  );
+  const print = (slot: Slot, side: number) => {
+    const p = slot.who;
+    const lean = side * (3.5 + (slot.n % 2) * 1.5) || (slot.n % 2 ? 2 : -2);
+    const label = `${c.competitor} ${String(slot.n + 1).padStart(2, "0")}`;
+    if (!p)
+      return (
+        <Pinned
+          key={slot.n}
+          id={`slot-${slot.n}`}
+          lean={lean}
+          pin={pin}
+          onHeat={setHot}
+          lang={lang}
+          sheet={
+            <div aria-hidden="true" className="fp-mystery absolute inset-0" style={{ "--i": slot.n } as React.CSSProperties}>
+              <span className="readout absolute left-[9%] top-[6%] text-[0.58rem] text-steel">FP4 · {String(slot.n + 1).padStart(2, "0")}</span>
+              <span className="fp-mystery-q stencil absolute inset-0 grid place-items-center">?</span>
+              <span className="fp-mystery-bar absolute inset-x-[14%] bottom-[24%] h-[7%]" />
+              <span className="stamp absolute inset-x-0 bottom-[9%] text-center text-ember">{c.soonStamp}</span>
+            </div>
+          }
+        >
+          <p className="readout text-[0.6rem] text-steel">{label}</p>
+          <p className="stencil mt-1.5 text-[clamp(1.75rem,3vw,2.75rem)] leading-[0.9] text-steel [--wdth:74]">{c.soonName}</p>
+          <p className="mt-2 text-[0.9rem] leading-snug text-iron/60">{c.soonNote}</p>
+        </Pinned>
+      );
+    return (
+      <Pinned
+        key={p.name}
+        id={p.name}
+        poster={p.poster}
+        lean={lean}
+        sizes="(max-width: 1024px) 46vw, 22rem"
+        pin={pin}
+        onHeat={setHot}
+        lang={lang}
+      >
+        <p className="readout text-[0.6rem] text-steel">{label}</p>
+        <p className="stencil mt-1.5 text-[clamp(1.75rem,3vw,2.75rem)] leading-[0.9] text-iron [--wdth:74]">{p.name}</p>
+      </Pinned>
+    );
+  };
+  const hidden = slots.length - FP.competitors.length;
 
   return (
     <section
@@ -273,25 +334,28 @@ export default function FuturasPromesas() {
         </div>
 
         {/* the case board: competitors pinned either side, the guest judge in the middle, red string between them */}
-        <div ref={board} className="fp-board relative mt-16 rounded-[3px] border border-anvil px-4 pb-10 pt-14 sm:px-8 lg:mt-24 lg:px-10 lg:pb-14 lg:pt-20">
+        <div ref={board} className="fp-board relative mt-16 rounded-[3px] border border-anvil px-4 pb-10 pt-20 sm:px-8 sm:pt-14 lg:mt-24 lg:px-10 lg:pb-14 lg:pt-20">
           <p aria-hidden="true" className="stamp absolute left-4 top-4 text-steel sm:left-8 lg:left-10">
             {c.board}
           </p>
-          <p className="readout absolute right-4 top-4 text-[0.62rem] text-steel sm:right-8 lg:right-10">
-            {FP.competitors.length} {c.count} · 1 {c.guestShort}
+          <p className="readout absolute left-4 top-10 text-[0.62rem] text-steel sm:left-auto sm:right-8 sm:top-4 lg:right-10">
+            {slots.length} {c.count}
+            {hidden > 0 && ` · ${hidden} ${c.toReveal}`} · 1 {c.guestShort}
           </p>
 
           <Strings board={board} pins={pins} hot={hot} />
 
-          <div className="grid grid-cols-2 gap-x-4 gap-y-14 sm:gap-x-8 lg:grid-cols-12 lg:gap-x-8">
+          {/* desktop: the side columns span both rows, so the print under the guest sits right below it */}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-14 sm:gap-x-8 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-8">
             {/* the guest: first on phones, centre stage on desktop */}
-            <div className="fp-in relative col-span-2 mx-auto w-full max-w-[24rem] lg:order-2 lg:col-span-6 lg:max-w-[30rem]">
+            <div className="fp-in relative col-span-2 mx-auto w-full max-w-[24rem] lg:col-span-6 lg:col-start-4 lg:row-start-1 lg:max-w-[30rem]">
               <Pinned
                 id="guest"
                 poster={FP.guest.poster}
                 lean={-1}
                 sizes="(max-width: 1024px) 80vw, 30rem"
-                pin={pin("guest")}
+                pin={pin}
+                edges={guestEdges}
                 onHeat={setHot}
                 lang={lang}
               >
@@ -316,12 +380,17 @@ export default function FuturasPromesas() {
               </span>
             </div>
 
-            <div className="fp-in flex flex-col gap-14 lg:order-1 lg:col-span-3 lg:pt-28">
-              {left.map((p, i) => competitor(p, i, -1))}
+            <div className="fp-in flex flex-col gap-14 lg:col-span-3 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:pt-28">
+              {left.map((s) => print(s, -1))}
             </div>
-            <div className="fp-in flex flex-col gap-14 lg:order-3 lg:col-span-3 lg:pt-44">
-              {right.map((p, i) => competitor(p, i, 1))}
+            <div className="fp-in flex flex-col gap-14 lg:col-span-3 lg:col-start-10 lg:row-span-2 lg:row-start-1 lg:pt-44">
+              {right.map((s) => print(s, 1))}
             </div>
+            {under && (
+              <div className="fp-in col-span-2 mx-auto w-[calc(50%-0.5rem)] sm:w-[calc(50%-1rem)] lg:col-span-6 lg:col-start-4 lg:row-start-2 lg:w-full lg:max-w-[18rem] lg:pt-6">
+                {print(under, 0)}
+              </div>
+            )}
           </div>
         </div>
       </div>

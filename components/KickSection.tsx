@@ -179,6 +179,16 @@ export default function KickSection() {
                           </span>
                         </span>
                       ))}
+                      {ed.slots && ed.slots > ed.lineup.length && (
+                        <span className="flex items-baseline gap-3 text-steel">
+                          <span aria-hidden="true" className="text-[1rem]">
+                            ×
+                          </span>
+                          <span className="readout text-[0.68rem]">
+                            +{ed.slots - ed.lineup.length} {t.fp.toReveal}
+                          </span>
+                        </span>
+                      )}
                     </dd>
                   </div>
                 )}

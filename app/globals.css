@@ -397,6 +397,70 @@ a {
   stroke-width: 2;
   filter: drop-shadow(0 2px 6px rgb(255 90 17 / 0.65));
 }
+/* a slot still to be revealed: a blank steel plate with a stencilled "?", a
+   redaction bar and a slow sweep of light; its string hangs loose from the pin */
+.fp-mystery {
+  background:
+    repeating-linear-gradient(135deg, rgb(236 230 218 / 0.025) 0 2px, transparent 2px 9px),
+    radial-gradient(120% 80% at 50% 38%, #24242a, #131316 70%);
+}
+.fp-mystery::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 243 196 / 0.07) 50%, transparent 65%);
+  translate: -100% 0;
+}
+.fp-mystery-q {
+  font-size: clamp(7rem, 12vw, 11rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(154 158 165 / 0.55);
+  --wdth: 70;
+  transition:
+    color 0.4s ease,
+    -webkit-text-stroke-color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+.fp-mystery-bar {
+  background: repeating-linear-gradient(90deg, rgb(236 230 218 / 0.14) 0 0.6rem, transparent 0.6rem 0.8rem);
+}
+.fp-loose {
+  transform-origin: 3px 0;
+  transition: rotate 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.fp-loose path {
+  fill: none;
+  stroke: var(--color-cherry);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.6));
+}
+@media (hover: hover) and (pointer: fine) {
+  .fp-print:hover .fp-mystery-q {
+    color: rgb(255 90 17 / 0.12);
+    -webkit-text-stroke-color: var(--color-ember);
+    text-shadow: 0 0 40px rgb(255 90 17 / 0.35);
+  }
+  .fp-print:hover .fp-loose {
+    rotate: 9deg;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fp-mystery::after {
+    animation: fp-sweep 5.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+    animation-delay: calc(var(--i, 0) * 1.3s);
+  }
+}
+@keyframes fp-sweep {
+  0%,
+  55% {
+    translate: -100% 0;
+  }
+  100% {
+    translate: 100% 0;
+  }
+}
 /* a rubber stamp pressed across the guest's print */
 .fp-stamp {
   rotate: -9deg;

@@ -269,6 +269,10 @@ const es = {
     guestNote: "Lowkey llega como invitado especial para esta edición: escucha y califica a los participantes en vivo.",
     profile: "Ver perfil",
     done: "Finalizado · el ganador se anuncia muy pronto",
+    toReveal: "por revelar",
+    soonName: "Por revelar",
+    soonNote: "Lo anunciamos en los próximos días.",
+    soonStamp: "Muy pronto",
   },
   halloween: { greeting: "Feliz Halloween" },
   top: {
@@ -711,6 +715,10 @@ const en: Dict = {
     guestNote: "Lowkey joins as a special guest for this edition: listening to and scoring the competitors live.",
     profile: "View profile",
     done: "Finished · the winner is announced soon",
+    toReveal: "to be revealed",
+    soonName: "To be revealed",
+    soonNote: "Announced in the coming days.",
+    soonStamp: "Coming soon",
   },
   halloween: { greeting: "Happy Halloween" },
   top: {

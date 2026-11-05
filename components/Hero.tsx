@@ -243,7 +243,7 @@ function EventTakeover({
                   key={src}
                   aria-hidden="true"
                   className="takeover-fan-card absolute inset-0 z-0 overflow-hidden rounded-[3px] bg-forge-3"
-                  style={{ "--i": i % 2 === 0 ? -1 : 1 } as React.CSSProperties}
+                  style={{ "--i": FAN[i] ?? 0 } as React.CSSProperties}
                 >
                   <Image src={src} alt="" fill sizes="(max-width: 1024px) 60vw, 30vw" className="object-cover" />
                 </div>
@@ -502,6 +502,9 @@ function SecondaryRow({
     </div>
   );
 }
+
+/** Where each gallery print sits in the fan behind the lead (-1 far left, 1 far right); later prints tuck in on top. */
+const FAN = [-1, 1, -0.55, 0.55];
 
 export default function Hero() {
   const { t } = useLang();

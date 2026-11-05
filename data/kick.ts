@@ -28,6 +28,8 @@ export type KickEdition = {
   guest?: { name: string; role: { es: string; en: string } };
   /** Competitors' names; empty when the poster doesn't print them. */
   lineup: string[];
+  /** Line-up size when some names are still unannounced: the rest show as "por revelar". */
+  slots?: number;
   /** Cities represented, when the poster shows them instead of names. */
   cities?: string[];
   posters: KickPoster[]; // first = lead poster
@@ -42,7 +44,8 @@ export const editions: KickEdition[] = [
     format: { es: "Sesión de streaming en Kick", en: "Streaming session on Kick" },
     when: { es: "7 de noviembre · 9:00 PM", en: "November 7 · 9:00 PM" },
     guest: { name: "Lowkey", role: { es: "Jurado invitado", en: "Guest judge" } },
-    lineup: ["Colmaill", "Leykan"],
+    lineup: ["Colmaill", "Leykan", "Tyan4"],
+    slots: 5,
     posters: [
       {
         src: "/futuras-promesas/ft4-lowkey-jurado.webp",

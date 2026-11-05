@@ -70,7 +70,7 @@ export const events: ForgeEvent[] = [
     // the guest judge's poster leads; the competitors' fan out behind it
     image: "/futuras-promesas/ft4-lowkey-jurado.webp",
     poster: { width: 1024, height: 1536 },
-    gallery: ["/futuras-promesas/ft4-colmaill.webp", "/futuras-promesas/ft4-leykan.webp"],
+    gallery: ["/futuras-promesas/ft4-colmaill.webp", "/futuras-promesas/ft4-leykan.webp", "/futuras-promesas/ft4-tyan4.webp"],
   },
   {
     id: "futuras-promesas-3",

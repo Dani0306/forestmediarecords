@@ -9,7 +9,10 @@ import { site } from "./site";
  * competitors (Colmaill, Leykan) and Lowkey as "Jurado invitado", a guest
  * invited for this edition. Posters are cropped from the originals in
  * `source/futuras-promesas-4/` (the competitors' were phone screenshots).
- * More competitors join the line-up by adding them to `competitors`.
+ * Five singers compete (team, 2026-11-04). Tyan4 was announced the same day
+ * (her poster prints "TYAN4"); two more are revealed in the coming days. Until
+ * then the board shows a "por revelar" print for each empty slot: add a
+ * competitor to `competitors` and it takes the next slot.
  */
 export type Poster = {
   src: string;
@@ -29,6 +32,8 @@ export const futurasPromesas = {
   name: "Futuras Promesas",
   edition: "4",
   channel: site.kick.url,
+  /** How many singers compete; slots past `competitors` show as "por revelar". */
+  slots: 5,
   competitors: [
     {
       name: "Colmaill",
@@ -51,6 +56,18 @@ export const futurasPromesas = {
         alt: {
           es: "Afiche de Futuras Promesas 4 con Leykan, con gorra y gafas, en una foto clavada a un tablero de pistas; 7 de noviembre, 9 PM, kick.com/leolugolive.",
           en: "Futuras Promesas 4 poster with Leykan, in a cap and glasses, in a photo pinned to an evidence board; November 7, 9 PM, kick.com/leolugolive.",
+        },
+      },
+    },
+    {
+      name: "Tyan4",
+      poster: {
+        src: "/futuras-promesas/ft4-tyan4.webp",
+        width: 1024,
+        height: 1536,
+        alt: {
+          es: "Afiche de Futuras Promesas 4 con Tyan4, con gorro de piel blanco y la mano junto a la cara, en una foto clavada a un tablero de pistas; 7 de noviembre, 9 PM, kick.com/leolugolive.",
+          en: "Futuras Promesas 4 poster with Tyan4, in a white fur hat with her hand by her face, in a photo pinned to an evidence board; November 7, 9 PM, kick.com/leolugolive.",
         },
       },
     },
