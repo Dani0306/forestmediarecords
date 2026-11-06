@@ -10,9 +10,9 @@ import { site } from "./site";
  * invited for this edition. Posters are cropped from the originals in
  * `source/futuras-promesas-4/` (the competitors' were phone screenshots).
  * Five singers compete (team, 2026-11-04). Tyan4 was announced the same day
- * (her poster prints "TYAN4"), 2BLE B on 2026-11-05; one more is revealed in the coming days. Until
- * then the board shows a "por revelar" print for each empty slot: add a
- * competitor to `competitors` and it takes the next slot.
+ * (her poster prints "TYAN4"), 2BLE B on 2026-11-05 and Septu RG on 2026-11-06
+ * (the line-up is complete). If a slot is ever empty, the board shows a "por
+ * revelar" print in it: add a competitor to `competitors` and it takes the next slot.
  */
 export type Poster = {
   src: string;
@@ -80,6 +80,18 @@ export const futurasPromesas = {
         alt: {
           es: "Afiche de Futuras Promesas 4 con 2BLE B, de perfil con gafas oscuras y el cuello de la chaqueta entre las manos, en una foto clavada a un tablero de pistas; 7 de noviembre, 9 PM, kick.com/leolugolive.",
           en: "Futuras Promesas 4 poster with 2BLE B, in profile in dark glasses with his hands on his jacket collar, in a photo pinned to an evidence board; November 7, 9 PM, kick.com/leolugolive.",
+        },
+      },
+    },
+    {
+      name: "Septu RG",
+      poster: {
+        src: "/futuras-promesas/ft4-septu-rg.webp",
+        width: 1024,
+        height: 1536,
+        alt: {
+          es: "Afiche de Futuras Promesas 4 con Septu RG, de perfil con camiseta blanca y pantalón oscuro holgado, cantando con el micrófono en la mano, en una foto clavada a un tablero de pistas; 7 de noviembre, 9 PM, kick.com/leolugolive.",
+          en: "Futuras Promesas 4 poster with Septu RG, in profile in a white tee and baggy dark pants, singing with a microphone in hand, in a photo pinned to an evidence board; November 7, 9 PM, kick.com/leolugolive.",
         },
       },
     },

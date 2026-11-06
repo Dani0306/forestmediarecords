@@ -504,7 +504,7 @@ function SecondaryRow({
 }
 
 /** Where each gallery print sits in the fan behind the lead (-1 far left, 1 far right); later prints tuck in on top. */
-const FAN = [-1, 1, -0.55, 0.55];
+const FAN = [-1, 1, -0.7, 0.55, -0.4];
 
 export default function Hero() {
   const { t } = useLang();
