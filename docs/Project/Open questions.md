@@ -22,7 +22,8 @@ Things the code can't answer. Move answers into the relevant note, then tick the
 - [ ] Company NIT and address for the legal pages ([[Legal pages]])
 - [ ] Spotify and YouTube links for Lentino and RS el Italiano ([[Artists]])
 - [ ] When does "Sobrio" (Lentino × RS el Italiano) come out? Not dated yet ([[Artists]], [[Agenda]])
-- [ ] Futuras Promesas 4: the last two competitors; is the third one's name spelled "Tyan4" (poster) or "Tyana" (file name)? ([[Futuras Promesas 4]])
+- [ ] Futuras Promesas 4: the last competitor; is the third one's name spelled "Tyan4" (poster) or "Tyana" (file name)? ([[Futuras Promesas 4]])
+- [ ] Futuras Promesas 4: is competitor 2BLE B the same artist who won #3? ([[Futuras Promesas 4]])
 
 - [ ] Website launch event: real date, time and place? Should it be a main event (takes over the hero)? ([[Agenda]], [[Trending]])
 - [ ] Nikosan: what does "9/10/2018" mean (start in music, or joined Forest)? (Genres are now set: Rap, BoomBap, Trap, Drumless.) ([[Artists]])

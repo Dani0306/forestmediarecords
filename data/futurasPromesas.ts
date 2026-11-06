@@ -10,7 +10,7 @@ import { site } from "./site";
  * invited for this edition. Posters are cropped from the originals in
  * `source/futuras-promesas-4/` (the competitors' were phone screenshots).
  * Five singers compete (team, 2026-11-04). Tyan4 was announced the same day
- * (her poster prints "TYAN4"); two more are revealed in the coming days. Until
+ * (her poster prints "TYAN4"), 2BLE B on 2026-11-05; one more is revealed in the coming days. Until
  * then the board shows a "por revelar" print for each empty slot: add a
  * competitor to `competitors` and it takes the next slot.
  */
@@ -68,6 +68,18 @@ export const futurasPromesas = {
         alt: {
           es: "Afiche de Futuras Promesas 4 con Tyan4, con gorro de piel blanco y la mano junto a la cara, en una foto clavada a un tablero de pistas; 7 de noviembre, 9 PM, kick.com/leolugolive.",
           en: "Futuras Promesas 4 poster with Tyan4, in a white fur hat with her hand by her face, in a photo pinned to an evidence board; November 7, 9 PM, kick.com/leolugolive.",
+        },
+      },
+    },
+    {
+      name: "2BLE B",
+      poster: {
+        src: "/futuras-promesas/ft4-dobleb.webp",
+        width: 1024,
+        height: 1536,
+        alt: {
+          es: "Afiche de Futuras Promesas 4 con 2BLE B, de perfil con gafas oscuras y el cuello de la chaqueta entre las manos, en una foto clavada a un tablero de pistas; 7 de noviembre, 9 PM, kick.com/leolugolive.",
+          en: "Futuras Promesas 4 poster with 2BLE B, in profile in dark glasses with his hands on his jacket collar, in a photo pinned to an evidence board; November 7, 9 PM, kick.com/leolugolive.",
         },
       },
     },

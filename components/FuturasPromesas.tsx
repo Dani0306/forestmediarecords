@@ -96,7 +96,7 @@ function Pinned({
       {edges && edges.length > 0 && (
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-30" style={{ aspectRatio: ratio }}>
           {edges.includes("l") && <span ref={pin(`${id}-l`)} className="fp-pin absolute left-0 top-[58%] -ml-[5px]" />}
-          {edges.includes("r") && <span ref={pin(`${id}-r`)} className="fp-pin absolute right-0 top-[58%] -mr-[5px]" />}
+          {edges.includes("r") && <span ref={pin(`${id}-r`)} className="fp-pin absolute right-0 top-[87%] -mr-[5px]" />}
         </div>
       )}
       <div className="fp-sheet">

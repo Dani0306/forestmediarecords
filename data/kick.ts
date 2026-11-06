@@ -44,7 +44,7 @@ export const editions: KickEdition[] = [
     format: { es: "Sesión de streaming en Kick", en: "Streaming session on Kick" },
     when: { es: "7 de noviembre · 9:00 PM", en: "November 7 · 9:00 PM" },
     guest: { name: "Lowkey", role: { es: "Jurado invitado", en: "Guest judge" } },
-    lineup: ["Colmaill", "Leykan", "Tyan4"],
+    lineup: ["Colmaill", "Leykan", "Tyan4", "2BLE B"],
     slots: 5,
     posters: [
       {
