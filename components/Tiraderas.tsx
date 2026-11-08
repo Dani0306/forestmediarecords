@@ -178,7 +178,20 @@ function Match({
 }
 
 /** Column header: stage name and its date, coloured by how close that round is. */
-function StageHead({ label, e, heat, lang }: { label: string; e?: ForgeEvent; heat: Heat; lang: Lang }) {
+function StageHead({
+  label,
+  e,
+  heat,
+  lang,
+  note,
+}: {
+  label: string;
+  e?: ForgeEvent;
+  heat: Heat;
+  lang: Lang;
+  /** Shown instead of the date when the stage has no event yet. */
+  note?: string;
+}) {
   const d = e ? formatDateParts(e.start, lang) : null;
   return (
     <div data-heat={heat} className="mb-4 border-b border-anvil pb-3">
@@ -188,6 +201,7 @@ function StageHead({ label, e, heat, lang }: { label: string; e?: ForgeEvent; he
           {d.day} {d.month}
         </p>
       )}
+      {!d && note && <p className="readout mt-1.5 text-[0.62rem] text-steel">{note}</p>}
     </div>
   );
 }
@@ -211,7 +225,7 @@ export default function Tiraderas() {
 
   const byId = (id: string) => rounds.find((r) => r.eventId === id)?.e;
   const r1 = byId("tiraderas-ronda-1");
-  const royale = byId("tiraderas-battle-royale");
+  const r2e = byId("tiraderas-ronda-2");
   const fin = byId("tiraderas-final");
   const youtubeUrl = site.socials.find((x) => x.id === "youtube")?.url;
   const drawUrl = rounds.find((r) => r.eventId === "tiraderas-sorteo")?.watchUrl;
@@ -353,7 +367,7 @@ export default function Tiraderas() {
           )}
         </div>
 
-        {/* the bracket: quarter-finals → semi-finals → final → champion, filled in as the rounds run */}
+        {/* the bracket: Round 1 → Round 2 → semifinals (drawn) → final → champion, filled in as the rounds run */}
         <div className="mt-14 lg:mt-20">
         <div className="forge-in plate rounded-[3px] border border-anvil p-5 sm:p-6">
           <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -381,29 +395,39 @@ export default function Tiraderas() {
             </p>
           )}
           <div className="-mx-5 overflow-x-auto px-5 pb-2 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
-            <div className="bracket grid min-w-[40rem] grid-cols-4 gap-x-8">
+            <div className="bracket grid min-w-[52rem] grid-cols-5 gap-x-8">
               <div className="flex flex-col">
                 <StageHead label={c.stages.round1} e={r1} heat={heat(r1)} lang={lang} />
                 <div className="bracket-out relative flex flex-1 items-center">
-                  <Match
-                    names={b.round1}
-                    empty={c.tbd}
-                    through={b.through1}
-                    settled={b.through1.length >= T.bracket.advance1}
-                    onPick={pick("r1")}
-                  />
+                  <Match names={b.round1.players} empty={c.tbd} through={b.round1.through} settled />
                 </div>
               </div>
 
               <div className="flex flex-col">
-                <StageHead label={c.stages.royale} e={royale} heat={heat(royale)} lang={lang} />
+                <StageHead label={c.stages.round2} e={r2e} heat={heat(r2e)} lang={lang} />
+                <div className="bracket-in-line bracket-out relative flex flex-1 flex-col justify-center gap-3">
+                  {b.round2.map((duel, i) => (
+                    <Match
+                      key={i}
+                      names={duel}
+                      empty={c.tbdLater}
+                      through={b.r2[i] ? [b.r2[i]] : []}
+                      settled={Boolean(b.r2[i])}
+                      onPick={pick("r2")}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col">
+                <StageHead label={c.stages.semis} heat="embers" lang={lang} note={c.semisDrawn} />
                 <div className="bracket-in-line bracket-out relative flex flex-1 items-center">
                   <Match
-                    names={b.royale}
+                    names={b.semis}
                     empty={c.tbdLater}
-                    through={b.through2}
-                    settled={b.through2.length >= T.bracket.advance2}
-                    onPick={pick("r2")}
+                    through={b.through3}
+                    settled={b.through3.length >= T.bracket.finalists}
+                    onPick={pick("sf")}
                   />
                 </div>
               </div>

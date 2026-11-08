@@ -226,12 +226,13 @@ function tiraderasInfo() {
     `- Jueces (${T.judgeSeats}): ${T.judges.map((j) => `${j.name} (${j.url})`).join(", ")}${T.judges.length < T.judgeSeats ? `; ${T.judgeSeats - T.judges.length === 1 ? "el otro, por confirmar" : `${T.judgeSeats - T.judges.length} por confirmar`}` : ""}.`,
     `- Puntuación: ${T.criteria.map((k) => k.es).join(", ")}.`,
     `- Premio: ${formatCOP(T.prize.amount)} COP. ${T.prize.note.es}`,
-    "- Formato (actualizado el 2 de noviembre de 2026; Carlogato y Edisson ya no participan y el sorteo se rehace): seis competidores; en la primera ronda los tres mejores pasan al battle royale, donde se enfrentan entre sí los tres, y los dos mejores disputan la gran final.",
+    "- Formato (actualizado el 8 de noviembre de 2026): ocho competidores en cuatro duelos, dos por ronda. Ronda 1 (parte de los duelos, ya se jugó) y Ronda 2 (la otra parte); en la Ronda 2 también se hace un sorteo para definir los cruces de las semifinales, que no están fijados de antemano. Luego semifinales y la gran final.",
     T.rounds.some((r) => r.watchUrl) ? `- El sorteo ya se hizo y se puede ver en YouTube: ${T.rounds.find((r) => r.watchUrl)?.watchUrl}` : "",
     `- Rondas (el sorteo a las 8:00 p. m. y el resto a las 7:30 p. m., hora de Colombia, por Kick en todos los canales; fechas exactas en la Agenda):`,
     ...T.rounds.map((r) => `  - ${r.name.es}: ${r.body.es}`),
     `- Cómo se hacen las tiraderas: ${T.making.map((m) => m.es).join(" ")}`,
-    `- Primera ronda (competidores): ${b.round1.join(", ")}. Los tres mejores pasan al battle royale y los dos mejores de ese pasan a la final. Todavía no se ha publicado cómo quedó el nuevo sorteo; no inventes enfrentamientos ni resultados.`,
+    `- Ronda 1 (ya se jugó): avanzaron ${b.round1.through.join(" y ")}; ${b.round1.players.filter((n) => !b.round1.through.includes(n)).join(", ")} quedó eliminado.`,
+    `- Ronda 2: ${b.round2.map((d) => d.join(" vs ")).join(" y ")}. Los ganadores se unen a ${b.round1.through.join(" y ")} en las semifinales, cuyos cruces se definen por sorteo. La fecha de las semifinales todavía no está confirmada; no inventes fechas, cruces ni resultados.`,
     b.champion ? `- Campeón: ${b.champion}.` : "",
   ].filter(Boolean));
 }

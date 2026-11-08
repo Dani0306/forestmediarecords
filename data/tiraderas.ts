@@ -36,11 +36,11 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Seis streamers se enfrentan en tiraderas: barras, indirectas y flow. Los tres mejores pasan a un battle royale y los dos mejores de ese, a la final. El sorteo fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
-    en: "Six streamers face off in tiraderas (diss tracks): bars, shots and flow. The best three go through to a battle royale, and the best two of that to the final. The draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
+    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow. Cuatro duelos en dos rondas, un sorteo para armar las semifinales y una gran final. El sorteo inicial fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
+    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow. Four duels across two rounds, a draw to set the semifinals, and a grand final. The first draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
-  /** Eight until 2026-11-02, when Carlogato and Edisson dropped out and the format became six. */
-  players: 6,
+  /** Eight again since 2026-11-08 (six from 2026-11-02): four duels, two per round. */
+  players: 8,
   /** True while a place is a surprise (revealed later) instead of "to be announced". Off since 2026-10-16: all are known. */
   surprise: false,
   /**
@@ -109,6 +109,18 @@ export const tiraderas = {
         width: 1179,
         height: 1268,
         focus: "45% 35%",
+      },
+    },
+    {
+      // back in the field for Round 2 (2026-11-08); channel and photo from the 2026-10-16 entry.
+      // TODO: Coptero (the other new duelist) joins here once the team sends his Kick link and photo.
+      name: "Carlogato",
+      url: "https://kick.com/carlogato",
+      photo: {
+        src: "/tiraderas/participants/carlogato.avif",
+        width: 1034,
+        height: 1379,
+        focus: "50% 38%",
       },
     },
   ] as Participant[],
@@ -185,24 +197,24 @@ export const tiraderas = {
       eventId: "tiraderas-ronda-1",
       name: { es: "Primera ronda", en: "Round 1" },
       body: {
-        es: "Los seis competidores hacen su tiradera y se puntúan. Los tres mejores pasan al battle royale.",
-        en: "The six competitors each deliver their tiradera and are scored. The best three go through to the battle royale.",
+        es: "Primera parte de los duelos. Soyjosema y Cuartiz avanzaron; Emvy_29 quedó eliminado.",
+        en: "The first half of the duels. Soyjosema and Cuartiz moved on; Emvy_29 was eliminated.",
       },
     },
     {
-      eventId: "tiraderas-battle-royale",
-      name: { es: "Battle royale", en: "Battle royale" },
+      eventId: "tiraderas-ronda-2",
+      name: { es: "Segunda ronda", en: "Round 2" },
       body: {
-        es: "Los tres clasificados se enfrentan entre sí en un battle royale. Los dos mejores pasan a la gran final.",
-        en: "The three who went through face each other in a battle royale. The best two go on to the grand final.",
+        es: "Segunda parte de los duelos: Cang5 contra Pablomeji4 y Coptero contra Carlogato. Al final se hace un sorteo para definir los cruces de las semifinales; no están fijados de antemano.",
+        en: "The second half of the duels: Cang5 vs Pablomeji4 and Coptero vs Carlogato. At the end there is a draw to set the semifinal match-ups; they are not fixed beforehand.",
       },
     },
     {
       eventId: "tiraderas-final",
       name: { es: "Gran final", en: "Grand final" },
       body: {
-        es: "Los dos clasificados del battle royale, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
-        en: "The two who came through the battle royale, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
+        es: "Los dos finalistas, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
+        en: "The two finalists, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
       },
     },
   ] as Round[],
@@ -220,16 +232,23 @@ export const tiraderas = {
     { es: "El videoclip es opcional.", en: "A music video is optional." },
   ],
   /**
-   * Format (2026-11-02): six competitors → the best three go to a battle royale
-   * → the best two go to the final. Round 1 lists the six; the draw order is
-   * not set yet. Who advances is picked in the bracket (admin mode); "" = not known yet.
+   * Format (2026-11-08): eight competitors in four duels, two per round. Round 1 is done
+   * (Soyjosema and Cuartiz moved on, Emvy_29 is out); Round 2 plays Cang5 vs Pablomeji4 and
+   * Coptero vs Carlogato and ends with a draw for the semifinals; then the final.
+   * Who goes through the later stages is picked in the bracket (admin mode); "" = not known yet.
    */
   bracket: {
-    round1: ["Cang5", "Pablomeji4", "Cuartiz", "ElFerpo2", "Emvy_29", "soyjosema"] as string[],
-    /** How many go through from round 1 to the battle royale. */
-    advance1: 3,
-    /** How many go through from the battle royale to the final. */
-    advance2: 2,
+    /** Round 1 (6 Nov): who is named in the result, and who moved on. ElFerpo2's result is not published yet. */
+    round1: { players: ["soyjosema", "Cuartiz", "Emvy_29"] as string[], through: ["soyjosema", "Cuartiz"] as string[] },
+    /** Round 2 duels (13 Nov); the winners join Round 1's winners in the semifinals. */
+    round2: [
+      ["Cang5", "Pablomeji4"],
+      ["Coptero", "Carlogato"],
+    ] as string[][],
+    /** Round 2's winners and Round 1's winners, 4 in all: the draw sets who faces whom. */
+    semis: 4,
+    /** How many reach the final. */
+    finalists: 2,
     champion: "",
   },
 };

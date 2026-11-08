@@ -132,12 +132,12 @@ export const events: ForgeEvent[] = [
     url: "https://kick.com/jaycol",
   },
   {
-    id: "tiraderas-battle-royale",
+    id: "tiraderas-ronda-2",
     type: "stream",
     main: false,
     title: {
-      es: "Mundial de Tiraderas · Battle royale",
-      en: "Mundial de Tiraderas · Battle royale",
+      es: "Mundial de Tiraderas · Segunda ronda",
+      en: "Mundial de Tiraderas · Round 2",
     },
     artists: [],
     start: "2026-11-13T19:30:00-05:00",

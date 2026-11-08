@@ -32,6 +32,12 @@ LeoLugoLive's tiradera (diss track) tournament with Forest Media Récords, from 
 - The five rounds are regular `stream` events (`main: false`), so they also appear in the [[Agenda]], the [[Kick section]] list and LeoLugoLive's next stream in [[Streamers]]. Event cards use LeoLugoLive and Trianiss photos until the poster exists, except Round 1 (6 Nov), which show Jaycol (`public/tiraderas/juries/jaycol.jpg`; the earlier `jaycol-tall.avif` mirror crop was trashed on 2026-10-24 as unused) and whose "Ver en Kick" goes to kick.com/jaycol (event `url`), as the team asked. `lib/eventPhoto.ts` gives judge and competitor photos their own alt text ("Jaycol, juez del Mundial de Tiraderas").
 - The [[Chat assistant]] knows the tournament (`tiraderasInfo()` in `lib/assistantContext.ts`).
 
+## Round restructure (2026-11-08)
+Format moved from six players with a battle royale to **eight players, four duels, two per round**: Round 1 (6 Nov, done: Soyjosema and Cuartiz moved on, Emvy_29 eliminated), Round 2 (13 Nov: Cang5 vs Pablomeji4 and Coptero vs Carlogato, ending with a draw for the semifinal pairings), Semifinals (drawn, date not set), Final (21 Nov). Event `tiraderas-battle-royale` became `tiraderas-ronda-2`; the bracket has five columns (Round 1, Round 2, Semifinals, Final, Champion). Admin picks: `r2:<name>` per Round 2 duel, `sf:<name>` for finalists, `final`. Round 1's result lives in `bracket.round1` in `data/tiraderas.ts`. Carlogato is back in the line-up (old channel and photo); Coptero has no card yet. Supersedes the battle-royale parts above and [[Six players, best three to a battle royale]].
+- [ ] Coptero's Kick link and photo (the team is sending them); confirm Carlogato's channel
+- [ ] Semifinals date (no event yet, the column reads "Cruces por sorteo"); confirm the final is still 21 Nov
+- [ ] ElFerpo2's Round 1 result isn't in the bracket (not stated)
+
 ## Open issues
 - [ ] Official poster: swap `image` on the five events in `data/events.ts`
 - [ ] Fill the bracket after the draw (16 Oct) and after each round
