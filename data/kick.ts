@@ -36,17 +36,28 @@ export type KickEdition = {
 };
 
 export const editions: KickEdition[] = [
-  // the next edition (data/futurasPromesas.ts has the full announcement)
+  // the latest edition (data/futurasPromesas.ts has the full announcement); its winner's poster leads
   {
     id: "futuras-promesas-4",
     name: "Futuras Promesas",
     edition: "#4",
     format: { es: "Sesión de streaming en Kick", en: "Streaming session on Kick" },
     when: { es: "7 de noviembre · 9:00 PM", en: "November 7 · 9:00 PM" },
+    winner: "Leykan",
     guest: { name: "Lowkey", role: { es: "Jurado invitado", en: "Guest judge" } },
     lineup: ["Colmaill", "Leykan", "Tyan4", "2BLE B", "Septu RG"],
     slots: 5,
     posters: [
+      {
+        src: "/futuras-promesas/ft4-leykan.webp",
+        width: 738,
+        height: 1107,
+        label: { es: "Ganador", en: "Winner" },
+        alt: {
+          es: "Afiche de Futuras Promesas 4 con Leykan, el ganador, con gorra y gafas; 7 de noviembre, 9 PM, kick.com/leolugolive.",
+          en: "Futuras Promesas 4 poster with Leykan, the winner, in a cap and glasses; November 7, 9 PM, kick.com/leolugolive.",
+        },
+      },
       {
         src: "/futuras-promesas/ft4-lowkey-jurado.webp",
         width: 1024,

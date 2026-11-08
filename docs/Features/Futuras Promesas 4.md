@@ -29,6 +29,12 @@ The label's next Kick showcase, announced in its own section right after the [[H
 - The hero takeover fans the competitors' posters out behind the guest's (`gallery` on the event; positions in `FAN` in `components/Hero.tsx`, five since Septu RG: three prints on the left, two on the right) and adds "Ver line-up y jurado" (to `#futuras-promesas`).
 - Also in the [[Kick section]] (first edition in `data/kick.ts`, with a "Jurado invitado" row and "+1 por revelar" after the line-up, from `slots`) and the [[Agenda]]; the [[Chat assistant]] knows the line-up and the guest (and, while a slot is empty, that one name is still unannounced).
 
+## Winner (2026-11-08)
+**Leykan** won (team). `winner` in `data/futurasPromesas.ts` and `data/kick.ts`.
+- **Hero winner takeover** (`WinnerTakeover` in `components/Hero.tsx`): from the end of the event until `winnerHeroUntil` (2026-11-22, two weeks; an editorial default, change it in the data), Leykan's poster leads the first screen instead of the artist video: poster set down askew with an ember glow and a "Ganador" stamp pressed across it, his name stamped huge, date, place, the guest judge, who else competed, hot "Ver el canal en Kick", steel "Forma parte…", links to this section and the agenda. A main event (`main: true`) coming up takes the hero back from it. After the window the video hero returns.
+- **This section:** the countdown becomes "Finalizado · el ganador es" with his name; his print gets an ember ring and a stamp, "Ganador · Participante 02" in ember, and his string stays lit.
+- [[Kick section]]: Futuras Promesas #4 leads with his poster first, a "Ganador" row and his name in ember in the line-up.
+
 ## Assets
 - `public/futuras-promesas/ft4-lowkey-jurado.webp` (1024×1536), `ft4-colmaill.webp` and `ft4-leykan.webp` (738×1107, cropped out of phone screenshots), `ft4-tyan4.webp`, `ft4-dobleb.webp` and `ft4-septu-rg.webp` (1024×1536, as sent; the last one arrived as "septu rg.webp" and was renamed without the space). Originals in `source/futuras-promesas-4/`.
 
@@ -36,5 +42,5 @@ The label's next Kick showcase, announced in its own section right after the [[H
 - [ ] 2BLE B also won Futuras Promesas #3 (Barranquilla): is this the same artist coming back? If so, the site could say it (the poster doesn't)
 - [ ] Confirm the spelling "Tyan4" (poster) vs "Tyana" (file name)
 - [ ] End time (the posters give none; the agenda assumes 2 hours)
-- [ ] Winner after the event (then the section can close and the edition keeps the winner in `data/kick.ts`)
+- [ ] Leykan's Instagram (`winnerUrl` in `data/kick.ts`) and the VOD link of the session, to link from the winner
 - [ ] Remove the section after the event, or turn it into the results

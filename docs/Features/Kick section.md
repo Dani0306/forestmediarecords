@@ -24,6 +24,7 @@ Since 2026-11-04 the section leads with **Futuras Promesas #4** (7 Nov, 9:00 PM;
 - Channels: the supporting channel **`leolugolive`** first (logo), then the team's other Kick channels taken from `data/streamers.ts` (today **`trianiss`**, with his photo zoomed on the face). Artist channels were removed earlier.
 
 ## Winner links
+Since 2026-11-08 the lead edition is **Futuras Promesas #4** (winner **Leykan**; his poster first, "Ganador" row, his name in ember in the line-up); see [[Futuras Promesas 4]].
 The lead edition's winner name links to their Instagram when `winnerUrl` is set in `data/kick.ts` (Instagram mark beside it): 2BLE B → instagram.com/el2ble_b, Jhanky → instagram.com/jhanky.10 (2026-10-13).
 
 ## Open issues

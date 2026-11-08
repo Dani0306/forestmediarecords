@@ -56,6 +56,7 @@ function Pinned({
   sizes,
   pin,
   edges,
+  winning,
   onHeat,
   lang,
   children,
@@ -70,6 +71,8 @@ function Pinned({
   pin: (id: string) => (el: HTMLSpanElement | null) => void;
   /** Extra pins on the print's left ("l") and right ("r") edges, for the lower strings. */
   edges?: readonly ("l" | "r")[];
+  /** The edition's winner: an ember ring and a stamp across the print. */
+  winning?: string;
   onHeat: (id: string | null) => void;
   lang: "es" | "en";
   children: React.ReactNode;
@@ -78,7 +81,7 @@ function Pinned({
   const [tilt, tiltHandlers] = useTilt();
   return (
     <figure
-      className="fp-print relative"
+      className={`fp-print relative ${winning ? "fp-win" : ""}`}
       style={{ "--lean": `${lean}deg` } as React.CSSProperties}
       onPointerEnter={() => onHeat(id)}
       onPointerLeave={() => {
@@ -99,11 +102,16 @@ function Pinned({
           {edges.includes("r") && <span ref={pin(`${id}-r`)} className="fp-pin absolute right-0 top-[87%] -mr-[5px]" />}
         </div>
       )}
-      <div className="fp-sheet">
+      <div className="fp-sheet relative">
         <div ref={tilt} className="fp-tilt relative overflow-hidden rounded-[3px]" style={{ aspectRatio: ratio }}>
           {poster ? <Image src={poster.src} alt={poster.alt[lang]} fill sizes={sizes} className="object-cover" /> : sheet}
           <span aria-hidden="true" className="fp-gloss pointer-events-none absolute inset-0" />
         </div>
+        {winning && (
+          <span aria-hidden="true" className="fp-stamp fp-win-stamp stencil pointer-events-none absolute left-[8%] top-[56%] z-40">
+            {winning}
+          </span>
+        )}
       </div>
       <figcaption className="mt-5">{children}</figcaption>
     </figure>
@@ -111,7 +119,7 @@ function Pinned({
 }
 
 /** Red string from each competitor's pin to the guest's, sagging under its own weight. Drawn in on scroll. */
-function Strings({ board, pins, hot }: { board: React.RefObject<HTMLDivElement | null>; pins: Map<string, HTMLSpanElement>; hot: string | null }) {
+function Strings({ board, pins, hot, won }: { board: React.RefObject<HTMLDivElement | null>; pins: Map<string, HTMLSpanElement>; hot: string | null; won?: string }) {
   const [paths, setPaths] = useState<{ id: string; d: string }[]>([]);
   const [box, setBox] = useState({ w: 0, h: 0 });
 
@@ -161,7 +169,7 @@ function Strings({ board, pins, hot }: { board: React.RefObject<HTMLDivElement |
           key={p.id}
           d={p.d}
           pathLength={1}
-          className={`fp-string ${hot === p.id || hot === "guest" ? "is-hot" : ""}`}
+          className={`fp-string ${hot === p.id || hot === "guest" || won === p.id ? "is-hot" : ""}`}
           style={{ animationRange: `entry ${30 + i * 10}% cover ${55 + i * 10}%` } as React.CSSProperties}
         />
       ))}
@@ -251,14 +259,17 @@ export default function FuturasPromesas() {
         key={p.name}
         id={p.name}
         poster={p.poster}
+        winning={done && p.name === FP.winner ? c.winner : undefined}
         lean={lean}
         sizes="(max-width: 1024px) 46vw, 22rem"
         pin={pin}
         onHeat={setHot}
         lang={lang}
       >
-        <p className="readout text-[0.6rem] text-steel">{label}</p>
-        <p className="stencil mt-1.5 text-[clamp(1.75rem,3vw,2.75rem)] leading-[0.9] text-iron [--wdth:74]">{p.name}</p>
+        <p className={`readout text-[0.6rem] ${done && p.name === FP.winner ? "text-ember" : "text-steel"}`}>
+          {done && p.name === FP.winner ? `${c.winner} · ${label}` : label}
+        </p>
+        <p className={`stencil mt-1.5 text-[clamp(1.75rem,3vw,2.75rem)] leading-[0.9] [--wdth:74] ${done && p.name === FP.winner ? "text-ember" : "text-iron"}`}>{p.name}</p>
       </Pinned>
     );
   };
@@ -288,7 +299,7 @@ export default function FuturasPromesas() {
                   </span>
                 ))}
               </span>
-              <span className="fp-number text-[1.9em] leading-[0.74]" style={{ color: done ? "var(--color-steel)" : "var(--h)" }}>
+              <span className="fp-number text-[1.9em] leading-[0.74]" style={{ color: done && !FP.winner ? "var(--color-steel)" : done ? "var(--color-ember)" : "var(--h)" }}>
                 {FP.edition}
               </span>
             </h2>
@@ -310,6 +321,11 @@ export default function FuturasPromesas() {
                   <span aria-hidden="true" className="live-dot size-3 rounded-full bg-white-heat" />
                   {t.hero.liveNow}
                 </p>
+              ) : done && FP.winner ? (
+                <div className="border-y border-iron/15 py-4">
+                  <p className="stamp text-ember">{c.winnerDone}</p>
+                  <p className="stencil mt-2 text-[clamp(3rem,6vw,5.5rem)] leading-[0.85] text-iron [--wdth:64]">{FP.winner}</p>
+                </div>
               ) : done ? (
                 <p className="readout text-[0.72rem] text-steel">{c.done}</p>
               ) : (
@@ -343,7 +359,7 @@ export default function FuturasPromesas() {
             {hidden > 0 && ` · ${hidden} ${c.toReveal}`} · 1 {c.guestShort}
           </p>
 
-          <Strings board={board} pins={pins} hot={hot} />
+          <Strings board={board} pins={pins} hot={hot} won={done ? FP.winner : undefined} />
 
           {/* desktop: the side columns span both rows, so the print under the guest sits right below it */}
           <div className="grid grid-cols-2 gap-x-4 gap-y-14 sm:gap-x-8 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-8">
