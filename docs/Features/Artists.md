@@ -44,4 +44,5 @@ Section title "Nuestros Artistas". One artist at a time:
 ## Decisions
 [[Artist stage with tabs]], [[Artist stage as a reel]] (superseded)
 
+- 2026-11-10: Lentino's bio replaced with the full text from the team (nickname «El de la Magia», Luis Lentino, started in Barranquilla in 2018, moved to Medellín in 2022; releases La Vuelta, Stalker, Stripper, BM, Coronao; upcoming «Contacto Cero» single and «Sobrio» with RS el Italiano). Four paragraphs, ES and EN; the first is the short intro. The nickname is plain text (the pasted version used Fraktur Unicode letters, which read badly on screen readers).
 - 2026-10-23: added the "FMR" video-shoot photos (`rs-fmr-1…6`, after `rs-main`; `lentino-fmr-1…2`, before the first existing photo).

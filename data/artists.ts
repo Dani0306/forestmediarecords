@@ -135,14 +135,16 @@ export const artists: Artist[] = [
       since: "2026", // joined about August 2026 (two months before 2026-10-06)
       bio: {
         es: [
-          "Luis Rafael Lentino nació en Sincelejo en 1997 y vive en Medellín desde 2022, donde ha venido consolidando su propuesta en la música urbana. Su sonido mezcla reguetón, R&B y trap para construir una identidad propia.",
-          "Entre sus canciones se destacan «La Vuelta» y «BM», parte del camino que viene construyendo en la escena urbana.",
-          "Hoy prepara nuevos lanzamientos, entre ellos «Sobrio», una colaboración con RS el Italiano que marca una nueva etapa en su evolución artística.",
+          "Lentino «El de la Magia», cuyo nombre es Luis Lentino, es un artista urbano colombiano nacido en Sincelejo en 1997. En 2018 inició profesionalmente su carrera artística en Barranquilla, ciudad donde comenzó a desarrollar su visión musical y a dar forma a su proyecto. En 2022 se trasladó a Medellín, donde ha continuado consolidando su propuesta y expandiendo su identidad dentro de la escena urbana.",
+          "Su sonido se caracteriza por la fusión de reguetón, R&B y trap, géneros que convergen en una propuesta versátil, con una visión creativa orientada a explorar nuevas sonoridades y construir un sello musical propio.",
+          "Entre sus lanzamientos destacan «La Vuelta», «Stalker», «Stripper», «BM» y «Coronao», canciones que representan distintas etapas de su recorrido y evolución artística.",
+          "Actualmente, Lentino se encuentra trabajando en nueva música. Entre sus próximos lanzamientos se destacan «Contacto Cero», que será su single, y «Sobrio», una colaboración con RS el Italiano que marca un nuevo capítulo en su carrera y refleja su constante búsqueda de evolución, autenticidad y crecimiento dentro de la música urbana.",
         ],
         en: [
-          "Luis Rafael Lentino was born in Sincelejo in 1997 and has lived in Medellín since 2022, where he's been building his place in urban music. His sound blends reggaeton, R&B and trap into an identity of his own.",
-          "His standout songs include “La Vuelta” and “BM”, part of the path he's building in the urban scene.",
-          "He's now preparing new releases, including “Sobrio”, a collaboration with RS el Italiano that marks a new stage in his artistic growth.",
+          "Lentino “El de la Magia” (“the one with the magic”), whose name is Luis Lentino, is a Colombian urban artist born in Sincelejo in 1997. In 2018 he began his artistic career professionally in Barranquilla, the city where he started to develop his musical vision and shape his project. In 2022 he moved to Medellín, where he has kept consolidating his work and expanding his identity within the urban scene.",
+          "His sound blends reggaeton, R&B and trap, genres that come together in a versatile approach, with a creative vision aimed at exploring new sounds and building a musical signature of his own.",
+          "His releases include “La Vuelta”, “Stalker”, “Stripper”, “BM” and “Coronao”, songs that stand for different stages of his path and artistic evolution.",
+          "Lentino is currently working on new music. His upcoming releases include “Contacto Cero”, which will be his single, and “Sobrio”, a collaboration with RS el Italiano that marks a new chapter in his career and reflects his constant search for evolution, authenticity and growth in urban music.",
         ],
       },
     },
