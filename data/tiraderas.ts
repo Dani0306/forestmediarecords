@@ -112,15 +112,14 @@ export const tiraderas = {
       },
     },
     {
-      // back in the field for Round 2 (2026-11-08); channel and photo from the 2026-10-16 entry.
-      // TODO: Coptero (the other new duelist) joins here once the team sends his Kick link and photo.
-      name: "Carlogato",
-      url: "https://kick.com/carlogato",
+      // added 2026-11-10 (Round 2 duelist)
+      name: "Coptero",
+      url: "https://kick.com/coptero",
       photo: {
-        src: "/tiraderas/participants/carlogato.avif",
-        width: 1034,
-        height: 1379,
-        focus: "50% 38%",
+        src: "/tiraderas/participants/coptero.webp",
+        width: 350,
+        height: 350,
+        focus: "50% 30%",
       },
     },
   ] as Participant[],
