@@ -44,3 +44,5 @@ The label's next Kick showcase, announced in its own section right after the [[H
 - [ ] End time (the posters give none; the agenda assumes 2 hours)
 - [ ] Leykan's Instagram (`winnerUrl` in `data/kick.ts`) and the VOD link of the session, to link from the winner
 - [ ] Remove the section after the event, or turn it into the results
+
+- 2026-11-12: the YouTube recording (https://youtu.be/p_ai7crPUf0) replaces the Kick button in the hero winner takeover ("Ver en YouTube") and is the event's `replay` in the agenda.

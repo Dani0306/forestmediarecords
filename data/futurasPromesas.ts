@@ -32,6 +32,8 @@ export const futurasPromesas = {
   name: "Futuras Promesas",
   edition: "4",
   channel: site.kick.url,
+  /** Recording of the night on YouTube (team, 2026-11-12). */
+  watchUrl: "https://youtu.be/p_ai7crPUf0",
   /** How many singers compete; slots past `competitors` show as "por revelar". */
   slots: 5,
   /** The winner (team, 2026-11-08): a competitor's `name`. Leads the page while `winnerHeroUntil` lasts, then stays on the section. */

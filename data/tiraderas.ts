@@ -36,11 +36,11 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Ocho streamers se enfrentan en tiraderas: barras, indirectas y flow. Cuatro duelos en dos rondas, un sorteo para armar las semifinales y una gran final. El sorteo inicial fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
-    en: "Eight streamers face off in tiraderas (diss tracks): bars, shots and flow. Four duels across two rounds, a draw to set the semifinals, and a grand final. The first draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
+    es: "Siete streamers se enfrentan en tiraderas: barras, indirectas y flow. Cuatro duelos en dos rondas, un sorteo para armar las semifinales y una gran final. El sorteo inicial fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
+    en: "Seven streamers face off in tiraderas (diss tracks): bars, shots and flow. Four duels across two rounds, a draw to set the semifinals, and a grand final. The first draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
-  /** Eight again since 2026-11-08 (six from 2026-11-02): four duels, two per round. */
-  players: 8,
+  /** Seven since 2026-11-12 (ElFerpo2 left, no eighth competitor): four duels in two rounds. */
+  players: 7,
   /** True while a place is a surprise (revealed later) instead of "to be announced". Off since 2026-10-16: all are known. */
   surprise: false,
   /**
@@ -49,16 +49,6 @@ export const tiraderas = {
    * "Por anunciar" slots. Bracket names match these `name`s to show the photo.
    */
   participants: [
-    {
-      name: "ElFerpo2",
-      url: "https://kick.com/elferpo2",
-      photo: {
-        src: "/tiraderas/participants/elferpo2.avif",
-        width: 900,
-        height: 1600,
-        focus: "50% 40%",
-      },
-    },
     {
       name: "soyjosema",
       url: "https://kick.com/soyjosema",
@@ -120,6 +110,17 @@ export const tiraderas = {
         width: 350,
         height: 350,
         focus: "50% 30%",
+      },
+    },
+    {
+      // back for Round 2 (2026-11-12); channel and photo from the 2026-10-16 entry
+      name: "Carlogato",
+      url: "https://kick.com/carlogato",
+      photo: {
+        src: "/tiraderas/participants/carlogato.avif",
+        width: 1034,
+        height: 1379,
+        focus: "50% 38%",
       },
     },
   ] as Participant[],
@@ -195,6 +196,8 @@ export const tiraderas = {
     {
       eventId: "tiraderas-ronda-1",
       name: { es: "Primera ronda", en: "Round 1" },
+      watchUrl: "https://youtu.be/o6RwpctHIVE",
+      watchLabel: { es: "Ver la primera ronda", en: "Watch Round 1" },
       body: {
         es: "Primera parte de los duelos. Soyjosema y Cuartiz avanzaron; Emvy_29 quedó eliminado.",
         en: "The first half of the duels. Soyjosema and Cuartiz moved on; Emvy_29 was eliminated.",
@@ -231,13 +234,13 @@ export const tiraderas = {
     { es: "El videoclip es opcional.", en: "A music video is optional." },
   ],
   /**
-   * Format (2026-11-08): eight competitors in four duels, two per round. Round 1 is done
+   * Format (2026-11-08): seven competitors across four duels, two per round. Round 1 is done
    * (Soyjosema and Cuartiz moved on, Emvy_29 is out); Round 2 plays Cang5 vs Pablomeji4 and
    * Coptero vs Carlogato and ends with a draw for the semifinals; then the final.
    * Who goes through the later stages is picked in the bracket (admin mode); "" = not known yet.
    */
   bracket: {
-    /** Round 1 (6 Nov): who is named in the result, and who moved on. ElFerpo2's result is not published yet. */
+    /** Round 1 (6 Nov): who is named in the result, and who moved on. */
     round1: { players: ["soyjosema", "Cuartiz", "Emvy_29"] as string[], through: ["soyjosema", "Cuartiz"] as string[] },
     /** Round 2 duels (13 Nov); the winners join Round 1's winners in the semifinals. */
     round2: [

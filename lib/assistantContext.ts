@@ -226,7 +226,7 @@ function tiraderasInfo() {
     `- Jueces (${T.judgeSeats}): ${T.judges.map((j) => `${j.name} (${j.url})`).join(", ")}${T.judges.length < T.judgeSeats ? `; ${T.judgeSeats - T.judges.length === 1 ? "el otro, por confirmar" : `${T.judgeSeats - T.judges.length} por confirmar`}` : ""}.`,
     `- Puntuación: ${T.criteria.map((k) => k.es).join(", ")}.`,
     `- Premio: ${formatCOP(T.prize.amount)} COP. ${T.prize.note.es}`,
-    "- Formato (actualizado el 8 de noviembre de 2026): ocho competidores en cuatro duelos, dos por ronda. Ronda 1 (parte de los duelos, ya se jugó) y Ronda 2 (la otra parte); en la Ronda 2 también se hace un sorteo para definir los cruces de las semifinales, que no están fijados de antemano. Luego semifinales y la gran final.",
+    "- Formato (actualizado el 8 de noviembre de 2026): siete competidores; cuatro duelos en dos rondas. Ronda 1 (parte de los duelos, ya se jugó) y Ronda 2 (la otra parte); en la Ronda 2 también se hace un sorteo para definir los cruces de las semifinales, que no están fijados de antemano. Luego semifinales y la gran final.",
     T.rounds.some((r) => r.watchUrl) ? `- El sorteo ya se hizo y se puede ver en YouTube: ${T.rounds.find((r) => r.watchUrl)?.watchUrl}` : "",
     `- Rondas (el sorteo a las 8:00 p. m. y el resto a las 7:30 p. m., hora de Colombia, por Kick en todos los canales; fechas exactas en la Agenda):`,
     ...T.rounds.map((r) => `  - ${r.name.es}: ${r.body.es}`),

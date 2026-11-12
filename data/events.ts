@@ -67,6 +67,7 @@ export const events: ForgeEvent[] = [
     start: "2026-11-07T21:00:00-05:00",
     place: { es: "Kick · kick.com/leolugolive", en: "Kick · kick.com/leolugolive" },
     url: "https://kick.com/leolugolive",
+    replay: "https://youtu.be/p_ai7crPUf0",
     // the guest judge's poster leads; the competitors' fan out behind it
     image: "/futuras-promesas/ft4-lowkey-jurado.webp",
     poster: { width: 1024, height: 1536 },
@@ -130,6 +131,7 @@ export const events: ForgeEvent[] = [
     // the team asked for Jaycol (judge) on this round, watched from his channel.
     image: "/tiraderas/juries/jaycol.jpg",
     url: "https://kick.com/jaycol",
+    replay: "https://youtu.be/o6RwpctHIVE",
   },
   {
     id: "tiraderas-ronda-2",

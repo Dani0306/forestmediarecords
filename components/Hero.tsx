@@ -474,12 +474,10 @@ function WinnerTakeover({ now, secondary }: { now: number | null; secondary?: Fo
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            {hasKick && (
-              <a href={FP.channel} target="_blank" rel="noreferrer" className="btn btn-hot">
-                <Broadcast className="size-5" />
-                {t.hero.winnerWatch}
-              </a>
-            )}
+            <a href={FP.watchUrl} target="_blank" rel="noreferrer" className="btn btn-hot">
+              <YouTube className="size-5" />
+              {t.hero.winnerWatch}
+            </a>
             <a href="#demos" className="btn btn-steel max-w-full whitespace-normal py-3 text-center leading-tight sm:whitespace-nowrap">
               {t.hero.ctaJoin}
             </a>

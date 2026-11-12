@@ -38,6 +38,9 @@ Format moved from six players with a battle royale to **eight players, four duel
 - [ ] Semifinals date (no event yet, the column reads "Cruces por sorteo"); confirm the final is still 21 Nov
 - [ ] ElFerpo2's Round 1 result isn't in the bracket (not stated)
 
+## Line-up change (2026-11-12)
+ElFerpo2 left the line-up and Carlogato returned; seven competitors (`players: 7`), no open slot. Round 1's recording is `watchUrl` on its round (button "Ver la primera ronda") and `replay` on its event. Copy and the chat assistant say seven.
+
 ## Open issues
 - [ ] Official poster: swap `image` on the five events in `data/events.ts`
 - [ ] Fill the bracket after the draw (16 Oct) and after each round
