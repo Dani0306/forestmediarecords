@@ -39,7 +39,7 @@ export const futurasPromesas = {
   /** The winner (team, 2026-11-08): a competitor's `name`. Leads the page while `winnerHeroUntil` lasts, then stays on the section. */
   winner: "Leykan",
   /** The winner takes over the first screen until this moment (two weeks after the event; the artist video hero returns). */
-  winnerHeroUntil: "2026-11-22T00:00:00-05:00",
+  winnerHeroUntil: "2026-11-08T00:00:00-05:00", // set to the event day on 2026-11-14 at the team's request: the video hero is back; push it forward to bring the winner takeover back
   competitors: [
     {
       name: "Colmaill",

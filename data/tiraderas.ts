@@ -112,17 +112,6 @@ export const tiraderas = {
         focus: "50% 30%",
       },
     },
-    {
-      // back for Round 2 (2026-11-12); channel and photo from the 2026-10-16 entry
-      name: "Carlogato",
-      url: "https://kick.com/carlogato",
-      photo: {
-        src: "/tiraderas/participants/carlogato.avif",
-        width: 1034,
-        height: 1379,
-        focus: "50% 38%",
-      },
-    },
   ] as Participant[],
   /** Seats on the panel; fewer `judges` than this shows "Por confirmar" for the rest. */
   judgeSeats: 3,
@@ -207,8 +196,8 @@ export const tiraderas = {
       eventId: "tiraderas-ronda-2",
       name: { es: "Segunda ronda", en: "Round 2" },
       body: {
-        es: "Segunda parte de los duelos: Cang5 contra Pablomeji4 y Coptero contra Carlogato. Al final se hace un sorteo para definir los cruces de las semifinales; no están fijados de antemano.",
-        en: "The second half of the duels: Cang5 vs Pablomeji4 and Coptero vs Carlogato. At the end there is a draw to set the semifinal match-ups; they are not fixed beforehand.",
+        es: "Segunda parte de los duelos: Cang5 contra Pablomeji4 y Coptero contra un rival por confirmar. Al final se hace un sorteo para definir los cruces de las semifinales; no están fijados de antemano.",
+        en: "The second half of the duels: Cang5 vs Pablomeji4 and Coptero vs an opponent to be confirmed. At the end there is a draw to set the semifinal match-ups; they are not fixed beforehand.",
       },
     },
     {
@@ -236,7 +225,7 @@ export const tiraderas = {
   /**
    * Format (2026-11-08): seven competitors across four duels, two per round. Round 1 is done
    * (Soyjosema and Cuartiz moved on, Emvy_29 is out); Round 2 plays Cang5 vs Pablomeji4 and
-   * Coptero vs Carlogato and ends with a draw for the semifinals; then the final.
+   * Coptero vs an opponent still to be named and ends with a draw for the semifinals; then the final.
    * Who goes through the later stages is picked in the bracket (admin mode); "" = not known yet.
    */
   bracket: {
@@ -245,7 +234,7 @@ export const tiraderas = {
     /** Round 2 duels (13 Nov); the winners join Round 1's winners in the semifinals. */
     round2: [
       ["Cang5", "Pablomeji4"],
-      ["Coptero", "Carlogato"],
+      ["Coptero", ""],
     ] as string[][],
     /** Round 2's winners and Round 1's winners, 4 in all: the draw sets who faces whom. */
     semis: 4,

@@ -416,4 +416,41 @@ export const artists: Artist[] = [
       },
     },
   },
+  {
+    // Added 2026-11-14 with placeholders: the team uploads the real bio, links and music later.
+    // Photo: the framed picture cropped from his Futuras Promesas 4 poster (`public/futuras-promesas/ft4-leykan.webp`).
+    slug: "leykan",
+    name: "Leykan",
+    photos: [
+      {
+        src: "/artists/leykan/leykan-1.webp",
+        width: 350,
+        height: 410,
+        focus: "50% 25%",
+        alt: {
+          es: "Leykan con gorra, gafas y pañoleta, haciendo un gesto con la mano, de noche",
+          en: "Leykan in a cap, sunglasses and a bandana, making a hand sign at night",
+        },
+      },
+    ],
+    // TODO: social profiles
+    links: [],
+    // TODO: Spotify artist and YouTube channel
+    listen: { spotify: "", youtube: "" },
+    profile: {
+      sample: true, // placeholder copy, tagged "Biografía de ejemplo" until the real bio arrives
+      role: { es: "Artista", en: "Artist" },
+      genres: [], // TODO
+      city: "", // TODO
+      since: "", // TODO
+      bio: {
+        es: [
+          "Leykan es el nuevo artista de Forest Media Récords. Su biografía llegará muy pronto.",
+        ],
+        en: [
+          "Leykan is Forest Media Récords' newest artist. His bio is coming soon.",
+        ],
+      },
+    },
+  },
 ];

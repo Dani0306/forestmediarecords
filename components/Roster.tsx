@@ -246,7 +246,7 @@ function Stage({ a, index }: { a: Artist; index: number }) {
             </div>
             <div className="border-t border-iron/15 py-3">
               <dt className="text-steel">{t.roster.city}</dt>
-              <dd className="mt-1 text-iron">{p.city}</dd>
+              <dd className={`mt-1 ${p.city ? "text-iron" : "text-steel"}`}>{p.city || t.roster.tbc}</dd>
             </div>
             <div className="border-t border-iron/15 py-3">
               <dt className="text-steel">{t.roster.since}</dt>
