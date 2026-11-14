@@ -36,11 +36,11 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Siete streamers se enfrentan en tiraderas: barras, indirectas y flow. Cuatro duelos en dos rondas, un sorteo para armar las semifinales y una gran final. El sorteo inicial fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
-    en: "Seven streamers face off in tiraderas (diss tracks): bars, shots and flow. Four duels across two rounds, a draw to set the semifinals, and a grand final. The first draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
+    es: "Seis streamers se enfrentan en tiraderas: barras, indirectas y flow. Cuatro duelos en dos rondas, un sorteo para armar las semifinales y una gran final. El sorteo inicial fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
+    en: "Six streamers face off in tiraderas (diss tracks): bars, shots and flow. Four duels across two rounds, a draw to set the semifinals, and a grand final. The first draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
-  /** Seven since 2026-11-12 (ElFerpo2 left, no eighth competitor): four duels in two rounds. */
-  players: 7,
+  /** Six since 2026-11-14: the six confirmed competitors, no open place. */
+  players: 6,
   /** True while a place is a surprise (revealed later) instead of "to be announced". Off since 2026-10-16: all are known. */
   surprise: false,
   /**
@@ -223,7 +223,7 @@ export const tiraderas = {
     { es: "El videoclip es opcional.", en: "A music video is optional." },
   ],
   /**
-   * Format (2026-11-08): seven competitors across four duels, two per round. Round 1 is done
+   * Format (2026-11-08): six competitors announced across four duels, two per round. Round 1 is done
    * (Soyjosema and Cuartiz moved on, Emvy_29 is out); Round 2 plays Cang5 vs Pablomeji4 and
    * Coptero vs an opponent still to be named and ends with a draw for the semifinals; then the final.
    * Who goes through the later stages is picked in the bracket (admin mode); "" = not known yet.

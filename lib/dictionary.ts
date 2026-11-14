@@ -125,7 +125,7 @@ const es = {
   tiraderas: {
     title: "Mundial de Tiraderas",
     caption: "2026 · LeoLugoLive × Forest Media Récords",
-    tagline: "7 streamers · 3 jueces · un campeón",
+    tagline: "6 streamers · 3 jueces · un campeón",
     calendar: "Calendario",
     next: "Siguiente",
     done: "Finalizado",
@@ -580,7 +580,7 @@ const en: Dict = {
   tiraderas: {
     title: "Mundial de Tiraderas",
     caption: "2026 · LeoLugoLive × Forest Media Récords",
-    tagline: "7 streamers · 3 judges · one champion",
+    tagline: "6 streamers · 3 judges · one champion",
     calendar: "Schedule",
     next: "Next",
     done: "Finished",
