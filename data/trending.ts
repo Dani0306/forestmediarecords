@@ -62,20 +62,6 @@ const FP3_WINNER = "https://www.instagram.com/el2ble_b/";
 const FP2_WINNER = "https://www.instagram.com/jhanky.10/";
 
 export const trending: Trend[] = [
-  // Lentino's new singles (2026-10-10) lead; the covers also live in "Lo nuevo" (data/releases.ts)
-  {
-    id: "coronao",
-    kind: "music",
-    title: { es: "Coronao", en: "Coronao" },
-    meta: {
-      es: "Lentino · Nuevo sencillo",
-      en: "Lentino · New single",
-    },
-    media: { kind: "image", src: "/releases/coronao-cover.webp", width: 736, height: 736 },
-    alt: releases[0].cover.alt,
-    focus: "50% 50%",
-    href: releases[0].spotify,
-  },
   // Leykan joins (2026-11-14); photo is the crop from his FP4 poster until the team uploads better ones
   {
     id: "leykan-llega",
@@ -95,6 +81,20 @@ export const trending: Trend[] = [
     },
     focus: "50% 25%",
     href: "#artistas",
+  },
+  // Lentino's new singles (2026-10-10) lead; the covers also live in "Lo nuevo" (data/releases.ts)
+  {
+    id: "coronao",
+    kind: "music",
+    title: { es: "Coronao", en: "Coronao" },
+    meta: {
+      es: "Lentino · Nuevo sencillo",
+      en: "Lentino · New single",
+    },
+    media: { kind: "image", src: "/releases/coronao-cover.webp", width: 736, height: 736 },
+    alt: releases[0].cover.alt,
+    focus: "50% 50%",
+    href: releases[0].spotify,
   },
   // the "FMR" teaser (new song) leads
   {
