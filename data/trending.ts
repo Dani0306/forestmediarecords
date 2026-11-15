@@ -76,6 +76,26 @@ export const trending: Trend[] = [
     focus: "50% 50%",
     href: releases[0].spotify,
   },
+  // Leykan joins (2026-11-14); photo is the crop from his FP4 poster until the team uploads better ones
+  {
+    id: "leykan-llega",
+    kind: "studio",
+    title: {
+      es: "Leykan llega a Forest Media Récords",
+      en: "Leykan joins Forest Media Récords",
+    },
+    meta: {
+      es: "Cantante de trap · Cali",
+      en: "Trap singer · Cali",
+    },
+    media: { kind: "image", src: "/artists/leykan/leykan-1.webp", width: 350, height: 410 },
+    alt: {
+      es: "Leykan con gorra, gafas y pañoleta, haciendo un gesto con la mano, de noche",
+      en: "Leykan in a cap, sunglasses and a bandana, making a hand sign at night",
+    },
+    focus: "50% 25%",
+    href: "#artistas",
+  },
   // the "FMR" teaser (new song) leads
   {
     id: "fmr-avance",
