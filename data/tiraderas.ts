@@ -196,8 +196,16 @@ export const tiraderas = {
       eventId: "tiraderas-ronda-2",
       name: { es: "Segunda ronda", en: "Round 2" },
       body: {
-        es: "Segunda parte de los duelos: Cang5 contra Pablomeji4 y Coptero contra un rival por confirmar. Al final se hace un sorteo para definir los cruces de las semifinales; no están fijados de antemano.",
-        en: "The second half of the duels: Cang5 vs Pablomeji4 and Coptero vs an opponent to be confirmed. At the end there is a draw to set the semifinal match-ups; they are not fixed beforehand.",
+        es: "Segunda parte de los duelos: Cang5 contra Pablomeji4 y Coptero contra un rival por confirmar. Al final se definen los cruces de las semifinales.",
+        en: "The second half of the duels: Cang5 vs Pablomeji4 and Coptero vs an opponent to be confirmed. At the end the semifinal match-ups are set.",
+      },
+    },
+    {
+      eventId: "tiraderas-semifinal",
+      name: { es: "Semifinales", en: "Semi-finals" },
+      body: {
+        es: "Dos duelos para llegar a la final: Soyjosema contra Pablomeji4 y Coptero contra Cuartiz. Pasan los ganadores de cada cruce.",
+        en: "Two duels for a place in the final: Soyjosema vs Pablomeji4 and Coptero vs Cuartiz. The winner of each match-up goes through.",
       },
     },
     {
@@ -236,8 +244,13 @@ export const tiraderas = {
       ["Cang5", "Pablomeji4"],
       ["Coptero", ""],
     ] as string[][],
-    /** Round 2's winners and Round 1's winners, 4 in all: the draw sets who faces whom. */
+    /** Round 2's winners and Round 1's winners, 4 in all. */
     semis: 4,
+    /** Semifinal match-ups (set 2026-11-15; played Sat 21 Nov, 7 PM). */
+    semiDuels: [
+      ["soyjosema", "Pablomeji4"],
+      ["Coptero", "Cuartiz"],
+    ] as string[][],
     /** How many reach the final. */
     finalists: 2,
     champion: "",

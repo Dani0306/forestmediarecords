@@ -147,6 +147,19 @@ export const events: ForgeEvent[] = [
     image: "/streamers/trianiss/trianiss-2.avif",
   },
   {
+    id: "tiraderas-semifinal",
+    type: "stream",
+    main: false,
+    title: {
+      es: "Mundial de Tiraderas · Semifinales",
+      en: "Mundial de Tiraderas · Semi-finals",
+    },
+    artists: [],
+    start: "2026-11-21T19:00:00-05:00",
+    place: { es: "Kick · todos los canales", en: "Kick · all channels" },
+    image: "/streamers/trianiss/trianiss-2.avif",
+  },
+  {
     id: "tiraderas-final",
     type: "stream",
     main: false,

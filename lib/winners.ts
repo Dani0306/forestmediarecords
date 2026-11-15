@@ -31,13 +31,14 @@ export function resolveBracket(w: Winners) {
   const through = (round: string, names: string[]) => names.filter((n) => n && w[`${round}:${n}`] === n);
   // one winner per Round 2 duel
   const r2 = b.round2.map((duel) => through("r2", duel)[0] ?? "");
-  const semis = [...b.round1.through, ...r2.filter(Boolean)];
+  const semis = b.semiDuels.length ? b.semiDuels.flat() : [...b.round1.through, ...r2.filter(Boolean)];
   const finalists = through("sf", semis).slice(0, b.finalists);
   const final = Array.from({ length: b.finalists }, (_, i) => finalists[i] ?? "");
   const champion = final.includes(w.final) ? w.final : "";
   return {
     round1: b.round1,
     round2: b.round2,
+    semiDuels: b.semiDuels,
     /** Round 2's winner of each duel ("" while open). */
     r2,
     /** The four semifinalists; the empty places are Round 2's open duels. */

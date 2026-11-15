@@ -226,6 +226,7 @@ export default function Tiraderas() {
   const byId = (id: string) => rounds.find((r) => r.eventId === id)?.e;
   const r1 = byId("tiraderas-ronda-1");
   const r2e = byId("tiraderas-ronda-2");
+  const semiE = byId("tiraderas-semifinal");
   const fin = byId("tiraderas-final");
   const youtubeUrl = site.socials.find((x) => x.id === "youtube")?.url;
   const drawUrl = rounds.find((r) => r.eventId === "tiraderas-sorteo")?.watchUrl;
@@ -420,15 +421,18 @@ export default function Tiraderas() {
               </div>
 
               <div className="flex flex-col">
-                <StageHead label={c.stages.semis} heat="embers" lang={lang} note={c.semisDrawn} />
-                <div className="bracket-in-line bracket-out relative flex flex-1 items-center">
-                  <Match
-                    names={b.semis}
-                    empty={c.tbdLater}
-                    through={b.through3}
-                    settled={b.through3.length >= T.bracket.finalists}
-                    onPick={pick("sf")}
-                  />
+                <StageHead label={c.stages.semis} e={semiE} heat={heat(semiE)} lang={lang} />
+                <div className="bracket-in-line bracket-out relative flex flex-1 flex-col justify-center gap-3">
+                  {b.semiDuels.map((duel, i) => (
+                    <Match
+                      key={i}
+                      names={duel}
+                      empty={c.tbdLater}
+                      through={duel.filter((n) => b.through3.includes(n))}
+                      settled={duel.some((n) => b.through3.includes(n))}
+                      onPick={pick("sf")}
+                    />
+                  ))}
                 </div>
               </div>
 
