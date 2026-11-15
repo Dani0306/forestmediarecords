@@ -5,7 +5,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { artists, type Artist, type SocialPlatform } from "@/data/artists";
 import { heatOf, upcoming } from "@/data/events";
 import { formatDateParts, useLang, useNow } from "@/lib/i18n";
-import { ArrowDown, ArrowUpRight, Facebook, Instagram, Play, SoundCloud, Spotify, Threads, TikTok, XMark, YouTube } from "./icons";
+import { AppleMusic, ArrowDown, ArrowUpRight, Facebook, Instagram, Play, SoundCloud, Spotify, Threads, TikTok, XMark, YouTube } from "./icons";
 
 /** Platform names stay as brands in both languages; marks come from the icon set. */
 const SOCIAL: Record<SocialPlatform, { name: string; Icon: (p: React.SVGProps<SVGSVGElement>) => React.JSX.Element }> = {
@@ -17,6 +17,7 @@ const SOCIAL: Record<SocialPlatform, { name: string; Icon: (p: React.SVGProps<SV
   youtube: { name: "YouTube", Icon: YouTube },
   spotify: { name: "Spotify", Icon: Spotify },
   soundcloud: { name: "SoundCloud", Icon: SoundCloud },
+  applemusic: { name: "Apple Music", Icon: AppleMusic },
 };
 
 /**
@@ -31,6 +32,8 @@ function Listen({ a }: { a: Artist }) {
   const platforms = [
     { label: "Spotify", url: a.listen.spotify },
     { label: "YouTube", url: a.listen.youtube },
+    // only artists on Apple Music get a row; the rest keep the two-platform menu
+    ...(a.listen.appleMusic ? [{ label: "Apple Music", url: a.listen.appleMusic }] : []),
   ];
 
   useEffect(() => {
@@ -63,7 +66,7 @@ function Listen({ a }: { a: Artist }) {
         <span className="flex flex-col items-start leading-none">
           {t.roster.listen}
           <span className="readout mt-1.5 text-[0.55rem] tracking-[0.12em] text-scale/70">
-            Spotify · YouTube
+            {a.listen.appleMusic ? "Spotify · YouTube · Apple Music" : "Spotify · YouTube"}
           </span>
         </span>
         <span aria-hidden="true" className="flex h-5 items-end gap-[3px]">

@@ -132,6 +132,7 @@ function roster() {
       const listen = [
         a.listen.spotify && `Spotify: ${a.listen.spotify}`,
         a.listen.youtube && `YouTube: ${a.listen.youtube}`,
+        a.listen.appleMusic && `Apple Music: ${a.listen.appleMusic}`,
       ].filter(Boolean);
       return [
         `### ${a.name}`,

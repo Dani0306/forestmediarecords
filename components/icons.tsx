@@ -111,6 +111,14 @@ export const SoundCloud = (p: P) => (
   </svg>
 );
 
+export const AppleMusic = (p: P) => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M9 18V6.5l10-2V16" />
+    <circle cx="6.5" cy="18" r="2.5" />
+    <circle cx="16.5" cy="16" r="2.5" />
+  </svg>
+);
+
 export const TikTok = (p: P) => (
   <svg {...base} strokeLinecap="round" strokeLinejoin="round" {...p}>
     <path d="M14 3.5v11.3a3.9 3.9 0 1 1-3.9-3.9" />

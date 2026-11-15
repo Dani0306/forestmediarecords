@@ -6,7 +6,8 @@ export type SocialPlatform =
   | "facebook"
   | "youtube"
   | "spotify"
-  | "soundcloud";
+  | "soundcloud"
+  | "applemusic";
 
 export type Artist = {
   slug: string;
@@ -25,7 +26,7 @@ export type Artist = {
   /** Social profiles, shown as icon buttons on the stage. */
   links: { platform: SocialPlatform; url: string }[];
   /** Where to hear the music: the stage's "Escuchar" button. Empty shows "Muy pronto". */
-  listen: { spotify: string; youtube: string }; // TODO: Spotify artist/playlist and YouTube channel URLs
+  listen: { spotify: string; youtube: string; appleMusic?: string }; // TODO: Spotify artist/playlist and YouTube channel URLs
   profile: ArtistProfile;
 };
 
@@ -294,6 +295,64 @@ export const artists: Artist[] = [
     },
   },
   {
+    // Added 2026-11-14; bio, genre and links from the team on 2026-11-15. Still placeholders: more photos (team uploads later), latest release.
+    // Photo: the framed picture cropped from his Futuras Promesas 4 poster (`public/futuras-promesas/ft4-leykan.webp`).
+    slug: "leykan",
+    name: "Leykan",
+    photos: [
+      {
+        src: "/artists/leykan/leykan-1.webp",
+        width: 350,
+        height: 410,
+        focus: "50% 25%",
+        alt: {
+          es: "Leykan con gorra, gafas y pañoleta, haciendo un gesto con la mano, de noche",
+          en: "Leykan in a cap, sunglasses and a bandana, making a hand sign at night",
+        },
+      },
+    ],
+    links: [
+      { platform: "instagram", url: "https://www.instagram.com/leykanmusic" },
+      { platform: "tiktok", url: "https://www.tiktok.com/@leykanmusic" },
+      {
+        platform: "facebook",
+        url: "https://www.facebook.com/share/1Fbn3QxTo6/",
+      },
+      { platform: "youtube", url: "https://youtube.com/@leykan" },
+      {
+        platform: "spotify",
+        url: "https://open.spotify.com/artist/0RiYU88aiUZxDSs4CYA5XK",
+      },
+      {
+        platform: "applemusic",
+        url: "https://music.apple.com/co/artist/leykan/1677278442",
+      },
+    ],
+    listen: {
+      spotify: "https://open.spotify.com/artist/0RiYU88aiUZxDSs4CYA5XK",
+      youtube: "https://youtube.com/@leykan",
+      appleMusic: "https://music.apple.com/co/artist/leykan/1677278442",
+    },
+    profile: {
+      role: { es: "Cantante", en: "Singer" },
+      genres: ["Trap"],
+      city: "Cali",
+      since: "2026",
+      bio: {
+        es: [
+          "Nacido en Cali y criado entre estudios de grabación y tarimas, Juan Sebastian Gallego Perea (Leykan) lleva la música en las venas desde los tres años. Influenciado por el legado del género urbano desde los 2000 y una profunda visión de la cultura y la sociedad, este joven artista ha convertido su vida en una constante búsqueda de autenticidad.",
+          "Más que hacer música, Leykan esculpe su propia identidad a través del trap y el rap con barras afiladas y líneas melódicas e innovadoras que rompen esquemas. Su sonido fresco y su incansable dedicación al arte conectan con una nueva generación que busca verdad, identidad y estilo propio.",
+          "Prepárate para conectar con el movimiento. Su más reciente lanzamiento ya se encuentra disponible en todas las plataformas digitales.",
+        ],
+        en: [
+          "Born in Cali and raised between recording studios and stages, Juan Sebastian Gallego Perea (Leykan) has had music in his veins since he was three. Shaped by the legacy of urban music since the 2000s and a deep view of culture and society, this young artist has made his life a constant search for authenticity.",
+          "More than making music, Leykan sculpts his own identity through trap and rap, with sharp bars and innovative melodic lines that break the mould. His fresh sound and tireless dedication to the craft connect with a new generation looking for truth, identity and a style of its own.",
+          "Get ready to connect with the movement. His latest release is now available on all digital platforms.",
+        ],
+      },
+    },
+  },
+  {
     slug: "lowkey",
     name: "Lowkey",
     photos: [
@@ -392,7 +451,9 @@ export const artists: Artist[] = [
         },
       },
     ],
-    links: [{ platform: "instagram", url: "https://www.instagram.com/nicolozanoo_/" }],
+    links: [
+      { platform: "instagram", url: "https://www.instagram.com/nicolozanoo_/" },
+    ],
     listen: { spotify: "", youtube: "" },
     profile: {
       role: {
@@ -412,43 +473,6 @@ export const artists: Artist[] = [
           "Nicolás Lozano, Nikosan, comes from San Javier, Medellín. As a beatmaker and music producer at Forest Media Récords, he turns ideas into sounds, emotions into melodies and dreams into music projects.",
           "San Javier is part of his identity, his roots and his story. His path is driven by a passion for creating, learning and building something that lasts beyond a single song.",
           "Today his vision goes beyond making beats: he wants to help new artists grow and prove that talent can come from anywhere and go as far as discipline and ambition allow.",
-        ],
-      },
-    },
-  },
-  {
-    // Added 2026-11-14 with placeholders: the team uploads the real bio, links and music later.
-    // Photo: the framed picture cropped from his Futuras Promesas 4 poster (`public/futuras-promesas/ft4-leykan.webp`).
-    slug: "leykan",
-    name: "Leykan",
-    photos: [
-      {
-        src: "/artists/leykan/leykan-1.webp",
-        width: 350,
-        height: 410,
-        focus: "50% 25%",
-        alt: {
-          es: "Leykan con gorra, gafas y pañoleta, haciendo un gesto con la mano, de noche",
-          en: "Leykan in a cap, sunglasses and a bandana, making a hand sign at night",
-        },
-      },
-    ],
-    // TODO: social profiles
-    links: [],
-    // TODO: Spotify artist and YouTube channel
-    listen: { spotify: "", youtube: "" },
-    profile: {
-      sample: true, // placeholder copy, tagged "Biografía de ejemplo" until the real bio arrives
-      role: { es: "Artista", en: "Artist" },
-      genres: [], // TODO
-      city: "", // TODO
-      since: "", // TODO
-      bio: {
-        es: [
-          "Leykan es el nuevo artista de Forest Media Récords. Su biografía llegará muy pronto.",
-        ],
-        en: [
-          "Leykan is Forest Media Récords' newest artist. His bio is coming soon.",
         ],
       },
     },
