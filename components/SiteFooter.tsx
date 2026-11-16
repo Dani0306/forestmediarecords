@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/data/site";
+import { releases } from "@/data/releases";
 import { useLang } from "@/lib/i18n";
 import { OPEN_COOKIES } from "./CookieBanner";
 import { ArrowUpRight, Globe, Instagram, LinkedIn, Mail } from "./icons";
@@ -11,7 +12,7 @@ export default function SiteFooter() {
   const { t } = useLang();
   const c = site.credits;
   const links = [
-    { href: "/#lanzamientos", label: t.nav.releases },
+    ...(releases.length > 0 ? [{ href: "/#lanzamientos", label: t.nav.releases }] : []),
     { href: "/#agenda", label: t.nav.agenda },
     { href: "/#tendencia", label: t.nav.trending },
     { href: "/#artistas", label: t.nav.artists },

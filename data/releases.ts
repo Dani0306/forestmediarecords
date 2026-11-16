@@ -20,41 +20,9 @@ export type Release = {
   explicit?: boolean;
 };
 
-export const releases: Release[] = [
-  {
-    slug: "coronao",
-    title: "Coronao",
-    artist: { slug: "lentino", name: "Lentino" },
-    kind: "single",
-    date: "2026-10-10T12:00:00-05:00",
-    cover: {
-      src: "/releases/coronao-cover.webp",
-      width: 736,
-      height: 736,
-      alt: {
-        es: "Portada de Coronao: Lentino con una corona dorada sobre su nombre, frente a una ciudad de noche, con fajos de billetes y monedas",
-        en: "Coronao cover art: Lentino under a golden crown over the title, in front of a city at night, with stacks of cash and coins",
-      },
-    },
-    spotify: "https://open.spotify.com/album/3LZ7e2bQOGNzNAcOou2R4L",
-    explicit: true,
-  },
-  {
-    slug: "la-vuelta",
-    title: "La Vuelta",
-    artist: { slug: "lentino", name: "Lentino" },
-    kind: "single",
-    date: "2026-10-10T12:00:00-05:00",
-    cover: {
-      src: "/releases/lavuelta-cover.webp",
-      width: 736,
-      height: 736,
-      alt: {
-        es: "Portada de La Vuelta: Lentino sentado junto a una mujer en un muro con Medellín y el metrocable al atardecer detrás",
-        en: "La Vuelta cover art: Lentino seated beside a woman on a wall, with Medellín and the cable car at sunset behind them",
-      },
-    },
-    spotify: "https://open.spotify.com/album/3ws3s3R0QX9qb5ZpiCylkZ",
-    explicit: true,
-  },
-];
+/**
+ * Empty on 2026-11-15 at the team's request: Lentino's Coronao and La Vuelta (10 Oct) are no
+ * longer "new". Their covers and links still live in `data/trending.ts` and `data/topSongs.ts`.
+ * With no releases, "Lo nuevo" hides itself, along with its nav links and hero shortcut.
+ */
+export const releases: Release[] = [];

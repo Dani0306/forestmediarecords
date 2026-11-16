@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { releases } from "@/data/releases";
 import { useLang } from "@/lib/i18n";
 import type { Lang } from "@/lib/dictionary";
 import { Broadcast, Close, Menu } from "./icons";
@@ -35,7 +36,7 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "/#lanzamientos", label: t.nav.releases },
+    ...(releases.length > 0 ? [{ href: "/#lanzamientos", label: t.nav.releases }] : []),
     { href: "/#agenda", label: t.nav.agenda },
     { href: "/#tiraderas", label: t.nav.tiraderas },
     { href: "/#tendencia", label: t.nav.trending },

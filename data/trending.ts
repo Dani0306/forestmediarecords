@@ -1,5 +1,3 @@
-import { releases } from "./releases";
-
 /**
  * "En tendencia": the latest productions and projects, hottest first.
  * Order is rank: the first item takes the big slot.
@@ -82,7 +80,7 @@ export const trending: Trend[] = [
     focus: "50% 25%",
     href: "#artistas",
   },
-  // Lentino's new singles (2026-10-10) lead; the covers also live in "Lo nuevo" (data/releases.ts)
+  // Lentino's new singles (2026-10-10) lead; "Lo nuevo" (data/releases.ts) was emptied on 2026-11-15
   {
     id: "coronao",
     kind: "music",
@@ -92,9 +90,12 @@ export const trending: Trend[] = [
       en: "Lentino · New single",
     },
     media: { kind: "image", src: "/releases/coronao-cover.webp", width: 736, height: 736 },
-    alt: releases[0].cover.alt,
+    alt: {
+      es: "Portada de Coronao: Lentino con una corona dorada sobre su nombre, frente a una ciudad de noche, con fajos de billetes y monedas",
+      en: "Coronao cover art: Lentino under a golden crown over the title, in front of a city at night, with stacks of cash and coins",
+    },
     focus: "50% 50%",
-    href: releases[0].spotify,
+    href: "https://open.spotify.com/album/3LZ7e2bQOGNzNAcOou2R4L",
   },
   // the "FMR" teaser (new song) leads
   {
@@ -158,9 +159,12 @@ export const trending: Trend[] = [
       en: "Lentino · New single",
     },
     media: { kind: "image", src: "/releases/lavuelta-cover.webp", width: 736, height: 736 },
-    alt: releases[1].cover.alt,
+    alt: {
+      es: "Portada de La Vuelta: Lentino sentado junto a una mujer en un muro con Medellín y el metrocable al atardecer detrás",
+      en: "La Vuelta cover art: Lentino seated beside a woman on a wall, with Medellín and the cable car at sunset behind them",
+    },
     focus: "50% 40%",
-    href: releases[1].spotify,
+    href: "https://open.spotify.com/album/3ws3s3R0QX9qb5ZpiCylkZ",
   },
   // Futuras Promesas #3 (2026-10-07), the latest edition, follows the new-song teaser
   {

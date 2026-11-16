@@ -31,7 +31,7 @@ const youtube = site.socials.find((s) => s.id === "youtube")?.url;
 
 /** The video hero's shortcuts: the actions worth finding in the first screen. Order is priority. */
 const QUICK = [
-  { href: "#lanzamientos", id: "music" },
+  ...(releases.length > 0 ? [{ href: "#lanzamientos", id: "music" } as const] : []),
   { href: "#agenda", id: "agenda" },
   { href: "#tiraderas", id: "tiraderas" },
   { href: "#estudio", id: "studio" },
