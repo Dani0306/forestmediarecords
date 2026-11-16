@@ -47,3 +47,5 @@ So visitors find the key actions without covering the loop (`components/Hero.tsx
 - A small pill above the title, "Nuevo en Spotify · Coronao · La Vuelta" (titles from `data/releases.ts`), links to `#lanzamientos`. Hidden when there are no releases.
 - A hairline strip along the bottom edge, text only, no panels: Escucha lo nuevo, Ver la agenda, Mundial de Tiraderas, Reserva el estudio. Order is priority. Four columns from 768px; on phones a snap-scrolling row.
 - The existing "Forma parte" and YouTube buttons stay. The main-event takeover (when an event is on) has its own actions and does not show the strip.
+
+- 2026-11-15: **Welcome takeover** (`data/welcome.ts`): a new artist leads the first screen for a window, below a main event and above the winner takeover. Copy in `hero.welcome*`.

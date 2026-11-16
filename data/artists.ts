@@ -296,18 +296,28 @@ export const artists: Artist[] = [
   },
   {
     // Added 2026-11-14; bio, genre and links from the team on 2026-11-15. Still placeholders: more photos (team uploads later), latest release.
-    // Photo: the framed picture cropped from his Futuras Promesas 4 poster (`public/futuras-promesas/ft4-leykan.webp`).
+    // Photos from the team (2026-11-15); originals in `source/leykan/`. The first leads the stage and the welcome hero.
     slug: "leykan",
     name: "Leykan",
     photos: [
       {
-        src: "/artists/leykan/leykan-1.webp",
-        width: 350,
-        height: 410,
-        focus: "50% 25%",
+        src: "/artists/leykan/leykan-2.avif",
+        width: 1400,
+        height: 2100,
+        focus: "50% 26%",
         alt: {
-          es: "Leykan con gorra, gafas y pañoleta, haciendo un gesto con la mano, de noche",
-          en: "Leykan in a cap, sunglasses and a bandana, making a hand sign at night",
+          es: "Leykan con gorra blanca, gafas y pañoleta, haciendo un gesto con la mano frente a la cámara, de noche",
+          en: "Leykan in a white cap, sunglasses and a bandana, making a hand sign toward the camera at night",
+        },
+      },
+      {
+        src: "/artists/leykan/leykan-3.avif",
+        width: 1400,
+        height: 2488,
+        focus: "50% 22%",
+        alt: {
+          es: "Leykan de pie junto a un carro negro, sujetando la pañoleta sobre su gorra, con una camiseta blanca de labios estampados",
+          en: "Leykan standing beside a black car, holding a bandana over his cap, in a white tee with a lips print",
         },
       },
     ],

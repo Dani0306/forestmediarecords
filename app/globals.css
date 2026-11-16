@@ -909,6 +909,24 @@ a {
     clip-path: inset(0 0 0 0);
   }
 }
+/* welcome takeover: the second print is tucked behind the lead, askew to the other side */
+.welcome-second {
+  translate: 34% 3%;
+  rotate: 7deg;
+  scale: 0.88;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .welcome-second {
+    animation: welcome-second 0.9s var(--ease-hammer) 0.5s both;
+  }
+}
+@keyframes welcome-second {
+  from {
+    opacity: 0;
+    translate: 0 3%;
+    rotate: 0deg;
+  }
+}
 /* a takeover with more than one poster: the others fan out behind the lead,
    opening once on load like a hand of prints being spread on the bench */
 .takeover-fan {

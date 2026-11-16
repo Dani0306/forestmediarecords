@@ -60,7 +60,7 @@ const FP3_WINNER = "https://www.instagram.com/el2ble_b/";
 const FP2_WINNER = "https://www.instagram.com/jhanky.10/";
 
 export const trending: Trend[] = [
-  // Leykan joins (2026-11-14); photo is the crop from his FP4 poster until the team uploads better ones
+  // Leykan joins (2026-11-14); photo from the team (2026-11-15)
   {
     id: "leykan-llega",
     kind: "studio",
@@ -72,10 +72,10 @@ export const trending: Trend[] = [
       es: "Cantante de trap · Cali",
       en: "Trap singer · Cali",
     },
-    media: { kind: "image", src: "/artists/leykan/leykan-1.webp", width: 350, height: 410 },
+    media: { kind: "image", src: "/artists/leykan/leykan-2.avif", width: 1400, height: 2100 },
     alt: {
-      es: "Leykan con gorra, gafas y pañoleta, haciendo un gesto con la mano, de noche",
-      en: "Leykan in a cap, sunglasses and a bandana, making a hand sign at night",
+      es: "Leykan con gorra blanca, gafas y pañoleta, haciendo un gesto con la mano frente a la cámara, de noche",
+      en: "Leykan in a white cap, sunglasses and a bandana, making a hand sign toward the camera at night",
     },
     focus: "50% 25%",
     href: "#artistas",

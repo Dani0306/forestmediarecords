@@ -14,6 +14,7 @@ import {
 } from "@/data/events";
 import { futurasPromesas as FP } from "@/data/futurasPromesas";
 import { releases } from "@/data/releases";
+import { welcome } from "@/data/welcome";
 import { hasKick, site } from "@/data/site";
 import { eventPhoto } from "@/lib/eventPhoto";
 import { icsHref } from "@/lib/ics";
@@ -401,6 +402,113 @@ const winnerOn = (now: number) =>
   now >= eventEnd(fpEvent!) &&
   now < new Date(FP.winnerHeroUntil).getTime();
 
+/** The artist being welcomed (`data/welcome.ts`), and whether the window is open. */
+const welcomed = artists.find((a) => a.slug === welcome.artist);
+const welcomeOn = (now: number) =>
+  Boolean(welcomed) && now >= new Date(welcome.from).getTime() && now < new Date(welcome.until).getTime();
+
+/**
+ * Welcome takeover: a new artist's two photos are set down on the bench (the lead print
+ * askew with a "Bienvenido" stamp pressed across it, a second print tucked behind), their
+ * name is struck huge, and one hot action goes to their music.
+ */
+function WelcomeTakeover({ now, secondary }: { now: number | null; secondary?: ForgeEvent }) {
+  const { t, lang } = useLang();
+  const a = welcomed!;
+  const [lead, second] = a.photos;
+  const ratio = lead.width / lead.height;
+  const facts = [a.profile.genres.join(" · "), a.profile.city, a.profile.since].filter(Boolean);
+
+  return (
+    <section
+      id="top"
+      aria-labelledby="hero-title"
+      data-heat="white"
+      className="hero-gutter hero-scope relative isolate flex min-h-[100svh] flex-col overflow-hidden"
+    >
+      <div aria-hidden="true" className="absolute inset-0 -z-10">
+        <Image src={lead.src} alt="" fill sizes="50vw" preload className="scale-125 object-cover blur-[70px] brightness-[0.42] saturate-[1.1]" />
+      </div>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_16%,transparent),transparent_70%),linear-gradient(to_bottom,rgb(11_11_13/0.55),transparent_22%,transparent_70%,var(--color-forge))]"
+      />
+
+      <div className="grid flex-1 grid-cols-1 items-center gap-6 px-[var(--g)] pb-8 pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-10 lg:pt-28">
+        <div className="flex justify-center lg:col-span-5">
+          <div className="win-poster takeover-poster relative" style={{ "--ratio": ratio, aspectRatio: String(ratio) } as React.CSSProperties}>
+            {second && (
+              <div
+                aria-hidden="true"
+                className="welcome-second absolute inset-0 hidden overflow-hidden rounded-[3px] shadow-[0_30px_70px_-30px_rgb(0_0_0/0.95)] sm:block"
+              >
+                <Image src={second.src} alt="" fill sizes="30vw" className="object-cover brightness-[0.8]" style={{ objectPosition: second.focus }} />
+              </div>
+            )}
+            <div className="relative size-full overflow-hidden rounded-[3px] shadow-[0_40px_90px_-30px_rgb(0_0_0/0.95)]">
+              <Image src={lead.src} alt={lead.alt[lang]} fill preload sizes="(max-width: 1024px) 90vw, 40vw" className="object-cover" style={{ objectPosition: lead.focus }} />
+            </div>
+            <span aria-hidden="true" className="win-stamp stencil pointer-events-none absolute right-[-4%] top-[52%] z-10">
+              {t.hero.welcomeStamp}
+            </span>
+          </div>
+        </div>
+
+        <div className="hero-exit min-w-0 lg:col-span-7">
+          <h1 id="hero-title" className="readout flex items-center gap-3 text-[0.7rem] text-iron/90">
+            <Image src="/brand/logo-512.webp" alt="" width={28} height={28} className="size-7" />
+            <span>
+              Forest Media Récords <span className="text-steel">{t.hero.presents}</span>
+            </span>
+          </h1>
+
+          <p className="stamp mt-4 flex items-center gap-2 lg:mt-6" style={{ color: "var(--h)" }}>
+            <span className="heat-bar inline-block h-1.5 w-8 rounded-full" />
+            {t.hero.welcomeEyebrow}
+          </p>
+
+          <h2 className="win-name stencil drop mt-3 text-balance text-[clamp(4rem,11.5vw,11rem)] leading-[0.82] text-iron [--wdth:64]">
+            {a.name}
+          </h2>
+
+          <p className="readout mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.72rem] leading-relaxed text-iron/90 sm:text-[0.8rem]">
+            {facts.map((f, i) => (
+              <span key={f} className="contents">
+                {i > 0 && <span className="text-steel">·</span>}
+                <span>{f}</span>
+              </span>
+            ))}
+          </p>
+          <p className="mt-4 max-w-[34rem] text-[1.0625rem] leading-relaxed text-iron/85">{t.hero.welcomeNote}</p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            {a.listen.spotify && (
+              <a href={a.listen.spotify} target="_blank" rel="noreferrer" className="btn btn-hot">
+                {t.hero.welcomeListen}
+                <ArrowUpRight className="size-4" />
+              </a>
+            )}
+            <a href="#artistas" className="btn btn-steel max-w-full whitespace-normal py-3 text-center leading-tight sm:whitespace-nowrap">
+              {t.hero.welcomeMeet}
+            </a>
+            <a href="#demos" className="btn btn-steel max-w-full whitespace-normal py-3 text-center leading-tight sm:whitespace-nowrap">
+              {t.hero.ctaJoin}
+            </a>
+            <a href="#agenda" className="readout inline-flex min-h-11 items-center gap-2 px-2 text-xs text-iron/80 hover:text-white-heat">
+              {t.hero.allEvents} <ArrowDown className="size-4 text-ember" />
+            </a>
+          </div>
+        </div>
+      </div>
+      {secondary && (
+        <div className="relative z-10">
+          <SecondaryHeat e={secondary} now={now} />
+        </div>
+      )}
+    </section>
+  );
+}
+
 /**
  * Winner takeover: after the showcase, the winner's poster takes the first screen
  * (their own picture glows behind it, their name is stamped huge, a "Ganador"
@@ -624,8 +732,10 @@ export default function Hero() {
   // before the clock mounts, use the build time so server and client agree
   const main = nextMain(now ?? Number(process.env.BUILD_TIME));
   // the winner of the last Futuras Promesas leads while no main event is coming
-  const winner = !main && winnerOn(now ?? Number(process.env.BUILD_TIME));
-  const takeover = Boolean(main) || winner;
+  const clock = now ?? Number(process.env.BUILD_TIME);
+  const welcoming = !main && welcomeOn(clock);
+  const winner = !main && !welcoming && winnerOn(clock);
+  const takeover = Boolean(main) || welcoming || winner;
   const secondary = nextSecondary(now ?? Number(process.env.BUILD_TIME));
 
   useEffect(() => {
@@ -648,6 +758,7 @@ export default function Hero() {
 
   // a main event takes over the whole first screen; otherwise the artist video leads
   if (main) return <EventTakeover e={main} now={now} secondary={secondary} />;
+  if (welcoming) return <WelcomeTakeover now={now} secondary={secondary} />;
   if (winner) return <WinnerTakeover now={now} secondary={secondary} />;
 
   return (
