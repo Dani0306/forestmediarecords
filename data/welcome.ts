@@ -9,5 +9,5 @@ export const welcome = {
   artist: "leykan",
   /** The window, Medellín time (UTC-5). Push `until` forward to keep the welcome up longer. */
   from: "2026-11-15T00:00:00-05:00",
-  until: "2026-11-22T00:00:00-05:00",
+  until: "2026-11-15T00:00:00-05:00", // closed on 2026-11-19 at the team's request so the "Por Deporte" video hero shows; was 2026-11-22. Push it forward to bring the welcome back.
 };
