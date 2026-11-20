@@ -60,6 +60,29 @@ const FP3_WINNER = "https://www.instagram.com/el2ble_b/";
 const FP2_WINNER = "https://www.instagram.com/jhanky.10/";
 
 export const trending: Trend[] = [
+  // Leykan's new song "Por Deporte" (2026-11-19), the same silent loop as the video hero; number 1
+  {
+    id: "por-deporte",
+    kind: "video",
+    title: { es: "Por Deporte", en: "Por Deporte" },
+    meta: {
+      es: "Leykan · Nueva canción",
+      en: "Leykan · New song",
+    },
+    media: {
+      kind: "video",
+      src: "/trending/por-deporte.webm",
+      mp4: "/trending/por-deporte.mp4",
+      poster: "/trending/por-deporte.webp",
+      width: 1280,
+      height: 672,
+    },
+    alt: {
+      es: "Leykan de perfil en blanco y negro, con gorra hacia atrás y la mano en el rostro, sobre el título «F.M.R × Por Deporte»",
+      en: "Leykan in profile in black and white, cap on backwards and a hand on his face, under the title “F.M.R × Por Deporte”",
+    },
+    focus: "60% 35%",
+  },
   // Leykan joins (2026-11-14); photo from the team (2026-11-15)
   {
     id: "leykan-llega",
