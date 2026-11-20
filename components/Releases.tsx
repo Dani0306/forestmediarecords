@@ -1,20 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { releases, type Release } from "@/data/releases";
+import { listenUrl, releases, type Release } from "@/data/releases";
 import { formatDateParts, useLang } from "@/lib/i18n";
 import { ArrowUpRight, Spotify } from "./icons";
 
 function ReleaseCard({ r, index }: { r: Release; index: number }) {
   const { t, lang } = useLang();
-  const d = formatDateParts(r.date, lang);
+  const d = r.date ? formatDateParts(r.date, lang) : undefined;
+  const href = listenUrl(r);
   const fresh = index === 0;
 
   return (
     <li data-heat={fresh ? "hot" : "warm"} className="forge-in group relative">
       {/* the cover, with a record that slides out of the sleeve on hover or focus */}
       <a
-        href={r.spotify}
+        href={href}
         target="_blank"
         rel="noreferrer"
         aria-label={`${t.releases.listen}: ${r.title}, ${r.artist.name}`}
@@ -61,13 +62,14 @@ function ReleaseCard({ r, index }: { r: Release; index: number }) {
             <a href="#artistas" className="text-iron hover:text-white-heat">
               {r.artist.name}
             </a>{" "}
-            · {t.releases.kinds[r.kind]} · {d.day} {d.month}
+            · {t.releases.kinds[r.kind]}
+            {d && ` · ${d.day} ${d.month}`}
           </p>
         </div>
       </div>
 
       <div className="mt-5">
-        <a href={r.spotify} target="_blank" rel="noreferrer" className="btn btn-hot">
+        <a href={href} target="_blank" rel="noreferrer" className="btn btn-hot">
           <Spotify className="size-5" />
           {t.releases.listen}
           <ArrowUpRight className="size-4" />

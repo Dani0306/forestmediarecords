@@ -1,3 +1,8 @@
+import { listenUrl, releases } from "./releases";
+
+// the official song's release entry: the trending card reuses its cover text and Spotify link
+const FMR = releases.find((r) => r.slug === "fmr")!;
+
 /**
  * "En tendencia": the latest productions and projects, hottest first.
  * Order is rank: the first item takes the big slot.
@@ -60,7 +65,21 @@ const FP3_WINNER = "https://www.instagram.com/el2ble_b/";
 const FP2_WINNER = "https://www.instagram.com/jhanky.10/";
 
 export const trending: Trend[] = [
-  // Leykan's new song "Por Deporte" (2026-11-19), the same silent loop as the video hero; number 1
+  // "F.M.R", the label's official song (2026-11-20): number 1, same cover and link as the hero
+  {
+    id: "fmr-oficial",
+    kind: "music",
+    title: { es: "F.M.R", en: "F.M.R" },
+    meta: {
+      es: "Lentino × RS el Italiano · Canción oficial · Ya disponible",
+      en: "Lentino × RS el Italiano · Official song · Out now",
+    },
+    media: { kind: "image", src: "/releases/fmr-cover.webp", width: 1200, height: 1200 },
+    alt: FMR.cover.alt,
+    focus: "50% 35%",
+    href: listenUrl(FMR),
+  },
+  // Leykan's new song "Por Deporte" (2026-11-19), the same silent loop as the video hero
   {
     id: "por-deporte",
     kind: "video",

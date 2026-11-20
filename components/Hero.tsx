@@ -13,7 +13,7 @@ import {
   type Heat,
 } from "@/data/events";
 import { futurasPromesas as FP } from "@/data/futurasPromesas";
-import { releases } from "@/data/releases";
+import { heroRelease, listenUrl, releases } from "@/data/releases";
 import { welcome } from "@/data/welcome";
 import { hasKick, site } from "@/data/site";
 import { eventPhoto } from "@/lib/eventPhoto";
@@ -24,6 +24,7 @@ import {
   ArrowUpRight,
   Broadcast,
   CalendarPlus,
+  Spotify,
   YouTube,
 } from "./icons";
 
@@ -402,6 +403,106 @@ const winnerOn = (now: number) =>
   now >= eventEnd(fpEvent!) &&
   now < new Date(FP.winnerHeroUntil).getTime();
 
+/** The release that leads the first screen (`heroRelease` in `data/releases.ts`), if any. */
+const spotlight = releases.find((r) => r.slug === heroRelease);
+
+/**
+ * Release takeover: the cover is set down like a sleeve, its record slides out and keeps
+ * turning, an "Ya disponible" stamp is pressed across it and the title is struck huge.
+ * One hot action: listen on Spotify.
+ */
+function ReleaseTakeover({ now, secondary }: { now: number | null; secondary?: ForgeEvent }) {
+  const { t, lang } = useLang();
+  const r = spotlight!;
+
+  return (
+    <section
+      id="top"
+      aria-labelledby="hero-title"
+      data-heat="white"
+      className="hero-gutter hero-scope relative isolate flex min-h-[100svh] flex-col overflow-hidden"
+    >
+      {/* background: the cover itself, sharp and full bleed, enlarged from the bottom so only the
+          cars, headlights and wet reflections show (its lettering would fight the title) */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 origin-bottom scale-[2] lg:scale-[1.15]">
+          <Image src={r.cover.src} alt="" fill sizes="100vw" preload className="hero-zoom object-cover object-bottom brightness-[0.6]" />
+        </div>
+      </div>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_14%,transparent),transparent_70%),linear-gradient(to_bottom,rgb(11_11_13/0.6),rgb(11_11_13/0.35)_30%,rgb(11_11_13/0.8)_62%,var(--color-forge))] lg:bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_14%,transparent),transparent_70%),linear-gradient(90deg,rgb(11_11_13/0.3)_0%,rgb(11_11_13/0.42)_36%,rgb(11_11_13/0.9)_56%,rgb(11_11_13/0.95)_100%),linear-gradient(to_bottom,rgb(11_11_13/0.5),transparent_25%,transparent_70%,var(--color-forge))]"
+      />
+
+      <div className="grid flex-1 grid-cols-1 items-center gap-6 px-[var(--g)] pb-8 pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-10 lg:pt-28">
+        <div className="flex justify-center lg:col-span-5 lg:justify-start">
+          <div className="release-sleeve relative" style={{ "--ratio": 1, aspectRatio: "1" } as React.CSSProperties}>
+            {/* the record, sliding out of the sleeve; its label is the cover */}
+            <span aria-hidden="true" className="release-vinyl absolute inset-y-[3%] right-0 aspect-square rounded-full">
+              <span className="release-groove absolute inset-0 rounded-full" />
+              <span className="absolute inset-[34%] overflow-hidden rounded-full border-[3px] border-scale">
+                <Image src={r.cover.src} alt="" fill sizes="8rem" className="object-cover object-[50%_22%]" />
+              </span>
+              <span className="absolute inset-[48.5%] rounded-full bg-scale" />
+            </span>
+            <div className="win-poster relative size-full">
+              <div className="relative size-full overflow-hidden rounded-[3px] border border-anvil shadow-[0_40px_90px_-30px_rgb(0_0_0/0.95)]">
+                <Image src={r.cover.src} alt={r.cover.alt[lang]} fill preload sizes="(max-width: 1024px) 80vw, 36vw" className="object-cover" />
+              </div>
+              <span aria-hidden="true" className="win-stamp stencil pointer-events-none absolute -left-[5%] bottom-[5%] z-10">
+                {t.hero.releaseStamp}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-exit min-w-0 lg:col-span-7 lg:pl-[6%]">
+          <h1 id="hero-title" className="readout flex items-center gap-3 text-[0.7rem] text-iron/90">
+            <Image src="/brand/logo-512.webp" alt="" width={28} height={28} className="size-7" />
+            <span>
+              Forest Media Récords <span className="text-steel">{t.hero.presents}</span>
+            </span>
+          </h1>
+
+          <h2 className="win-name stencil drop mt-5 text-[clamp(4.5rem,13vw,12rem)] leading-[0.8] text-iron [--wdth:62] lg:mt-7">
+            {r.title}
+          </h2>
+
+          <p className="mt-5 flex items-center gap-3">
+            <span aria-hidden="true" className="heat-bar inline-block h-1.5 w-10 shrink-0 rounded-full" />
+            <span className="stencil text-[clamp(1.25rem,2.2vw,1.75rem)] leading-none text-white-heat [--wdth:80]">
+              {t.hero.releaseOfficial}
+            </span>
+          </p>
+          <p className="readout mt-4 text-[0.72rem] text-iron/90 sm:text-[0.8rem]">
+            {r.artist.name} <span className="text-steel">·</span> {t.releases.kinds[r.kind]}
+          </p>
+          <p className="mt-4 max-w-[34rem] text-[1.0625rem] leading-relaxed text-iron/85">{t.hero.releaseNote}</p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a href={listenUrl(r)} target="_blank" rel="noreferrer" className="btn btn-hot">
+              <Spotify className="size-5" />
+              {t.hero.releaseListen}
+              <ArrowUpRight className="size-4" />
+            </a>
+            <a href="#demos" className="btn btn-steel max-w-full whitespace-normal py-3 text-center leading-tight sm:whitespace-nowrap">
+              {t.hero.ctaJoin}
+            </a>
+            <a href="#agenda" className="readout inline-flex min-h-11 items-center gap-2 px-2 text-xs text-iron/80 hover:text-white-heat">
+              {t.hero.allEvents} <ArrowDown className="size-4 text-ember" />
+            </a>
+          </div>
+        </div>
+      </div>
+      {secondary && (
+        <div className="relative z-10">
+          <SecondaryHeat e={secondary} now={now} />
+        </div>
+      )}
+    </section>
+  );
+}
+
 /** The artist being welcomed (`data/welcome.ts`), and whether the window is open. */
 const welcomed = artists.find((a) => a.slug === welcome.artist);
 const welcomeOn = (now: number) =>
@@ -733,9 +834,10 @@ export default function Hero() {
   const main = nextMain(now ?? Number(process.env.BUILD_TIME));
   // the winner of the last Futuras Promesas leads while no main event is coming
   const clock = now ?? Number(process.env.BUILD_TIME);
-  const welcoming = !main && welcomeOn(clock);
-  const winner = !main && !welcoming && winnerOn(clock);
-  const takeover = Boolean(main) || welcoming || winner;
+  const releasing = !main && Boolean(spotlight);
+  const welcoming = !main && !releasing && welcomeOn(clock);
+  const winner = !main && !releasing && !welcoming && winnerOn(clock);
+  const takeover = Boolean(main) || releasing || welcoming || winner;
   const secondary = nextSecondary(now ?? Number(process.env.BUILD_TIME));
 
   useEffect(() => {
@@ -758,6 +860,7 @@ export default function Hero() {
 
   // a main event takes over the whole first screen; otherwise the artist video leads
   if (main) return <EventTakeover e={main} now={now} secondary={secondary} />;
+  if (releasing) return <ReleaseTakeover now={now} secondary={secondary} />;
   if (welcoming) return <WelcomeTakeover now={now} secondary={secondary} />;
   if (winner) return <WinnerTakeover now={now} secondary={secondary} />;
 

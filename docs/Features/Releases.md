@@ -33,3 +33,5 @@ Both singles are cards in `data/trending.ts` (kind `music`, label "Música"): **
 
 ## Chat assistant
 `lib/assistantContext.ts` has a "Lanzamientos" section built from `data/releases.ts` (title, artist, date, explicit, Spotify link), so Sorner Morrison answers questions about the new singles and stays current when the list changes. The Lentino tone example now mentions them.
+
+- 2026-11-20: "F.M.R" (official label song) is back in "Lo nuevo"; `date` is optional now, `listenUrl()` falls back to the lead artist's Spotify until the song link arrives.

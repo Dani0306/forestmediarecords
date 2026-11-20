@@ -1,7 +1,7 @@
 import { artists } from "@/data/artists";
 import { eventEnd, events, type ForgeEvent } from "@/data/events";
 import { editions } from "@/data/kick";
-import { releases } from "@/data/releases";
+import { listenUrl, releases } from "@/data/releases";
 import { site } from "@/data/site";
 import { topSongs } from "@/data/topSongs";
 import { streamers } from "@/data/streamers";
@@ -152,7 +152,7 @@ function releasesInfo() {
     "Música reciente del sello, la más nueva primero. Está en la sección \"Lo nuevo\" (justo debajo del inicio) y también en \"En tendencia\"; cada una se escucha en Spotify:",
     ...releases.map(
       (r) =>
-        `- «${r.title}», de ${r.artist.name}: sencillo lanzado el ${fmtDate(new Date(r.date).getTime())}${r.explicit ? " (contenido explícito)" : ""}. Spotify: ${r.spotify}`,
+        `- «${r.title}», de ${r.artist.name}: ${r.official ? "la canción oficial de Forest Media Récords, ya disponible en todas las plataformas" : "sencillo"}${r.date ? `, lanzado el ${fmtDate(new Date(r.date).getTime())}` : ""}${r.explicit ? " (contenido explícito)" : ""}. ${r.spotify ? `Spotify: ${r.spotify}` : `Enlace directo en Spotify muy pronto; mientras tanto, el perfil del artista: ${listenUrl(r)}`}`,
     ),
   ]);
 }
