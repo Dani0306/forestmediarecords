@@ -18,7 +18,7 @@ related:
 
 ## What it does
 Full-viewport opening.
-- **Background**: `public/hero/hero-fmr.mp4` + `hero/hero-fmr.webm` (since 2026-10-20: a new 16:9 studio clip of RS el Italiano, 1024×576, 16.6 s, supplied by the team as `source/hero/poster1-lentino.webm`, which replaced the first 9 s version, `poster.webm`; replaced the 4:3 `videoloop-renzo.*` of 2026-10-09), a loop of the company's latest productions (muted, no controls by design, poster `hero/hero-fmr-poster.webp`). Crop: `object-[50%_30%]` on phones (a narrow slice of the 16:9 frame; he stays in it for almost the whole clip) and `52% 40%` from 1024px, dark scrims, pauses when off-screen; reduced motion shows the poster.
+- **Background**: `hero-fmr.mp4` (now in `source/hero-fmr/`) + `hero/hero-fmr.webm` (since 2026-10-20: a new 16:9 studio clip of RS el Italiano, 1024×576, 16.6 s, supplied by the team as `source/hero/poster1-lentino.webm`, which replaced the first 9 s version, `poster.webm`; replaced the 4:3 `videoloop-renzo.*` of 2026-10-09), a loop of the company's latest productions (muted, no controls by design, poster `hero/hero-fmr-poster.webp`). Crop: `object-[50%_30%]` on phones (a narrow slice of the 16:9 frame; he stays in it for almost the whole clip) and `52% 40%` from 1024px, dark scrims, pauses when off-screen; reduced motion shows the poster.
 - **Left**: stencil headline (copy key `hero.lines`, now "Forest / Media / Récords"), lede, hot button "Forma parte de Forest Media Récords" (`hero.ctaJoin` → `#demos`) and steel "Ver en YouTube" with the YouTube mark (`hero.ctaYouTube` → the label channel youtube.com/@forestmediarecords from `site.socials`; was "Ver en Kick" until 2026-10-13).
 - **Event takeover** (2026-10-07): while a `main: true` event is upcoming or live, the whole first screen becomes that event: poster whole on the left over its own blurred glow, "Forest Media Récords presenta", huge title, Hoy/Mañana chip, a giant four-cell countdown (EN VIVO when live), and Ver en Kick / Agregar al calendario / Ver toda la agenda. With no main event the video hero (left column only) comes back.
 - **Scroll**: as the hero leaves, the video pushes in slightly and the headline column lifts and fades (CSS view timeline).
@@ -49,3 +49,5 @@ So visitors find the key actions without covering the loop (`components/Hero.tsx
 - The existing "Forma parte" and YouTube buttons stay. The main-event takeover (when an event is on) has its own actions and does not show the strip.
 
 - 2026-11-15: **Welcome takeover** (`data/welcome.ts`): a new artist leads the first screen for a window, below a main event and above the winner takeover. Copy in `hero.welcome*`.
+
+- 2026-11-19: the video hero's background is now Leykan × "Por Deporte" (`hero-deporte.webm/.mp4`, 6.6 s, silent, watermark cropped). The FMR loop is parked in `source/hero-fmr/`. The welcome takeover (until 22 Nov) still covers it.

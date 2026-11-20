@@ -767,11 +767,11 @@ export default function Hero() {
       aria-labelledby="hero-title"
       className="hero-gutter hero-scope relative flex min-h-[100svh] flex-col overflow-hidden"
     >
-      {/* background: artist loop */}
+      {/* background: artist loop (Leykan x Por Deporte since 2026-11-19; the previous FMR loop is in `source/hero-fmr/`) */}
       <video
         ref={video}
         className="hero-zoom absolute inset-0 size-full object-cover object-[48%_30%] lg:object-[50%_40%]"
-        poster="/hero/hero-fmr-poster.webp"
+        poster="/hero/hero-deporte-poster.webp"
         muted
         loop
         playsInline
@@ -783,10 +783,10 @@ export default function Hero() {
         {/* AV1 WebM first (smallest, same look); browsers without AV1 skip it and take
             the H.264 MP4, which older iPhones and Safari need */}
         <source
-          src="/hero/hero-fmr.webm"
+          src="/hero/hero-deporte.webm"
           type='video/webm; codecs="av01.0.05M.08"'
         />
-        <source src="/hero/hero-fmr.mp4" type="video/mp4" />
+        <source src="/hero/hero-deporte.mp4" type="video/mp4" />
       </video>
       {/* scrims keep the type legible without hiding the artist */}
       <div
