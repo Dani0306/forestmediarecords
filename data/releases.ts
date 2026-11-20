@@ -33,7 +33,7 @@ export type Release = {
 export const releases: Release[] = [
   {
     // the label's official song, out on all platforms (team, 2026-11-20). Cover from the team
-    // (`source/releases/fmr-portrait.jpg`). TODO: the Spotify link and the release date.
+    // (`source/releases/fmr-portrait.jpg`). TODO: the release date.
     slug: "fmr",
     title: "F.M.R",
     artist: { slug: "lentino", name: "Lentino × RS el Italiano" },
@@ -48,7 +48,7 @@ export const releases: Release[] = [
         en: "F.M.R #1 cover art by Lentino and RS el Italiano: the title in metal letters over two black cars facing each other with their lights on, plates reading “We love” and “U Lowkey”",
       },
     },
-    spotify: "",
+    spotify: "https://open.spotify.com/album/791xkc6NhDKhc2LPj03oj6",
   },
 ];
 
