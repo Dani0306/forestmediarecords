@@ -912,6 +912,16 @@ a {
 /* F.M.R video premiere counter (hero): each digit that changes lifts out under a blur while the
    new one drops in with a small overshoot; the fuse under it burns toward the premiere, and the
    last minute runs at white heat. Only transform, opacity and filter move. */
+/* the plate runs at heat: a hot edge and a low glow under it, so it leads the column */
+.video-plate {
+  border-color: color-mix(in oklab, var(--h) 45%, var(--color-anvil));
+  box-shadow:
+    0 30px 70px -36px color-mix(in oklab, var(--h) 55%, transparent),
+    0 24px 60px -30px rgb(0 0 0 / 0.9);
+}
+.vc-title {
+  text-shadow: 0 0 34px color-mix(in oklab, var(--h) 30%, transparent);
+}
 .vc-digit {
   width: 0.62em;
   text-align: center;

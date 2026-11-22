@@ -426,7 +426,7 @@ function ReleaseTakeover({ now, secondary }: { now: number | null; secondary?: F
       {/* background: the cover itself, sharp and full bleed, enlarged from the bottom so only the
           cars, headlights and wet reflections show (its lettering would fight the title) */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 origin-bottom scale-[2] lg:scale-[1.22]">
+        <div className="absolute inset-0 origin-bottom scale-[2] [mask-image:linear-gradient(to_bottom,transparent_0%,transparent_30%,black_62%)] lg:scale-[1.22]">
           <Image src={r.cover.src} alt="" fill sizes="100vw" preload className="hero-zoom object-cover object-bottom brightness-[0.6]" />
         </div>
       </div>
@@ -465,7 +465,7 @@ function ReleaseTakeover({ now, secondary }: { now: number | null; secondary?: F
             </span>
           </h1>
 
-          <h2 className="win-name stencil drop mt-5 text-[clamp(4.5rem,11vw,10rem)] leading-[0.8] text-iron [--wdth:62] lg:mt-7">
+          <h2 className="win-name stencil drop mt-5 text-[clamp(4rem,9vw,7.5rem)] leading-[0.8] text-iron [--wdth:62] lg:mt-6">
             {r.title}
           </h2>
 

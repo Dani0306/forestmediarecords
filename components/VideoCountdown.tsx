@@ -97,26 +97,34 @@ export default function VideoCountdown({ r }: { r: Release }) {
   return (
     <div
       data-heat={heat}
-      className={`video-plate relative mt-6 max-w-[36rem] overflow-hidden rounded-[3px] border border-anvil bg-forge-2/85 px-5 pb-5 pt-5 ${final ? "vc-final" : ""}`}
+      className={`video-plate relative mt-6 max-w-[40rem] overflow-hidden rounded-[3px] border bg-forge-2/90 px-5 pb-6 pt-6 sm:px-7 ${final ? "vc-final" : ""}`}
     >
-      <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-[3px]" />
+      <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-1" />
 
+      {/* what this is, said plainly and big: the official video's premiere */}
       <p className="stamp flex flex-wrap items-center gap-x-2.5 gap-y-1" style={{ color: "var(--h)" }}>
         <span aria-hidden="true" className="live-dot size-2 rounded-full bg-[var(--h)] shadow-[0_0_10px_var(--h)]" />
-        {h.videoLabel}
+        {out ? h.videoPremiereDone : h.videoPremiereLabel}
         {when && !out && (
-          <span className="text-iron/80">
-            · {h.videoPremiere} {today ? h.videoToday : `${when.weekday} ${when.day} ${when.month}`} {when.time}
+          <span className="text-iron/85">
+            · {today ? h.videoToday : `${when.weekday} ${when.day} ${when.month}`} {when.time}
           </span>
         )}
       </p>
+      <h3 className="vc-title stencil mt-3 flex items-center gap-3 text-[clamp(2.6rem,6vw,4.5rem)] leading-[0.84] text-white-heat [--wdth:66] sm:gap-4">
+        <YouTube aria-hidden="true" className="size-[0.7em] shrink-0" style={{ color: "var(--h)" }} />
+        {h.videoLabel}
+      </h3>
+      <p className="readout mt-2 text-[0.64rem] text-iron/80 sm:text-[0.7rem]">
+        F.M.R · {r.artist.name}
+      </p>
 
       {at === null ? (
-        <p className="stencil mt-2.5 text-[clamp(2.25rem,4.6vw,3.75rem)] leading-[0.85] text-white-heat [--wdth:70]">
+        <p className="stencil mt-5 border-t border-anvil pt-5 text-[clamp(2.25rem,4.6vw,3.75rem)] leading-[0.85] text-glow [--wdth:70]">
           {h.videoSoon}
         </p>
       ) : out ? (
-        <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-4 border-t border-anvil pt-5">
           <p className="vc-strike stencil text-[clamp(2.25rem,4.6vw,3.75rem)] leading-[0.85] text-white-heat [--wdth:70]">
             {h.videoOut}
           </p>
@@ -136,7 +144,7 @@ export default function VideoCountdown({ r }: { r: Release }) {
           </p>
           <div
             aria-hidden="true"
-            className="vc-counter readout mt-3 flex items-start gap-2 text-[clamp(2.75rem,7vw,4.75rem)] leading-none tracking-normal text-iron sm:gap-3"
+            className="vc-counter readout mt-5 flex items-start gap-2 border-t border-anvil pt-5 text-[clamp(2.75rem,7vw,4.75rem)] leading-none tracking-normal text-iron sm:gap-3"
           >
             {cur.d && (
               <>
