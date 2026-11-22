@@ -21,8 +21,8 @@ export default function Home() {
       <SiteNav />
       <main id="main">
         <Hero />
-        <FuturasPromesas />
         <Releases />
+        <FuturasPromesas />
         <Agenda />
         <Tiraderas />
         <Trending />

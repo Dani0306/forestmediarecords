@@ -52,6 +52,16 @@ export const artists: Artist[] = [
     name: "Lentino",
     photos: [
       {
+        src: "/artists/lentino/lentino-6.webp",
+        width: 828,
+        height: 1459,
+        focus: "50% 25%",
+        alt: {
+          es: "Lentino sentado de lado con gorra azul de visera verde, gafas y sudadera negra, con las manos tatuadas sobre la rodilla",
+          en: "Lentino seated side-on in a navy cap with a green brim, sunglasses and a black hoodie, tattooed hands over his knee",
+        },
+      },
+      {
         src: "/artists/lentino/lentino-3.avif",
         width: 1023,
         height: 1280,
@@ -72,14 +82,12 @@ export const artists: Artist[] = [
         },
       },
       {
-        src: "/artists/lentino/lentino-fmr-2.avif",
-        width: 1440,
-        height: 1920,
-        focus: "50% 24%",
-        lift: 1.25,
+        src: "/artists/lentino/lentino-7.webp",
+        width: 700,
+        height: 727,
         alt: {
-          es: "Lentino con gorra roja mirando de lado, en el parqueadero, durante el rodaje de «FMR»",
-          en: "Lentino in a red cap looking off to the side, in the parking garage, on the “FMR” shoot",
+          es: "Lentino en versión ilustrada 3D: gorra azul hacia atrás, gafas oscuras, barba y capucha negra",
+          en: "Lentino as a 3D illustration: a navy cap on backwards, dark sunglasses, a beard and a black hoodie",
         },
       },
       {

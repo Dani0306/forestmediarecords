@@ -19,6 +19,8 @@ export type Release = {
   cover: { src: string; width: number; height: number; alt: { es: string; en: string } };
   /** The song on Spotify; "" until the team sends it (the buttons then open the lead artist's Spotify profile). */
   spotify: string;
+  /** The official video is announced as "muy pronto" in the hero (no date or countdown yet). Remove it once the video is out. */
+  videoSoon?: boolean;
   /** The label's official song: the hero and the assistant say so. */
   official?: boolean;
   /** Explicit content, shown as an "E" tag next to the title. */
@@ -39,6 +41,7 @@ export const releases: Release[] = [
     artist: { slug: "lentino", name: "Lentino × RS el Italiano" },
     kind: "single",
     official: true,
+    videoSoon: true,
     cover: {
       src: "/releases/fmr-cover.webp",
       width: 1200,

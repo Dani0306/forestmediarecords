@@ -49,3 +49,5 @@ Section title "Nuestros Artistas". One artist at a time:
 - 2026-10-23: added the "FMR" video-shoot photos (`rs-fmr-1…6`, after `rs-main`; `lentino-fmr-1…2`, before the first existing photo).
 
 - 2026-11-15: Leykan's profile is real now (see [[2026-11-15]]); photos `leykan-2.avif` and `leykan-3.avif`. Still empty: his latest release.
+
+- 2026-11-21: Lentino: `lentino-6.webp` first; `lentino-7.webp` (3D avatar) replaces `lentino-fmr-2.avif`.

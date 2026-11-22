@@ -53,3 +53,5 @@ So visitors find the key actions without covering the loop (`components/Hero.tsx
 - 2026-11-19: the video hero's background is now Leykan × "Por Deporte" (`hero-deporte.webm/.mp4`, 6.6 s, silent, watermark cropped). The FMR loop is parked in `source/hero-fmr/`. The welcome takeover (until 22 Nov) still covers it.
 
 - 2026-11-20: **Release takeover** for "F.M.R" (`heroRelease` in `data/releases.ts`); it covers the Por Deporte video until `heroRelease` is set to "".
+
+- 2026-11-21: the release takeover announces the official F.M.R video as "Muy pronto" (no countdown) via `videoSoon` in `data/releases.ts`.
