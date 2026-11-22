@@ -46,8 +46,8 @@ export const releases: Release[] = [
     kind: "single",
     official: true,
     videoSoon: true,
-    // premiere set by the team on 2026-11-22: today, 9 PM Colombia (moved from 7 PM the same day)
-    videoAt: "2026-11-22T21:00:00-05:00",
+    // premiere set by the team on 2026-11-22: today, 7 PM Colombia (briefly moved to 9 PM, then back)
+    videoAt: "2026-11-22T19:00:00-05:00",
     cover: {
       src: "/releases/fmr-cover.webp",
       width: 1200,
