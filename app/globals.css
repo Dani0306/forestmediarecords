@@ -909,6 +909,61 @@ a {
     clip-path: inset(0 0 0 0);
   }
 }
+/* tiraderas grand final: the two corners close in from the sides as the fight scrolls in,
+   and the VS is struck between them; the rods above and below it glow with the final's heat */
+.final-vs {
+  text-shadow:
+    0 0 28px color-mix(in oklab, var(--h) 55%, transparent),
+    0 2px 0 rgb(0 0 0 / 0.6);
+}
+.final-rod {
+  background: linear-gradient(to bottom, transparent, var(--h2), var(--h), transparent);
+  box-shadow: 0 0 14px -2px color-mix(in oklab, var(--h) 70%, transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .final-corner-left {
+      animation: corner-left linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 32%;
+    }
+    .final-corner-right {
+      animation: corner-right linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 32%;
+    }
+    .final-vs {
+      animation: vs-strike linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 38%;
+    }
+  }
+}
+@keyframes corner-left {
+  from {
+    opacity: 0;
+    translate: -14% 0;
+  }
+}
+@keyframes corner-right {
+  from {
+    opacity: 0;
+    translate: 14% 0;
+  }
+}
+@keyframes vs-strike {
+  0% {
+    opacity: 0;
+    scale: 1.8;
+  }
+  70% {
+    opacity: 1;
+    scale: 0.94;
+  }
+  100% {
+    scale: 1;
+  }
+}
 /* release takeover: the cover is a sleeve; its record slides out to the right and keeps turning */
 .release-sleeve {
   /* room on the right for the record */

@@ -829,6 +829,12 @@ function SecondaryRow({
               {t.agenda.sample}
             </span>
           )}
+          {/* an event with its own section (the tiraderas final) also points down to it */}
+          {e.section && (
+            <a href={e.section} className="readout inline-flex min-h-11 items-center gap-2 text-xs text-iron hover:text-white-heat">
+              {t.hero.seeSection} <ArrowDown className="size-4 text-ember" />
+            </a>
+          )}
           <EventAction e={e} />
         </div>
       </div>

@@ -233,7 +233,8 @@ function tiraderasInfo() {
     ...T.rounds.map((r) => `  - ${r.name.es}: ${r.body.es}`),
     `- Cómo se hacen las tiraderas: ${T.making.map((m) => m.es).join(" ")}`,
     `- Ronda 1 (ya se jugó): avanzaron ${b.round1.through.join(" y ")}; ${b.round1.players.filter((n) => !b.round1.through.includes(n)).join(", ")} quedó eliminado.`,
-    `- Ronda 2: ${b.round2.map((d) => d.join(" vs ")).join(" y ")}. Semifinales (sábado 21 de noviembre de 2026, 7:00 p. m., hora de Colombia): ${b.semiDuels.map((d) => d.join(" vs ")).join(" y ")}. No inventes resultados ni la fecha de la final.`,
+    `- Ronda 2: ${b.round2.map((d) => d.join(" vs ")).join(" y ")}. Semifinales (sábado 21 de noviembre de 2026): ${b.semiDuels.map((d) => d.join(" vs ")).join(" y ")}; ganaron ${T.grandFinal.players.join(" y ")}.`,
+    `- GRAN FINAL: ${T.grandFinal.players.join(" vs ")}, el sábado 28 de noviembre de 2026 a las 7:30 p. m. (hora de Colombia), por Kick en todos los canales. Es lo más importante del torneo ahora mismo. No inventes el resultado.`,
     b.champion ? `- Campeón: ${b.champion}.` : "",
   ].filter(Boolean));
 }

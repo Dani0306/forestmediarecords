@@ -37,8 +37,9 @@ export default function SiteNav() {
 
   const links = [
     ...(releases.length > 0 ? [{ href: "/#lanzamientos", label: t.nav.releases }] : []),
-    { href: "/#agenda", label: t.nav.agenda },
+    // the tournament's grand final is the second-biggest thing on: it sits right after the song
     { href: "/#tiraderas", label: t.nav.tiraderas },
+    { href: "/#agenda", label: t.nav.agenda },
     { href: "/#tendencia", label: t.nav.trending },
     { href: "/#artistas", label: t.nav.artists },
     { href: "/#streamers", label: t.nav.streamers },
@@ -93,13 +94,13 @@ export default function SiteNav() {
 
         <ul className="ml-auto hidden items-center gap-1 lg:flex">
           {links.map((l) => (
-            // the bar is full at 1024px: Lanzamientos joins it from 1280px, Tiraderas and Estudio from 1440px, Tendencia and Streamers from 1600px (always in the menu)
+            // the bar is full at 1024px: Tiraderas is always there (the grand final), Lanzamientos joins from 1280px, Estudio and Kick from 1440px (Kick also has its button), Tendencia and Streamers from 1600px (always in the menu)
             <li
               key={l.href}
               className={
                 l.href === "/#tendencia" || l.href === "/#streamers"
                   ? "hidden min-[1600px]:block"
-                  : l.href === "/#estudio" || l.href === "/#tiraderas"
+                  : l.href === "/#estudio" || l.href === "/#kick"
                     ? "hidden min-[1440px]:block"
                     : l.href === "/#lanzamientos"
                       ? "hidden xl:block"
@@ -108,8 +109,12 @@ export default function SiteNav() {
             >
               <Link
                 href={l.href}
-                className="stencil relative flex h-11 items-center px-3 text-[1.05rem] tracking-[0.06em] text-iron/80 transition-colors [--wdth:84] after:absolute after:inset-x-3 after:bottom-2 after:h-px after:origin-left after:scale-x-0 after:bg-ember after:transition-transform after:duration-300 hover:text-white-heat hover:after:scale-x-100"
+                className="stencil relative flex h-11 items-center gap-2 px-3 text-[1.05rem] tracking-[0.06em] text-iron/80 transition-colors [--wdth:84] after:absolute after:inset-x-3 after:bottom-2 after:h-px after:origin-left after:scale-x-0 after:bg-ember after:transition-transform after:duration-300 hover:text-white-heat hover:after:scale-x-100"
               >
+                {/* the grand final is coming: a small ember light on its link */}
+                {l.href === "/#tiraderas" && (
+                  <span aria-hidden="true" className="live-dot size-1.5 rounded-full bg-ember shadow-[0_0_8px_var(--color-ember)]" />
+                )}
                 {l.label}
               </Link>
             </li>

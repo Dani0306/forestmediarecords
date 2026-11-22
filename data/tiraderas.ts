@@ -39,6 +39,16 @@ export const tiraderas = {
     es: "Seis streamers se enfrentan en tiraderas: barras, indirectas y flow. Cuatro duelos en dos rondas, un sorteo para armar las semifinales y una gran final. El sorteo inicial fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
     en: "Six streamers face off in tiraderas (diss tracks): bars, shots and flow. Four duels across two rounds, a draw to set the semifinals, and a grand final. The first draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
+  /**
+   * The grand final (set 2026-11-22): the section is built around it. `players` are the two corners,
+   * left and right; `beat` is who each one knocked out in the semifinals (21 Nov). The date lives
+   * on the `eventId` event. The champion comes from `bracket.champion` or the admin pick ("final").
+   */
+  grandFinal: {
+    eventId: "tiraderas-final",
+    players: ["soyjosema", "Coptero"] as [string, string],
+    beat: { soyjosema: "Pablomeji4", Coptero: "Cuartiz" } as Record<string, string>,
+  },
   /** Six since 2026-11-14: the six confirmed competitors, no open place. */
   players: 6,
   /** True while a place is a surprise (revealed later) instead of "to be announced". Off since 2026-10-16: all are known. */
@@ -204,16 +214,16 @@ export const tiraderas = {
       eventId: "tiraderas-semifinal",
       name: { es: "Semifinales", en: "Semi-finals" },
       body: {
-        es: "Dos duelos para llegar a la final: Soyjosema contra Pablomeji4 y Coptero contra Cuartiz. Pasan los ganadores de cada cruce.",
-        en: "Two duels for a place in the final: Soyjosema vs Pablomeji4 and Coptero vs Cuartiz. The winner of each match-up goes through.",
+        es: "Soyjosema le ganó a Pablomeji4 y Coptero le ganó a Cuartiz: los dos pasan a la gran final.",
+        en: "Soyjosema beat Pablomeji4 and Coptero beat Cuartiz: both go through to the grand final.",
       },
     },
     {
       eventId: "tiraderas-final",
       name: { es: "Gran final", en: "Grand final" },
       body: {
-        es: "Los dos finalistas, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
-        en: "The two finalists, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
+        es: "Soyjosema contra Coptero, cara a cara. Se corona al campeón del Mundial de Tiraderas 2026 y se entrega el premio.",
+        en: "Soyjosema vs Coptero, head to head. The 2026 Mundial de Tiraderas champion is crowned and takes the prize.",
       },
     },
   ] as Round[],

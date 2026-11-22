@@ -67,3 +67,5 @@ ElFerpo2 left the line-up and Carlogato returned; seven competitors (`players: 7
 Open the site with `/?admin` (that browser stays in admin mode; `?admin=off` leaves it). In the bracket, tap the competitors who go through each round (three from Round 1, two from the battle royale, then the champion); tap again to clear. They advance by themselves (Round 1 → battle royale → final → champion), logic in `lib/winners.ts`. Picks are saved in that browser's localStorage. If the shared store is configured (`KV_REST_API_URL`, `KV_REST_API_TOKEN`, `WINNERS_PASSWORD` in Vercel, an Upstash Redis from the Marketplace), `app/api/winners/route.ts` also saves them there and every visitor sees them; without it only the admin's browser shows them.
 
 - 2026-10-24: the face off round carries the YouTube replay (`https://youtu.be/HAtpw_8Kbb8`) as a "Ver el face off" button; Trending card `face-off-mundial-tiraderas` sits third.
+
+- 2026-11-22: rebuilt around the **grand final** (soyjosema vs Coptero, Sat 28 Nov, 7:30 PM): face-off, countdown, judges, prize, road to the final; placed right after "Lo nuevo". See [[2026-11-22]].

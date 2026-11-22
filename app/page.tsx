@@ -22,9 +22,9 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Releases />
+        <Tiraderas />
         <FuturasPromesas />
         <Agenda />
-        <Tiraderas />
         <Trending />
         <Roster />
         <TopSongs />

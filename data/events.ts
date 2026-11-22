@@ -39,6 +39,8 @@ export type ForgeEvent = {
   poster?: { width: number; height: number };
   /** More posters of the same event (same shape as `image`), fanned behind it in the takeover. */
   gallery?: string[];
+  /** In-page section that covers the event in depth (e.g. "#tiraderas"): the hero strip links to it. */
+  section?: string;
   sample?: boolean;
 };
 
@@ -164,13 +166,15 @@ export const events: ForgeEvent[] = [
     type: "stream",
     main: false,
     title: {
-      es: "Mundial de Tiraderas · Gran final",
-      en: "Mundial de Tiraderas · Grand final",
+      es: "Gran final de Tiraderas · Soyjosema vs Coptero",
+      en: "Tiraderas grand final · Soyjosema vs Coptero",
     },
     artists: [],
-    start: "2026-11-21T19:30:00-05:00",
+    // set 2026-11-22 by the team: Saturday 28 Nov, 7:30 PM Bogotá
+    start: "2026-11-28T19:30:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
-    image: "/streamers/leolugo/leolugo-portrait.avif",
+    image: "/tiraderas/participants/soyjosema.avif",
+    section: "#tiraderas",
   },
 ];
 

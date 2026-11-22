@@ -7,284 +7,273 @@ import { participantByName, tiraderas as T, type Participant } from "@/data/tira
 import { formatCOP } from "@/data/studio";
 import { formatCountdown, formatDateParts, useLang, useNow } from "@/lib/i18n";
 import { icsHref } from "@/lib/ics";
-import { resolveBracket, useWinners } from "@/lib/winners";
+import { useWinners } from "@/lib/winners";
 import { ArrowUpRight, CalendarPlus, Crown, YouTube } from "./icons";
-
-type Lang = "es" | "en";
 
 const roundEvent = (id: string) => events.find((e) => e.id === id) as ForgeEvent | undefined;
 
-/** One competitor in the line-up: the photo, then the name and their Kick channel. */
-function Fighter({ p, label, judge = false }: { p: Participant; label: string; judge?: boolean }) {
+/**
+ * One corner of the final: the finalist's print (graded into the forge, colour on hover),
+ * their name struck big, their Kick channel and who they knocked out to get here.
+ * The right corner mirrors the left, so the two face each other across the VS.
+ */
+function Corner({
+  p,
+  side,
+  beat,
+  champion,
+  lost,
+  onPick,
+}: {
+  p: Participant;
+  side: "left" | "right";
+  beat?: string;
+  champion: boolean;
+  lost: boolean;
+  onPick?: () => void;
+}) {
+  const { t } = useLang();
+  const c = t.tiraderas.final;
+  const right = side === "right";
   const [host, ...path] = p.url.replace(/^https?:\/\//, "").split("/");
+
   return (
-    <li>
+    <div className={`final-corner final-corner-${side} min-w-0 ${right ? "text-right" : ""} ${lost ? "opacity-45" : ""}`}>
       <a
         href={p.url}
         target="_blank"
         rel="noreferrer"
-        aria-label={`${label} ${p.name}`}
+        aria-label={`${t.tiraderas.channel} ${p.name}`}
         className="fighter group block rounded-[3px]"
       >
         <div
-          className={`iron-photo relative rounded-[3px] border border-anvil bg-forge-2 ${judge ? "aspect-square" : "aspect-[3/4]"}`}
+          className={`iron-photo relative aspect-[4/5] overflow-hidden lg:aspect-square rounded-[3px] border bg-forge-2 shadow-[0_40px_80px_-40px_rgb(0_0_0/0.95)] ${champion ? "border-[var(--h)]" : "border-anvil"}`}
         >
           <Image
             src={p.photo.src}
             alt=""
             fill
-            sizes={judge ? "(min-width: 1024px) 18rem, (min-width: 640px) 30vw, 50vw" : "(min-width: 1280px) 12vw, (min-width: 640px) 24vw, 50vw"}
+            sizes="(min-width: 1024px) 34vw, 46vw"
             className="object-cover"
             style={{ objectPosition: p.photo.focus ?? "50% 30%" }}
           />
-          <span aria-hidden="true" data-heat="hot" className="fighter-heat heat-bar absolute inset-x-0 bottom-0 z-10 block h-[3px]" />
+          <span aria-hidden="true" className="fighter-heat heat-bar absolute inset-x-0 bottom-0 z-10 block h-[3px]" />
+          {champion && (
+            <span className="win-stamp stencil absolute left-1/2 top-[46%] z-10 -translate-x-1/2">{c.champion}</span>
+          )}
         </div>
-        <p
-          className={`stencil mt-3 break-words leading-[0.95] text-iron [--wdth:78] ${judge ? "text-[clamp(1.15rem,2.4vw,2rem)]" : "text-[clamp(1.15rem,1.6vw,1.35rem)]"}`}
-        >
-          {p.name}
-        </p>
-        <p className="readout mt-1.5 flex items-center gap-1 text-[0.58rem] text-steel transition-colors group-hover:text-ember group-focus-visible:text-ember">
-          <span className="truncate">
-            {host}/
-            {path.join("/")}
-          </span>
-          <ArrowUpRight className="size-3 shrink-0" />
-        </p>
       </a>
-    </li>
-  );
-}
 
-/** A place still to be announced: same footprint, no face yet. */
-function OpenSlot({
-  label,
-  aspect = "aspect-[3/2] sm:aspect-[3/4]",
-  className,
-  surprise = false,
-}: {
-  label: string;
-  aspect?: string;
-  className?: string;
-  /** A surprise entrant (known, revealed later): the "?" glows instead of sitting cold. */
-  surprise?: boolean;
-}) {
-  return (
-    <li aria-label={label} className={className}>
-      <div
-        aria-hidden="true"
-        className={`flex ${aspect} items-center justify-center rounded-[3px] border border-anvil bg-[repeating-linear-gradient(135deg,transparent_0_10px,rgb(42_45_49/0.35)_10px_11px)]`}
-      >
-        <span className={`stencil text-[3.5rem] leading-none [--wdth:66] ${surprise ? "text-ember" : "text-anvil"}`}>?</span>
-      </div>
-      <p aria-hidden="true" className="readout mt-3 text-[0.62rem] text-steel">
-        {label}
+      <p className="stamp mt-5 text-steel">{c.corner}</p>
+      <p className="stencil mt-2 break-words text-[clamp(1.9rem,5.4vw,4.75rem)] leading-[0.86] text-iron [--wdth:70]">
+        {p.name}
       </p>
-    </li>
-  );
-}
-
-/** One competitor slot in the bracket: a name once known (with the photo when confirmed), else a quiet placeholder. */
-function Slot({
-  name,
-  empty,
-  won = false,
-  lost = false,
-  onPick,
-}: {
-  name: string;
-  empty: string;
-  won?: boolean;
-  lost?: boolean;
-  /** Admin mode: makes the slot a button that marks this competitor as the winner. */
-  onPick?: () => void;
-}) {
-  const p = participantByName(name);
-  const inner = (
-    <>
-      {p && (
-        <span className="relative size-6 shrink-0 overflow-hidden rounded-[2px] border border-anvil">
-          <Image
-            src={p.photo.src}
-            alt=""
-            fill
-            sizes="24px"
-            className="object-cover grayscale"
-            style={{ objectPosition: p.photo.focus ?? "50% 30%" }}
-          />
+      <p className={`readout mt-3 flex items-center gap-1 text-[0.6rem] text-steel sm:text-[0.66rem] ${right ? "justify-end" : ""}`}>
+        <span className="truncate">
+          {host}/{path.join("/")}
         </span>
-      )}
-      {name ? (
-        <span
-          className={`stencil truncate text-[1rem] leading-none [--wdth:80] ${won ? "text-glow" : lost ? "text-iron/40" : "text-iron"}`}
-        >
-          {name}
-        </span>
-      ) : (
-        <span className="readout truncate text-[0.6rem] text-steel/70">{empty}</span>
-      )}
-      {won && <Crown className="ml-auto size-4 shrink-0 text-glow" />}
-    </>
-  );
-  const cls = `flex h-10 w-full items-center gap-2 border-b border-anvil px-3 last:border-b-0 ${won ? "bg-ember/10" : ""}`;
-  return onPick && name ? (
-    <button
-      type="button"
-      onClick={onPick}
-      aria-pressed={won}
-      className={`${cls} cursor-pointer text-left outline-offset-[-2px] hover:bg-ember/15 focus-visible:outline-2 focus-visible:outline-ember`}
-    >
-      {inner}
-    </button>
-  ) : (
-    <div className={cls}>{inner}</div>
-  );
-}
-
-/** One stage of the bracket: a slot per competitor; those who go through are lit, and once the stage is settled the rest dim. */
-function Match({
-  names,
-  empty,
-  through = [],
-  settled = false,
-  onPick,
-}: {
-  names: string[];
-  empty: string;
-  through?: string[];
-  /** Everyone who goes through is known: the others dim. */
-  settled?: boolean;
-  onPick?: (name: string) => void;
-}) {
-  return (
-    <div
-      className={`relative w-full rounded-[3px] border bg-forge ${names.some(Boolean) ? "border-steel/40" : "border-anvil"}`}
-    >
-      {names.map((n, i) => {
-        const won = Boolean(n) && through.includes(n);
-        return (
-          <Slot
-            key={i}
-            name={n}
-            empty={empty}
-            won={won}
-            lost={settled && Boolean(n) && !won}
-            onPick={onPick ? () => onPick(n) : undefined}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-/** Column header: stage name and its date, coloured by how close that round is. */
-function StageHead({
-  label,
-  e,
-  heat,
-  lang,
-  note,
-}: {
-  label: string;
-  e?: ForgeEvent;
-  heat: Heat;
-  lang: Lang;
-  /** Shown instead of the date when the stage has no event yet. */
-  note?: string;
-}) {
-  const d = e ? formatDateParts(e.start, lang) : null;
-  return (
-    <div data-heat={heat} className="mb-4 border-b border-anvil pb-3">
-      <p className="stencil text-[1.15rem] leading-none text-iron [--wdth:80]">{label}</p>
-      {d && (
-        <p className="readout mt-1.5 text-[0.62rem]" style={{ color: heat === "cold" ? undefined : "var(--h)" }}>
-          {d.day} {d.month}
+        <ArrowUpRight className="size-3 shrink-0 text-ember" />
+      </p>
+      {beat && (
+        <p className="readout mt-1.5 text-[0.6rem] leading-relaxed text-iron/70 sm:text-[0.66rem]">
+          {c.beat} <span className="text-iron">{beat}</span>
         </p>
       )}
-      {!d && note && <p className="readout mt-1.5 text-[0.62rem] text-steel">{note}</p>}
+      {onPick && (
+        <button
+          type="button"
+          onClick={onPick}
+          aria-pressed={champion}
+          className="readout mt-3 inline-flex min-h-11 items-center gap-2 border border-ember/50 px-3 text-[0.6rem] text-glow hover:bg-ember/15"
+        >
+          <Crown className="size-4" />
+          {c.markChampion}
+        </button>
+      )}
     </div>
   );
 }
 
-/** Mundial de Tiraderas: LeoLugoLive's tournament with the label, its calendar, bracket and rules. */
+/** Mundial de Tiraderas, now all about the grand final: the two finalists face off across a VS, with the date, a live countdown and the one hot action. */
 export default function Tiraderas() {
   const { t, lang } = useLang();
   const now = useNow(1000);
   const c = t.tiraderas;
+  const f = c.final;
   const { winners, admin, shared, error, pickWinner } = useWinners();
 
-  const rounds = T.rounds
-    .map((r) => ({ ...r, e: roundEvent(r.eventId) }))
-    .filter((r): r is typeof r & { e: ForgeEvent } => Boolean(r.e));
-  if (rounds.length === 0) return null;
+  const fin = roundEvent(T.grandFinal.eventId);
+  const [a, b] = T.grandFinal.players.map(participantByName);
+  if (!fin || !a || !b) return null;
 
-  // until the clock mounts, every round renders as upcoming so server and client agree
-  const heat = (e?: ForgeEvent): Heat => (e && now !== null ? heatOf(e, now) : "embers");
-  const nextIdx = now === null ? 0 : rounds.findIndex((r) => eventEnd(r.e) > now);
-  const next = nextIdx >= 0 ? rounds[nextIdx] : undefined;
+  // until the clock mounts, the final renders as upcoming so server and client agree
+  const heat: Heat = now !== null ? heatOf(fin, now) : "hot";
+  const live = heat === "live";
+  const done = now !== null && now >= eventEnd(fin);
+  const d = formatDateParts(fin.start, lang);
+  const cd = formatCountdown(new Date(fin.start).getTime() - (now ?? new Date(fin.start).getTime()), lang);
+  const names = T.grandFinal.players;
+  const champion = [T.bracket.champion, winners.final].find((n) => n && names.includes(n)) ?? "";
+  const pick = (name: string) => (admin ? () => void pickWinner("final", name) : undefined);
 
-  const byId = (id: string) => rounds.find((r) => r.eventId === id)?.e;
-  const r1 = byId("tiraderas-ronda-1");
-  const r2e = byId("tiraderas-ronda-2");
-  const semiE = byId("tiraderas-semifinal");
-  const fin = byId("tiraderas-final");
-  const youtubeUrl = site.socials.find((x) => x.id === "youtube")?.url;
-  const drawUrl = rounds.find((r) => r.eventId === "tiraderas-sorteo")?.watchUrl;
-  const b = resolveBracket(winners);
-  const pick = (id: string) => (admin ? (name: string) => void pickWinner(id === "final" ? id : `${id}:${name}`, name) : undefined);
+  const watchUrl = fin.url || (hasKick ? site.kick.url : "");
+  const recordings = T.rounds.filter((r) => r.watchUrl);
+  const semis = T.rounds.find((r) => r.eventId === "tiraderas-semifinal");
 
   return (
-    <section id="tiraderas" aria-labelledby="tiraderas-title" className="relative overflow-clip border-t border-anvil">
+    <section
+      id="tiraderas"
+      aria-labelledby="tiraderas-title"
+      data-heat={done ? "white" : heat}
+      className="relative isolate overflow-clip border-t border-anvil"
+    >
+      {/* the floor glows under the fight: a heat bloom low and centre */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(60%_45%_at_50%_62%,color-mix(in_oklab,var(--h)_13%,transparent),transparent_72%)]"
+      />
+
       <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-10 lg:py-28">
-        {/* heading, intro, prize and the one hot action */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+        {/* heading and lede */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end lg:gap-10">
           <div className="lg:col-span-7">
-            <h2
-              id="tiraderas-title"
-              className="stencil drop text-[clamp(3.25rem,9.5vw,6rem)] leading-[0.86] [--wdth:66]"
-            >
-              {T.name}
+            <h2 id="tiraderas-title" className="stencil drop text-[clamp(3.75rem,12vw,6rem)] leading-[0.84] [--wdth:64]">
+              {f.title}
             </h2>
-            <p className="readout mt-5 flex items-center gap-3 text-[0.72rem] text-iron/80">
-              <span aria-hidden="true" className="h-px w-10 bg-iron/40" />
-              {c.caption}
+            <p className="readout mt-5 flex items-center gap-3 text-[0.68rem] text-iron/80 sm:text-[0.72rem]">
+              <span aria-hidden="true" className="h-px w-10 shrink-0 bg-iron/40" />
+              {f.caption}
             </p>
-            <p className="mt-8 max-w-[36rem] text-[1.0625rem] leading-relaxed text-iron/85">{T.intro[lang]}</p>
-            <p className="readout mt-4 text-[0.68rem] text-glow">{c.tagline}</p>
+          </div>
+          <p className="max-w-[34rem] text-[1.0625rem] leading-relaxed text-iron/85 lg:col-span-5">{f.lede}</p>
+        </div>
+
+        {admin && (
+          <p role="status" className="readout mt-8 border border-ember/50 bg-ember/10 px-3 py-2 text-[0.62rem] text-glow">
+            {c.adminHint} · {shared ? c.adminShared : c.adminLocal}
+            {error && <span className="ml-2 text-white-heat">{error}</span>}
+          </p>
+        )}
+
+        {/* the face-off: two corners across a glowing VS; on phones the VS sits on the seam between the prints */}
+        <div className="relative mt-12 grid grid-cols-2 gap-x-4 sm:gap-x-6 lg:mt-16 lg:grid-cols-[1fr_minmax(13rem,17rem)_1fr] lg:gap-x-10">
+          <Corner
+            p={a}
+            side="left"
+            beat={T.grandFinal.beat[a.name]}
+            champion={champion === a.name}
+            lost={Boolean(champion) && champion !== a.name}
+            onPick={pick(a.name)}
+          />
+
+          <div className="pointer-events-none absolute left-1/2 top-[min(28vw,15rem)] z-20 -translate-x-1/2 -translate-y-1/2 lg:pointer-events-auto lg:static lg:translate-x-0 lg:translate-y-0 lg:flex lg:flex-col lg:items-center lg:pt-[4%] lg:text-center">
+            <span aria-hidden="true" className="final-rod hidden h-24 w-[3px] rounded-full lg:block" />
+            <p
+              aria-hidden="true"
+              className="final-vs stencil text-[clamp(3.5rem,11vw,8.5rem)] leading-[0.8] text-white-heat [--wdth:62]"
+            >
+              VS
+            </p>
+            <div className="hidden lg:block">
+              <p className="stencil mt-6 text-[2.6rem] leading-[0.85] [--wdth:66]" style={{ color: "var(--h)" }}>
+                {d.weekday} {d.day}
+                <span className="block text-[1.6rem]">{d.month}</span>
+              </p>
+              <p className="readout mt-3 text-[0.72rem] text-iron">
+                {d.time} · {c.tz}
+              </p>
+              <p className="readout mt-1 text-[0.62rem] text-steel">{fin.place[lang]}</p>
+            </div>
+            <span aria-hidden="true" className="final-rod mt-6 hidden h-24 w-[3px] rounded-full lg:block" />
           </div>
 
-          <div className="lg:col-span-5">
-            <div className="border-y border-anvil py-5">
-              <p className="stamp text-steel">{c.prize}</p>
-              <p className="readout mt-2 flex items-baseline gap-3 leading-none">
-                <span className="text-[clamp(2.75rem,6vw,4.25rem)] tracking-normal text-glow">
-                  {formatCOP(T.prize.amount)}
-                </span>
-                <span className="text-[0.8rem] text-iron/80">COP</span>
+          <Corner
+            p={b}
+            side="right"
+            beat={T.grandFinal.beat[b.name]}
+            champion={champion === b.name}
+            lost={Boolean(champion) && champion !== b.name}
+            onPick={pick(b.name)}
+          />
+        </div>
+
+        {/* when, how long, where to watch: one steel plate under the fight, the one hot action in it */}
+        <div className="forge-in plate relative mt-12 overflow-hidden rounded-[3px] border border-anvil p-5 sm:p-7 lg:mt-16">
+          <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-[3px]" />
+          <div className="grid grid-cols-1 gap-7 lg:grid-cols-12 lg:items-center lg:gap-10">
+            {/* phones read the date here, since the VS column is desktop only */}
+            <div className="lg:hidden">
+              <p className="stencil text-[2.25rem] leading-none [--wdth:68]" style={{ color: "var(--h)" }}>
+                {d.weekday} {d.day} {d.month}
               </p>
-              <p className="mt-3 max-w-[30rem] text-[0.95rem] leading-relaxed text-iron/75">{T.prize.note[lang]}</p>
+              <p className="readout mt-2 text-[0.66rem] text-iron">
+                {d.time} · {c.tz} · {fin.place[lang]}
+              </p>
             </div>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              {hasKick && (
-                <a href={site.kick.url} target="_blank" rel="noreferrer" className="btn btn-hot">
-                  {c.watch}
+
+            <div className="lg:col-span-7">
+              {live ? (
+                <p className="stencil flex items-center gap-3 text-[clamp(2.5rem,6vw,4rem)] leading-none text-white-heat [--wdth:70]">
+                  <span aria-hidden="true" className="live-dot size-3 rounded-full bg-[var(--h)] shadow-[0_0_14px_var(--h)]" />
+                  {f.live}
+                </p>
+              ) : done ? (
+                <div>
+                  <p className="stamp text-steel">{f.done}</p>
+                  <p className="stencil mt-2 flex items-center gap-3 text-[clamp(2.25rem,5vw,3.5rem)] leading-none text-white-heat [--wdth:72]">
+                    {champion ? (
+                      <>
+                        <Crown className="size-8 shrink-0" style={{ color: "var(--h)" }} />
+                        {f.champion}: {champion}
+                      </>
+                    ) : (
+                      f.soon
+                    )}
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <p className="stamp text-steel">{f.startsIn}</p>
+                  <div className="mt-3 grid grid-cols-4 border-y border-anvil" aria-live="off">
+                    {(
+                      [
+                        [cd.d, cd.units.d],
+                        [cd.h, cd.units.h],
+                        [cd.m, cd.units.m],
+                        [cd.s, cd.units.s],
+                      ] as const
+                    ).map(([v, u], i) => (
+                      <div key={u} className={`py-4 ${i > 0 ? "border-l border-anvil pl-3 sm:pl-5" : ""}`}>
+                        <p
+                          key={i === 3 ? v : undefined}
+                          className={`readout text-[clamp(2rem,5.2vw,3.75rem)] leading-none tracking-normal ${i === 3 ? "tick" : "text-iron"}`}
+                          style={i === 3 ? { color: "var(--h)" } : undefined}
+                        >
+                          {now === null ? "--" : v}
+                        </p>
+                        <p className="readout mt-2 text-[0.6rem] text-steel">{u}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 lg:col-span-5 lg:justify-end">
+              {watchUrl && (
+                <a href={watchUrl} target="_blank" rel="noreferrer" className="btn btn-hot">
+                  {live ? f.watchLive : f.watch}
                   <ArrowUpRight className="size-5" />
                 </a>
               )}
-              {youtubeUrl && (
-                <a href={youtubeUrl} target="_blank" rel="noreferrer" className="btn btn-steel">
-                  <YouTube className="size-5" />
-                  {c.watchYoutube}
-                </a>
-              )}
-              {next && (
+              {!done && !live && (
                 <a
-                  href={icsHref(next.e, lang)}
-                  download={`${next.e.id}.ics`}
+                  href={icsHref(fin, lang)}
+                  download={`${fin.id}.ics`}
                   className="btn btn-steel"
-                  aria-label={`${t.agenda.addCal}: ${next.e.title[lang]}`}
+                  aria-label={`${t.agenda.addCal}: ${fin.title[lang]}`}
                 >
-                  <CalendarPlus className="size-5" />
+                  <CalendarPlus className="size-5 text-ember" />
                   {t.agenda.addCal}
                 </a>
               )}
@@ -292,271 +281,56 @@ export default function Tiraderas() {
           </div>
         </div>
 
-        {/* the people: the judges' panel leads (they score every tiradera), the competitors line up right under it */}
-        <div className="mt-14 lg:mt-20">
-          <div
-            data-heat="hot"
-            className="forge-in plate relative grid grid-cols-1 gap-x-10 gap-y-7 overflow-hidden rounded-[3px] border border-anvil p-5 sm:p-7 lg:grid-cols-12 lg:p-8"
-          >
-            <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-[3px]" />
-            <div className="lg:col-span-4 lg:col-start-1 lg:row-start-1">
-              <h3 className="stencil text-[clamp(2.25rem,4.5vw,3.25rem)] leading-[0.9] text-iron [--wdth:70]">
-                {c.judges}
-              </h3>
-              <p className="readout mt-2 text-[0.62rem] text-iron/70">
-                {Math.min(T.judges.length, T.judgeSeats)} / {T.judgeSeats} {c.confirmed}
-              </p>
-            </div>
-
-            {/* each confirmed judge links to their Kick channel; open seats until all are known */}
-            <ul className="judges grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-5 lg:col-span-8 lg:col-start-5 lg:row-span-2 lg:row-start-1">
+        {/* the rest of the tournament, compressed: who judges, what's at stake, how they got here */}
+        <div className="mt-12 grid grid-cols-1 border-t border-anvil lg:mt-16 lg:grid-cols-12">
+          <div className="border-b border-anvil py-7 lg:col-span-5 lg:border-b-0 lg:border-r lg:pr-10">
+            <h3 className="stamp text-steel">{f.judges}</h3>
+            <ul className="mt-5 grid grid-cols-3 gap-3 sm:gap-5">
               {T.judges.slice(0, T.judgeSeats).map((j) => (
-                <Fighter key={j.url} p={j} label={c.channel} judge />
-              ))}
-              {Array.from({ length: Math.max(0, T.judgeSeats - T.judges.length) }, (_, i) => (
-                <OpenSlot
-                  key={i}
-                  label={c.tbc}
-                  aspect="aspect-[5/1] sm:aspect-square"
-                  className="col-span-2 sm:col-span-1"
-                />
-              ))}
-            </ul>
-
-            {/* how they score, next to who scores */}
-            <div className="border-t border-anvil pt-6 lg:col-span-4 lg:col-start-1 lg:row-start-2 lg:self-end">
-              <h4 className="stamp text-steel">{c.scoring}</h4>
-              <ul className="mt-3 grid grid-cols-3 gap-4">
-                {T.criteria.map((k) => (
-                  <li key={k.es}>
-                    <p className="stencil text-[1.1rem] leading-none text-iron [--wdth:80] sm:text-[1.35rem]">{k[lang]}</p>
-                    <span aria-hidden="true" className="heat-bar mt-3 block h-1.5 rounded-full" />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* the line-up: every confirmed competitor and their Kick channel; open slots until all are known */}
-          {T.participants.length > 0 && (
-            <div className="mt-10">
-              <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="stamp text-steel">{c.lineup}</h3>
-                <p className="readout text-[0.62rem] text-iron/70">
-                  {T.participants.length >= T.players
-                    ? `${T.players} streamers`
-                    : T.surprise
-                      ? `${T.participants.length} + ${T.players - T.participants.length} ${c.surpriseCount}`
-                      : `${T.participants.length} / ${T.players} ${c.announced}`}
-                </p>
-              </div>
-              <ul className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-4 xl:grid-cols-6">
-                {T.participants.slice(0, T.players).map((p) => (
-                  <Fighter key={p.url} p={p} label={c.channel} />
-                ))}
-                {Array.from({ length: Math.max(0, T.players - T.participants.length) }, (_, i) => (
-                  <OpenSlot
-                    key={i}
-                    label={T.surprise ? c.surprise : c.toAnnounce}
-                    surprise={T.surprise}
-                    // a surprise sits beside a face card, so it keeps the same 3:4 frame on phones too
-                    aspect={T.surprise ? "aspect-[3/4]" : undefined}
-                  />
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-
-        {/* the bracket: Round 1 → Round 2 → semifinals (drawn) → final → champion, filled in as the rounds run */}
-        <div className="mt-14 lg:mt-20">
-        <div className="forge-in plate rounded-[3px] border border-anvil p-5 sm:p-6">
-          <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 className="stamp text-steel">{c.bracket}</h3>
-            {drawUrl && (
-              <a
-                href={drawUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="readout inline-flex items-center gap-1.5 text-[0.62rem] text-ember underline decoration-ember/40 underline-offset-4 hover:text-white-heat"
-              >
-                <YouTube className="size-3.5" />
-                {c.watchDraw}
-                <ArrowUpRight className="size-3" />
-              </a>
-            )}
-            <p className="readout text-[0.62rem] text-iron/70">
-              {T.players} streamers · {T.judgeSeats} {c.judges.toLowerCase()}
-            </p>
-          </div>
-          {admin && (
-            <p role="status" className="readout mb-5 border border-ember/50 bg-ember/10 px-3 py-2 text-[0.62rem] text-glow">
-              {c.adminHint} · {shared ? c.adminShared : c.adminLocal}
-              {error && <span className="ml-2 text-white-heat">{error}</span>}
-            </p>
-          )}
-          <div className="-mx-5 overflow-x-auto px-5 pb-2 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
-            <div className="bracket grid min-w-[52rem] grid-cols-5 gap-x-8">
-              <div className="flex flex-col">
-                <StageHead label={c.stages.round1} e={r1} heat={heat(r1)} lang={lang} />
-                <div className="bracket-out relative flex flex-1 items-center">
-                  <Match names={b.round1.players} empty={c.tbd} through={b.round1.through} settled />
-                </div>
-              </div>
-
-              <div className="flex flex-col">
-                <StageHead label={c.stages.round2} e={r2e} heat={heat(r2e)} lang={lang} />
-                <div className="bracket-in-line bracket-out relative flex flex-1 flex-col justify-center gap-3">
-                  {b.round2.map((duel, i) => (
-                    <Match
-                      key={i}
-                      names={duel}
-                      empty={c.tbdLater}
-                      through={b.r2[i] ? [b.r2[i]] : []}
-                      settled={Boolean(b.r2[i])}
-                      onPick={pick("r2")}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex flex-col">
-                <StageHead label={c.stages.semis} e={semiE} heat={heat(semiE)} lang={lang} />
-                <div className="bracket-in-line bracket-out relative flex flex-1 flex-col justify-center gap-3">
-                  {b.semiDuels.map((duel, i) => (
-                    <Match
-                      key={i}
-                      names={duel}
-                      empty={c.tbdLater}
-                      through={duel.filter((n) => b.through3.includes(n))}
-                      settled={duel.some((n) => b.through3.includes(n))}
-                      onPick={pick("sf")}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex flex-col">
-                <StageHead label={c.stages.final} e={fin} heat={heat(fin)} lang={lang} />
-                <div className="bracket-in-line bracket-out-line relative flex flex-1 items-center">
-                  <Match
-                    names={b.final}
-                    empty={c.tbdLater}
-                    through={b.champion ? [b.champion] : []}
-                    settled={Boolean(b.champion)}
-                    onPick={pick("final")}
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col" data-heat={heat(fin) === "cold" ? "white" : heat(fin)}>
-                <StageHead label={c.stages.champion} e={fin} heat={heat(fin)} lang={lang} />
-                <div className="relative flex flex-1 items-center">
-                  <div className="champion relative w-full overflow-hidden rounded-[3px] border p-4 text-center">
-                    <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-[3px]" />
-                    <Crown className="mx-auto size-7" style={{ color: "var(--h)" }} />
-                    {b.champion ? (
-                      <p className="stencil mt-3 text-[1.35rem] leading-none text-white-heat [--wdth:78]">{b.champion}</p>
-                    ) : (
-                      <p className="readout mt-3 text-[0.6rem] text-steel">{c.tbdLater}</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p className="readout mt-3 text-[0.6rem] text-steel lg:hidden">{c.bracketHint}</p>
-        </div>
-        </div>
-
-        <div className="mt-14 grid grid-cols-1 gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
-          {/* the calendar: one row per round, heated by how close it is */}
-          <div className="lg:col-span-7">
-            <h3 className="stamp mb-2 text-steel">{c.calendar}</h3>
-            <ol>
-              {rounds.map((r, i) => {
-                const h = heat(r.e);
-                const d = formatDateParts(r.e.start, lang);
-                const isNext = i === nextIdx;
-                const done = h === "cold";
-                return (
-                  <li
-                    key={r.eventId}
-                    data-heat={h}
-                    className={`drop relative grid grid-cols-[4.25rem_1fr] gap-x-5 border-b border-anvil py-6 first:border-t ${done ? "opacity-60" : ""}`}
-                  >
-                    <div className="text-center">
-                      <span
-                        className="stencil block text-[3rem] leading-[0.85] [--wdth:66]"
-                        style={{ color: done ? "var(--color-steel)" : "var(--h)" }}
-                      >
-                        {d.day}
-                      </span>
-                      <span className="readout mt-1 block text-[0.62rem] text-iron/80">{d.month}</span>
+                <li key={j.url}>
+                  <a href={j.url} target="_blank" rel="noreferrer" aria-label={`${c.channel} ${j.name}`} className="fighter group block rounded-[3px]">
+                    <div className="iron-photo relative aspect-square overflow-hidden rounded-[3px] border border-anvil bg-forge-2">
+                      <Image src={j.photo.src} alt="" fill sizes="(min-width: 1024px) 9rem, 28vw" className="object-cover" style={{ objectPosition: j.photo.focus ?? "50% 30%" }} />
                     </div>
-                    <div className="min-w-0">
-                      <div className="flex items-start justify-between gap-3">
-                        <p className="stencil text-[1.45rem] leading-[0.95] text-iron [--wdth:80]">{r.name[lang]}</p>
-                        {!done && (
-                          <a
-                            href={icsHref(r.e, lang)}
-                            download={`${r.e.id}.ics`}
-                            className="btn btn-steel -mt-1 size-11 min-h-11 shrink-0 px-0"
-                            aria-label={`${t.agenda.addCal}: ${r.e.title[lang]}`}
-                            title={t.agenda.addCal}
-                          >
-                            <CalendarPlus className="size-5" />
-                          </a>
-                        )}
-                      </div>
-                      <p className="mt-2 text-[0.95rem] leading-relaxed text-iron/75">{r.body[lang]}</p>
-                      {r.watchUrl && (
-                        <a
-                          href={r.watchUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="btn btn-steel mt-4 min-h-11 px-4 text-[0.9rem]"
-                        >
-                          <YouTube className="size-5 text-ember" />
-                          {r.watchLabel?.[lang] ?? c.watchDraw}
-                          <ArrowUpRight className="size-4" />
-                        </a>
-                      )}
-                      <p className="readout mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.62rem] text-steel">
-                        <span>
-                          {d.weekday} · {d.time} {c.tz} · {r.e.place[lang]}
-                        </span>
-                        {h === "live" ? (
-                          <span style={{ color: "var(--h)" }}>{t.heat.live}</span>
-                        ) : done ? (
-                          <span>{c.done}</span>
-                        ) : isNext && now !== null ? (
-                          <span style={{ color: "var(--h)" }}>
-                            {c.next} · {formatCountdown(new Date(r.e.start).getTime() - now, lang).short}
-                          </span>
-                        ) : null}
-                      </p>
-                      {isNext && (
-                        <span aria-hidden="true" className="heat-bar mt-4 block h-[3px] w-full rounded-full" />
-                      )}
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-
-          {/* how tiraderas are made */}
-          <div className="lg:col-span-5">
-            <h3 className="stamp mb-2 text-steel">{c.making}</h3>
-            <ul className="space-y-3 border-y border-anvil py-7">
-              {T.making.map((m) => (
-                <li key={m.es} className="flex gap-3 text-[0.98rem] leading-relaxed text-iron/85">
-                  <span aria-hidden="true" className="mt-[0.7em] h-px w-4 shrink-0 bg-ember" />
-                  {m[lang]}
+                    <p className="stencil mt-2.5 truncate text-[clamp(0.95rem,2.6vw,1.2rem)] leading-none text-iron [--wdth:80]">{j.name}</p>
+                  </a>
                 </li>
               ))}
             </ul>
+            <p className="readout mt-5 text-[0.6rem] text-steel">
+              {c.scoring}: {T.criteria.map((k) => k[lang]).join(" · ")}
+            </p>
+          </div>
+
+          <div className="border-b border-anvil py-7 lg:col-span-3 lg:border-b-0 lg:border-r lg:px-10">
+            <h3 className="stamp text-steel">{c.prize}</h3>
+            <p className="readout mt-4 flex items-baseline gap-2 leading-none">
+              <span className="text-[clamp(2.25rem,4vw,3rem)] tracking-normal text-glow">{formatCOP(T.prize.amount)}</span>
+              <span className="text-[0.75rem] text-iron/80">COP</span>
+            </p>
+            <p className="mt-3 text-[0.92rem] leading-relaxed text-iron/75">{T.prize.note[lang]}</p>
+          </div>
+
+          <div className="py-7 lg:col-span-4 lg:pl-10">
+            <h3 className="stamp text-steel">{f.road}</h3>
+            {semis && <p className="mt-4 text-[0.95rem] leading-relaxed text-iron/80">{semis.body[lang]}</p>}
+            {recordings.length > 0 && (
+              <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
+                {recordings.map((r) => (
+                  <li key={r.eventId}>
+                    <a
+                      href={r.watchUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="readout inline-flex min-h-11 items-center gap-1.5 text-[0.62rem] text-ember underline decoration-ember/40 underline-offset-4 hover:text-white-heat"
+                    >
+                      <YouTube className="size-3.5" />
+                      {r.watchLabel?.[lang] ?? c.watchDraw}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>
