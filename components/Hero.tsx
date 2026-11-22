@@ -15,6 +15,7 @@ import {
 import { futurasPromesas as FP } from "@/data/futurasPromesas";
 import { heroRelease, listenUrl, releases } from "@/data/releases";
 import { welcome } from "@/data/welcome";
+import VideoCountdown from "./VideoCountdown";
 import { hasKick, site } from "@/data/site";
 import { eventPhoto } from "@/lib/eventPhoto";
 import { icsHref } from "@/lib/ics";
@@ -425,7 +426,7 @@ function ReleaseTakeover({ now, secondary }: { now: number | null; secondary?: F
       {/* background: the cover itself, sharp and full bleed, enlarged from the bottom so only the
           cars, headlights and wet reflections show (its lettering would fight the title) */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 origin-bottom scale-[2] lg:scale-[1.15]">
+        <div className="absolute inset-0 origin-bottom scale-[2] lg:scale-[1.22]">
           <Image src={r.cover.src} alt="" fill sizes="100vw" preload className="hero-zoom object-cover object-bottom brightness-[0.6]" />
         </div>
       </div>
@@ -468,19 +469,7 @@ function ReleaseTakeover({ now, secondary }: { now: number | null; secondary?: F
             {r.title}
           </h2>
 
-          {r.videoSoon && (
-            <div data-heat="hot" className="video-soon relative mt-6 max-w-[34rem] overflow-hidden rounded-[3px] border border-anvil bg-forge-2/85 px-5 pb-4 pt-5">
-              <span aria-hidden="true" className="heat-bar absolute inset-x-0 top-0 block h-[3px]" />
-              <p className="stamp flex items-center gap-2.5" style={{ color: "var(--h)" }}>
-                <span aria-hidden="true" className="live-dot size-2 rounded-full bg-[var(--h)] shadow-[0_0_10px_var(--h)]" />
-                {t.hero.videoLabel}
-              </p>
-              <p className="stencil mt-2.5 text-[clamp(2.25rem,4.6vw,3.75rem)] leading-[0.85] text-white-heat [--wdth:70]">
-                {t.hero.videoSoon}
-              </p>
-              <p className="readout mt-2.5 text-[0.62rem] leading-relaxed text-steel sm:text-[0.68rem]">{t.hero.videoNote}</p>
-            </div>
-          )}
+          {r.videoSoon && <VideoCountdown r={r} />}
 
           <p className="mt-5 flex items-center gap-3">
             <span aria-hidden="true" className="heat-bar inline-block h-1.5 w-10 shrink-0 rounded-full" />

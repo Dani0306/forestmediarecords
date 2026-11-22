@@ -909,6 +909,80 @@ a {
     clip-path: inset(0 0 0 0);
   }
 }
+/* F.M.R video premiere counter (hero): each digit that changes lifts out under a blur while the
+   new one drops in with a small overshoot; the fuse under it burns toward the premiere, and the
+   last minute runs at white heat. Only transform, opacity and filter move. */
+.vc-digit {
+  width: 0.62em;
+  text-align: center;
+}
+.vc-hot {
+  color: var(--h);
+  text-shadow: 0 0 22px color-mix(in oklab, var(--h) 45%, transparent);
+}
+.vc-final .vc-counter {
+  color: var(--color-white-heat);
+  text-shadow: 0 0 26px color-mix(in oklab, var(--h) 40%, transparent);
+}
+.vc-fuse {
+  width: 100%;
+  background: linear-gradient(90deg, var(--h2), var(--h));
+  box-shadow: 0 0 12px -2px color-mix(in oklab, var(--h) 80%, transparent);
+  transition: transform 1s linear;
+}
+.vc-spark {
+  box-shadow:
+    0 0 8px 2px var(--h),
+    0 0 18px 4px color-mix(in oklab, var(--h) 50%, transparent);
+  transition: left 1s linear;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .vc-in {
+    animation: vc-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .vc-out {
+    animation: vc-out 0.32s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .vc-spark {
+    animation: flicker 1.2s steps(5) infinite;
+  }
+  .vc-final .vc-hot {
+    animation: vc-beat 1s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+  }
+  .vc-strike {
+    animation: win-stamp 0.45s var(--ease-hammer) both;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vc-out {
+    display: none;
+  }
+}
+@keyframes vc-in {
+  from {
+    opacity: 0;
+    translate: 0 -0.55em;
+    filter: blur(4px);
+  }
+  70% {
+    translate: 0 0.04em;
+  }
+}
+@keyframes vc-out {
+  to {
+    opacity: 0;
+    translate: 0 0.45em;
+    filter: blur(4px);
+  }
+}
+@keyframes vc-beat {
+  0% {
+    scale: 1.06;
+  }
+  100% {
+    scale: 1;
+  }
+}
 /* tiraderas grand final: the two corners close in from the sides as the fight scrolls in,
    and the VS is struck between them; the rods above and below it glow with the final's heat */
 .final-vs {

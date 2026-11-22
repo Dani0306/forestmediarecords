@@ -19,8 +19,12 @@ export type Release = {
   cover: { src: string; width: number; height: number; alt: { es: string; en: string } };
   /** The song on Spotify; "" until the team sends it (the buttons then open the lead artist's Spotify profile). */
   spotify: string;
-  /** The official video is announced as "muy pronto" in the hero (no date or countdown yet). Remove it once the video is out. */
+  /** The official video is announced on the hero: "Muy pronto" with no `videoAt`, a live countdown with it. */
   videoSoon?: boolean;
+  /** The video's premiere (ISO, Bogotá offset): the hero counts down to it, then reads "Ya disponible". */
+  videoAt?: string;
+  /** The video itself, once it's up; until then "Ver el video oficial" opens the label's YouTube channel. */
+  videoUrl?: string;
   /** The label's official song: the hero and the assistant say so. */
   official?: boolean;
   /** Explicit content, shown as an "E" tag next to the title. */
@@ -42,6 +46,8 @@ export const releases: Release[] = [
     kind: "single",
     official: true,
     videoSoon: true,
+    // premiere set by the team on 2026-11-22: today, 7 PM Colombia
+    videoAt: "2026-11-22T19:00:00-05:00",
     cover: {
       src: "/releases/fmr-cover.webp",
       width: 1200,
