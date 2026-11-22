@@ -248,6 +248,11 @@ const es = {
     intro:
       "Lo más reciente que sale de Forest: videoclips, rodajes, sesiones en el estudio y lo que pasa en Kick.",
     hint: "Pasa el cursor sobre un video para verlo",
+    gang: {
+      title: "La FMR gang haciendo el avance de «FMR»",
+      caption: "Detrás del avance · Forest Media Récords",
+      list: "Fotos de la FMR gang durante el avance de «FMR»",
+    },
     list: "Lo más reciente en Forest Media Récords",
     play: "Ver avance",
     pause: "Pausar",
@@ -715,6 +720,11 @@ const en: Dict = {
     intro:
       "The latest out of Forest: music videos, shoots, studio sessions and what's happening on Kick.",
     hint: "Hover over a video to play it",
+    gang: {
+      title: "FMR gang doing the FMR preview",
+      caption: "Behind the preview · Forest Media Récords",
+      list: "Photos of the FMR gang during the “FMR” preview",
+    },
     list: "The latest on Forest Media Récords",
     play: "Play preview",
     pause: "Pause",

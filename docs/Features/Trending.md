@@ -58,3 +58,5 @@ Items with an `href` starting with `#` show "Ver en la agenda" and stay on the p
 - 2026-10-24: `fmr-bts` card (portrait phone clip, 464×832) at rank 2; `focus: "50% 24%"` keeps the heads in the wide desktop crop.
 
 - 2026-11-20: "F.M.R" cover is number 1 (`fmr-oficial`).
+
+- 2026-11-21: photo strip "La FMR gang haciendo el avance de «FMR»" under the mosaic (`fmrGang` in `data/trending.ts`, four prints, iron-photo grade).

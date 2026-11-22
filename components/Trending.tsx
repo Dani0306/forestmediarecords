@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Heat } from "@/data/events";
-import { trending, type Trend } from "@/data/trending";
+import { fmrGang, trending, type Trend } from "@/data/trending";
 import { useLang } from "@/lib/i18n";
 import { ArrowDown, ArrowUpRight, Pause, Play } from "./icons";
 
@@ -259,7 +259,7 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
 
 /** En tendencia: the latest productions and projects, ranked hottest first. */
 export default function Trending() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   if (trending.length === 0) return null;
 
   return (
@@ -300,6 +300,46 @@ export default function Trending() {
             <TrendCard key={item.id} item={item} rank={i} count={trending.length} />
           ))}
         </ol>
+
+        {/* the crew behind the "FMR" preview: four prints along the bench, graded into the forge, colour on hover */}
+        <div className="mt-20 lg:mt-28">
+          <div className="px-4 sm:px-6 lg:px-0">
+            <h3 className="stencil drop max-w-[22ch] text-balance text-[clamp(2.25rem,5vw,3.75rem)] leading-[0.9] [--wdth:72]">
+              {t.trending.gang.title}
+            </h3>
+            <p className="readout mt-4 flex items-center gap-3 text-[0.7rem] text-iron/80">
+              <span aria-hidden="true" className="h-px w-10 bg-iron/40" />
+              {t.trending.gang.caption}
+            </p>
+          </div>
+          <ul
+            aria-label={t.trending.gang.list}
+            className="mt-8 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-4 [scrollbar-width:thin] sm:scroll-px-6 sm:px-6 lg:mt-10 lg:grid lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0"
+          >
+            {fmrGang.photos.map((p, i) => (
+              <li
+                key={p.src}
+                data-heat="hot"
+                className={`forge-in group relative w-[68vw] max-w-[20rem] shrink-0 snap-start sm:w-[44vw] lg:w-auto lg:max-w-none`}
+              >
+                <div className="iron-photo relative aspect-[3/4] overflow-hidden rounded-[3px] border border-anvil bg-forge-3 shadow-[0_30px_70px_-34px_rgb(0_0_0/0.9)]">
+                  <Image
+                    src={p.src}
+                    alt={p.alt[lang]}
+                    fill
+                    sizes="(max-width: 1024px) 68vw, 24vw"
+                    className="object-cover"
+                    style={{ objectPosition: p.focus }}
+                  />
+                </div>
+                <span aria-hidden="true" className="heat-bar mt-3 block h-[3px] w-10 rounded-full" />
+                <p className="readout mt-2 text-[0.6rem] text-steel">
+                  {String(i + 1).padStart(2, "0")} / {String(fmrGang.photos.length).padStart(2, "0")}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

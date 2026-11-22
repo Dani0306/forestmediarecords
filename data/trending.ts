@@ -534,3 +534,20 @@ export const trending: Trend[] = [
   },
   // the one video loop, so the section keeps a playable piece
 ];
+
+/**
+ * "La FMR gang haciendo el avance de «FMR»": four stills of the crew on the night of the "FMR"
+ * preview, shown as a photo strip under the ranked mosaic. Originals in `source/trending/fmr-gang/`.
+ */
+export const fmrGang = {
+  photos: [1, 2, 3, 4].map((n) => ({
+    src: `/trending/fmr-gang-${n}.avif`,
+    width: 1200,
+    height: 1600,
+    alt: {
+      es: `La FMR gang reunida de pie en un parqueadero de noche, junto a unas motos y un edificio de vidrio iluminado de naranja (foto ${n} de 4)`,
+      en: `The FMR gang standing together in a parking lot at night, next to some motorcycles and a glass building lit in orange (photo ${n} of 4)`,
+    },
+    focus: "50% 60%",
+  })),
+};
