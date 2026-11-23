@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/data/site";
 import { releases } from "@/data/releases";
+import { hasSupport } from "@/data/support";
 import { useLang } from "@/lib/i18n";
 import { OPEN_COOKIES } from "./CookieBanner";
 import { ArrowUpRight, Globe, Instagram, LinkedIn, Mail } from "./icons";
@@ -21,6 +22,7 @@ export default function SiteFooter() {
     { href: "/#estudio", label: t.nav.studio },
     { href: "/#kick", label: t.nav.kick },
     { href: "/#demos", label: t.nav.demos },
+    ...(hasSupport ? [{ href: "/#apoyar", label: t.nav.support }] : []),
     { href: "/#siguenos", label: t.follow.title },
   ];
   return (

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { releases } from "@/data/releases";
+import { hasSupport } from "@/data/support";
 import { useLang } from "@/lib/i18n";
 import type { Lang } from "@/lib/dictionary";
 import { Broadcast, Close, Menu } from "./icons";
@@ -46,6 +47,7 @@ export default function SiteNav() {
     { href: "/#estudio", label: t.nav.studio },
     { href: "/#kick", label: t.nav.kick },
     { href: "/#demos", label: t.nav.demos },
+    ...(hasSupport ? [{ href: "/#apoyar", label: t.nav.support }] : []),
   ];
 
   useEffect(() => {
@@ -94,11 +96,11 @@ export default function SiteNav() {
 
         <ul className="ml-auto hidden items-center gap-1 lg:flex">
           {links.map((l) => (
-            // the bar is full at 1024px: Tiraderas is always there (the grand final), Lanzamientos joins from 1280px, Estudio and Kick from 1440px (Kick also has its button), Tendencia and Streamers from 1600px (always in the menu)
+            // the bar is full at 1024px: Tiraderas is always there (the grand final), Lanzamientos joins from 1280px, Estudio and Kick from 1440px (Kick also has its button), Tendencia, Streamers and Apoyar from 1600px (always in the menu)
             <li
               key={l.href}
               className={
-                l.href === "/#tendencia" || l.href === "/#streamers"
+                l.href === "/#tendencia" || l.href === "/#streamers" || l.href === "/#apoyar"
                   ? "hidden min-[1600px]:block"
                   : l.href === "/#estudio" || l.href === "/#kick"
                     ? "hidden min-[1440px]:block"
