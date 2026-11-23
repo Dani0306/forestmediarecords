@@ -404,6 +404,30 @@ const winnerOn = (now: number) =>
   now >= eventEnd(fpEvent!) &&
   now < new Date(FP.winnerHeroUntil).getTime();
 
+/**
+ * A silent background loop: plays only while on screen and never under reduced motion
+ * (then it rests on its poster). The AV1 WebM goes first; Safari and older iPhones take the MP4.
+ */
+function LoopVideo({ mp4, webm, poster, className }: { mp4: string; webm?: string; poster: string; className?: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? v.play().catch(() => {}) : v.pause()),
+      { threshold: 0.05 },
+    );
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <video ref={ref} className={className} poster={poster} muted loop playsInline preload="auto" tabIndex={-1}>
+      {webm && <source src={webm} type='video/webm; codecs="av01.0.05M.08"' />}
+      <source src={mp4} type="video/mp4" />
+    </video>
+  );
+}
+
 /** The release that leads the first screen (`heroRelease` in `data/releases.ts`), if any. */
 const spotlight = releases.find((r) => r.slug === heroRelease);
 
@@ -423,16 +447,30 @@ function ReleaseTakeover({ now, secondary }: { now: number | null; secondary?: F
       data-heat="white"
       className="hero-gutter hero-scope relative isolate flex min-h-[100svh] flex-col overflow-hidden"
     >
-      {/* background: the cover itself, sharp and full bleed, enlarged from the bottom so only the
-          cars, headlights and wet reflections show (its lettering would fight the title) */}
+      {/* background: a loop from the official video when the release has one, else the cover
+          itself (sharp, enlarged from the bottom so only the cars and reflections show) */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 origin-bottom scale-[2] [mask-image:linear-gradient(to_bottom,transparent_0%,transparent_30%,black_62%)] lg:scale-[1.22]">
-          <Image src={r.cover.src} alt="" fill sizes="100vw" preload className="hero-zoom object-cover object-bottom brightness-[0.6]" />
-        </div>
+        {r.heroVideo ? (
+          <LoopVideo
+            mp4={r.heroVideo.mp4}
+            webm={r.heroVideo.webm}
+            poster={r.heroVideo.poster}
+            className="hero-zoom absolute inset-0 size-full object-cover brightness-[0.85]"
+          />
+        ) : (
+          <div className="absolute inset-0 origin-bottom scale-[2] [mask-image:linear-gradient(to_bottom,transparent_0%,transparent_30%,black_62%)] lg:scale-[1.22]">
+            <Image src={r.cover.src} alt="" fill sizes="100vw" preload className="hero-zoom object-cover object-bottom brightness-[0.6]" />
+          </div>
+        )}
       </div>
+      {/* scrims: the cover needs a heavy one on the copy side (its lettering); the video loop can breathe more */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_14%,transparent),transparent_70%),linear-gradient(to_bottom,rgb(11_11_13/0.6),rgb(11_11_13/0.35)_30%,rgb(11_11_13/0.8)_62%,var(--color-forge))] lg:bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_14%,transparent),transparent_70%),linear-gradient(90deg,rgb(11_11_13/0.3)_0%,rgb(11_11_13/0.42)_36%,rgb(11_11_13/0.9)_56%,rgb(11_11_13/0.95)_100%),linear-gradient(to_bottom,rgb(11_11_13/0.5),transparent_25%,transparent_70%,var(--color-forge))]"
+        className={`absolute inset-0 -z-10 ${
+          r.heroVideo
+            ? "bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_14%,transparent),transparent_70%),linear-gradient(to_bottom,rgb(11_11_13/0.45),rgb(11_11_13/0.25)_30%,rgb(11_11_13/0.7)_62%,var(--color-forge))] lg:bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_14%,transparent),transparent_70%),linear-gradient(90deg,rgb(11_11_13/0.15)_0%,rgb(11_11_13/0.3)_36%,rgb(11_11_13/0.7)_58%,rgb(11_11_13/0.8)_100%),linear-gradient(to_bottom,rgb(11_11_13/0.45),transparent_25%,transparent_70%,var(--color-forge))]"
+            : "bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_14%,transparent),transparent_70%),linear-gradient(to_bottom,rgb(11_11_13/0.6),rgb(11_11_13/0.35)_30%,rgb(11_11_13/0.8)_62%,var(--color-forge))] lg:bg-[radial-gradient(70%_55%_at_70%_80%,color-mix(in_oklab,var(--h)_14%,transparent),transparent_70%),linear-gradient(90deg,rgb(11_11_13/0.3)_0%,rgb(11_11_13/0.42)_36%,rgb(11_11_13/0.9)_56%,rgb(11_11_13/0.95)_100%),linear-gradient(to_bottom,rgb(11_11_13/0.5),transparent_25%,transparent_70%,var(--color-forge))]"
+        }`}
       />
 
       <div className="grid flex-1 grid-cols-1 items-center gap-6 px-[var(--g)] pb-8 pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-10 lg:pt-28">

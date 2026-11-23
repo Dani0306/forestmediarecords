@@ -57,3 +57,5 @@ So visitors find the key actions without covering the loop (`components/Hero.tsx
 - 2026-11-21: the release takeover announces the official F.M.R video as "Muy pronto" (no countdown) via `videoSoon` in `data/releases.ts`.
 
 - 2026-11-22: the release takeover counts down to the F.M.R video premiere (`videoAt`), then flips to "Ya disponible" with a link (`videoUrl`, else the YouTube channel).
+
+- 2026-11-22: release takeover background can be a video loop (`heroVideo` on the release); F.M.R uses a 9.8 s cut of the official video.

@@ -23,6 +23,8 @@ export type Release = {
   videoSoon?: boolean;
   /** The video's premiere (ISO, Bogotá offset): the hero counts down to it, then reads "Ya disponible". */
   videoAt?: string;
+  /** A short silent loop from the video for the hero background (MP4 required; WebM/AV1 optional). Without it the hero uses the cover. */
+  heroVideo?: { mp4: string; webm?: string; poster: string };
   /** The video itself, once it's up; until then "Ver el video oficial" opens the label's YouTube channel. */
   videoUrl?: string;
   /** The label's official song: the hero and the assistant say so. */
@@ -49,6 +51,13 @@ export const releases: Release[] = [
     // premiere set by the team on 2026-11-22: today, 7 PM Colombia (briefly moved to 9 PM, then back)
     videoAt: "2026-11-22T19:00:00-05:00",
     videoUrl: "https://youtu.be/QntWZdZp7Ns",
+    // 9.8 s cut from the official video (21.55–31.35 s, cut to cut so the loop reads as one more edit),
+    // 1280×720, 30 fps, no audio. Original 4K in the git-ignored `marketing/fmr-video/`.
+    heroVideo: {
+      mp4: "/hero/hero-fmr-video.mp4",
+      webm: "/hero/hero-fmr-video.webm",
+      poster: "/hero/hero-fmr-video-poster.webp",
+    },
     cover: {
       src: "/releases/fmr-cover.webp",
       width: 1200,
