@@ -130,7 +130,7 @@ function Stage({ a, index }: { a: Artist; index: number }) {
   const [open, setOpen] = useState(false);
   const bioId = useId();
   const p = a.profile;
-  const bio = p.bio[lang];
+  const bio = p.soon ? [t.roster.soonInfo] : p.bio[lang];
   const next =
     now === null
       ? undefined
@@ -193,7 +193,8 @@ function Stage({ a, index }: { a: Artist; index: number }) {
         <div className="relative flex h-full flex-col gap-6 overflow-y-auto lg:max-[1440px]:gap-4 overscroll-contain px-5 pb-6 pt-24 [scrollbar-width:thin] sm:px-8 lg:pb-6 lg:pl-[clamp(5rem,7vw,7rem)] lg:pr-10 lg:pt-10 lg:max-[1440px]:pt-7">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <p className="readout text-[0.65rem] text-glow">{p.role[lang]}</p>
+              {/* while the info is pending the bio carries the message, so the role label stays off */}
+              {!p.soon && <p className="readout text-[0.65rem] text-glow">{p.role[lang]}</p>}
               {p.sample && (
                 <span className="readout rounded-[2px] border border-anvil px-1.5 py-0.5 text-[0.58rem] text-steel">
                   {t.roster.sampleBio}
@@ -244,17 +245,17 @@ function Stage({ a, index }: { a: Artist; index: number }) {
             <div className="border-t border-iron/15 py-3">
               <dt className="text-steel">{t.roster.genre}</dt>
               <dd className={`mt-1 ${p.genres.length ? "text-iron" : "text-steel"}`}>
-                {p.genres.length ? p.genres.join(" · ") : t.roster.tbc}
+                {p.soon ? t.roster.soonInfo : p.genres.length ? p.genres.join(" · ") : t.roster.tbc}
               </dd>
             </div>
             <div className="border-t border-iron/15 py-3">
               <dt className="text-steel">{t.roster.city}</dt>
-              <dd className={`mt-1 ${p.city ? "text-iron" : "text-steel"}`}>{p.city || t.roster.tbc}</dd>
+              <dd className={`mt-1 ${p.city ? "text-iron" : "text-steel"}`}>{p.soon ? t.roster.soonInfo : p.city || t.roster.tbc}</dd>
             </div>
             <div className="border-t border-iron/15 py-3">
               <dt className="text-steel">{t.roster.since}</dt>
               <dd className={`mt-1 ${p.since ? "text-iron" : "text-steel"}`}>
-                {p.since || t.roster.tbc}
+                {p.soon ? t.roster.soonInfo : p.since || t.roster.tbc}
               </dd>
             </div>
             <div className="border-t border-iron/15 py-3">

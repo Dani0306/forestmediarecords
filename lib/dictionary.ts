@@ -230,6 +230,7 @@ const es = {
     listen: "Escuchar",
     listenOn: "Escucha a",
     soonLink: "Muy pronto",
+    soonInfo: "Información disponible muy pronto",
     tbc: "Por confirmar",
   },
   streamers: {
@@ -727,6 +728,7 @@ const en: Dict = {
     listen: "Listen",
     listenOn: "Listen to",
     soonLink: "Coming soon",
+    soonInfo: "Info available soon",
     tbc: "To be confirmed",
   },
   streamers: {

@@ -37,6 +37,8 @@ export type Artist = {
  */
 export type ArtistProfile = {
   sample?: boolean;
+  /** Not confirmed yet: the stage shows "Información disponible muy pronto" in place of role, genres, city, year and bio. */
+  soon?: boolean;
   role: { es: string; en: string };
   genres: string[];
   city: string;
@@ -411,27 +413,13 @@ export const artists: Artist[] = [
     links: [],
     listen: { spotify: "", youtube: "" },
     profile: {
-      role: { es: "Compositor de música urbana", en: "Urban music songwriter" },
-      genres: ["Reguetón", "R&B", "Trap"],
-      city: "Medellín",
-      since: "2026", // joined about August 2026 (two months before 2026-10-06)
-      bio: {
-        es: [
-          "Mateo Andrés Valera nació en Cali en 1998 y se radicó en Medellín en 2021, donde comenzó a desarrollar su proyecto musical. Su propuesta combina reguetón, R&B y sonidos urbanos contemporáneos para crear una identidad fresca y versátil.",
-
-          "Entre sus primeros lanzamientos se encuentran «Noche Cero» y «Sin Señal», canciones que reflejan su evolución y su interés por explorar diferentes sonidos dentro de la escena urbana.",
-
-          "Actualmente trabaja en nueva música y prepara «Después de las 12», una colaboración con el artista colombiano Jhay Ríos que representa una nueva etapa en su carrera y en la consolidación de su propuesta artística.",
-        ],
-
-        en: [
-          "Mateo Andrés Valera was born in Cali in 1998 and moved to Medellín in 2021, where he began developing his musical project. His sound blends reggaeton, R&B and contemporary urban influences to create a fresh and versatile identity.",
-
-          "His early releases include “Noche Cero” and “Sin Señal”, songs that reflect his evolution and his interest in exploring different sounds within the urban music scene.",
-
-          "He is currently working on new music and preparing “Después de las 12”, a collaboration with Colombian artist Jhay Ríos that represents a new chapter in his career and the continued development of his artistic identity.",
-        ],
-      },
+      // mock-up copy removed on 2026-11-23 at the team's request: the stage reads "info available soon" until the real info arrives
+      soon: true,
+      role: { es: "", en: "" },
+      genres: [],
+      city: "",
+      since: "",
+      bio: { es: [], en: [] },
     },
   },
   {
