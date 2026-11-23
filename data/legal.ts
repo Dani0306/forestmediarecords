@@ -1,4 +1,5 @@
 import { site } from "./site";
+import { hasSupport, support } from "./support";
 
 /**
  * Legal pages: privacy policy (/privacidad) and terms (/terminos).
@@ -21,6 +22,54 @@ export const legalMeta = {
 };
 
 const m = legalMeta;
+
+/**
+ * "Apoya a Forest" (data/support.ts): these texts join the pages only once that section is live.
+ * Draft like the rest: confirm who receives the money and the refund wording before removing the brackets.
+ */
+const recipient = support.breb.holder || "[Titular por confirmar]";
+const supportPrivacy = {
+  es: hasSupport
+    ? " Si haces un aporte, el pago ocurre en tu banco o billetera, o en PayPal: este sitio no recibe ni guarda datos de pago."
+    : "",
+  en: hasSupport
+    ? " If you send support, the payment happens in your bank or wallet, or in PayPal: this site never receives or stores payment details."
+    : "",
+};
+const supportTerms: Record<"es" | "en", LegalSection[]> = hasSupport
+  ? {
+      es: [
+        {
+          id: "aportes",
+          title: "Aportes voluntarios",
+          body: [`Si decides apoyar a ${m.holder} con dinero:`],
+          list: [
+            "Los aportes son voluntarios: no son una compra y no dan derecho a productos, servicios ni beneficios a cambio.",
+            "Se usan para equipos y herramientas de producción musical y de contenido.",
+            `Los recibe ${recipient} en nombre de ${m.holder}.`,
+            "No son deducibles de impuestos y no expedimos certificados de donación.",
+            "El pago se hace en tu banco o billetera (Bre-B) o en PayPal, bajo las condiciones de esos servicios; este sitio no procesa ni guarda datos de pago.",
+            `Si hiciste una transferencia por error, escríbenos a ${m.email} para revisarla. [Política de devoluciones por confirmar.]`,
+          ],
+        },
+      ],
+      en: [
+        {
+          id: "aportes",
+          title: "Voluntary contributions",
+          body: [`If you choose to support ${m.holder} with money:`],
+          list: [
+            "Contributions are voluntary: they are not a purchase and give no right to products, services or benefits in return.",
+            "They are used for music and content production equipment and tools.",
+            `They are received by ${recipient} on behalf of ${m.holder}.`,
+            "They are not tax-deductible and we don't issue donation certificates.",
+            "Payment is made in your bank or wallet (Bre-B) or in PayPal, under those services' terms; this site doesn't process or store payment details.",
+            `If you made a transfer by mistake, write to ${m.email} so we can review it. [Refund policy to be confirmed.]`,
+          ],
+        },
+      ],
+    }
+  : { es: [], en: [] };
 
 export const privacy: Record<"es" | "en", LegalDoc> = {
   es: {
@@ -67,7 +116,7 @@ export const privacy: Record<"es" | "en", LegalDoc> = {
         id: "terceros",
         title: "Con quién los compartimos",
         body: [
-          "No vendemos ni alquilamos tus datos. Pueden pasar por los proveedores que usamos para operar: el servicio de correo, el alojamiento del sitio y, cuando aplique, WhatsApp. Kick, Spotify y YouTube son sitios externos con sus propias políticas.",
+          "No vendemos ni alquilamos tus datos. Pueden pasar por los proveedores que usamos para operar: el servicio de correo, el alojamiento del sitio y, cuando aplique, WhatsApp. Kick, Spotify y YouTube son sitios externos con sus propias políticas." + supportPrivacy.es,
         ],
       },
       {
@@ -161,7 +210,7 @@ export const privacy: Record<"es" | "en", LegalDoc> = {
         id: "terceros",
         title: "Who we share it with",
         body: [
-          "We don't sell or rent your data. It may pass through the providers we use to operate: email, site hosting and, when relevant, WhatsApp. Kick, Spotify and YouTube are external sites with their own policies.",
+          "We don't sell or rent your data. It may pass through the providers we use to operate: email, site hosting and, when relevant, WhatsApp. Kick, Spotify and YouTube are external sites with their own policies." + supportPrivacy.en,
         ],
       },
       {
@@ -253,6 +302,7 @@ export const terms: Record<"es" | "en", LegalDoc> = {
           "Los derechos sobre las grabaciones y producciones se definen en el acuerdo de cada servicio.",
         ],
       },
+      ...supportTerms.es,
       {
         id: "externos",
         title: "Enlaces externos",
@@ -334,6 +384,7 @@ export const terms: Record<"es" | "en", LegalDoc> = {
           "Rights to recordings and productions are set out in each service's agreement.",
         ],
       },
+      ...supportTerms.en,
       {
         id: "externos",
         title: "External links",

@@ -6,6 +6,7 @@ import { site } from "@/data/site";
 import { topSongs } from "@/data/topSongs";
 import { streamers } from "@/data/streamers";
 import { formatCOP, services, slots, slotsSample } from "@/data/studio";
+import { hasBreb, hasPaypal, hasSupport, support } from "@/data/support";
 import { tiraderas as T } from "@/data/tiraderas";
 import { dictionaries } from "@/lib/dictionary";
 
@@ -252,6 +253,30 @@ function studio() {
   ]);
 }
 
+/** How to support the label with money ("Apoya a Forest"), from `data/support.ts`. */
+function supportInfo() {
+  if (!hasSupport) {
+    return section("Apoyar a Forest con dinero (aportes)", [
+      "- Por ahora el sitio no recibe aportes de dinero. Si preguntan cómo apoyar económicamente, di que esa opción aún no está disponible en el sitio y que pueden apoyar siguiendo a Forest en redes y en Kick, y compartiendo la música.",
+    ]);
+  }
+  const b = support.breb;
+  return section("Apoyar a Forest con dinero (aportes)", [
+    `- ${es.support.lede}`,
+    "- Cualquier monto ayuda: no hay mínimo.",
+    "- Cómo: en la sección \"Apoya a Forest\" del sitio (" + SITE_URL + "/#apoyar).",
+    hasBreb(support) &&
+      `- Desde Colombia: transferencia con llave Bre-B desde cualquier banco o billetera, sin comisiones. Llave: ${b.key}${b.holder ? `, a nombre de ${b.holder}` : ""}${b.bank ? ` (${b.bank})` : ""}. Se copia la llave en el sitio y se pega en la app del banco.`,
+    hasPaypal(support) && "- Desde otro país: con PayPal o tarjeta, con el botón \"Apoyar con PayPal\" de esa sección.",
+    ...support.uses.map(
+      (u) =>
+        `- ${u.status === "bought" ? "Ya conseguido" : "Por conseguir"}: ${u.name.es}${u.cost ? ` (aprox. ${formatCOP(u.cost)})` : ""}${u.body ? `. ${u.body.es}` : ""}`,
+    ),
+    "- Los aportes son voluntarios, no dan derecho a nada a cambio y no son deducibles de impuestos. El sitio no procesa pagos ni puede confirmar si una transferencia llegó: para eso, el equipo responde por WhatsApp o correo.",
+    "- No inventes montos recaudados, metas ni nombres de quienes han aportado.",
+  ]);
+}
+
 function demos() {
   return section("Enviar música (demos)", [
     `- ${es.demo.body}`,
@@ -336,6 +361,7 @@ export function buildAssistantContext(now: Date = new Date()) {
     kick(),
     tiraderasInfo(),
     studio(),
+    supportInfo(),
     demos(),
     developer(),
     contact(),
