@@ -7,3 +7,6 @@ source/
 
 # ad videos and other marketing files (not part of the site)
 marketing/
+
+# implementation prompts for agents (not part of the site)
+prompts/
