@@ -377,49 +377,80 @@ export const artists: Artist[] = [
     name: "Lowkey",
     photos: [
       {
-        // cropped from lowkey1.avif (a phone story screenshot) to the photo itself
-        src: "/artists/lowkey/lowkey-3.avif",
-
-        width: 738,
-        height: 445,
+        src: "/artists/lowkey/lowkey1.webp",
+        width: 3024,
+        height: 4032,
+        focus: "60% 40%",
+        alt: {
+          es: "Lowkey con audífonos y camiseta blanca produciendo en el estudio, con un compañero grabándolo al fondo",
+          en: "Lowkey in headphones and a white tee producing in the studio, a friend filming him in the background",
+        },
+      },
+      {
+        src: "/artists/lowkey/lowkey4.webp",
+        width: 960,
+        height: 1280,
+        focus: "50% 55%",
+        alt: {
+          es: "Lowkey trabajando en el portátil en la cabina del estudio, junto al micrófono y la consola",
+          en: "Lowkey working on his laptop in the studio booth, beside the microphone and the console",
+        },
+      },
+      {
+        src: "/artists/lowkey/lowkey2.webp",
+        width: 3120,
+        height: 4160,
+        focus: "50% 40%",
+        alt: {
+          es: "Lowkey sentado con gorra y camiseta verde frente a una bicicleta colgada en la pared",
+          en: "Lowkey seated in a cap and a green jersey in front of a bicycle hung on the wall",
+        },
+      },
+      {
+        src: "/artists/lowkey/lowkey5.webp",
+        width: 960,
+        height: 1280,
+        focus: "50% 45%",
+        alt: {
+          es: "Lowkey de espaldas frente al portátil, con los monitores del estudio al fondo",
+          en: "Lowkey from behind at his laptop, the studio monitors in the background",
+        },
+      },
+      {
+        src: "/artists/lowkey/lowkey3.webp",
+        width: 1170,
+        height: 650,
         focus: "40% 45%",
         alt: {
-          es: "Lowkey con audífonos y gorra produciendo en el estudio frente a un portátil",
-          en: "Lowkey in headphones and a cap producing in the studio at a laptop",
-        },
-      },
-      {
-        src: "/artists/lowkey/lowkey-2.avif",
-        width: 738,
-        height: 899,
-        focus: "50% 78%",
-        alt: {
-          es: "Lowkey de espaldas trabajando en el estudio bajo luz morada",
-          en: "Lowkey from behind, working in the studio under purple light",
-        },
-      },
-      {
-        src: "/artists/lowkey/lowkey-1.avif",
-
-        width: 691,
-        height: 974,
-        focus: "50% 25%",
-        alt: {
-          es: "Sesión de grabación en el estudio: dos artistas con audífonos frente al micrófono",
-          en: "Recording session in the studio: two artists in headphones at the mic",
+          es: "Sesión de grabación en el estudio bajo luces de neón: un artista frente al micrófono y Lowkey en la mesa",
+          en: "Recording session in the studio under neon light: an artist at the mic and Lowkey at the desk",
         },
       },
     ],
-    links: [],
-    listen: { spotify: "", youtube: "" },
+    links: [
+      { platform: "instagram", url: "https://www.instagram.com/lowkey.bpm" },
+      { platform: "tiktok", url: "https://www.tiktok.com/@lowkey.bpm" },
+      { platform: "youtube", url: "https://www.youtube.com/@weloveulowkey" },
+    ],
+    listen: {
+      spotify: "https://open.spotify.com/artist/14hwNhHKQD60YcNDYWtDXI",
+      youtube: "https://www.youtube.com/@weloveulowkey",
+    },
     profile: {
-      // mock-up copy removed on 2026-11-23 at the team's request: the stage reads "info available soon" until the real info arrives
-      soon: true,
-      role: { es: "", en: "" },
-      genres: [],
+      role: { es: "Artista y productor", en: "Artist and producer" },
+      genres: ["Urbano", "Afro"],
       city: "",
       since: "",
-      bio: { es: [], en: [] },
+      bio: {
+        es: [
+          "Ian Martínez, mejor conocido como «Lowkey», es un artista y productor con más de 6 años de experiencia en la industria musical. Ha trabajado con múltiples artistas de la escena urbana de Colombia y otros países, y se caracteriza por un estilo propio que cautiva los oídos de quien lo escucha.",
+          "Influenciado por ritmos latinos, europeos y africanos, Lowkey lleva su diseño sonoro a un estilo particular y comercial que da a sus obras una estética sonora distintiva.",
+        ],
+        en: [
+          "Ian Martínez, better known as “Lowkey”, is an artist and producer with more than 6 years of experience in the music industry. He has worked with many artists from the urban scene in Colombia and other countries, and is known for a style of his own that captivates whoever listens.",
+          "Influenced by Latin, European and African rhythms, Lowkey takes his sound design into a particular, commercial style that gives his work a distinctive sonic aesthetic.",
+        ],
+      },
     },
   },
   {

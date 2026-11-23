@@ -21,7 +21,8 @@ Section title "Nuestros Artistas". One artist at a time:
 - **Profile** on `.glass-side`: role and sample tag, name with the Escuchar button, bio intro + "Leer biografía completa", facts grid (genre, city, since, next date in its heat colour, then a full-width row of social icon buttons (`links` in `data/artists.ts` names a `platform`: instagram, tiktok, x, threads, facebook, youtube, spotify, soundcloud; marks in `components/icons.tsx`); no Kick field, the artists have no Kick channels), thumbnails.
 - Data: `data/artists.ts` → `profile`. **Lentino** is real (2026-10-06): bio summarised from Daniel's text (born in Sincelejo in 1997, in Medellín since 2022, reguetón · R&B · trap, songs "La Vuelta" and "BM", upcoming "Sobrio" with RS el Italiano). **RS el Italiano** has his real bio too (2026-10-09); no artist carries a sample tag.
 
-## Lowkey (2026-10-06)
+## Lowkey (2026-10-06; real profile 2026-11-22)
+- 2026-11-22: the team sent his bio, genres (urbano / afro), links (Instagram, TikTok, YouTube, Spotify) and five new WebP photos (`lowkey1–5.webp`, replacing the old AVIFs). City and join year are still empty ("Por confirmar"). The playlist of songs he produced has no field yet.
 - Third artist (added by Daniel): photos in `public/artists/lowkey/`. `lowkey-1.avif` is cropped from the story screenshot (kept in `source/artists/lowkey1-screenshot.avif`). Each photo has its own `focus` so the stage centres on him (studio shots with the subject low in the frame); sizes and alt text were fixed (they had been copied from Lentino).
 
 ## RS el Italiano (real, 2026-10-09)
@@ -34,8 +35,7 @@ Section title "Nuestros Artistas". One artist at a time:
 ## Open issues
 - [x] Nikosan genres: Rap, BoomBap, Trap, Drumless (2026-10-17)
 - [ ] Nikosan: what "9/10/2018" refers to; Spotify/YouTube
-- [ ] Higher-resolution photos of Lowkey (738 px wide; the first is a 445 px tall crop)
-- [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`): Lentino done 2026-10-10 (Spotify, YouTube @lenttino; links Instagram lenttino, TikTok @lenttino_, X @lentinolr, Threads @lenttino); RS el Italiano done 2026-10-10 (Spotify artist 4EZilV2kRfc5pkbaCb7eDn, YouTube @rs.italiano; links Instagram rselitaliano, TikTok @rs_italiano, Facebook RS.ITALIANO, Threads @rselitaliano); Lowkey and Nikosan pending
+- [ ] Spotify and YouTube URLs for each artist (`listen` in `data/artists.ts`): Lentino done 2026-10-10 (Spotify, YouTube @lenttino; links Instagram lenttino, TikTok @lenttino_, X @lentinolr, Threads @lenttino); RS el Italiano done 2026-10-10 (Spotify artist 4EZilV2kRfc5pkbaCb7eDn, YouTube @rs.italiano; links Instagram rselitaliano, TikTok @rs_italiano, Facebook RS.ITALIANO, Threads @rselitaliano); Lowkey done 2026-11-22 (Instagram lowkey.bpm, TikTok @lowkey.bpm, YouTube @weloveulowkey, Spotify artist); Nikosan pending
 - [ ] RS el Italiano bio and facts are mock-ups
 - [x] Lentino joined Forest about two months before 2026-10-06: `since: "2026"`
 - [ ] Release date of "Sobrio" (not set yet); add it to the [[Agenda]] as a release once dated
