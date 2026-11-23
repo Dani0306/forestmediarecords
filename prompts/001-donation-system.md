@@ -1,6 +1,6 @@
 # 001 · Support section: Bre-B key + PayPal button ("Apoya a Forest")
 
-**Date:** 2026-11-22 · **Branch:** `feat/donation-system` · **Status:** approved (2026-11-22)
+**Date:** 2026-11-22 · **Branch:** `feat/donation-system` · **Status:** built (2026-11-22)
 
 ## Goal
 A visitor can read why Forest Media Récords asks for support and where the money goes, then give in under a minute: from any Colombian bank or wallet with a Bre-B key or QR (no fee), or from abroad through a PayPal popup. The team keeps nearly everything it receives and runs no payment server.
@@ -164,6 +164,17 @@ Built with the impeccable skill (`shape`, then `craft`), inside the forge world 
 7. When the team sends real details: fill `data/support.ts` (PayPal `env: "sandbox"` first), reload without parameters, and run a sandbox payment; then scan the QR with two different bank apps and check the recipient's name, and send one small real transfer.
 8. Open `/terminos` and `/privacidad` and read the new text in both languages.
 9. Ask the chat "¿cómo puedo apoyar a Forest?" and check the answer matches the data.
+
+## As built (2026-11-22, after the design review)
+The build follows this prompt with these changes, each made for a stated reason:
+- **No thank-you on copy.** Requirement 4 and the copy table gave the copied state a "Gracias" block. A copy isn't a payment, so it now shows a next-step strip inside the plate ("Ya tienes la llave", then "Avisar por WhatsApp"). The thank-you plate shows only on PayPal's own confirmation.
+- **PayPal never waits to open a popup.** Requirement 5 loaded the script on the first click and then opened the popup. Browsers drop popups opened after a wait, so the script loads when the visitor reaches for the button; if it isn't there at click time, PayPal's hosted donation page opens in a new tab.
+- **Preview modes:** `?apoyo=demo`, `demo-llave`, `demo-larga`, `demo-error`, `copiada`, `gracias` (see `lib/support.ts`), plus `/preview/apoyar` in development.
+- **The key** sits in its own well, bold, sized to its length, breaking only after "@" or a dot (never at a hyphen).
+- **QR on phones** sits behind "Ver código QR".
+- **Fine print** closes the section instead of sitting under the payment options.
+- **Copy:** the final wording is in `lib/dictionary.ts` (`support`); the table above is the draft.
+- **Suggested amounts** are left empty in `data/support.ts` until the team confirms them.
 
 ## Needed from the team before going live
 - The Bre-B key created for this, the QR image if the app offers one, and the holder's name as the bank shows it.
