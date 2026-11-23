@@ -212,3 +212,9 @@ export const Check = (p: P) => (
     <path d="m4 12.5 5 5L20 6.5" />
   </svg>
 );
+
+export const Plus = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);

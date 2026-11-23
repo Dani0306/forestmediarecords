@@ -438,10 +438,10 @@ const es = {
   },
   support: {
     title: "Apoya a Forest",
-    lede: "Forest Media Récords desarrolla artistas emergentes desde Medellín. Tu aporte se convierte en equipos y herramientas para producir mejor música y mejor contenido.",
+    lede: "Forest Media Récords desarrolla artistas emergentes desde Medellín. Si crees en lo que hacemos, aquí nos ayudas a hacerlo mejor.",
     messages: [
-      { title: "No importa el monto", body: "Todo suma, y todo se convierte en música." },
-      { title: "Todo va a la producción", body: "Cada aporte va a equipos y herramientas para grabar, producir y crear contenido." },
+      { title: "No importa el monto", body: "Todo suma, y todo termina convertido en música." },
+      { title: "Todo va a la producción", body: "Cada aporte se invierte en equipos y herramientas para grabar, producir y crear contenido." },
       { title: "Tú pones la chispa", body: "Nosotros ponemos el trabajo. Sigamos." },
     ],
     suggested: "Ideas, por si ayudan",
@@ -461,6 +461,7 @@ const es = {
       qr: "O escanea el código desde tu app",
       qrAlt: "Código QR de la llave Bre-B de Forest Media Récords",
       qrSample: "QR de ejemplo",
+      qrShow: "Ver código QR",
     },
     paypal: {
       label: "Desde otro país",
@@ -471,12 +472,15 @@ const es = {
       errorLink: "Abrir PayPal en otra pestaña",
       errorMail: "Inténtalo otra vez o escríbenos a",
     },
+    next: {
+      title: "Ya tienes la llave",
+      body: "Pégala en tu banco o billetera y envía lo que quieras. Cuando hagas tu aporte, cuéntanos y te damos las gracias como se debe.",
+      tellUs: "Avisar por WhatsApp",
+      message: "Hola, acabo de hacer un aporte a Forest Media Récords.",
+    },
     thanks: {
       title: "Gracias por apoyar a Forest",
-      copied: "Si ya hiciste tu aporte, cuéntanos para darte las gracias como se debe.",
-      paid: "PayPal confirmó tu aporte. Gracias por creer en lo que hacemos.",
-      tellUs: "Avísanos por WhatsApp",
-      message: "Hola, acabo de hacer un aporte a Forest Media Récords.",
+      body: "PayPal confirmó tu aporte. Gracias por creer en lo que hacemos.",
     },
     uses: {
       title: "A dónde va tu aporte",
@@ -984,10 +988,10 @@ const en: Dict = {
   },
   support: {
     title: "Support Forest",
-    lede: "Forest Media Récords develops emerging artists from Medellín. Your support becomes gear and tools for better music and better content.",
+    lede: "Forest Media Récords develops emerging artists from Medellín. If you believe in what we do, this is where you help us do it better.",
     messages: [
-      { title: "The amount doesn't matter", body: "It all adds up, and it all turns into music." },
-      { title: "It all goes into production", body: "Every contribution goes into gear and tools to record, produce and create content." },
+      { title: "The amount doesn't matter", body: "It all adds up, and it all ends up as music." },
+      { title: "It all goes into production", body: "Every contribution is invested in gear and tools to record, produce and create content." },
       { title: "You bring the spark", body: "We bring the work. Let's keep going." },
     ],
     suggested: "Ideas, if they help",
@@ -995,9 +999,9 @@ const en: Dict = {
     breb: {
       label: "From Colombia",
       free: "Bre-B · no fees",
-      sub: "From any bank or wallet. Your support arrives whole.",
+      sub: "From any bank or wallet. Your support arrives in full.",
       key: "Key",
-      holder: "In the name of",
+      holder: "Account holder",
       copy: "Copy key",
       copied: "Key copied",
       copyFailed: "We couldn't copy it automatically: the key is selected, copy it from there.",
@@ -1007,6 +1011,7 @@ const en: Dict = {
       qr: "Or scan the code from your app",
       qrAlt: "QR code of Forest Media Récords' Bre-B key",
       qrSample: "Sample QR",
+      qrShow: "Show QR code",
     },
     paypal: {
       label: "From another country",
@@ -1017,17 +1022,20 @@ const en: Dict = {
       errorLink: "Open PayPal in another tab",
       errorMail: "Try again or write to us at",
     },
-    thanks: {
-      title: "Thank you for supporting Forest",
-      copied: "If you've sent your support, tell us so we can thank you properly.",
-      paid: "PayPal confirmed your support. Thank you for believing in what we do.",
+    next: {
+      title: "You have the key",
+      body: "Paste it in your bank or wallet and send what you like. Once you've sent your support, tell us so we can thank you properly.",
       tellUs: "Tell us on WhatsApp",
       message: "Hi, I just sent my support to Forest Media Récords.",
+    },
+    thanks: {
+      title: "Thank you for supporting Forest",
+      body: "PayPal confirmed your support. Thank you for believing in what we do.",
     },
     uses: {
       title: "Where your support goes",
       needed: "Needed",
-      bought: "Got it",
+      bought: "Covered",
       approx: "approx.",
     },
     fine: "Contributions are voluntary and not tax-deductible.",

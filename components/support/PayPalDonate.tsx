@@ -11,7 +11,8 @@ import { ArrowUpRight } from "../icons";
  * "Apoyar con PayPal": our own button over PayPal's Donate SDK, which opens PayPal's
  * donation popup over the page. PayPal's script is not part of the page: it is fetched
  * when the visitor reaches for the button (pointer, focus or touch), so the popup can
- * open inside the click itself and nobody else ever loads it.
+ * open inside the click itself and nobody else ever loads it. If the script isn't there
+ * yet when they click, PayPal's own donation page opens in a new tab instead.
  *
  * The SDK renders its own image button and opens the popup from that image's click, so
  * we render it into a hidden box and click it for the visitor.
@@ -113,19 +114,20 @@ export default function PayPalDonate({
       if (!fails) onComplete();
       return;
     }
-    try {
-      if (!mounted.current) {
-        setStatus("loading");
-        await loadSdk();
-        mount();
-      }
-      const trigger = box.current?.querySelector("img");
-      if (!trigger) throw new Error("no button");
-      trigger.click();
+    // ready: PayPal's popup opens over the page, inside this click
+    const trigger = mounted.current ? box.current?.querySelector("img") : null;
+    if (trigger) {
       setStatus("idle");
-    } catch {
-      setStatus("error");
+      trigger.click();
+      return;
     }
+    // PayPal's script hasn't arrived yet (a fast first tap, or it is blocked). A popup opened
+    // after waiting for it would be outside the click and browsers such as iOS Safari drop it
+    // silently, so open PayPal's own donation page in a new tab right now instead.
+    const tab = link ? window.open(link, "_blank") : null;
+    if (tab) tab.opener = null;
+    setStatus(tab ? "idle" : "error");
+    warm();
   };
 
   return (

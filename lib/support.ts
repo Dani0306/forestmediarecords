@@ -4,8 +4,11 @@ import { hasSupport, support, type Support } from "@/data/support";
  * Review the support section before the real details exist: add `?apoyo=…` to the URL.
  *   ?apoyo=demo        every piece, with clearly fake details (key, QR slot, PayPal, spending list)
  *   ?apoyo=demo-llave  the smallest version: a key only (no QR, no PayPal, no list)
+ *   ?apoyo=demo-larga  like demo, with a long email-type key
  *   ?apoyo=demo-error  like demo, but PayPal fails to open
- *   ?apoyo=gracias     the thank-you state, without copying or paying (on the demo details while the real ones are empty)
+ *   ?apoyo=copiada     the state after copying the key, without copying
+ *   ?apoyo=gracias     the thank-you state after a PayPal payment, without paying
+ * (`copiada` and `gracias` use the demo details while the real ones are empty)
  *
  * The demo details never show on the live site: they work on localhost and on Vercel
  * preview addresses only, so a fake key can't reach a real visitor.
@@ -39,6 +42,11 @@ const demo: Support = {
   ],
 };
 
+const demoLong: Support = {
+  ...demo,
+  breb: { ...demo.breb, key: "llave.de.ejemplo@correo-ejemplo.com" },
+};
+
 const demoKeyOnly: Support = {
   breb: { key: "@llave-de-ejemplo", holder: "Titular de ejemplo", bank: "", qr: "" },
   paypal: { hostedButtonId: "", business: "", env: "sandbox", paypalMe: "" },
@@ -50,8 +58,8 @@ export type SupportView = {
   data: Support;
   /** The details are stand-ins: tag them and never call the real services. */
   sample: boolean;
-  /** Open on the thank-you state. */
-  thanks: boolean;
+  /** Open on a later state: the key already copied, or a PayPal payment completed. */
+  preview: "copied" | "paid" | null;
   /** Demo only: PayPal fails to open. */
   paypalFails: boolean;
 };
@@ -60,13 +68,18 @@ export type SupportView = {
 export function supportView(search: string, host: string): SupportView {
   const mode = new URLSearchParams(search).get("apoyo");
   const mayDemo = host !== "" && !LIVE_HOSTS.includes(host);
+  const preview = mode === "copiada" ? "copied" : mode === "gracias" ? "paid" : null;
   const isDemo =
     mayDemo &&
-    (mode === "demo" || mode === "demo-llave" || mode === "demo-error" || (mode === "gracias" && !hasSupport));
+    (mode === "demo" ||
+      mode === "demo-llave" ||
+      mode === "demo-larga" ||
+      mode === "demo-error" ||
+      (preview !== null && !hasSupport));
   return {
-    data: isDemo ? (mode === "demo-llave" ? demoKeyOnly : demo) : support,
+    data: isDemo ? (mode === "demo-llave" ? demoKeyOnly : mode === "demo-larga" ? demoLong : demo) : support,
     sample: isDemo,
-    thanks: mode === "gracias",
+    preview,
     paypalFails: isDemo && mode === "demo-error",
   };
 }
