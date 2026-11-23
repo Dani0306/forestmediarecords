@@ -37,9 +37,10 @@ Working vault for the **Forest Media Récords** website: a bilingual (ES/EN) lab
 9. [[Streamers]]
 10. [[Kick section]]
 11. [[La forja]]
-12. [[Studio]]
-13. [[Demo form]]
-14. [[Follow us]]
+12. [[Support]] (hidden until `data/support.ts` is filled)
+13. [[Studio]]
+14. [[Demo form]]
+15. [[Follow us]]
 
 Around the page: [[Navigation and footer]], [[Chat assistant]], [[Legal pages]] (`/privacidad`, `/terminos`, cookie notice), [[Bilingual copy]].
 

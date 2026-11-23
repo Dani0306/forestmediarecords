@@ -20,6 +20,7 @@ related:
 - Reading layout: sticky numbered contents, 68ch column, "Borrador · pendiente de revisión legal" tag while `legalMeta.draft` is true. Both languages.
 - **Cookie notice**: bottom plate until the visitor picks "Aceptar todas" or "Solo necesarias" (stored as `fmr-consent` in localStorage); "Preferencias de cookies" in the footer reopens it. Every choice fires `fmr:consent` on window.
 - **Analytics**: Vercel Web Analytics loads only after "Aceptar todas" (see [[Analytics after cookie consent]]).
+- **Support texts** (2026-11-22): once [[Support]] is live (`hasSupport`), the terms gain "Aportes voluntarios" (`#aportes`: voluntary, nothing in exchange, not tax-deductible, who receives it, refunds to confirm) and the privacy policy says payments happen in the donor's bank or PayPal and the site never receives payment details. Hidden until then.
 
 ## Open issues
 - [ ] Lawyer review, then set `draft: false`
