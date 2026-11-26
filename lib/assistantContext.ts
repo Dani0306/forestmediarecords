@@ -5,7 +5,7 @@ import { listenUrl, releases } from "@/data/releases";
 import { site } from "@/data/site";
 import { topSongs } from "@/data/topSongs";
 import { streamers } from "@/data/streamers";
-import { cantina } from "@/data/cantina";
+import { cantina, cantinaStart } from "@/data/cantina";
 import { formatCOP, services, slots, slotsSample } from "@/data/studio";
 import { tiraderas as T } from "@/data/tiraderas";
 import { dictionaries } from "@/lib/dictionary";
@@ -244,7 +244,7 @@ function cantinaInfo() {
   const [y, m, d] = cantina.date.split("-");
   return section("La Cantina de Trianiss (evento en Kick)", [
     `- Qué es: toda la FMR Gang reunida en la cantina de ${cantina.host}: charla, temas y tragos, en vivo por Kick en ${cantina.channel}.`,
-    `- Fecha: viernes ${Number(d)} de noviembre de ${y} (${d}/${m}/${y}). Hora: ${cantina.time ? `${cantina.time} (hora de Colombia)` : "por confirmar; no inventes una hora"}.`,
+    `- Fecha: viernes ${Number(d)} de noviembre de ${y} (${d}/${m}/${y}). Hora: ${cantinaStart !== null ? `${fmtTime(cantinaStart)} (hora de Colombia), en vivo por Kick` : "por confirmar; no inventes una hora"}.`,
     "- En la página: sección «La Cantina de Trianiss» (#cantina), justo después de los lanzamientos, y en «En tendencia».",
   ]);
 }

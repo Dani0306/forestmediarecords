@@ -98,12 +98,12 @@ export const trending: Trend[] = [
     kind: "event",
     title: { es: "La Cantina de Trianiss", en: "La Cantina de Trianiss" },
     meta: {
-      es: "Viernes 27 de noviembre · En vivo en Kick · Toda la FMR Gang",
-      en: "Friday 27 November · Live on Kick · The whole FMR Gang",
+      es: "Viernes 27 de noviembre · 9:00 p. m. · En vivo en Kick",
+      en: "Friday 27 November · 9:00 PM · Live on Kick",
     },
-    media: { kind: "image", src: cantina.pictures[0].src, width: cantina.pictures[0].width, height: cantina.pictures[0].height },
-    alt: cantina.pictures[0].alt,
-    focus: "50% 50%",
+    media: { kind: "image", src: cantina.picture.src, width: cantina.picture.width, height: cantina.picture.height },
+    alt: cantina.picture.alt,
+    focus: "50% 36%",
     href: cantina.channel,
   },
   // "F.M.R", the label's official song (2026-11-20), same cover and link as the hero
