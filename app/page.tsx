@@ -1,4 +1,5 @@
 import Agenda from "@/components/Agenda";
+import Cantina from "@/components/Cantina";
 import Tiraderas from "@/components/Tiraderas";
 import DemoForm from "@/components/DemoForm";
 import FollowUs from "@/components/FollowUs";
@@ -22,6 +23,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Releases />
+        <Cantina />
         <Tiraderas />
         <FuturasPromesas />
         <Agenda />

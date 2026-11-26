@@ -1,3 +1,4 @@
+import { cantina } from "./cantina";
 import { listenUrl, releases } from "./releases";
 
 // the official song's release entry: the trending card reuses its cover text and Spotify link
@@ -89,6 +90,21 @@ export const trending: Trend[] = [
     },
     focus: "50% 40%",
     href: FMR.videoUrl,
+  },
+  // La Cantina de Trianiss (data/cantina.ts): number 2 at the team's request (2026-11-26).
+  // The section `#cantina` covers it; the card goes straight to the Kick channel.
+  {
+    id: "cantina-de-trianiss",
+    kind: "event",
+    title: { es: "La Cantina de Trianiss", en: "La Cantina de Trianiss" },
+    meta: {
+      es: "Viernes 27 de noviembre · En vivo en Kick · Toda la FMR Gang",
+      en: "Friday 27 November · Live on Kick · The whole FMR Gang",
+    },
+    media: { kind: "image", src: cantina.pictures[0].src, width: cantina.pictures[0].width, height: cantina.pictures[0].height },
+    alt: cantina.pictures[0].alt,
+    focus: "50% 50%",
+    href: cantina.channel,
   },
   // "F.M.R", the label's official song (2026-11-20), same cover and link as the hero
   {
