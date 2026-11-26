@@ -27,19 +27,20 @@ Working vault for the **Forest Media Récords** website: a bilingual (ES/EN) lab
 
 ## Features (page order)
 1. [[Hero]]
-2. [[Futuras Promesas 4]]
-3. [[Agenda]]
+2. [[Releases]]
+3. [[Cantina de Trianiss]]
 4. [[Mundial de Tiraderas]]
-5. [[Trending]]
-6. [[Releases]]
-7. [[Artists]]
-8. [[Top songs]]
-9. [[Streamers]]
-10. [[Kick section]]
-11. [[La forja]]
-12. [[Studio]]
-13. [[Demo form]]
-14. [[Follow us]]
+5. [[Futuras Promesas 4]]
+6. [[Agenda]]
+7. [[Trending]]
+8. [[Artists]]
+9. [[Top songs]]
+10. [[Streamers]]
+11. [[Kick section]]
+12. [[La forja]]
+13. [[Studio]]
+14. [[Demo form]]
+15. [[Follow us]]
 
 Around the page: [[Navigation and footer]], [[Chat assistant]], [[Legal pages]] (`/privacidad`, `/terminos`, cookie notice), [[Bilingual copy]].
 

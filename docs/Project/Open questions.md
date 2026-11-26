@@ -12,6 +12,7 @@ tags:
 Things the code can't answer. Move answers into the relevant note, then tick them off.
 
 ## Open
+- [ ] La Cantina de Trianiss (viernes 27 de noviembre): what time does it start? ([[Cantina de Trianiss]])
 - [ ] Studio hours: are 9–13, 14–18 and 19–23 right? They show without a sample tag since 2026-10-10 ([[Studio]])
 - [ ] Website launch: is there a launch event to announce? The placeholder was removed from the agenda; the [[Trending]] card still says "Muy pronto"
 - [ ] Who is in the hero video and what is the production called? (needed to title the [[Trending]] clips)
