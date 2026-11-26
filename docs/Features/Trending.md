@@ -60,3 +60,5 @@ Items with an `href` starting with `#` show "Ver en la agenda" and stay on the p
 - 2026-11-20: "F.M.R" cover is number 1 (`fmr-oficial`).
 
 - 2026-11-21: photo strip "La FMR gang haciendo el avance de «FMR»" under the mosaic (`fmrGang` in `data/trending.ts`, four prints, iron-photo grade).
+
+- 2026-11-23: "F.M.R · Video oficial" is number 1. Video cards can carry an `href`: the link leads, the preview becomes an icon (desktop lead) or is dropped (icon mode).

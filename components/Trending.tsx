@@ -87,9 +87,10 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
               ? t.trending.instagram
               : t.trending.open;
 
-  // "Ver avance" for clips, otherwise a link; labelled on the lead card, an icon on the rest
+  // "Ver avance" for clips, otherwise a link; labelled on the lead card, an icon on the rest.
+  // A clip that also has a link (the official video) leads with the link and keeps the preview as an icon.
   const action = (size: string, labelled = false) => {
-    if (isVideo) {
+    const preview = (withLabel: boolean, cls: string) => {
       const label = playing ? t.trending.pause : t.trending.play;
       return (
         <button
@@ -97,15 +98,40 @@ function TrendCard({ item, rank, count }: { item: Trend; rank: number; count: nu
           onClick={playing ? pause : play}
           aria-pressed={playing}
           aria-label={`${label}: ${item.title[lang]}`}
-          title={labelled ? undefined : label}
-          className={`btn btn-steel text-[0.9rem] ${size}`}
+          title={withLabel ? undefined : label}
+          className={`btn btn-steel text-[0.9rem] ${cls}`}
         >
           {playing ? <Pause className="size-4" /> : <Play className="size-4" />}
-          {labelled && <span className="hidden sm:inline">{label}</span>}
+          {withLabel && <span className="hidden sm:inline">{label}</span>}
         </button>
       );
-    }
+    };
+    if (isVideo && !item.href) return preview(labelled, size);
     if (!item.href) return null;
+    if (isVideo) {
+      const label = internalLabel(item.href);
+      const link = (cls: string) => (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${label}: ${item.title[lang]}`}
+          title={labelled ? undefined : label}
+          className={`btn btn-hot text-[0.9rem] ${cls}`}
+        >
+          {labelled && <span className="hidden sm:inline">{label}</span>}
+          <ArrowUpRight className="size-4" />
+        </a>
+      );
+      // as an icon (phones, small cards) only the link: on touch the clip already plays while it's centred
+      if (!labelled) return link(size);
+      return (
+        <span className={`items-center gap-2 ${size.replace("min-h-11", "")}`}>
+          {preview(false, "size-11 min-h-11 shrink-0 px-0")}
+          {link("min-h-11 px-3")}
+        </span>
+      );
+    }
     const label = internalLabel(item.href);
     const internal = item.href.startsWith("#");
     return (

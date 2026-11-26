@@ -65,7 +65,32 @@ const FP3_WINNER = "https://www.instagram.com/el2ble_b/";
 const FP2_WINNER = "https://www.instagram.com/jhanky.10/";
 
 export const trending: Trend[] = [
-  // "F.M.R", the label's official song (2026-11-20): number 1, same cover and link as the hero
+  // the official F.M.R video (premiered 2026-11-22): number 1. Same 9.8 s silent loop as the
+  // release hero (cut from the video), so a visitor who saw the hero downloads nothing new.
+  {
+    id: "fmr-video-oficial",
+    kind: "video",
+    title: { es: "F.M.R · Video oficial", en: "F.M.R · Official video" },
+    meta: {
+      es: "Lentino × RS el Italiano · Ya disponible en YouTube",
+      en: "Lentino × RS el Italiano · Out now on YouTube",
+    },
+    media: {
+      kind: "video",
+      src: FMR.heroVideo?.webm ?? "/hero/hero-fmr-video.webm",
+      mp4: FMR.heroVideo?.mp4 ?? "/hero/hero-fmr-video.mp4",
+      poster: FMR.heroVideo?.poster ?? "/hero/hero-fmr-video-poster.webp",
+      width: 1280,
+      height: 720,
+    },
+    alt: {
+      es: "Escenas del video oficial de «F.M.R» en tono verde azulado: Lentino y RS el Italiano en un balcón, un pasillo, el estudio, una azotea sobre Medellín de noche y un parqueadero",
+      en: "Scenes from the official “F.M.R” video in a teal grade: Lentino and RS el Italiano on a balcony, in a hallway, in the studio, on a rooftop over Medellín at night and in a parking garage",
+    },
+    focus: "50% 40%",
+    href: FMR.videoUrl,
+  },
+  // "F.M.R", the label's official song (2026-11-20), same cover and link as the hero
   {
     id: "fmr-oficial",
     kind: "music",
