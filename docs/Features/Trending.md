@@ -63,3 +63,4 @@ Items with an `href` starting with `#` show "Ver en la agenda" and stay on the p
 
 - 2026-11-23: "F.M.R · Video oficial" is number 1. Video cards can carry an `href`: the link leads, the preview becomes an icon (desktop lead) or is dropped (icon mode).
 - 2026-11-26: "La Cantina de Trianiss" is number 2 (`cantina-de-trianiss`, image card, links to kick.com/trianiss); see [[Cantina de Trianiss]].
+- 2026-11-26: the Cantina card now uses the cartoon FMR Gang art and reads "Viernes 27 de noviembre · 9:00 p. m. · En vivo en Kick".
