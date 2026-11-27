@@ -28,6 +28,12 @@ Things the code can't answer. Move answers into the relevant note, then tick the
 
 - [ ] Website launch event: real date, time and place? Should it be a main event (takes over the hero)? ([[Agenda]], [[Trending]])
 - [ ] Nikosan: what does "9/10/2018" mean (start in music, or joined Forest)? (Genres are now set: Rap, BoomBap, Trap, Drumless.) ([[Artists]])
+- [ ] Support: a small real transfer from another bank, to check the name the payer sees and that the full amount arrives ([[Support]])
+- [ ] Support: the PayPal account and its Donate button id ([[Support]])
+- [ ] Support: what the money will buy (items, approximate costs) and the suggested amounts ([[Support]])
+- [ ] Support: refund wording for the terms ([[Legal pages]])
+- [ ] Support: who reads the label's WhatsApp, where receipts arrive ([[Support]])
+- [ ] Support: Vercel plan before taking money (Hobby is personal or non-commercial use only) ([[Support]])
 
 ## Answered (2026-10-06)
 - [x] Artist Kick channels: the artists have none (2026-10-10); the field was removed from the stage

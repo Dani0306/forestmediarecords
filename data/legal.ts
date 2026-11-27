@@ -1,4 +1,5 @@
 import { site } from "./site";
+import { hasBreb, hasPaypal, hasSupport, support } from "./support";
 
 /**
  * Legal pages: privacy policy (/privacidad) and terms (/terminos).
@@ -11,7 +12,7 @@ export type LegalSection = { id: string; title: string; body: string[]; list?: s
 export type LegalDoc = { title: string; intro: string; sections: LegalSection[] };
 
 export const legalMeta = {
-  updated: "2026-10-06",
+  updated: "2026-11-26",
   draft: true,
   /** TODO: legal details of the company. */
   holder: "Forest Media Récords",
@@ -21,6 +22,65 @@ export const legalMeta = {
 };
 
 const m = legalMeta;
+
+/**
+ * "Apoya a Forest" (data/support.ts): these texts join the pages only once that section is live.
+ * Draft like the rest: confirm who receives the money and the refund wording before removing the brackets.
+ */
+const recipient = support.breb.holder || "[Titular por confirmar]";
+const account = {
+  es: support.breb.bank ? `la cuenta ${support.breb.bank}` : "la cuenta",
+  en: support.breb.bank ? `the ${support.breb.bank} account` : "the account",
+};
+/** Where the payment happens, naming only the ways to give that are filled in. */
+const paidIn = {
+  es: [hasBreb(support) && "en tu banco o billetera", hasPaypal(support) && "en PayPal"].filter(Boolean).join(", o "),
+  en: [hasBreb(support) && "in your bank or wallet", hasPaypal(support) && "in PayPal"].filter(Boolean).join(", or "),
+};
+const supportPrivacy = {
+  es: hasSupport
+    ? ` Si haces un aporte, el pago ocurre ${paidIn.es}: este sitio no recibe ni guarda datos de pago. Si nos envías un comprobante por WhatsApp, lo usamos solo para confirmar tu aporte y llevar nuestro registro. Tu nombre aparece en la lista pública de apoyo solo si lo pides, con el nombre que elijas, y lo quitamos cuando nos lo pidas.`
+    : "",
+  en: hasSupport
+    ? ` If you send support, the payment happens ${paidIn.en}: this site never receives or stores payment details. If you send us a receipt on WhatsApp, we use it only to confirm your support and keep our records. Your name appears on the public supporters list only if you ask, under the name you choose, and we remove it whenever you ask.`
+    : "",
+};
+const supportTerms: Record<"es" | "en", LegalSection[]> = hasSupport
+  ? {
+      es: [
+        {
+          id: "aportes",
+          title: "Aportes voluntarios",
+          body: [`Si decides apoyar a ${m.holder} con dinero:`],
+          list: [
+            "Los aportes son voluntarios: no son una compra y no dan derecho a productos, servicios ni beneficios a cambio.",
+            "Se usan para equipos y herramientas de producción musical y de contenido.",
+            `Se reciben en ${account.es} a nombre de ${recipient}.`,
+            "No son deducibles de impuestos y no expedimos certificados de donación.",
+            "Aparecer en la lista de quienes apoyan es opcional y no es una contraprestación: publicamos el nombre que nos indiques, y el monto solo si lo autorizas.",
+            `El pago se hace ${paidIn.es}, bajo las condiciones de ese servicio; este sitio no procesa ni guarda datos de pago.`,
+            `Si hiciste una transferencia por error, escríbenos a ${m.email} para revisarla. [Política de devoluciones por confirmar.]`,
+          ],
+        },
+      ],
+      en: [
+        {
+          id: "aportes",
+          title: "Voluntary contributions",
+          body: [`If you choose to support ${m.holder} with money:`],
+          list: [
+            "Contributions are voluntary: they are not a purchase and give no right to products, services or benefits in return.",
+            "They are used for music and content production equipment and tools.",
+            `They are received in ${account.en} held by ${recipient}.`,
+            "They are not tax-deductible and we don't issue donation certificates.",
+            "Appearing on the supporters list is optional and is not something given in exchange: we publish the name you give us, and the amount only if you allow it.",
+            `Payment is made ${paidIn.en}, under that service's terms; this site doesn't process or store payment details.`,
+            `If you made a transfer by mistake, write to ${m.email} so we can review it. [Refund policy to be confirmed.]`,
+          ],
+        },
+      ],
+    }
+  : { es: [], en: [] };
 
 export const privacy: Record<"es" | "en", LegalDoc> = {
   es: {
@@ -67,7 +127,7 @@ export const privacy: Record<"es" | "en", LegalDoc> = {
         id: "terceros",
         title: "Con quién los compartimos",
         body: [
-          "No vendemos ni alquilamos tus datos. Pueden pasar por los proveedores que usamos para operar: el servicio de correo, el alojamiento del sitio y, cuando aplique, WhatsApp. Kick, Spotify y YouTube son sitios externos con sus propias políticas.",
+          "No vendemos ni alquilamos tus datos. Pueden pasar por los proveedores que usamos para operar: el servicio de correo, el alojamiento del sitio y, cuando aplique, WhatsApp. Kick, Spotify y YouTube son sitios externos con sus propias políticas." + supportPrivacy.es,
         ],
       },
       {
@@ -161,7 +221,7 @@ export const privacy: Record<"es" | "en", LegalDoc> = {
         id: "terceros",
         title: "Who we share it with",
         body: [
-          "We don't sell or rent your data. It may pass through the providers we use to operate: email, site hosting and, when relevant, WhatsApp. Kick, Spotify and YouTube are external sites with their own policies.",
+          "We don't sell or rent your data. It may pass through the providers we use to operate: email, site hosting and, when relevant, WhatsApp. Kick, Spotify and YouTube are external sites with their own policies." + supportPrivacy.en,
         ],
       },
       {
@@ -253,6 +313,7 @@ export const terms: Record<"es" | "en", LegalDoc> = {
           "Los derechos sobre las grabaciones y producciones se definen en el acuerdo de cada servicio.",
         ],
       },
+      ...supportTerms.es,
       {
         id: "externos",
         title: "Enlaces externos",
@@ -334,6 +395,7 @@ export const terms: Record<"es" | "en", LegalDoc> = {
           "Rights to recordings and productions are set out in each service's agreement.",
         ],
       },
+      ...supportTerms.en,
       {
         id: "externos",
         title: "External links",

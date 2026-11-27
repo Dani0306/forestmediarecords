@@ -33,7 +33,7 @@ tags:
 - [x] Demo deploy on Vercel: https://forestmr.vercel.app (2026-10-06)
 - [x] Domain **forestmediarecords.com** bought on Vercel, attached and set as `metadataBase` (2026-10-07, [[Deploy on Vercel]])
 - [ ] Optional: make `www` and `forestmr.vercel.app` redirect to `forestmediarecords.com` (Vercel → Settings → Domains)
-- [ ] Move to Vercel Pro before the public launch (Hobby is non-commercial)
+- [ ] Move to Vercel Pro before the public launch (Hobby is non-commercial); taking money through [[Support]] makes this urgent
 - [x] Repo connected to Vercel: pushes to `main` deploy automatically (confirmed 2026-10-12; one push, `a5d69ef`, was missed by the webhook and deployed by hand)
 - [ ] Clean unused assets: `source/artists/lowkey1-screenshot.avif` (original screenshot), `source/hero/videoloop.webm` (5.7 MB original; source of the trending clips), `source/artists/leolugo1-screenshot.avif` (original screenshot of the cropped portrait), `source/hero/videoloop-poster.webp.json`
 - [ ] Align font sizes with the `DESIGN.md` type ramp (detector flags about 45 sizes)
@@ -43,6 +43,9 @@ tags:
 - [ ] Leo's corrected bio, if it differs from the current one
 
 ## Next features (ideas, not committed)
+- [ ] [[Support]] goes live: Bre-B key, holder and QR are in `data/support.ts` (2026-11-26, branch `feat/donation-system`); left: a test transfer, the refund wording, the merge, and later the PayPal button and the spending list
+- [ ] Support: `?admin` form to update the supporters board without a deploy, if updates become frequent ([[Top supporters are listed by consent and edited by hand]])
+- [ ] Support payment gateway (PayPal Checkout + Wompi) once contributions justify the fees: `prompts/002-support-gateway-paypal-wompi.md` ([[Support starts with Bre-B and PayPal, gateway later]])
 - [ ] Artist detail pages (bio, releases, gallery) as the roster grows
 - [ ] Live Kick status (only if Kick exposes a reliable API)
 - [ ] Vercel project + custom domain ([[Deploy on Vercel]])

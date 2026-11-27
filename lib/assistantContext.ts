@@ -7,8 +7,10 @@ import { topSongs } from "@/data/topSongs";
 import { streamers } from "@/data/streamers";
 import { cantina, cantinaStart } from "@/data/cantina";
 import { formatCOP, services, slots, slotsSample } from "@/data/studio";
+import { hasBreb, hasPaypal, hasSupport, support } from "@/data/support";
 import { tiraderas as T } from "@/data/tiraderas";
 import { dictionaries } from "@/lib/dictionary";
+import { rankSupporters } from "@/lib/support";
 
 /**
  * The assistant's instructions: rules, then every fact the site holds, built
@@ -262,6 +264,39 @@ function studio() {
   ]);
 }
 
+/** How to support the label with money ("Apoya a Forest"), from `data/support.ts`. */
+function supportInfo() {
+  if (!hasSupport) {
+    return section("Apoyar a Forest con dinero (aportes)", [
+      "- Por ahora el sitio no recibe aportes de dinero. Si preguntan cómo apoyar económicamente, di que esa opción aún no está disponible en el sitio y que pueden apoyar siguiendo a Forest en redes y en Kick, y compartiendo la música.",
+    ]);
+  }
+  const b = support.breb;
+  const { top, rest } = rankSupporters(support.supporters);
+  const named = [...top, ...rest];
+  return section("Apoyar a Forest con dinero (aportes)", [
+    `- ${es.support.lede}`,
+    "- Cualquier monto ayuda: no hay mínimo.",
+    "- Cómo: en la sección \"Apoya a Forest\" del sitio (" + SITE_URL + "/#apoyar).",
+    hasBreb(support) &&
+      `- Desde Colombia: transferencia con llave Bre-B desde cualquier banco o billetera, sin comisiones. Llave: ${b.key}${b.holder ? `, a nombre de ${b.holder}` : ""}${b.bank ? ` (${b.bank})` : ""}. Se copia la llave en el sitio y se pega en la app del banco.`,
+    hasPaypal(support) && "- Desde otro país: con PayPal o tarjeta, con el botón \"Apoyar con PayPal\" de esa sección.",
+    ...support.uses.map(
+      (u) =>
+        `- ${u.status === "bought" ? "Ya conseguido" : "Por conseguir"}: ${u.name.es}${u.cost ? ` (aprox. ${formatCOP(u.cost)})` : ""}${u.body ? `. ${u.body.es}` : ""}`,
+    ),
+    `- Después de transferir, se le puede contar al equipo por WhatsApp (${site.whatsapp.display}) con el botón "Escribir por WhatsApp" de esa sección, y compartir el comprobante si se quiere aparecer en la lista.`,
+    support.showBoard &&
+      `- Lista "Quienes más apoyan": muestra, ordenadas por total aportado, a las personas que pidieron aparecer. Para aparecer basta con escribir por WhatsApp, compartir el comprobante y decir con qué nombre; es opcional, y el monto solo se muestra si la persona lo autoriza. ${
+        named.length > 0
+          ? `Hoy aparecen, en orden: ${named.map((p) => `${p.name}${p.showAmount ? ` (${formatCOP(p.total)})` : ""}`).join(", ")}.`
+          : "Hoy la lista está vacía: el primer lugar está libre."
+      }`,
+    "- Los aportes son voluntarios, no dan derecho a nada a cambio y no son deducibles de impuestos. El sitio no procesa pagos ni puede confirmar si una transferencia llegó: para eso, el equipo responde por WhatsApp o correo.",
+    "- No inventes montos recaudados, metas ni nombres de quienes han aportado: solo los que están en la lista de arriba. No digas el total recaudado.",
+  ]);
+}
+
 function demos() {
   return section("Enviar música (demos)", [
     `- ${es.demo.body}`,
@@ -347,6 +382,7 @@ export function buildAssistantContext(now: Date = new Date()) {
     tiraderasInfo(),
     cantinaInfo(),
     studio(),
+    supportInfo(),
     demos(),
     developer(),
     contact(),

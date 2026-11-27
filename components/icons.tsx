@@ -200,3 +200,21 @@ export const NewChat = (p: P) => (
     <path d="M17 3v6M14 6h6" />
   </svg>
 );
+
+export const Copy = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M9 9h11v11H9zM5 15H4V4h11v1" />
+  </svg>
+);
+
+export const Check = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="m4 12.5 5 5L20 6.5" />
+  </svg>
+);
+
+export const Plus = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
