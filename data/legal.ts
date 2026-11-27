@@ -12,7 +12,7 @@ export type LegalSection = { id: string; title: string; body: string[]; list?: s
 export type LegalDoc = { title: string; intro: string; sections: LegalSection[] };
 
 export const legalMeta = {
-  updated: "2026-10-06",
+  updated: "2026-11-26",
   draft: true,
   /** TODO: legal details of the company. */
   holder: "Forest Media Récords",
@@ -39,10 +39,10 @@ const paidIn = {
 };
 const supportPrivacy = {
   es: hasSupport
-    ? ` Si haces un aporte, el pago ocurre ${paidIn.es}: este sitio no recibe ni guarda datos de pago.`
+    ? ` Si haces un aporte, el pago ocurre ${paidIn.es}: este sitio no recibe ni guarda datos de pago. Si nos envías un comprobante por WhatsApp, lo usamos solo para confirmar tu aporte y llevar nuestro registro. Tu nombre aparece en la lista pública de apoyo solo si lo pides, con el nombre que elijas, y lo quitamos cuando nos lo pidas.`
     : "",
   en: hasSupport
-    ? ` If you send support, the payment happens ${paidIn.en}: this site never receives or stores payment details.`
+    ? ` If you send support, the payment happens ${paidIn.en}: this site never receives or stores payment details. If you send us a receipt on WhatsApp, we use it only to confirm your support and keep our records. Your name appears on the public supporters list only if you ask, under the name you choose, and we remove it whenever you ask.`
     : "",
 };
 const supportTerms: Record<"es" | "en", LegalSection[]> = hasSupport
@@ -57,6 +57,7 @@ const supportTerms: Record<"es" | "en", LegalSection[]> = hasSupport
             "Se usan para equipos y herramientas de producción musical y de contenido.",
             `Se reciben en ${account.es} a nombre de ${recipient}.`,
             "No son deducibles de impuestos y no expedimos certificados de donación.",
+            "Aparecer en la lista de quienes apoyan es opcional y no es una contraprestación: publicamos el nombre que nos indiques, y el monto solo si lo autorizas.",
             `El pago se hace ${paidIn.es}, bajo las condiciones de ese servicio; este sitio no procesa ni guarda datos de pago.`,
             `Si hiciste una transferencia por error, escríbenos a ${m.email} para revisarla. [Política de devoluciones por confirmar.]`,
           ],
@@ -72,6 +73,7 @@ const supportTerms: Record<"es" | "en", LegalSection[]> = hasSupport
             "They are used for music and content production equipment and tools.",
             `They are received in ${account.en} held by ${recipient}.`,
             "They are not tax-deductible and we don't issue donation certificates.",
+            "Appearing on the supporters list is optional and is not something given in exchange: we publish the name you give us, and the amount only if you allow it.",
             `Payment is made ${paidIn.en}, under that service's terms; this site doesn't process or store payment details.`,
             `If you made a transfer by mistake, write to ${m.email} so we can review it. [Refund policy to be confirmed.]`,
           ],

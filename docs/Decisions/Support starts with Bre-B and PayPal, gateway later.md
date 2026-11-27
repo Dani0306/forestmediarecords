@@ -21,3 +21,4 @@ Build Plan B now and keep Plan A for later (Daniel, 2026-11-22). The account bel
 - The payment step in [[Support]] is driven by `data/support.ts`, so Wompi can join as another way to give without a redesign. Plan A lives in `prompts/002-support-gateway-paypal-wompi.md`; re-read the providers' docs before building it.
 - Money lands in a personal account: the terms must say who receives it, and that person carries the income for tax purposes.
 - Vercel Hobby allows only personal or non-commercial use; settle the plan before going live.
+- 2026-11-26: proof of a transfer is now asked for by WhatsApp ("Enviar comprobante"), optional, and it is the way onto the supporters board ([[Top supporters are listed by consent and edited by hand]]).

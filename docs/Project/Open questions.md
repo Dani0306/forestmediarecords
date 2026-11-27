@@ -31,6 +31,7 @@ Things the code can't answer. Move answers into the relevant note, then tick the
 - [ ] Support: the PayPal account and its Donate button id ([[Support]])
 - [ ] Support: what the money will buy (items, approximate costs) and the suggested amounts ([[Support]])
 - [ ] Support: refund wording for the terms ([[Legal pages]])
+- [ ] Support: who reads the label's WhatsApp, where receipts arrive ([[Support]])
 - [ ] Support: Vercel plan before taking money (Hobby is personal or non-commercial use only) ([[Support]])
 
 ## Answered (2026-10-06)

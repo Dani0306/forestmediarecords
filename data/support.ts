@@ -27,6 +27,26 @@
  * `uses`: what the money is for. One entry per real item the team needs;
  * `cost` in COP is optional; `status` is "needed" or "bought". Empty hides
  * the "A dónde va tu aporte" block.
+ *
+ * `supporters`: the "Quienes más apoyan" board. ONLY add someone who asked to
+ * appear (their WhatsApp message is the record) and whose transfer shows in
+ * the bank. One entry per person; the site orders them by `total`.
+ *   id          a short unique slug, never reused ("juan-p")
+ *   name        the public name THEY chose (Kick or artist name is fine)
+ *   total       everything they have given so far, in COP, as it arrived;
+ *               when they give again, raise this number
+ *   showAmount  true only if they agreed to show the amount; without it the
+ *               name shows in its place but the amount doesn't
+ *   since       optional, first gift as "YYYY-MM"; breaks ties (earlier first)
+ * The top five are ranked; the rest are named under "También apoyan".
+ * To remove someone, delete their entry.
+ *
+ * `showBoard`: false hides the board (the rest of the section stays).
+ *
+ * `photos.side`: the studio picture beside the board. Only real Forest
+ * photos in `public/`. An empty `src` removes it. `focus` is the
+ * object-position that keeps the subject in frame; `lift` brightens a dark
+ * shot (0.9 is normal). The title carries the label's logo, not a photo.
  */
 export type SupportUse = {
   id: string;
@@ -35,6 +55,25 @@ export type SupportUse = {
   /** Approximate cost in COP. */
   cost?: number;
   status: "needed" | "bought";
+};
+
+export type Supporter = {
+  id: string;
+  name: string;
+  /** Everything given so far, in COP. */
+  total: number;
+  showAmount?: boolean;
+  /** First gift, "YYYY-MM". */
+  since?: string;
+};
+
+export type SupportPhoto = {
+  src: string;
+  alt: { es: string; en: string };
+  /** A short mono line under the picture. */
+  caption?: { es: string; en: string };
+  focus?: string;
+  lift?: number;
 };
 
 export type Support = {
@@ -47,6 +86,9 @@ export type Support = {
   };
   suggested: number[];
   uses: SupportUse[];
+  supporters: Supporter[];
+  showBoard: boolean;
+  photos: { side: SupportPhoto };
 };
 
 export const support: Support = {
@@ -60,6 +102,20 @@ export const support: Support = {
   paypal: { hostedButtonId: "", business: "", env: "sandbox", paypalMe: "" },
   suggested: [],
   uses: [],
+  supporters: [],
+  showBoard: true,
+  photos: {
+    side: {
+      src: "/artists/lowkey/lowkey4.webp",
+      alt: {
+        es: "Lowkey trabajando en el portátil en la cabina del estudio, junto al micrófono y la consola",
+        en: "Lowkey working on the laptop in the studio booth, next to the microphone and the console",
+      },
+      caption: { es: "Lowkey en el estudio", en: "Lowkey in the studio" },
+      focus: "50% 55%",
+      lift: 1.05,
+    },
+  },
 };
 
 export const hasBreb = (s: Support) => s.breb.key.length > 0;

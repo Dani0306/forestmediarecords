@@ -9,6 +9,7 @@ import { hasBreb, hasPaypal } from "@/data/support";
 import { useLang } from "@/lib/i18n";
 import { supportView } from "@/lib/support";
 import PayPalDonate from "./support/PayPalDonate";
+import Supporters from "./support/Supporters";
 import { ArrowUpRight, Check, Copy, Plus } from "./icons";
 
 // the address never changes under the section: read it once, the same way on server and client
@@ -42,6 +43,9 @@ const SPARKS: [number, number, number, number][] = [
  * get a PayPal row. Hidden until `data/support.ts` holds at least one way to give.
  * The site never claims a payment arrived: a Bre-B transfer happens in the donor's
  * own bank app. Only PayPal's own confirmation shows the thank-you plate.
+ * Proof of a transfer goes by WhatsApp ("Enviar comprobante"), which is also how a
+ * supporter asks to be named on the board ("Quienes más apoyan"). The label's vinyl
+ * logo sits over the title; a studio photo beside the board shows where the money goes.
  */
 export default function Support() {
   const { t, lang } = useLang();
@@ -70,6 +74,8 @@ export default function Support() {
   // the key may only break after an @ or a dot, never at a hyphen or inside a word (unless one part alone can't fit)
   const keyParts = (data.breb.key.match(/[^@.]*[@.]?/g) ?? [data.breb.key]).filter(Boolean);
   if (keyParts.length > 1 && keyParts[0] === "@") keyParts.splice(0, 2, `@${keyParts[1]}`); // a leading @ stays with its word
+  const { side } = data.photos;
+  const board = data.showBoard;
 
   const copy = async () => {
     let ok = false;
@@ -126,16 +132,29 @@ export default function Support() {
   return (
     <section id="apoyar" aria-labelledby="apoyar-title" className="border-t border-anvil">
       <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-10 lg:py-28">
-        <div className="grid gap-x-8 gap-y-10 lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
-          <header className="lg:col-span-5">
-            <h2 id="apoyar-title" className="stencil drop text-[clamp(2.75rem,6vw,4.5rem)] [--wdth:74]">
-              {s.title}
-            </h2>
-            <p className="mt-6 max-w-[30rem] text-[1.0625rem] leading-relaxed text-iron/80">{s.lede}</p>
+        <div className="grid gap-x-8 gap-y-10 lg:grid-cols-12">
+          {/* the label's own mark over the title: the vinyl logo whole, never cropped or graded */}
+          <header className="plate flex flex-col overflow-hidden rounded-[3px] border border-anvil lg:col-span-5">
+            <div className="flex flex-1 items-center justify-center px-8 pb-2 pt-10 sm:pt-12">
+              <Image
+                src="/brand/logo.png"
+                alt={s.logoAlt}
+                width={1254}
+                height={1254}
+                sizes="(max-width: 640px) 62vw, 22rem"
+                className="forge-in h-auto w-[min(62%,22rem)] drop-shadow-[0_24px_40px_rgb(0_0_0/0.65)]"
+              />
+            </div>
+            <div className="px-5 pb-6 pt-6 sm:px-8 sm:pb-8">
+              <h2 id="apoyar-title" className="stencil drop text-[clamp(2.4rem,6vw,4.5rem)] [--wdth:74]">
+                {s.title}
+              </h2>
+              <p className="mt-4 max-w-[30rem] text-[1.0625rem] leading-relaxed text-iron/85">{s.lede}</p>
+            </div>
           </header>
 
           {/* the ways to give */}
-          <div className="lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1">
+          <div className="lg:col-span-7 lg:col-start-6">
             {breb && (
               <div className="ingot forge-in" data-struck={struck ? "" : undefined}>
                 <div
@@ -235,23 +254,30 @@ export default function Support() {
                       ))}
                     </ol>
 
-                    {/* after the strike: what to do next. Not a thank-you: nothing has been sent yet */}
-                    {struck && (
-                      <div
-                        role="status"
-                        className="ingot-next flex flex-col gap-5 border-t border-iron/15 pt-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8"
-                      >
-                        <div className="min-w-0">
-                          <h3 className="stencil text-[clamp(1.5rem,2.6vw,2rem)] leading-[0.95] [--wdth:80]">{s.next.title}</h3>
-                          <p className="mt-2 max-w-[32rem] text-[1rem] leading-relaxed text-iron/85">{s.next.body}</p>
+                    {/* proof goes by WhatsApp, and it is how a supporter gets named on the board. After the
+                        strike the same row says what to do next. Never a thank-you: nothing has been sent yet */}
+                    <div className="flex flex-col gap-5 border-t border-iron/15 pt-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+                      <div role="status" className="min-w-0">
+                        <div key={struck ? "next" : "proof"} className={struck ? "ingot-next" : undefined}>
+                          <h3 className="stencil text-[clamp(1.5rem,2.6vw,2rem)] leading-[0.95] [--wdth:80]">
+                            {struck ? s.next.title : s.proof.title}
+                          </h3>
+                          <p className="mt-2 max-w-[32rem] text-[1rem] leading-relaxed text-iron/85">
+                            {struck ? s.next.body : s.proof.body}
+                          </p>
                         </div>
-                        <a href={whatsapp} target="_blank" rel="noreferrer" className="btn btn-steel shrink-0 max-sm:gap-2 max-sm:px-3 max-sm:text-[1rem]">
-                          {s.next.tellUs}
-                          <ArrowUpRight className="size-5 shrink-0 text-ember" />
-                          <span className="sr-only">({s.newTab})</span>
-                        </a>
                       </div>
-                    )}
+                      <a
+                        href={whatsapp}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-steel shrink-0 max-sm:gap-2 max-sm:px-3 max-sm:text-[1rem]"
+                      >
+                        {s.proof.cta}
+                        <ArrowUpRight className="size-5 shrink-0 text-ember" />
+                        <span className="sr-only">({s.newTab})</span>
+                      </a>
+                    </div>
 
                     {/* phones can't scan their own screen: the code waits behind a steel switch */}
                     {qr && (
@@ -296,10 +322,13 @@ export default function Support() {
 
           {/* why it matters */}
           <ul
-            className={`self-start border-t border-anvil lg:col-span-5 lg:col-start-1 lg:row-start-2 ${paypal ? "max-lg:border-t-0" : ""}`}
+            className={`border-t border-anvil sm:grid sm:grid-cols-3 sm:border-b lg:col-span-12 ${paypal ? "max-lg:border-t-0" : ""}`}
           >
             {s.messages.map((m, i) => (
-              <li key={m.title} className="drop border-b border-anvil py-6">
+              <li
+                key={m.title}
+                className="drop border-b border-anvil py-6 sm:border-b-0 sm:border-l sm:px-6 sm:py-7 sm:first:border-l-0 sm:first:pl-0 sm:last:pr-0"
+              >
                 <p className="stencil text-[clamp(1.5rem,2.6vw,2rem)] leading-[0.95] [--wdth:80]">{m.title}</p>
                 <p className="mt-2 max-w-[30rem] text-[1rem] leading-relaxed text-iron/75">{m.body}</p>
                 {i === 0 && data.suggested.length > 0 && (
@@ -312,6 +341,42 @@ export default function Support() {
             ))}
           </ul>
         </div>
+
+        {/* who backs the forge, beside the desk their support pays for */}
+        {(board || side.src) && (
+          <div className="mt-16 grid gap-x-8 gap-y-8 lg:mt-24 lg:grid-cols-12">
+            {board && (
+              <div className={side.src ? "lg:col-span-8" : "lg:col-span-12"}>
+                <Supporters supporters={data.supporters} sample={sample} whatsapp={whatsapp} />
+              </div>
+            )}
+            {side.src && (
+              <figure data-heat="hot" className={`forge-in flex flex-col ${board ? "lg:col-span-4" : "lg:col-span-12"}`}>
+                <div
+                  className={`parallax iron-photo relative aspect-[4/5] overflow-hidden rounded-[3px] border border-anvil bg-forge-3 sm:aspect-[16/9] ${
+                    board ? "lg:aspect-auto lg:min-h-[26rem] lg:flex-1" : "lg:aspect-[21/9]"
+                  }`}
+                  style={{ "--lift": side.lift ?? 0.9 } as React.CSSProperties}
+                >
+                  {/* beside the board the slot is taller than the shot: the frame overshoots the foot so the
+                      desk stays in the picture and the dark floor falls outside it */}
+                  <div className={`absolute inset-x-0 top-0 h-full ${board ? "lg:h-[122%]" : ""}`}>
+                    <Image
+                      src={side.src}
+                      alt={side.alt[lang]}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 30vw"
+                      className="object-cover"
+                      style={{ objectPosition: side.focus ?? "50% 40%" }}
+                    />
+                  </div>
+                </div>
+                <span aria-hidden="true" className="heat-bar mt-3 block h-[3px] w-10 rounded-full" />
+                {side.caption && <figcaption className="readout mt-2 text-[0.6rem] text-steel">{side.caption[lang]}</figcaption>}
+              </figure>
+            )}
+          </div>
+        )}
 
         {/* what the money is for */}
         {data.uses.length > 0 && (

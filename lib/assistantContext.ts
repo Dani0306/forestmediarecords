@@ -9,6 +9,7 @@ import { formatCOP, services, slots, slotsSample } from "@/data/studio";
 import { hasBreb, hasPaypal, hasSupport, support } from "@/data/support";
 import { tiraderas as T } from "@/data/tiraderas";
 import { dictionaries } from "@/lib/dictionary";
+import { rankSupporters } from "@/lib/support";
 
 /**
  * The assistant's instructions: rules, then every fact the site holds, built
@@ -261,6 +262,8 @@ function supportInfo() {
     ]);
   }
   const b = support.breb;
+  const { top, rest } = rankSupporters(support.supporters);
+  const named = [...top, ...rest];
   return section("Apoyar a Forest con dinero (aportes)", [
     `- ${es.support.lede}`,
     "- Cualquier monto ayuda: no hay mínimo.",
@@ -272,8 +275,15 @@ function supportInfo() {
       (u) =>
         `- ${u.status === "bought" ? "Ya conseguido" : "Por conseguir"}: ${u.name.es}${u.cost ? ` (aprox. ${formatCOP(u.cost)})` : ""}${u.body ? `. ${u.body.es}` : ""}`,
     ),
+    `- Comprobante: después de transferir, se puede enviar el comprobante por WhatsApp (${site.whatsapp.display}) con el botón "Enviar comprobante" de esa sección.`,
+    support.showBoard &&
+      `- Lista "Quienes más apoyan": muestra, ordenadas por total aportado, a las personas que pidieron aparecer. Para aparecer hay que enviar el comprobante por WhatsApp y decir con qué nombre; es opcional, y el monto solo se muestra si la persona lo autoriza. ${
+        named.length > 0
+          ? `Hoy aparecen, en orden: ${named.map((p) => `${p.name}${p.showAmount ? ` (${formatCOP(p.total)})` : ""}`).join(", ")}.`
+          : "Hoy la lista está vacía: el primer lugar está libre."
+      }`,
     "- Los aportes son voluntarios, no dan derecho a nada a cambio y no son deducibles de impuestos. El sitio no procesa pagos ni puede confirmar si una transferencia llegó: para eso, el equipo responde por WhatsApp o correo.",
-    "- No inventes montos recaudados, metas ni nombres de quienes han aportado.",
+    "- No inventes montos recaudados, metas ni nombres de quienes han aportado: solo los que están en la lista de arriba. No digas el total recaudado.",
   ]);
 }
 

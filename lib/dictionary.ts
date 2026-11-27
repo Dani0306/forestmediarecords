@@ -438,6 +438,7 @@ const es = {
   },
   support: {
     title: "Apoya a Forest",
+    logoAlt: "Logo de Forest Media Récords: un disco de vinilo con el monograma FR, una cabeza de venado y raíces",
     lede: "Forest Media Récords desarrolla artistas emergentes desde Medellín. Si crees en lo que hacemos, aquí nos ayudas a hacerlo mejor.",
     messages: [
       { title: "No importa el monto", body: "Todo suma, y todo termina convertido en música." },
@@ -472,11 +473,24 @@ const es = {
       errorLink: "Abrir PayPal en otra pestaña",
       errorMail: "Inténtalo otra vez o escríbenos a",
     },
+    proof: {
+      title: "¿Ya hiciste tu aporte?",
+      body: "Envíanos el comprobante por WhatsApp y dinos con qué nombre quieres aparecer.",
+      cta: "Enviar comprobante",
+    },
     next: {
       title: "Ya tienes la llave",
-      body: "Pégala en tu banco o billetera y envía lo que quieras. Cuando hagas tu aporte, cuéntanos y te damos las gracias como se debe.",
-      tellUs: "Avisar por WhatsApp",
-      message: "Hola, acabo de hacer un aporte a Forest Media Récords.",
+      body: "Pégala en tu banco o billetera y envía lo que quieras. Después, mándanos el comprobante.",
+      message: "Hola, hice un aporte a Forest Media Récords y adjunto el comprobante. Nombre para la lista de apoyo (opcional): ",
+    },
+    board: {
+      title: "Quienes más apoyan",
+      lede: "Gente que cree en esto y lo demuestra.",
+      open: "Lugar libre",
+      first: "El primer nombre puede ser el tuyo.",
+      rest: "También apoyan",
+      how: "¿Quieres aparecer? Envía tu comprobante y elige tu nombre.",
+      rank: "Puesto",
     },
     thanks: {
       title: "Gracias por apoyar a Forest",
@@ -988,6 +1002,7 @@ const en: Dict = {
   },
   support: {
     title: "Support Forest",
+    logoAlt: "Forest Media Récords logo: a vinyl record with the FR monogram, a stag head and roots",
     lede: "Forest Media Récords develops emerging artists from Medellín. If you believe in what we do, this is where you help us do it better.",
     messages: [
       { title: "The amount doesn't matter", body: "It all adds up, and it all ends up as music." },
@@ -1022,11 +1037,24 @@ const en: Dict = {
       errorLink: "Open PayPal in another tab",
       errorMail: "Try again or write to us at",
     },
+    proof: {
+      title: "Already sent your support?",
+      body: "Send us the receipt on WhatsApp and tell us the name you want to appear under.",
+      cta: "Send receipt",
+    },
     next: {
       title: "You have the key",
-      body: "Paste it in your bank or wallet and send what you like. Once you've sent your support, tell us so we can thank you properly.",
-      tellUs: "Tell us on WhatsApp",
-      message: "Hi, I just sent my support to Forest Media Récords.",
+      body: "Paste it in your bank or wallet and send what you like. Then send us the receipt.",
+      message: "Hi, I sent support to Forest Media Récords and I'm attaching the receipt. Name for the supporters list (optional): ",
+    },
+    board: {
+      title: "Top supporters",
+      lede: "People who believe in this and show it.",
+      open: "Open spot",
+      first: "The first name can be yours.",
+      rest: "Also supporting",
+      how: "Want to appear? Send your receipt and choose your name.",
+      rank: "Rank",
     },
     thanks: {
       title: "Thank you for supporting Forest",

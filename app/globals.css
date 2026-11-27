@@ -1834,6 +1834,10 @@ a.follow-row:is(:hover, :focus-visible) .follow-cta {
   padding: 0.75rem;
   border-radius: 3px;
 }
+/* the supporters board: rank is temperature, an open spot is cold */
+.board-rank {
+  color: var(--h);
+}
 .ingot-qr-sample {
   background-color: var(--color-forge-3);
   background-image: repeating-linear-gradient(135deg, rgb(236 230 218 / 0.07) 0 6px, transparent 6px 12px);

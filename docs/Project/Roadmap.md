@@ -44,6 +44,7 @@ tags:
 
 ## Next features (ideas, not committed)
 - [ ] [[Support]] goes live: Bre-B key, holder and QR are in `data/support.ts` (2026-11-26, branch `feat/donation-system`); left: a test transfer, the refund wording, the merge, and later the PayPal button and the spending list
+- [ ] Support: `?admin` form to update the supporters board without a deploy, if updates become frequent ([[Top supporters are listed by consent and edited by hand]])
 - [ ] Support payment gateway (PayPal Checkout + Wompi) once contributions justify the fees: `prompts/002-support-gateway-paypal-wompi.md` ([[Support starts with Bre-B and PayPal, gateway later]])
 - [ ] Artist detail pages (bio, releases, gallery) as the roster grows
 - [ ] Live Kick status (only if Kick exposes a reliable API)

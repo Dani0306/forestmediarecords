@@ -1,9 +1,9 @@
-import { hasSupport, support, type Support } from "@/data/support";
+import { hasSupport, support, type Support, type Supporter } from "@/data/support";
 
 /**
  * Review the support section before the real details exist: add `?apoyo=…` to the URL.
- *   ?apoyo=demo        every piece, with clearly fake details (key, QR slot, PayPal, spending list)
- *   ?apoyo=demo-llave  the smallest version: a key only (no QR, no PayPal, no list)
+ *   ?apoyo=demo        every piece, with clearly fake details (key, QR slot, PayPal, spending list, seven supporters)
+ *   ?apoyo=demo-llave  the smallest version: a key only (no QR, no PayPal, no list, an empty board)
  *   ?apoyo=demo-larga  like demo, with a long email-type key
  *   ?apoyo=demo-error  like demo, but PayPal fails to open
  *   ?apoyo=copiada     the state after copying the key, without copying
@@ -40,6 +40,17 @@ const demo: Support = {
       status: "bought",
     },
   ],
+  supporters: [
+    { id: "demo-a", name: "Nombre de ejemplo uno", total: 250_000, showAmount: true, since: "2026-01" },
+    { id: "demo-b", name: "Ejemplo dos", total: 120_000, showAmount: true, since: "2026-01" },
+    { id: "demo-c", name: "Un nombre de ejemplo bastante más largo tres", total: 100_000, since: "2026-02" },
+    { id: "demo-d", name: "Ejemplo cuatro", total: 50_000, showAmount: true, since: "2026-02" },
+    { id: "demo-e", name: "Ejemplo cinco", total: 50_000, since: "2026-03" },
+    { id: "demo-f", name: "Ejemplo seis", total: 20_000, since: "2026-03" },
+    { id: "demo-g", name: "Ejemplo siete", total: 10_000, showAmount: true, since: "2026-04" },
+  ],
+  showBoard: true,
+  photos: support.photos,
 };
 
 const demoLong: Support = {
@@ -52,6 +63,9 @@ const demoKeyOnly: Support = {
   paypal: { hostedButtonId: "", business: "", env: "sandbox", paypalMe: "" },
   suggested: [],
   uses: [],
+  supporters: [],
+  showBoard: true,
+  photos: support.photos,
 };
 
 export type SupportView = {
@@ -90,4 +104,18 @@ export function paypalLink(p: Support["paypal"]) {
   if (p.hostedButtonId) return `https://www.paypal.com/donate/?hosted_button_id=${encodeURIComponent(p.hostedButtonId)}`;
   if (p.business) return `https://www.paypal.com/donate/?business=${encodeURIComponent(p.business)}&no_recurring=0`;
   return "";
+}
+
+/** How many supporters the board ranks; the rest are named under "También apoyan". */
+export const BOARD_TOP = 5;
+
+/** The board's order: biggest total first, then whoever gave first, then by name. */
+export function rankSupporters(list: Supporter[]) {
+  const ordered = [...list].sort(
+    (a, b) =>
+      b.total - a.total ||
+      (a.since ?? "9999").localeCompare(b.since ?? "9999") ||
+      a.name.localeCompare(b.name, "es"),
+  );
+  return { top: ordered.slice(0, BOARD_TOP), rest: ordered.slice(BOARD_TOP) };
 }
