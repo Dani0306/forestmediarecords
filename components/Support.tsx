@@ -132,29 +132,45 @@ export default function Support() {
   return (
     <section id="apoyar" aria-labelledby="apoyar-title" className="border-t border-anvil">
       <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-10 lg:py-28">
-        <div className="grid gap-x-8 gap-y-10 lg:grid-cols-12">
-          {/* the label's own mark over the title: the vinyl logo whole, never cropped or graded */}
-          <header className="plate flex flex-col overflow-hidden rounded-[3px] border border-anvil lg:col-span-5">
-            <div className="flex flex-1 items-center justify-center px-8 pb-2 pt-10 sm:pt-12">
+        {/* the section's title, set like every other section's: headline left, intro right */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
+          <h2 id="apoyar-title" className="stencil drop text-[clamp(2.75rem,6vw,4.5rem)] [--wdth:74] lg:col-span-7">
+            {s.title}
+          </h2>
+          <p className="max-w-[32rem] text-[1.0625rem] leading-relaxed text-iron/80 lg:col-span-5">{s.lede}</p>
+        </div>
+
+        <div className="mt-12 grid gap-x-8 gap-y-10 lg:mt-16 lg:grid-cols-12">
+          {/* the label's own mark with why it matters: the vinyl logo whole, never cropped or graded */}
+          <div className="plate order-2 flex flex-col overflow-hidden rounded-[3px] border border-anvil lg:order-none lg:col-span-5">
+            <div className="flex flex-1 items-center justify-center px-8 py-10 sm:py-12">
               <Image
                 src="/brand/logo.png"
                 alt={s.logoAlt}
                 width={1254}
                 height={1254}
                 sizes="(max-width: 640px) 62vw, 22rem"
-                className="forge-in h-auto w-[min(62%,22rem)] drop-shadow-[0_24px_40px_rgb(0_0_0/0.65)]"
+                className="forge-in h-auto w-[min(62%,20rem)] drop-shadow-[0_24px_40px_rgb(0_0_0/0.65)]"
               />
             </div>
-            <div className="px-5 pb-6 pt-6 sm:px-8 sm:pb-8">
-              <h2 id="apoyar-title" className="stencil drop text-[clamp(2.4rem,6vw,4.5rem)] [--wdth:74]">
-                {s.title}
-              </h2>
-              <p className="mt-4 max-w-[30rem] text-[1.0625rem] leading-relaxed text-iron/85">{s.lede}</p>
-            </div>
-          </header>
+            <ul className="border-t border-iron/15 px-5 sm:px-8">
+              {s.messages.map((m, i) => (
+                <li key={m.title} className="drop border-b border-iron/15 py-5 last:border-b-0 sm:py-6">
+                  <p className="stencil text-[clamp(1.5rem,2.6vw,2rem)] leading-[0.95] [--wdth:80]">{m.title}</p>
+                  <p className="mt-2 max-w-[30rem] text-[1rem] leading-relaxed text-iron/75">{m.body}</p>
+                  {i === 0 && data.suggested.length > 0 && (
+                    <p className="readout mt-3 text-[0.65rem] leading-relaxed text-steel">
+                      {s.suggested}: <span className="text-iron/85">{data.suggested.map(formatCOP).join(" · ")}</span>
+                      {tag}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* the ways to give */}
-          <div className="lg:col-span-7 lg:col-start-6">
+          <div className="order-1 lg:order-none lg:col-span-7 lg:col-start-6">
             {breb && (
               <div className="ingot forge-in" data-struck={struck ? "" : undefined}>
                 <div
@@ -320,26 +336,6 @@ export default function Support() {
             )}
           </div>
 
-          {/* why it matters */}
-          <ul
-            className={`border-t border-anvil sm:grid sm:grid-cols-3 sm:border-b lg:col-span-12 ${paypal ? "max-lg:border-t-0" : ""}`}
-          >
-            {s.messages.map((m, i) => (
-              <li
-                key={m.title}
-                className="drop border-b border-anvil py-6 sm:border-b-0 sm:border-l sm:px-6 sm:py-7 sm:first:border-l-0 sm:first:pl-0 sm:last:pr-0"
-              >
-                <p className="stencil text-[clamp(1.5rem,2.6vw,2rem)] leading-[0.95] [--wdth:80]">{m.title}</p>
-                <p className="mt-2 max-w-[30rem] text-[1rem] leading-relaxed text-iron/75">{m.body}</p>
-                {i === 0 && data.suggested.length > 0 && (
-                  <p className="readout mt-3 text-[0.65rem] leading-relaxed text-steel">
-                    {s.suggested}: <span className="text-iron/85">{data.suggested.map(formatCOP).join(" · ")}</span>
-                    {tag}
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
         </div>
 
         {/* who backs the forge, beside the desk their support pays for */}
