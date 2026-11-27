@@ -116,7 +116,7 @@ export default function Support() {
         </div>
       ) : (
         <div className="ingot-qr inline-block">
-          <Image src={data.breb.qr} alt={b.qrAlt} width={352} height={352} unoptimized className="block size-44" />
+          <Image src={data.breb.qr} alt={b.qrAlt} width={352} height={352} unoptimized className="block size-44 mix-blend-multiply" />
         </div>
       )}
       <figcaption className="readout mt-2 max-w-[11rem] text-[0.6rem] leading-relaxed text-steel">{b.qr}</figcaption>

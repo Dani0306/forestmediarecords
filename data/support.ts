@@ -39,13 +39,24 @@ export type SupportUse = {
 
 export type Support = {
   breb: { key: string; holder: string; bank: string; qr: string };
-  paypal: { hostedButtonId: string; business: string; env: "sandbox" | "production"; paypalMe: string };
+  paypal: {
+    hostedButtonId: string;
+    business: string;
+    env: "sandbox" | "production";
+    paypalMe: string;
+  };
   suggested: number[];
   uses: SupportUse[];
 };
 
 export const support: Support = {
-  breb: { key: "", holder: "", bank: "", qr: "" },
+  // From the Nequi Negocios QR sheet (marketing/donations/qr-code-donations.pdf, 2026-11-26).
+  breb: {
+    key: "0093728205",
+    holder: "Forest Media Records · Daniel Colorado",
+    bank: "Nequi",
+    qr: "/support/breb-qr.png",
+  },
   paypal: { hostedButtonId: "", business: "", env: "sandbox", paypalMe: "" },
   suggested: [],
   uses: [],
@@ -53,7 +64,9 @@ export const support: Support = {
 
 export const hasBreb = (s: Support) => s.breb.key.length > 0;
 export const hasPaypal = (s: Support) =>
-  s.paypal.hostedButtonId.length > 0 || s.paypal.business.length > 0 || s.paypal.paypalMe.length > 0;
+  s.paypal.hostedButtonId.length > 0 ||
+  s.paypal.business.length > 0 ||
+  s.paypal.paypalMe.length > 0;
 
 /** True once the team has filled in at least one way to give: the section, its nav link and its footer link appear. */
 export const hasSupport = hasBreb(support) || hasPaypal(support);

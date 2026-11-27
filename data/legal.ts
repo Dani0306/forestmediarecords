@@ -1,5 +1,5 @@
 import { site } from "./site";
-import { hasSupport, support } from "./support";
+import { hasBreb, hasPaypal, hasSupport, support } from "./support";
 
 /**
  * Legal pages: privacy policy (/privacidad) and terms (/terminos).
@@ -28,12 +28,21 @@ const m = legalMeta;
  * Draft like the rest: confirm who receives the money and the refund wording before removing the brackets.
  */
 const recipient = support.breb.holder || "[Titular por confirmar]";
+const account = {
+  es: support.breb.bank ? `la cuenta ${support.breb.bank}` : "la cuenta",
+  en: support.breb.bank ? `the ${support.breb.bank} account` : "the account",
+};
+/** Where the payment happens, naming only the ways to give that are filled in. */
+const paidIn = {
+  es: [hasBreb(support) && "en tu banco o billetera", hasPaypal(support) && "en PayPal"].filter(Boolean).join(", o "),
+  en: [hasBreb(support) && "in your bank or wallet", hasPaypal(support) && "in PayPal"].filter(Boolean).join(", or "),
+};
 const supportPrivacy = {
   es: hasSupport
-    ? " Si haces un aporte, el pago ocurre en tu banco o billetera, o en PayPal: este sitio no recibe ni guarda datos de pago."
+    ? ` Si haces un aporte, el pago ocurre ${paidIn.es}: este sitio no recibe ni guarda datos de pago.`
     : "",
   en: hasSupport
-    ? " If you send support, the payment happens in your bank or wallet, or in PayPal: this site never receives or stores payment details."
+    ? ` If you send support, the payment happens ${paidIn.en}: this site never receives or stores payment details.`
     : "",
 };
 const supportTerms: Record<"es" | "en", LegalSection[]> = hasSupport
@@ -46,9 +55,9 @@ const supportTerms: Record<"es" | "en", LegalSection[]> = hasSupport
           list: [
             "Los aportes son voluntarios: no son una compra y no dan derecho a productos, servicios ni beneficios a cambio.",
             "Se usan para equipos y herramientas de producción musical y de contenido.",
-            `Los recibe ${recipient} en nombre de ${m.holder}.`,
+            `Se reciben en ${account.es} a nombre de ${recipient}.`,
             "No son deducibles de impuestos y no expedimos certificados de donación.",
-            "El pago se hace en tu banco o billetera (Bre-B) o en PayPal, bajo las condiciones de esos servicios; este sitio no procesa ni guarda datos de pago.",
+            `El pago se hace ${paidIn.es}, bajo las condiciones de ese servicio; este sitio no procesa ni guarda datos de pago.`,
             `Si hiciste una transferencia por error, escríbenos a ${m.email} para revisarla. [Política de devoluciones por confirmar.]`,
           ],
         },
@@ -61,9 +70,9 @@ const supportTerms: Record<"es" | "en", LegalSection[]> = hasSupport
           list: [
             "Contributions are voluntary: they are not a purchase and give no right to products, services or benefits in return.",
             "They are used for music and content production equipment and tools.",
-            `They are received by ${recipient} on behalf of ${m.holder}.`,
+            `They are received in ${account.en} held by ${recipient}.`,
             "They are not tax-deductible and we don't issue donation certificates.",
-            "Payment is made in your bank or wallet (Bre-B) or in PayPal, under those services' terms; this site doesn't process or store payment details.",
+            `Payment is made ${paidIn.en}, under that service's terms; this site doesn't process or store payment details.`,
             `If you made a transfer by mistake, write to ${m.email} so we can review it. [Refund policy to be confirmed.]`,
           ],
         },
