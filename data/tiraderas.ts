@@ -36,8 +36,8 @@ export const tiraderas = {
   year: "2026",
   host: "LeoLugoLive",
   intro: {
-    es: "Seis streamers se enfrentan en tiraderas: barras, indirectas y flow. Cuatro duelos en dos rondas, un sorteo para armar las semifinales y una gran final. El sorteo inicial fue a las 8:00 p. m. y el resto de las fechas, a las 7:30 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
-    en: "Six streamers face off in tiraderas (diss tracks): bars, shots and flow. Four duels across two rounds, a draw to set the semifinals, and a grand final. The first draw was at 8:00 PM and every other date is at 7:30 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
+    es: "Seis streamers se enfrentan en tiraderas: barras, indirectas y flow. Cuatro duelos en dos rondas, un sorteo para armar las semifinales y una gran final. El sorteo inicial fue a las 8:00 p. m. y la gran final es el domingo 29 de noviembre a las 7:00 p. m. (hora de Colombia); todo se transmite por Kick en todos los canales.",
+    en: "Six streamers face off in tiraderas (diss tracks): bars, shots and flow. Four duels across two rounds, a draw to set the semifinals, and a grand final. The first draw was at 8:00 PM and the grand final is on Sunday 29 November at 7:00 PM Colombia time (UTC−5); everything streams on Kick, on all channels.",
   },
   /**
    * The grand final (set 2026-11-22): the section is built around it. `players` are the two corners,

@@ -170,8 +170,8 @@ export const events: ForgeEvent[] = [
       en: "Tiraderas grand final · Soyjosema vs Coptero",
     },
     artists: [],
-    // set 2026-11-22 by the team: Saturday 28 Nov, 7:30 PM Bogotá
-    start: "2026-11-28T19:30:00-05:00",
+    // moved by the team on 2026-11-26 (was Sat 28 Nov, 7:30 PM): Sunday 29 Nov, 7 PM Bogotá
+    start: "2026-11-29T19:00:00-05:00",
     place: { es: "Kick · todos los canales", en: "Kick · all channels" },
     image: "/tiraderas/participants/soyjosema.avif",
     section: "#tiraderas",

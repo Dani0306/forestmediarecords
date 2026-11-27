@@ -230,12 +230,12 @@ function tiraderasInfo() {
     `- Premio: ${formatCOP(T.prize.amount)} COP. ${T.prize.note.es}`,
     "- Formato (actualizado el 8 de noviembre de 2026): seis competidores; cuatro duelos en dos rondas. Ronda 1 (parte de los duelos, ya se jugó) y Ronda 2 (la otra parte); los cruces de las semifinales ya están definidos. Luego semifinales y la gran final.",
     T.rounds.some((r) => r.watchUrl) ? `- El sorteo ya se hizo y se puede ver en YouTube: ${T.rounds.find((r) => r.watchUrl)?.watchUrl}` : "",
-    `- Rondas (el sorteo a las 8:00 p. m. y el resto a las 7:30 p. m., hora de Colombia, por Kick en todos los canales; fechas exactas en la Agenda):`,
+    `- Rondas (el sorteo fue a las 8:00 p. m. y las rondas siguientes en la noche, hora de Colombia, por Kick en todos los canales; fechas exactas en la Agenda):`,
     ...T.rounds.map((r) => `  - ${r.name.es}: ${r.body.es}`),
     `- Cómo se hacen las tiraderas: ${T.making.map((m) => m.es).join(" ")}`,
     `- Ronda 1 (ya se jugó): avanzaron ${b.round1.through.join(" y ")}; ${b.round1.players.filter((n) => !b.round1.through.includes(n)).join(", ")} quedó eliminado.`,
     `- Ronda 2: ${b.round2.map((d) => d.join(" vs ")).join(" y ")}. Semifinales (sábado 21 de noviembre de 2026): ${b.semiDuels.map((d) => d.join(" vs ")).join(" y ")}; ganaron ${T.grandFinal.players.join(" y ")}.`,
-    `- GRAN FINAL: ${T.grandFinal.players.join(" vs ")}, el sábado 28 de noviembre de 2026 a las 7:30 p. m. (hora de Colombia), por Kick en todos los canales. Es lo más importante del torneo ahora mismo. No inventes el resultado.`,
+    `- GRAN FINAL: ${T.grandFinal.players.join(" vs ")}, el domingo 29 de noviembre de 2026 a las 7:00 p. m. (hora de Colombia), por Kick en todos los canales. Se aplazó: antes era el sábado 28 de noviembre. Es lo más importante del torneo ahora mismo. No inventes el resultado.`,
     b.champion ? `- Campeón: ${b.champion}.` : "",
   ].filter(Boolean));
 }
