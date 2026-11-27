@@ -43,7 +43,7 @@ const SPARKS: [number, number, number, number][] = [
  * get a PayPal row. Hidden until `data/support.ts` holds at least one way to give.
  * The site never claims a payment arrived: a Bre-B transfer happens in the donor's
  * own bank app. Only PayPal's own confirmation shows the thank-you plate.
- * Proof of a transfer goes by WhatsApp ("Enviar comprobante"), which is also how a
+ * Proof of a transfer goes by WhatsApp ("Escribir por WhatsApp"), which is also how a
  * supporter asks to be named on the board ("Quienes más apoyan"). The label's vinyl
  * logo sits over the title; a studio photo beside the board shows where the money goes.
  */

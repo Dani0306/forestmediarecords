@@ -474,14 +474,14 @@ const es = {
       errorMail: "Inténtalo otra vez o escríbenos a",
     },
     proof: {
-      title: "¿Ya hiciste tu aporte?",
-      body: "Envíanos el comprobante por WhatsApp y dinos con qué nombre quieres aparecer.",
-      cta: "Enviar comprobante",
+      title: "Cuéntanos que fuiste tú",
+      body: "Escríbenos por WhatsApp y, si quieres, te sumamos a la lista de quienes apoyan.",
+      cta: "Escribir por WhatsApp",
     },
     next: {
       title: "Ya tienes la llave",
-      body: "Pégala en tu banco o billetera y envía lo que quieras. Después, mándanos el comprobante.",
-      message: "Hola, hice un aporte a Forest Media Récords y adjunto el comprobante. Nombre para la lista de apoyo (opcional): ",
+      body: "Pégala en tu banco o billetera y envía lo que quieras. Después, cuéntanos por WhatsApp.",
+      message: "¡Hola! Acabo de hacer un aporte a Forest Media Récords y te comparto el comprobante. Si se puede, me gustaría aparecer en la lista como: ",
     },
     board: {
       title: "Quienes más apoyan",
@@ -489,7 +489,7 @@ const es = {
       open: "Lugar libre",
       first: "El primer nombre puede ser el tuyo.",
       rest: "También apoyan",
-      how: "¿Quieres aparecer? Envía tu comprobante y elige tu nombre.",
+      how: "¿Quieres aparecer? Escríbenos y elige tu nombre.",
       rank: "Puesto",
     },
     thanks: {
@@ -1038,14 +1038,14 @@ const en: Dict = {
       errorMail: "Try again or write to us at",
     },
     proof: {
-      title: "Already sent your support?",
-      body: "Send us the receipt on WhatsApp and tell us the name you want to appear under.",
-      cta: "Send receipt",
+      title: "Let us know it was you",
+      body: "Write to us on WhatsApp and, if you like, we'll add you to the supporters list.",
+      cta: "Write on WhatsApp",
     },
     next: {
       title: "You have the key",
-      body: "Paste it in your bank or wallet and send what you like. Then send us the receipt.",
-      message: "Hi, I sent support to Forest Media Récords and I'm attaching the receipt. Name for the supporters list (optional): ",
+      body: "Paste it in your bank or wallet and send what you like. Then let us know on WhatsApp.",
+      message: "Hi! I just sent support to Forest Media Récords and I'm sharing the receipt. If possible, I'd like to appear on the list as: ",
     },
     board: {
       title: "Top supporters",
@@ -1053,7 +1053,7 @@ const en: Dict = {
       open: "Open spot",
       first: "The first name can be yours.",
       rest: "Also supporting",
-      how: "Want to appear? Send your receipt and choose your name.",
+      how: "Want to appear? Write to us and choose your name.",
       rank: "Rank",
     },
     thanks: {

@@ -13,7 +13,7 @@ Daniel asked for a public list of the people who support the label most, ordered
 
 ## Decision
 - The board ("Quienes más apoyan") is a list in `data/support.ts` (`supporters`). Only Daniel edits it. An `?admin` form with Upstash Redis, like the Tiraderas winners, was rejected for now: it needs a route, a password and a store for something that changes a few times a month.
-- Proof goes by WhatsApp ("Enviar comprobante"), never through the site. An upload form was rejected: a bank receipt is personal data and would need storage and a retention policy. This replaces the earlier choice not to ask for proof: giving it is optional, but it is the way onto the board.
+- Proof goes by WhatsApp ("Escribir por WhatsApp"; the page asks softly and the prefilled message carries the receipt), never through the site. An upload form was rejected: a bank receipt is personal data and would need storage and a retention policy. This replaces the earlier choice not to ask for proof: giving it is optional, but it is the way onto the board.
 - Nobody appears without asking. The prefilled WhatsApp message asks for the name to show; a transfer with no message stays in the private ledger.
 - The board orders everyone by total. An amount is printed only for supporters who agreed (`showAmount`).
 - The top five are ranked; everyone else is named under "También apoyan" without amounts, so a small gift is still thanked.

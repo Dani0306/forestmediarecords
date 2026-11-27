@@ -275,9 +275,9 @@ function supportInfo() {
       (u) =>
         `- ${u.status === "bought" ? "Ya conseguido" : "Por conseguir"}: ${u.name.es}${u.cost ? ` (aprox. ${formatCOP(u.cost)})` : ""}${u.body ? `. ${u.body.es}` : ""}`,
     ),
-    `- Comprobante: después de transferir, se puede enviar el comprobante por WhatsApp (${site.whatsapp.display}) con el botón "Enviar comprobante" de esa sección.`,
+    `- Después de transferir, se le puede contar al equipo por WhatsApp (${site.whatsapp.display}) con el botón "Escribir por WhatsApp" de esa sección, y compartir el comprobante si se quiere aparecer en la lista.`,
     support.showBoard &&
-      `- Lista "Quienes más apoyan": muestra, ordenadas por total aportado, a las personas que pidieron aparecer. Para aparecer hay que enviar el comprobante por WhatsApp y decir con qué nombre; es opcional, y el monto solo se muestra si la persona lo autoriza. ${
+      `- Lista "Quienes más apoyan": muestra, ordenadas por total aportado, a las personas que pidieron aparecer. Para aparecer basta con escribir por WhatsApp, compartir el comprobante y decir con qué nombre; es opcional, y el monto solo se muestra si la persona lo autoriza. ${
         named.length > 0
           ? `Hoy aparecen, en orden: ${named.map((p) => `${p.name}${p.showAmount ? ` (${formatCOP(p.total)})` : ""}`).join(", ")}.`
           : "Hoy la lista está vacía: el primer lugar está libre."
